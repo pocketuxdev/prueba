@@ -689,7 +689,7 @@ def login_page():
                     submitButton.textContent = 'Iniciando sesión...';
 
                     try {
-                        const response = await fetch('http://localhost:4000/v1/tifanny/loginClient', {
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/loginClient', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -2088,7 +2088,7 @@ def reset_password_page():
                     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
                     try {
-                        const response = await fetch('http://localhost:4000/v1/tifanny/resetPassword', {
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/resetPassword', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
