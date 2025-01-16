@@ -337,7 +337,7 @@ def login_page():
                     position: relative;
                     z-index: 2;
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
+                    grid-template-columns: 50vw 50vw; /* Cambio a vw */
                     min-height: 100vh;
                     backdrop-filter: blur(10px);
                     max-width: 100vw;
@@ -355,68 +355,54 @@ def login_page():
                 }
 
                 .logo {
-                    width: 500px;
+                    width: 25vw; /* Ajuste del logo */
                     height: auto;
-                    filter: brightness(1.2) drop-shadow(0 0 30px var(--shadow-color));
-                    animation: logoFloat 6s ease-in-out infinite,
-                             logoGlow 3s ease-in-out infinite,
-                             logoRotate 12s linear infinite;
-                    transform-origin: center center;
-                    perspective: 1000px;
+                    filter: brightness(1.2) drop-shadow(0 0 1.5vw var(--shadow-color));
                 }
 
                 /* Form Section Styles */
                 .form-section {
-                    padding: 3rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: rgba(255, 255, 255, 0.05);
+                    padding: 3vw;
                 }
 
                 .login-container {
-                    width: 100%;
-                    max-width: 400px;
-                    padding: 2.5rem;
-                    background: rgba(255, 255, 255, 0.1);
-                    border-radius: 20px;
-                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),
-                              0 0 20px var(--shadow-color);
-                    backdrop-filter: blur(10px);
-                    border: 1px solid var(--border-color);
+                    width: 90%;
+                    max-width: 40vw;
+                    padding: 2.5vw;
+                    border-radius: 1vw;
                 }
 
                 /* Form Elements */
                 h1 {
+                    font-size: 2.5vw;
+                    margin-bottom: 2vw;
                     color: white;
-                    font-size: 2.5rem;
-                    margin-bottom: 2rem;
                     text-align: center;
                     text-shadow: 0 0 10px var(--shadow-color);
                 }
 
                 .form-group {
                     position: relative;
-                    margin-bottom: 1.5rem;
+                    margin-bottom: 1.5vw;
                 }
 
                 .form-group i {
                     position: absolute;
-                    left: 15px;
+                    left: 1vw;
                     top: 50%;
                     transform: translateY(-50%);
                     color: var(--primary-color);
-                    font-size: 1.2rem;
+                    font-size: 1.2vw;
                 }
 
                 input {
                     width: 100%;
-                    padding: 1rem 1rem 1rem 3rem;
+                    padding: 1vw 1vw 1vw 3vw;
                     background: rgba(255, 255, 255, 0.1);
                     border: 2px solid var(--border-color);
-                    border-radius: 12px;
+                    border-radius: 0.8vw;
                     color: white;
-                    font-size: 1rem;
+                    font-size: 1vw;
                     transition: all 0.3s ease;
                 }
 
@@ -432,12 +418,12 @@ def login_page():
 
                 button {
                     width: 100%;
-                    padding: 1rem;
+                    padding: 1vw;
                     background: linear-gradient(45deg, var(--primary-color), #ff1493);
                     color: white;
                     border: none;
-                    border-radius: 12px;
-                    font-size: 1.1rem;
+                    border-radius: 0.8vw;
+                    font-size: 1.1vw;
                     font-weight: 600;
                     cursor: pointer;
                     transition: all 0.3s ease;
@@ -537,7 +523,7 @@ def login_page():
                 /* Responsive Design */
                 @media (max-width: 768px) {
                     .container {
-                        grid-template-columns: 1fr;
+                        grid-template-columns: 100vw;
                     }
 
                     .image-section {
@@ -545,15 +531,35 @@ def login_page():
                     }
 
                     .form-section {
-                        padding: 1.5rem;
+                        padding: 5vw;
                     }
 
                     .login-container {
-                        padding: 1.5rem;
+                        max-width: 90vw;
+                        padding: 5vw;
                     }
 
                     h1 {
-                        font-size: 2rem;
+                        font-size: 6vw;
+                    }
+
+                    input, button {
+                        font-size: 3vw;
+                        padding: 3vw;
+                    }
+
+                    .sidebar {
+                        height: 15vw;
+                        gap: 4vw;
+                    }
+
+                    .sidebar-logo {
+                        width: 8vw;
+                    }
+
+                    .nav-item {
+                        width: 8vw;
+                        height: 8vw;
                     }
                 }
 
