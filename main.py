@@ -337,14 +337,14 @@ def login_page():
                     position: relative;
                     z-index: 2;
                     display: grid;
-                    grid-template-columns: 50vw 50vw; /* Cambio a vw */
+                    grid-template-columns: 50vw 50vw;
                     min-height: 100vh;
                     backdrop-filter: blur(10px);
                     max-width: 100vw;
                     overflow-x: hidden;
                 }
 
-                /* Image Section Styles */
+                /* Image Section con efectos visuales */
                 .image-section {
                     display: flex;
                     align-items: center;
@@ -355,30 +355,64 @@ def login_page():
                 }
 
                 .logo {
-                    width: 25vw; /* Ajuste del logo */
+                    width: 25vw;
                     height: auto;
-                    filter: brightness(1.2) drop-shadow(0 0 1.5vw var(--shadow-color));
+                    filter: brightness(1.2) drop-shadow(0 0 2vw rgba(255, 0, 153, 0.7));
+                    animation: logoFloat 6s ease-in-out infinite,
+                              logoGlow 3s ease-in-out infinite,
+                              logoRotate 12s linear infinite;
+                    transform-origin: center center;
+                    perspective: 1000px;
                 }
 
-                /* Form Section Styles */
+                /* Form Section con fondo y efectos */
                 .form-section {
                     padding: 3vw;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(255, 255, 255, 0.05);
                 }
 
                 .login-container {
                     width: 90%;
                     max-width: 40vw;
                     padding: 2.5vw;
+                    background: rgba(255, 255, 255, 0.1);
                     border-radius: 1vw;
+                    box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.2),
+                               0 0 1vw var(--shadow-color);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid var(--border-color);
                 }
 
-                /* Form Elements */
+                /* Animaciones mantenidas pero ajustadas */
+                @keyframes logoFloat {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-2vw); }
+                }
+
+                @keyframes logoGlow {
+                    0%, 100% { 
+                        filter: brightness(1.2) drop-shadow(0 0 1vw rgba(255, 0, 153, 0.5)); 
+                    }
+                    50% { 
+                        filter: brightness(1.4) drop-shadow(0 0 2vw rgba(255, 0, 153, 0.7)); 
+                    }
+                }
+
+                @keyframes logoRotate {
+                    0% { transform: rotateY(0deg); }
+                    100% { transform: rotateY(360deg); }
+                }
+
+                /* Form Elements ajustados */
                 h1 {
                     font-size: 2.5vw;
                     margin-bottom: 2vw;
                     color: white;
                     text-align: center;
-                    text-shadow: 0 0 10px var(--shadow-color);
+                    text-shadow: 0 0 0.5vw var(--shadow-color);
                 }
 
                 .form-group {
@@ -406,14 +440,10 @@ def login_page():
                     transition: all 0.3s ease;
                 }
 
-                input::placeholder {
-                    color: var(--text-lighter);
-                }
-
                 input:focus {
                     outline: none;
                     border-color: var(--primary-color);
-                    box-shadow: 0 0 15px var(--shadow-color);
+                    box-shadow: 0 0 1vw var(--shadow-color);
                 }
 
                 button {
@@ -428,12 +458,12 @@ def login_page():
                     cursor: pointer;
                     transition: all 0.3s ease;
                     text-transform: uppercase;
-                    letter-spacing: 1px;
+                    letter-spacing: 0.1vw;
                 }
 
                 button:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 10px 20px var(--shadow-color);
+                    transform: translateY(-0.2vw);
+                    box-shadow: 0 0.5vw 1vw var(--shadow-color);
                 }
 
                 /* Message Styles */
@@ -492,35 +522,7 @@ def login_page():
                     color: var(--primary-color);
                 }
 
-                /* Animations */
-                @keyframes logoFloat {
-                    0%, 100% {
-                        transform: translateY(0);
-                    }
-                    50% {
-                        transform: translateY(-20px);
-                    }
-                }
-
-                @keyframes logoGlow {
-                    0%, 100% {
-                        filter: brightness(1.2) drop-shadow(0 0 30px var(--shadow-color));
-                    }
-                    50% {
-                        filter: brightness(1.4) drop-shadow(0 0 50px var(--shadow-color));
-                    }
-                }
-
-                @keyframes logoRotate {
-                    0% {
-                        transform: rotateY(0deg);
-                    }
-                    100% {
-                        transform: rotateY(360deg);
-                    }
-                }
-
-                /* Responsive Design */
+                /* Media queries ajustados */
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 100vw;
@@ -528,10 +530,6 @@ def login_page():
 
                     .image-section {
                         display: none;
-                    }
-
-                    .form-section {
-                        padding: 5vw;
                     }
 
                     .login-container {
@@ -548,18 +546,13 @@ def login_page():
                         padding: 3vw;
                     }
 
-                    .sidebar {
-                        height: 15vw;
-                        gap: 4vw;
+                    .form-group i {
+                        font-size: 4vw;
+                        left: 3vw;
                     }
 
-                    .sidebar-logo {
-                        width: 8vw;
-                    }
-
-                    .nav-item {
-                        width: 8vw;
-                        height: 8vw;
+                    input {
+                        padding-left: 10vw;
                     }
                 }
 
