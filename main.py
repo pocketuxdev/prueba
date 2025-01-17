@@ -10,7 +10,7 @@ def serve_image(filename):
     """Serve static images from the static/images directory"""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     image_path = os.path.join(current_dir, 'static', 'images', filename)
-    
+
     if os.path.exists(image_path):
         with open(image_path, 'rb') as f:
             return f.read(), 200, {'Content-Type': 'image/png'}
@@ -39,18 +39,15 @@ def get_common_sidebar():
             z-index: 1000;
             border-top: 1px solid var(--border-color);
         }
-
         .sidebar-logo {
             width: 40px;
             height: auto;
             filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 0, 153, 0.5));
             transition: all 0.3s ease;
         }
-
         .sidebar-logo:hover {
             transform: scale(1.1);
         }
-
         .nav-item {
             width: 45px;
             height: 45px;
@@ -64,19 +61,16 @@ def get_common_sidebar():
             background: rgba(255, 255, 255, 0.1);
             position: relative;
         }
-
         .nav-item:hover {
             background: var(--primary-hover);
             transform: translateY(-5px);
             color: white;
         }
-
         .nav-item.active {
             background: var(--primary-color);
             color: white;
             box-shadow: 0 0 15px rgba(255, 0, 153, 0.3);
         }
-
         .nav-item::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -95,13 +89,11 @@ def get_common_sidebar():
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .nav-item:hover::after {
             opacity: 1;
             visibility: visible;
             bottom: 110%;
         }
-
         .dashboard-layout {
             display: grid;
             grid-template-columns: 1fr;
@@ -111,78 +103,63 @@ def get_common_sidebar():
             padding: 2rem 2rem 100px 2rem;
             overflow-x: hidden;
         }
-
         @media (max-width: 768px) {
             .dashboard-layout {
                 padding: 1rem 1rem 100px 1rem;
             }
-
             .sidebar {
                 padding: 0 0.5rem;
                 gap: 1rem;
             }
-
             .metrics-grid {
                 grid-template-columns: 1fr;
                 padding: 0; /* Eliminar padding en móviles */
             }
-
             .chart-container {
                 height: 200px; /* Altura aún más reducida para móviles */
                 margin: 0.5rem auto; /* Reducir margen en móviles */
             }
-
             .billing-grid,
             .profile-grid {
                 grid-template-columns: 1fr;
             }
-
             .billing-summary,
             .payment-methods {
                 grid-template-columns: 1fr;
             }
-
             .calendar-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .history-header,
             .history-item {
                 font-size: 0.85rem;
                 padding: 0.75rem;
             }
-
             .profile-header {
                 flex-direction: column;
                 text-align: center;
                 padding: 1.5rem;
             }
-
             .profile-stats {
                 flex-wrap: wrap;
                 justify-content: center;
             }
         }
-
         /* Ajustes para tablets */
         @media (min-width: 769px) and (max-width: 1024px) {
             .dashboard-layout {
                 padding: 0 1.5rem 100px 1.5rem;
             }
-
             .metrics-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .chart-container {
                 height: 300px;
             }
-
             .calendar-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-
         /* Ajustes específicos para las gráficas */
         .chart-container {
             position: relative;
@@ -193,7 +170,6 @@ def get_common_sidebar():
             border-radius: 15px;
             border: 1px solid rgba(255, 0, 153, 0.1);
         }
-
         /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
         .main-content {
             width: 100%;
@@ -201,7 +177,6 @@ def get_common_sidebar():
             margin: 0 auto;
             padding: 0;
         }
-
         /* Ajustes para el scroll */
         html, body {
             overflow-x: hidden;
@@ -209,7 +184,6 @@ def get_common_sidebar():
             scroll-padding-bottom: 100px;
         }
     </style>
-
     <!-- HTML común del Sidebar -->
     <div class="sidebar">
         <img src="/static/images/logopocket.png" alt="Logo" class="sidebar-logo">
@@ -226,7 +200,6 @@ def get_common_sidebar():
             <i class="fas fa-sign-out-alt"></i>
         </div>
     </div>
-
     <!-- JavaScript común -->
     <script>
         function handleNavigation(route) {
@@ -234,13 +207,11 @@ def get_common_sidebar():
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
-
             // Agregar clase active al item actual
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
-
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
@@ -257,14 +228,12 @@ def get_common_sidebar():
                 }
             }, 200);
         }
-
         function handleLogout() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
                 localStorage.removeItem('clientData');
                 window.location.href = '/';
             }
         }
-
         window.onload = function() {
             // Verificar autenticación
             const clientData = localStorage.getItem('clientData');
@@ -272,7 +241,6 @@ def get_common_sidebar():
                 window.location.href = '/';
                 return;
             }
-
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
@@ -280,7 +248,6 @@ def get_common_sidebar():
             if (currentItem) {
                 currentItem.classList.add('active');
             }
-
             // Restaurar opacidad del body
             document.body.style.opacity = '1';
         };
@@ -312,6 +279,7 @@ def login_page():
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
+                    --shadow-color: rgba(255, 0, 153, 0.3);
                 }
                 
                 /* Reset and Base Styles */
@@ -319,10 +287,10 @@ def login_page():
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
-                    font-family: 'Poppins', sans-serif;
                 }
                 
                 body {
+                    font-family: 'Poppins', sans-serif;
                     min-height: 100vh;
                     background: var(--background-dark);
                     color: var(--text-light);
@@ -330,19 +298,19 @@ def login_page():
                     overflow-x: hidden;
                     max-width: 100vw;
                 }
-
                 /* Layout Components */
                 .container {
                     position: relative;
                     z-index: 2;
                     display: grid;
+                    grid-template-columns: 50vw 50vw; /* Cambio a vw */
                     grid-template-columns: 50vw 50vw;
                     min-height: 100vh;
                     backdrop-filter: blur(10px);
                     max-width: 100vw;
                     overflow-x: hidden;
                 }
-
+                /* Image Section Styles */
                 /* Image Section con efectos visuales */
                 .image-section {
                     display: flex;
@@ -352,10 +320,11 @@ def login_page():
                     overflow: hidden;
                     background: rgba(0, 0, 0, 0.5);
                 }
-
                 .logo {
+                    width: 25vw; /* Ajuste del logo */
                     width: 25vw;
                     height: auto;
+                    filter: brightness(1.2) drop-shadow(0 0 1.5vw var(--shadow-color));
                     filter: brightness(1.2) drop-shadow(0 0 2vw rgba(255, 0, 153, 0.7));
                     animation: logoFloat 6s ease-in-out infinite,
                               logoGlow 3s ease-in-out infinite,
@@ -363,7 +332,7 @@ def login_page():
                     transform-origin: center center;
                     perspective: 1000px;
                 }
-
+                /* Form Section Styles */
                 /* Form Section con fondo y efectos */
                 .form-section {
                     padding: 3vw;
@@ -372,7 +341,6 @@ def login_page():
                     justify-content: center;
                     background: rgba(255, 255, 255, 0.05);
                 }
-
                 .login-container {
                     width: 90%;
                     max-width: 40vw;
@@ -384,13 +352,12 @@ def login_page():
                     backdrop-filter: blur(10px);
                     border: 1px solid var(--border-color);
                 }
-
                 /* Animaciones mantenidas pero ajustadas */
                 @keyframes logoFloat {
                     0%, 100% { transform: translateY(0); }
                     50% { transform: translateY(-2vw); }
                 }
-
+                /* Form Elements */
                 @keyframes logoGlow {
                     0%, 100% { 
                         filter: brightness(1.2) drop-shadow(0 0 1vw rgba(255, 0, 153, 0.5)); 
@@ -399,26 +366,23 @@ def login_page():
                         filter: brightness(1.4) drop-shadow(0 0 2vw rgba(255, 0, 153, 0.7)); 
                     }
                 }
-
                 @keyframes logoRotate {
                     0% { transform: rotateY(0deg); }
                     100% { transform: rotateY(360deg); }
                 }
-
                 /* Form Elements ajustados */
                 h1 {
                     font-size: 2.5vw;
                     margin-bottom: 2vw;
                     color: white;
                     text-align: center;
+                    text-shadow: 0 0 10px var(--shadow-color);
                     text-shadow: 0 0 0.5vw var(--shadow-color);
                 }
-
                 .form-group {
                     position: relative;
                     margin-bottom: 1.5vw;
                 }
-
                 .form-group i {
                     position: absolute;
                     left: 1vw;
@@ -427,7 +391,6 @@ def login_page():
                     color: var(--primary-color);
                     font-size: 1.2vw;
                 }
-
                 input {
                     width: 100%;
                     padding: 1vw 1vw 1vw 3vw;
@@ -438,13 +401,15 @@ def login_page():
                     font-size: 1vw;
                     transition: all 0.3s ease;
                 }
-
+                input::placeholder {
+                    color: var(--text-lighter);
+                }
                 input:focus {
                     outline: none;
                     border-color: var(--primary-color);
+                    box-shadow: 0 0 15px var(--shadow-color);
                     box-shadow: 0 0 1vw var(--shadow-color);
                 }
-
                 button {
                     width: 100%;
                     padding: 1vw;
@@ -457,14 +422,15 @@ def login_page():
                     cursor: pointer;
                     transition: all 0.3s ease;
                     text-transform: uppercase;
+                    letter-spacing: 1px;
                     letter-spacing: 0.1vw;
                 }
-
                 button:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 20px var(--shadow-color);
                     transform: translateY(-0.2vw);
                     box-shadow: 0 0.5vw 1vw var(--shadow-color);
                 }
-
                 /* Message Styles */
                 #message {
                     margin-top: 1rem;
@@ -474,17 +440,14 @@ def login_page():
                     font-weight: 500;
                     color: white;
                 }
-
                 .success {
                     background: rgba(0, 179, 104, 0.2);
                     border: 1px solid #00b368;
                 }
-
                 .error {
                     background: rgba(204, 0, 0, 0.2);
                     border: 1px solid #cc0000;
                 }
-
                 /* Password Reset Link */
                 .reset-password-link {
                     margin-top: 1.5rem;
@@ -493,7 +456,6 @@ def login_page():
                     border-radius: 8px;
                     transition: all 0.3s ease;
                 }
-
                 .reset-password-link a {
                     color: var(--text-light);
                     text-decoration: none;
@@ -507,7 +469,6 @@ def login_page():
                     background: rgba(255, 0, 153, 0.1);
                     border: 1px solid var(--border-color);
                 }
-
                 .reset-password-link a:hover {
                     color: var(--primary-color);
                     background: rgba(255, 0, 153, 0.15);
@@ -515,46 +476,75 @@ def login_page():
                     transform: translateY(-2px);
                     box-shadow: 0 4px 12px var(--shadow-color);
                 }
-
                 .reset-password-link i {
                     font-size: 1.1rem;
                     color: var(--primary-color);
                 }
-
+                /* Animations */
+                @keyframes logoFloat {
+                    0%, 100% {
+                        transform: translateY(0);
+                    }
+                    50% {
+                        transform: translateY(-20px);
+                    }
+                }
+                @keyframes logoGlow {
+                    0%, 100% {
+                        filter: brightness(1.2) drop-shadow(0 0 30px var(--shadow-color));
+                    }
+                    50% {
+                        filter: brightness(1.4) drop-shadow(0 0 50px var(--shadow-color));
+                    }
+                }
+                @keyframes logoRotate {
+                    0% {
+                        transform: rotateY(0deg);
+                    }
+                    100% {
+                        transform: rotateY(360deg);
+                    }
+                }
+                /* Responsive Design */
                 /* Media queries ajustados */
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 100vw;
                     }
-
                     .image-section {
                         display: none;
                     }
-
+                    .form-section {
+                        padding: 5vw;
+                    }
                     .login-container {
                         max-width: 90vw;
                         padding: 5vw;
                     }
-
                     h1 {
                         font-size: 6vw;
                     }
-
                     input, button {
                         font-size: 3vw;
                         padding: 3vw;
                     }
-
+                    .sidebar {
+                        height: 15vw;
+                        gap: 4vw;
+                    }
+                    .sidebar-logo {
+                        width: 8vw;
                     .form-group i {
                         font-size: 4vw;
                         left: 3vw;
                     }
-
+                    .nav-item {
+                        width: 8vw;
+                        height: 8vw;
                     input {
                         padding-left: 10vw;
                     }
                 }
-
                 /* Sidebar Flotante Común */
                 .sidebar {
                     position: fixed;
@@ -574,14 +564,12 @@ def login_page():
                     width: 80px;
                     border: 1px solid var(--border-color);
                 }
-
                 .sidebar-logo {
                     width: 50px;
                     height: auto;
                     margin-bottom: 1rem;
                     filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 0, 153, 0.5));
                 }
-
                 .nav-item {
                     width: 45px;
                     height: 45px;
@@ -595,17 +583,14 @@ def login_page():
                     background: rgba(255, 255, 255, 0.1);
                     position: relative;
                 }
-
                 .nav-item:hover {
                     background: var(--primary-hover);
                     transform: translateX(5px);
                 }
-
                 .nav-item.active {
                     background: var(--primary-color);
                     color: white;
                 }
-
                 /* Tooltip para los iconos */
                 .nav-item::after {
                     content: attr(data-tooltip);
@@ -624,13 +609,11 @@ def login_page():
                     backdrop-filter: blur(10px);
                     border: 1px solid var(--border-color);
                 }
-
                 .nav-item:hover::after {
                     opacity: 1;
                     visibility: visible;
                     left: 110%;
                 }
-
                 .dashboard-layout {
                     display: grid;
                     grid-template-columns: 1fr;
@@ -672,7 +655,6 @@ def login_page():
                     </div>
                 </div>
             </div>
-
             <!-- Scripts -->
             <script>
                 document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -682,10 +664,8 @@ def login_page():
                     const password = document.getElementById('password').value;
                     const submitButton = document.getElementById('submitButton');
                     const messageDiv = document.getElementById('message');
-
                     submitButton.disabled = true;
                     submitButton.textContent = 'Iniciando sesión...';
-
                     try {
                         const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/loginClient', {
                             method: 'POST',
@@ -699,9 +679,7 @@ def login_page():
                                 password
                             })
                         });
-
                         const data = await response.json();
-
                         if (response.ok) {
                             messageDiv.className = 'success';
                             messageDiv.innerHTML = `<p>${data.message}</p>`;
@@ -733,7 +711,6 @@ def dashboard_page():
     Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
     Chart.defaults.font.size = 11;
     Chart.defaults.layout.padding = 10;
-
     // Opciones comunes para todos los gráficos
     const commonOptions = {
         responsive: true,
@@ -764,7 +741,6 @@ def dashboard_page():
             }
         }
     };
-
     // 1. User Engagement Metrics
     const userEngagementChart = new Chart(
         document.getElementById('userEngagementChart').getContext('2d'),
@@ -797,7 +773,6 @@ def dashboard_page():
             }
         }
     );
-
     // 2. Automation Performance
     const automationChart = new Chart(
         document.getElementById('automationChart').getContext('2d'),
@@ -827,7 +802,6 @@ def dashboard_page():
             }
         }
     );
-
     // 3. Patient Care Metrics
     const patientCareChart = new Chart(
         document.getElementById('patientCareChart').getContext('2d'),
@@ -858,7 +832,6 @@ def dashboard_page():
             }
         }
     );
-
     // 4. Operational Efficiency
     const efficiencyChart = new Chart(
         document.getElementById('efficiencyChart').getContext('2d'),
@@ -888,7 +861,6 @@ def dashboard_page():
             }
         }
     );
-
     // 5. Training and Support
     const trainingChart = new Chart(
         document.getElementById('trainingChart').getContext('2d'),
@@ -921,7 +893,6 @@ def dashboard_page():
             }
         }
     );
-
     // 6. System Performance
     const systemPerformanceChart = new Chart(
         document.getElementById('systemPerformanceChart').getContext('2d'),
@@ -953,7 +924,6 @@ def dashboard_page():
             }
         }
     );
-
     // 7. Adoption Metrics
     const adoptionChart = new Chart(
         document.getElementById('adoptionChart').getContext('2d'),
@@ -983,7 +953,6 @@ def dashboard_page():
             }
         }
     );
-
     // 8. General Insights
     const insightsChart = new Chart(
         document.getElementById('insightsChart').getContext('2d'),
@@ -1035,30 +1004,25 @@ def dashboard_page():
                     --text-light: rgba(255, 255, 255, 0.8);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
-
                 * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
                 }}
-
                 body {{
                     background: var(--background-dark);
                     color: var(--text-light);
                     min-height: 100vh;
                 }}
-
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
                     padding-left: 100px;
                     min-height: 100vh;
                 }}
-
                 .main-content {{
                     padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
                 }}
-
                 .header {{
                     display: flex;
                     justify-content: space-between;
@@ -1069,19 +1033,16 @@ def dashboard_page():
                     border-radius: 15px;
                     backdrop-filter: blur(10px);
                 }}
-
                 .header h1 {{
                     font-size: 1.8rem;
                     color: white;
                 }}
-
                 .metrics-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     gap: 1rem;
                     margin-bottom: 2rem;
                 }}
-
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
@@ -1089,21 +1050,18 @@ def dashboard_page():
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
                 }}
-
                 .chart-container {{
                     position: relative;
                     width: 100%;
                     height: 100%;
                     min-height: 200px;
                 }}
-
                 .kpi-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     gap: 1rem;
                     margin-bottom: 2rem;
                 }}
-
                 .kpi-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 12px;
@@ -1111,25 +1069,21 @@ def dashboard_page():
                     text-align: center;
                     border: 1px solid var(--border-color);
                 }}
-
                 .kpi-value {{
                     font-size: 2rem;
                     font-weight: 600;
                     color: var(--primary-color);
                     margin-bottom: 0.5rem;
                 }}
-
                 .kpi-label {{
                     font-size: 0.9rem;
                     color: var(--text-light);
                 }}
-
                 @media (max-width: 1400px) {{
                     .metrics-grid {{
                         grid-template-columns: repeat(2, 1fr);
                     }}
                 }}
-
                 @media (max-width: 768px) {{
                     .metrics-grid, .kpi-grid {{
                         grid-template-columns: 1fr;
@@ -1151,7 +1105,6 @@ def dashboard_page():
                     <div class="header">
                         <h1>Dashboard Tiffany Medical Assistant</h1>
                     </div>
-
                     <div class="kpi-grid">
                         <div class="kpi-card">
                             <div class="kpi-value">30%</div>
@@ -1170,7 +1123,6 @@ def dashboard_page():
                             <div class="kpi-label">Resolución WhatsApp</div>
                         </div>
                     </div>
-
                     <div class="metrics-grid">
                         <div class="metric-card">
                             <div class="chart-container">
@@ -1215,7 +1167,6 @@ def dashboard_page():
                     </div>
                 </div>
             </div>
-
             <script>
                 {charts_js}
             </script>
@@ -1240,34 +1191,27 @@ def profile_page():
                     --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
-
                 * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
-                    font-family: 'Poppins', sans-serif;
                 }}
-
                 body {{
                     background: var(--background-dark);
                     color: var(--text-light);
                     min-height: 100vh;
                 }}
-
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
                     padding-left: 100px;
                     min-height: 100vh;
                 }}
-
                 .main-content {{
                     padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
                 }}
-
                 .profile-header {{
                     display: flex;
                     align-items: center;
@@ -1278,7 +1222,6 @@ def profile_page():
                     margin-bottom: 2rem;
                     border: 1px solid var(--primary-color);
                 }}
-
                 .profile-avatar {{
                     width: 120px;
                     height: 120px;
@@ -1291,56 +1234,46 @@ def profile_page():
                     color: white;
                     border: 4px solid rgba(255, 255, 255, 0.1);
                 }}
-
                 .profile-info {{
                     flex: 1;
                 }}
-
                 .profile-name {{
                     font-size: 2rem;
                     color: white;
                     margin-bottom: 0.5rem;
                 }}
-
                 .profile-role {{
                     font-size: 1.1rem;
                     color: var(--primary-color);
                     margin-bottom: 1rem;
                 }}
-
                 .profile-stats {{
                     display: flex;
                     gap: 2rem;
                 }}
-
                 .stat-item {{
                     text-align: center;
                 }}
-
                 .stat-value {{
                     font-size: 1.5rem;
                     font-weight: 600;
                     color: white;
                 }}
-
                 .stat-label {{
                     font-size: 0.9rem;
                     color: var(--text-light);
                 }}
-
                 .profile-grid {{
                     display: grid;
                     grid-template-columns: 2fr 1fr;
                     gap: 2rem;
                 }}
-
                 .profile-section {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 20px;
                     padding: 2rem;
                     border: 1px solid var(--border-color);
                 }}
-
                 .section-title {{
                     font-size: 1.3rem;
                     color: white;
@@ -1349,45 +1282,37 @@ def profile_page():
                     align-items: center;
                     gap: 0.5rem;
                 }}
-
                 .section-title i {{
                     color: var(--primary-color);
                 }}
-
                 .info-grid {{
                     display: grid;
                     gap: 1.5rem;
                 }}
-
                 .info-item {{
                     background: rgba(255, 255, 255, 0.05);
                     padding: 1.2rem;
                     border-radius: 12px;
                     transition: all 0.3s ease;
                 }}
-
                 .info-item:hover {{
                     background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
-
                 .info-label {{
                     font-size: 0.9rem;
                     color: var(--text-light);
                     margin-bottom: 0.5rem;
                 }}
-
                 .info-value {{
                     font-size: 1.1rem;
                     color: white;
                 }}
-
                 .activity-list {{
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
                 }}
-
                 .activity-item {{
                     display: flex;
                     align-items: center;
@@ -1397,12 +1322,10 @@ def profile_page():
                     border-radius: 12px;
                     transition: all 0.3s ease;
                 }}
-
                 .activity-item:hover {{
                     background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
-
                 .activity-icon {{
                     width: 40px;
                     height: 40px;
@@ -1413,29 +1336,24 @@ def profile_page():
                     justify-content: center;
                     color: white;
                 }}
-
                 .activity-details {{
                     flex: 1;
                 }}
-
                 .activity-title {{
                     font-size: 1rem;
                     color: white;
                     margin-bottom: 0.2rem;
                 }}
-
                 .activity-time {{
                     font-size: 0.85rem;
                     color: var(--text-light);
                 }}
-
                 .subscription-info {{
                     padding: 1.5rem;
                     background: rgba(255, 0, 153, 0.1);
                     border-radius: 15px;
                     margin-top: 2rem;
                 }}
-
                 .subscription-status {{
                     display: inline-block;
                     padding: 0.5rem 1rem;
@@ -1445,13 +1363,11 @@ def profile_page():
                     font-size: 0.9rem;
                     margin-bottom: 1rem;
                 }}
-
                 .action-buttons {{
                     display: flex;
                     gap: 1rem;
                     margin-top: 1rem;
                 }}
-
                 .action-btn {{
                     padding: 0.8rem 1.5rem;
                     border: none;
@@ -1463,39 +1379,32 @@ def profile_page():
                     align-items: center;
                     gap: 0.5rem;
                 }}
-
                 .btn-primary {{
                     background: var(--primary-color);
                     color: white;
                 }}
-
                 .btn-primary:hover {{
                     background: var(--primary-hover);
                     transform: translateY(-2px);
                 }}
-
                 .btn-secondary {{
                     background: rgba(255, 255, 255, 0.1);
                     color: white;
                 }}
-
                 .btn-secondary:hover {{
                     background: rgba(255, 255, 255, 0.2);
                     transform: translateY(-2px);
                 }}
-
                 @media (max-width: 1200px) {{
                     .profile-grid {{
                         grid-template-columns: 1fr;
                     }}
                 }}
-
                 @media (max-width: 768px) {{
                     .profile-header {{
                         flex-direction: column;
                         text-align: center;
                     }}
-
                     .profile-stats {{
                         justify-content: center;
                     }}
@@ -1546,7 +1455,6 @@ def profile_page():
                             </button>
                         </div>
                     </div>
-
                     <div class="profile-grid">
                         <div class="profile-section">
                             <div class="section-title">
@@ -1556,7 +1464,6 @@ def profile_page():
                             <div class="info-grid" id="userInfo">
                                 <!-- Se llenará con JavaScript -->
                             </div>
-
                             <div class="section-title mt-4">
                                 <i class="fas fa-clock"></i>
                                 Actividad Reciente
@@ -1591,7 +1498,6 @@ def profile_page():
                                 </div>
                             </div>
                         </div>
-
                         <div class="profile-section">
                             <div class="section-title">
                                 <i class="fas fa-shield-alt"></i>
@@ -1605,7 +1511,6 @@ def profile_page():
                                 <h3>Plan Premium</h3>
                                 <p>Próxima facturación: 15/04/2024</p>
                             </div>
-
                             <div class="section-title mt-4">
                                 <i class="fas fa-bell"></i>
                                 Notificaciones
@@ -1628,7 +1533,6 @@ def profile_page():
                     </div>
                 </div>
             </div>
-
             <script>
                 window.onload = function() {{
                     const clientData = localStorage.getItem('clientData');
@@ -1691,32 +1595,27 @@ def reset_password_page():
                     --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }
-
                 * {
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
                     font-family: 'Poppins', sans-serif;
                 }
-
                 body {
                     min-height: 100vh;
                     background: var(--background-dark);
                 }
-
                 .container {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     min-height: 100vh;
                 }
-
                 .logo-section {
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     background: rgba(0, 0, 0, 0.5);
                 }
-
                 .logo {
                     width: 400px;
                     height: auto;
@@ -1726,7 +1625,6 @@ def reset_password_page():
                              logoRotate 12s linear infinite;
                     transform-origin: center center;
                 }
-
                 .form-section {
                     display: flex;
                     align-items: center;
@@ -1734,7 +1632,6 @@ def reset_password_page():
                     padding: 2rem;
                     background: rgba(255, 255, 255, 0.05);
                 }
-
                 .form-container {
                     background: rgba(40, 40, 40, 0.95);
                     padding: 2.5rem;
@@ -1745,21 +1642,18 @@ def reset_password_page():
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     backdrop-filter: blur(10px);
                 }
-
                 h1 {
                     color: white;
                     font-size: 2rem;
                     text-align: center;
                     margin-bottom: 0.5rem;
                 }
-
                 .subtitle {
                     color: var(--text-lighter);
                     text-align: center;
                     font-size: 0.9rem;
                     margin-bottom: 2rem;
                 }
-
                 .phone-input {
                     display: flex;
                     align-items: stretch;
@@ -1770,7 +1664,6 @@ def reset_password_page():
                     border-radius: 12px;
                     border: 1px solid var(--border-color);
                 }
-
                 .country-code {
                     display: flex;
                     align-items: center;
@@ -1781,7 +1674,6 @@ def reset_password_page():
                     border: 1px solid var(--border-color);
                     height: 42px;
                 }
-
                 .country-code input {
                     width: 50px;
                     background: transparent;
@@ -1791,14 +1683,12 @@ def reset_password_page():
                     text-align: center;
                     padding: 0;
                 }
-
                 .country-flag {
                     width: 24px;
                     height: 16px;
                     border-radius: 4px;
                     transition: all 0.3s ease;
                 }
-
                 .phone-number {
                     flex: 1;
                     background: rgba(255, 255, 255, 0.1);
@@ -1809,7 +1699,6 @@ def reset_password_page():
                     font-size: 0.95rem;
                     height: 42px;
                 }
-
                 .submit-button {
                     width: 100%;
                     padding: 1rem;
@@ -1824,12 +1713,10 @@ def reset_password_page():
                     text-transform: uppercase;
                     letter-spacing: 1px;
                 }
-
                 .submit-button:hover {
                     background: var(--primary-hover);
                     transform: translateY(-2px);
                 }
-
                 .back-link {
                     display: flex;
                     align-items: center;
@@ -1845,14 +1732,12 @@ def reset_password_page():
                     background: rgba(255, 0, 153, 0.1);
                     border: 1px solid var(--border-color);
                 }
-
                 .back-link:hover {
                     color: var(--primary-color);
                     background: rgba(255, 0, 153, 0.15);
                     border-color: var(--primary-color);
                     transform: translateY(-2px);
                 }
-
                 #message {
                     margin-top: 1rem;
                     text-align: center;
@@ -1860,50 +1745,40 @@ def reset_password_page():
                     border-radius: 8px;
                     font-size: 0.9rem;
                 }
-
                 .success {
                     background: rgba(0, 179, 104, 0.2);
                     color: #00b368;
                 }
-
                 .error {
                     background: rgba(255, 68, 68, 0.2);
                     color: #ff4444;
                 }
-
                 @keyframes logoRotate {
                     0% { transform: rotateY(0deg); }
                     100% { transform: rotateY(360deg); }
                 }
-
                 @keyframes logoFloat {
                     0%, 100% { transform: translateY(0); }
                     50% { transform: translateY(-20px); }
                 }
-
                 @keyframes logoGlow {
                     0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); }
                     50% { filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); }
                 }
-
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
                     }
-
                     .logo-section {
                         display: none;
                     }
-
                     .form-section {
                         padding: 1.5rem;
                     }
-
                     .form-container {
                         padding: 2rem;
                     }
                 }
-
                 /* Validación del número */
                 .phone-validation {
                     font-size: 0.85rem;
@@ -1915,39 +1790,32 @@ def reset_password_page():
                     gap: 6px;
                     transition: all 0.3s ease;
                 }
-
                 .phone-validation.valid {
                     color: #00b368;
                     background: rgba(0, 179, 104, 0.1);
                 }
-
                 .phone-validation.invalid {
                     color: #ff4444;
                     background: rgba(255, 68, 68, 0.1);
                 }
-
                 /* Ajustes de espaciado */
                 .form-container {
                     padding: 2rem;
                     max-width: 380px;
                 }
-
                 .phone-input {
                     margin-bottom: 1rem;
                 }
-
                 .subtitle {
                     margin-bottom: 1.5rem;
                     line-height: 1.4;
                 }
-
                 /* Mejoras visuales */
                 .phone-number:focus, .country-code input:focus {
                     outline: none;
                     border-color: var(--primary-color);
                     box-shadow: 0 0 0 2px rgba(255, 0, 153, 0.2);
                 }
-
                 .submit-button:disabled {
                     opacity: 0.7;
                     cursor: not-allowed;
@@ -2003,7 +1871,6 @@ def reset_password_page():
                     </div>
                 </div>
             </div>
-
             <script>
                 // Country Codes Configuration
                 const countryCodeMap = {
@@ -2013,19 +1880,16 @@ def reset_password_page():
                     '+505': 'ni', '+506': 'cr', '+507': 'pa', '+591': 'bo',
                     '+595': 'py', '+598': 'uy', '+1': 'us'
                 };
-
                 // Initialize elements
                 const dialCodeInput = document.getElementById('dialCode');
                 const countryFlag = document.getElementById('countryFlag');
                 const phoneInput = document.getElementById('phone');
-
                 // Validación del número de teléfono
                 function validatePhoneNumber(number) {
                     // Eliminar espacios y caracteres especiales
                     number = number.replace(/[^0-9]/g, '');
                     return number.length >= 10 && number.length <= 12;
                 }
-
                 function updateValidationUI(isValid, message) {
                     const validation = document.querySelector('.phone-validation');
                     const submitButton = document.getElementById('submitButton');
@@ -2040,7 +1904,6 @@ def reset_password_page():
                         submitButton.disabled = true;
                     }
                 }
-
                 // Event listeners para validación en tiempo real
                 phoneInput.addEventListener('input', function() {
                     const number = this.value;
@@ -2051,14 +1914,12 @@ def reset_password_page():
                         updateValidationUI(false, 'Código de país no válido');
                         return;
                     }
-
                     if (validatePhoneNumber(number)) {
                         updateValidationUI(true, 'Número válido');
                     } else {
                         updateValidationUI(false, 'El número debe tener entre 10 y 12 dígitos');
                     }
                 });
-
                 dialCodeInput.addEventListener('input', function(e) {
                     let value = e.target.value;
                     if (!value.startsWith('+')) {
@@ -2076,7 +1937,6 @@ def reset_password_page():
                         updateValidationUI(false, 'Código de país no válido');
                     }
                 });
-
                 // Handle form submission
                 document.getElementById('resetForm').addEventListener('submit', async (e) => {
                     e.preventDefault();
@@ -2086,7 +1946,6 @@ def reset_password_page():
                     
                     submitButton.disabled = true;
                     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-
                     try {
                         const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/resetPassword', {
                             method: 'POST',
@@ -2095,7 +1954,6 @@ def reset_password_page():
                             },
                             body: JSON.stringify({ phone: fullNumber })
                         });
-
                         if (response.ok) {
                             messageDiv.className = 'success';
                             messageDiv.innerHTML = `
@@ -2147,34 +2005,27 @@ def billing_page():
                     --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
-
                 * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
-                    font-family: 'Poppins', sans-serif;
                 }}
-
                 body {{
                     background: var(--background-dark);
                     color: var(--text-light);
                     min-height: 100vh;
                 }}
-
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
                     padding-left: 100px;
                     min-height: 100vh;
                 }}
-
                 .main-content {{
                     padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
                 }}
-
                 .header {{
                     display: flex;
                     justify-content: space-between;
@@ -2185,7 +2036,6 @@ def billing_page():
                     border-radius: 15px;
                     backdrop-filter: blur(10px);
                 }}
-
                 .header h1 {{
                     font-size: 2rem;
                     color: white;
@@ -2193,18 +2043,15 @@ def billing_page():
                     align-items: center;
                     gap: 1rem;
                 }}
-
                 .header-icon {{
                     color: var(--primary-color);
                 }}
-
                 .billing-grid {{
                     display: grid;
                     grid-template-columns: 2fr 1fr;
                     gap: 2rem;
                     margin-bottom: 2rem;
                 }}
-
                 .billing-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
@@ -2212,14 +2059,12 @@ def billing_page():
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
                 }}
-
                 .billing-summary {{
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
                     gap: 1rem;
                     margin-bottom: 2rem;
                 }}
-
                 .summary-item {{
                     background: rgba(255, 0, 153, 0.1);
                     padding: 1.5rem;
@@ -2228,31 +2073,26 @@ def billing_page():
                     border: 1px solid var(--primary-color);
                     transition: all 0.3s ease;
                 }}
-
                 .summary-item:hover {{
                     transform: translateY(-5px);
                     box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
                 }}
-
                 .summary-value {{
                     font-size: 2rem;
                     font-weight: 600;
                     color: var(--primary-color);
                     margin-bottom: 0.5rem;
                 }}
-
                 .summary-label {{
                     font-size: 0.9rem;
                     color: var(--text-light);
                 }}
-
                 .calendar-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     gap: 1rem;
                     margin-top: 1rem;
                 }}
-
                 .month-card {{
                     background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
@@ -2260,24 +2100,20 @@ def billing_page():
                     text-align: center;
                     transition: all 0.3s ease;
                 }}
-
                 .month-card:hover {{
                     background: rgba(255, 0, 153, 0.1);
                     transform: scale(1.05);
                 }}
-
                 .month-name {{
                     font-size: 1.1rem;
                     margin-bottom: 0.5rem;
                     color: white;
                 }}
-
                 .month-amount {{
                     font-size: 1.2rem;
                     color: var(--primary-color);
                     font-weight: 600;
                 }}
-
                 .month-status {{
                     font-size: 0.8rem;
                     margin-top: 0.5rem;
@@ -2285,29 +2121,24 @@ def billing_page():
                     border-radius: 12px;
                     display: inline-block;
                 }}
-
                 .status-paid {{
                     background: rgba(0, 179, 104, 0.2);
                     color: #00b368;
                 }}
-
                 .status-pending {{
                     background: rgba(255, 170, 0, 0.2);
                     color: #ffaa00;
                 }}
-
                 .chart-container {{
                     height: 300px;
                     margin-top: 2rem;
                 }}
-
                 .payment-methods {{
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     gap: 1rem;
                     margin-top: 1rem;
                 }}
-
                 .payment-method {{
                     display: flex;
                     align-items: center;
@@ -2317,12 +2148,10 @@ def billing_page():
                     border-radius: 10px;
                     transition: all 0.3s ease;
                 }}
-
                 .payment-method:hover {{
                     background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
-
                 .method-icon {{
                     width: 40px;
                     height: 40px;
@@ -2333,7 +2162,6 @@ def billing_page():
                     justify-content: center;
                     color: white;
                 }}
-
                 .section-title {{
                     font-size: 1.3rem;
                     color: white;
@@ -2342,11 +2170,9 @@ def billing_page():
                     align-items: center;
                     gap: 0.5rem;
                 }}
-
                 .section-title i {{
                     color: var(--primary-color);
                 }}
-
                 @media (max-width: 1200px) {{
                     .billing-grid {{
                         grid-template-columns: 1fr;
@@ -2355,7 +2181,6 @@ def billing_page():
                         grid-template-columns: repeat(3, 1fr);
                     }}
                 }}
-
                 @media (max-width: 768px) {{
                     .calendar-grid {{
                         grid-template-columns: repeat(2, 1fr);
@@ -2364,16 +2189,13 @@ def billing_page():
                         grid-template-columns: 1fr;
                     }}
                 }}
-
                 .payment-method {{
                     position: relative;
                     overflow: hidden;
                 }}
-
                 .method-details {{
                     flex: 1;
                 }}
-
                 .method-status {{
                     font-size: 0.8rem;
                     padding: 0.2rem 0.5rem;
@@ -2381,7 +2203,6 @@ def billing_page():
                     border-radius: 12px;
                     color: var(--primary-color);
                 }}
-
                 .action-btn {{
                     background: transparent;
                     border: none;
@@ -2391,19 +2212,16 @@ def billing_page():
                     border-radius: 50%;
                     transition: all 0.3s ease;
                 }}
-
                 .action-btn:hover {{
                     background: rgba(255, 255, 255, 0.1);
                     color: var(--primary-color);
                 }}
-
                 .payment-history {{
                     margin-top: 1rem;
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 12px;
                     overflow: hidden;
                 }}
-
                 .history-header {{
                     display: grid;
                     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -2411,7 +2229,6 @@ def billing_page():
                     background: rgba(255, 0, 153, 0.1);
                     font-weight: 500;
                 }}
-
                 .history-item {{
                     display: grid;
                     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -2420,15 +2237,12 @@ def billing_page():
                     transition: all 0.3s ease;
                     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 }}
-
                 .history-item:hover {{
                     background: rgba(255, 0, 153, 0.05);
                 }}
-
                 .history-item.pending {{
                     background: rgba(255, 170, 0, 0.05);
                 }}
-
                 .status-badge {{
                     padding: 0.3rem 0.8rem;
                     border-radius: 12px;
@@ -2437,24 +2251,20 @@ def billing_page():
                     align-items: center;
                     gap: 0.5rem;
                 }}
-
                 .status-badge.paid {{
                     background: rgba(0, 179, 104, 0.2);
                     color: #00b368;
                 }}
-
                 .status-badge.pending {{
                     background: rgba(255, 170, 0, 0.2);
                     color: #ffaa00;
                 }}
-
                 .payment-stats {{
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     gap: 1rem;
                     margin-top: 1rem;
                 }}
-
                 .stat-card {{
                     background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
@@ -2464,12 +2274,10 @@ def billing_page():
                     gap: 1rem;
                     transition: all 0.3s ease;
                 }}
-
                 .stat-card:hover {{
                     background: rgba(255, 0, 153, 0.1);
                     transform: translateY(-2px);
                 }}
-
                 .stat-icon {{
                     width: 40px;
                     height: 40px;
@@ -2480,30 +2288,24 @@ def billing_page():
                     justify-content: center;
                     color: white;
                 }}
-
                 .stat-info h4 {{
                     font-size: 0.9rem;
                     margin-bottom: 0.2rem;
                 }}
-
                 .stat-info p {{
                     font-size: 1.2rem;
                     font-weight: 600;
                     color: var(--primary-color);
                 }}
-
                 .mt-4 {{
                     margin-top: 2rem;
                 }}
-
                 .text-success {{
                     color: #00b368;
                 }}
-
                 .text-warning {{
                     color: #ffaa00;
                 }}
-
                 .chart-container {{
                     height: 300px;
                     margin: 2rem 0;
@@ -2512,12 +2314,10 @@ def billing_page():
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
                 }}
-
                 @media (max-width: 768px) {{
                     .payment-stats {{
                         grid-template-columns: 1fr;
                     }}
-
                     .history-item {{
                         font-size: 0.9rem;
                     }}
@@ -2534,7 +2334,6 @@ def billing_page():
                             Centro de Facturación
                         </h1>
                     </div>
-
                     <div class="billing-grid">
                         <div class="billing-card">
                             <div class="billing-summary">
@@ -2551,7 +2350,6 @@ def billing_page():
                                     <div class="summary-label">Tasa de Pago</div>
                                 </div>
                             </div>
-
                             <div class="section-title">
                                 <i class="fas fa-calendar-alt"></i>
                                 Facturación Mensual 2024
@@ -2579,12 +2377,10 @@ def billing_page():
                                 </div>
                                 <!-- Continuar con los demás meses... -->
                             </div>
-
                             <div class="chart-container">
                                 <canvas id="billingChart"></canvas>
                             </div>
                         </div>
-
                         <div class="billing-card">
                             <div class="section-title">
                                 <i class="fas fa-credit-card"></i>
@@ -2623,7 +2419,6 @@ def billing_page():
                                     </div>
                                 </div>
                             </div>
-
                             <div class="section-title mt-4">
                                 <i class="fas fa-history"></i>
                                 Historial de Pagos
@@ -2682,7 +2477,6 @@ def billing_page():
                                     </div>
                                 </div>
                             </div>
-
                             <div class="section-title mt-4">
                                 <i class="fas fa-chart-pie"></i>
                                 Resumen de Pagos
@@ -2711,7 +2505,6 @@ def billing_page():
                     </div>
                 </div>
             </div>
-
             <script>
                 // Configuración del gráfico
                 const ctx = document.getElementById('billingChart').getContext('2d');
