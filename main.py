@@ -281,17 +281,28 @@ def login_page():
                     --border-color: rgba(255, 0, 153, 0.2);
                 }
                 
-                /* Container y Form Section */
-                .container {
-                    min-height: 100vh;
-                    background: var(--background-dark);
+                /* Reset and Base Styles */
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
                 }
                 
-                .form-section {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                body {
                     min-height: 100vh;
+                    background: var(--background-dark);
+                    color: var(--text-light);
+                }
+                
+                /* Container y Form Section */
+                .container {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                    padding: 2rem;
                 }
                 
                 .login-container {
@@ -315,7 +326,7 @@ def login_page():
                 .form-group {
                     position: relative;
                     margin-bottom: 1.5rem;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgba(60, 60, 60, 0.95);
                     padding: 0.8rem;
                     border-radius: 12px;
                     border: 1px solid var(--border-color);
@@ -376,38 +387,43 @@ def login_page():
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
+                    width: 100%;
                     color: var(--text-lighter);
                     text-decoration: none;
                     font-size: 0.9rem;
                     padding: 0.8rem 1.5rem;
-                    border-radius: 20px;
-                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 12px;
+                    background: rgba(60, 60, 60, 0.95);
                     border: 1px solid var(--border-color);
                     transition: all 0.3s ease;
+                    justify-content: center;
                 }
                 
                 .reset-password-link a:hover {
                     background: rgba(255, 0, 153, 0.15);
                 }
                 
+                .reset-password-link i {
+                    color: var(--primary-color);
+                }
+                
                 /* Media Queries */
                 @media (max-width: 768px) {
-                    .image-section {
-                        display: none;
-                    }
-                    
-                    .form-section {
-                        padding: 1.5rem;
+                    .container {
+                        padding: 1rem;
                     }
                     
                     .login-container {
-                        background: rgba(40, 40, 40, 0.95);
                         padding: 2rem;
                     }
                     
                     h1 {
                         font-size: 1.8rem;
                         margin-bottom: 1.5rem;
+                    }
+                    
+                    .form-group {
+                        margin-bottom: 1.2rem;
                     }
                 }
             </style>
