@@ -311,6 +311,7 @@ def login_page():
                     justify-content: center;
                     position: relative;
                     overflow: hidden;
+                    background: rgba(0, 0, 0, 0.5);
                 }
                 
                 .logo {
@@ -318,17 +319,29 @@ def login_page():
                     height: auto;
                     filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
                     animation: logoFloat 6s ease-in-out infinite,
-                              logoGlow 3s ease-in-out infinite;
+                              logoGlow 3s ease-in-out infinite,
+                              logoRotate 12s linear infinite;
+                    transform-origin: center center;
+                    perspective: 1000px;
                 }
                 
                 @keyframes logoFloat {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-20px); }
+                    0%, 100% { transform: translateY(0) rotateY(0deg); }
+                    50% { transform: translateY(-20px) rotateY(180deg); }
                 }
                 
                 @keyframes logoGlow {
-                    0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); }
-                    50% { filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); }
+                    0%, 100% { 
+                        filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); 
+                    }
+                    50% { 
+                        filter: brightness(1.4) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); 
+                    }
+                }
+                
+                @keyframes logoRotate {
+                    0% { transform: rotateY(0deg); }
+                    100% { transform: rotateY(360deg); }
                 }
                 
                 /* Form Section */
