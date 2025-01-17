@@ -1089,18 +1089,17 @@ def profile_page():
                     --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
                 * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
-                    font-family: 'Poppins', sans-serif;
                 }}
                 body {{
-                    min-height: 100vh;
                     background: var(--background-dark);
+                    color: var(--text-light);
+                    min-height: 100vh;
                 }}
                 .dashboard-layout {{
                     display: grid;
@@ -1116,10 +1115,10 @@ def profile_page():
                     align-items: center;
                     gap: 2rem;
                     padding: 2rem;
-                    background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
                     border-radius: 20px;
                     margin-bottom: 2rem;
-                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    border: 1px solid var(--primary-color);
                 }}
                 .profile-avatar {{
                     width: 120px;
@@ -1168,7 +1167,7 @@ def profile_page():
                     gap: 2rem;
                 }}
                 .profile-section {{
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 20px;
                     padding: 2rem;
                     border: 1px solid var(--border-color);
@@ -1189,13 +1188,13 @@ def profile_page():
                     gap: 1.5rem;
                 }}
                 .info-item {{
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     padding: 1.2rem;
                     border-radius: 12px;
                     transition: all 0.3s ease;
                 }}
                 .info-item:hover {{
-                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
                 .info-label {{
@@ -1217,12 +1216,12 @@ def profile_page():
                     align-items: center;
                     gap: 1rem;
                     padding: 1rem;
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 12px;
                     transition: all 0.3s ease;
                 }}
                 .activity-item:hover {{
-                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
                 .activity-icon {{
@@ -1249,7 +1248,7 @@ def profile_page():
                 }}
                 .subscription-info {{
                     padding: 1.5rem;
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
                     border-radius: 15px;
                     margin-top: 2rem;
                 }}
@@ -1287,11 +1286,11 @@ def profile_page():
                     transform: translateY(-2px);
                 }}
                 .btn-secondary {{
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.1);
                     color: white;
                 }}
                 .btn-secondary:hover {{
-                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 255, 255, 0.2);
                     transform: translateY(-2px);
                 }}
                 @media (max-width: 1200px) {{
@@ -1522,7 +1521,6 @@ def reset_password_page():
                     animation: logoFloat 6s ease-in-out infinite,
                              logoGlow 3s ease-in-out infinite,
                              logoRotate 12s linear infinite;
-                             logoGlow 3s ease-in-out infinite;
                     transform-origin: center center;
                 }
                 .form-section {
@@ -1642,21 +1640,16 @@ def reset_password_page():
                     margin-top: 1rem;
                     text-align: center;
                     padding: 0.8rem;
-                    border-radius: 12px;
+                    border-radius: 8px;
                     font-size: 0.9rem;
-                    transition: all 0.3s ease;
                 }
                 .success {
                     background: rgba(0, 179, 104, 0.2);
-                    border: 1px solid #00b368;
                     color: #00b368;
-                    animation: successAnimation 0.3s ease-out forwards;
                 }
                 .error {
-                    background: rgba(255, 0, 0, 0.2);
-                    border: 1px solid #ff0000;
-                    color: #ff0000;
-                    animation: errorAnimation 0.3s ease-out forwards;
+                    background: rgba(255, 68, 68, 0.2);
+                    color: #ff4444;
                 }
                 @keyframes logoRotate {
                     0% { transform: rotateY(0deg); }
@@ -1724,47 +1717,6 @@ def reset_password_page():
                 .submit-button:disabled {
                     opacity: 0.7;
                     cursor: not-allowed;
-                }
-                /* Animación para el mensaje de éxito */
-                @keyframes successAnimation {
-                    0% { 
-                        transform: scale(0.9);
-                        opacity: 0;
-                    }
-                    50% { 
-                        transform: scale(1.1);
-                    }
-                    100% { 
-                        transform: scale(1);
-                        opacity: 1;
-                    }
-                }
-                .success {
-                    animation: successAnimation 0.3s ease-out forwards;
-                }
-                /* Animaciones */
-                @keyframes errorAnimation {
-                    0% { 
-                        transform: translateX(-10px);
-                        opacity: 0;
-                    }
-                    50% { 
-                        transform: translateX(10px);
-                    }
-                    100% { 
-                        transform: translateX(0);
-                        opacity: 1;
-                    }
-                }
-                /* Estilos para inputs no válidos */
-                input:invalid {
-                    border-color: #ff0000;
-                    animation: shake 0.3s ease-in-out;
-                }
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    25% { transform: translateX(-5px); }
-                    75% { transform: translateX(5px); }
                 }
             </style>
         </head>
@@ -1951,17 +1903,16 @@ def billing_page():
                     --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
                 * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
-                    font-family: 'Poppins', sans-serif;
                 }}
                 body {{
                     background: var(--background-dark);
+                    color: var(--text-light);
                     min-height: 100vh;
                 }}
                 .dashboard-layout {{
@@ -1979,9 +1930,9 @@ def billing_page():
                     align-items: center;
                     margin-bottom: 2rem;
                     padding: 1.5rem;
-                    background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
-                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
                     font-size: 2rem;
@@ -2000,10 +1951,11 @@ def billing_page():
                     margin-bottom: 2rem;
                 }}
                 .billing-card {{
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     padding: 1.5rem;
                     border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
                 }}
                 .billing-summary {{
                     display: grid;
@@ -2012,16 +1964,16 @@ def billing_page():
                     margin-bottom: 2rem;
                 }}
                 .summary-item {{
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
                     padding: 1.5rem;
                     border-radius: 12px;
                     text-align: center;
-                    border: 1px solid var(--border-color);
+                    border: 1px solid var(--primary-color);
                     transition: all 0.3s ease;
                 }}
                 .summary-item:hover {{
-                    background: rgba(255, 0, 153, 0.15);
                     transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
                 }}
                 .summary-value {{
                     font-size: 2rem;
@@ -2040,14 +1992,14 @@ def billing_page():
                     margin-top: 1rem;
                 }}
                 .month-card {{
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
                     border-radius: 10px;
                     text-align: center;
                     transition: all 0.3s ease;
                 }}
                 .month-card:hover {{
-                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: scale(1.05);
                 }}
                 .month-name {{
@@ -2090,12 +2042,12 @@ def billing_page():
                     align-items: center;
                     gap: 1rem;
                     padding: 1rem;
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 10px;
                     transition: all 0.3s ease;
                 }}
                 .payment-method:hover {{
-                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
                 .method-icon {{
@@ -2164,7 +2116,7 @@ def billing_page():
                 }}
                 .payment-history {{
                     margin-top: 1rem;
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 12px;
                     overflow: hidden;
                 }}
@@ -2184,10 +2136,10 @@ def billing_page():
                     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 }}
                 .history-item:hover {{
-                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.05);
                 }}
                 .history-item.pending {{
-                    background: rgba(255, 170, 0, 0.15);
+                    background: rgba(255, 170, 0, 0.05);
                 }}
                 .status-badge {{
                     padding: 0.3rem 0.8rem;
@@ -2212,7 +2164,7 @@ def billing_page():
                     margin-top: 1rem;
                 }}
                 .stat-card {{
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
                     border-radius: 12px;
                     display: flex;
@@ -2221,7 +2173,7 @@ def billing_page():
                     transition: all 0.3s ease;
                 }}
                 .stat-card:hover {{
-                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateY(-2px);
                 }}
                 .stat-icon {{
@@ -2256,7 +2208,7 @@ def billing_page():
                     height: 300px;
                     margin: 2rem 0;
                     padding: 1rem;
-                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
                 }}
