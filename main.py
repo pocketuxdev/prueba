@@ -302,6 +302,7 @@ def login_page():
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     min-height: 100vh;
+                    backdrop-filter: blur(10px);
                 }
                 
                 /* Image Section */
@@ -350,6 +351,7 @@ def login_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
+                    background: rgba(255, 255, 255, 0.05); /* Agregado el fondo semi-transparente */
                 }
                 
                 .login-container {
@@ -360,6 +362,7 @@ def login_page():
                     max-width: 400px;
                     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
                     border: 1px solid rgba(255, 0, 153, 0.1);
+                    backdrop-filter: blur(10px); /* Agregado el efecto de blur */
                 }
                 
                 h1 {
