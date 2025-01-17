@@ -1095,6 +1095,8 @@ def profile_page():
                 body {{
                     min-height: 100vh;
                     background: var(--background-dark);
+                    color: var(--text-light);
+                    min-height: 100vh;
                 }}
                 .dashboard-layout {{
                     display: grid;
@@ -1111,9 +1113,11 @@ def profile_page():
                     gap: 2rem;
                     padding: 2rem;
                     background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
                     border-radius: 20px;
                     margin-bottom: 2rem;
                     border: 1px solid rgba(255, 0, 153, 0.1);
+                    border: 1px solid var(--primary-color);
                 }}
                 .profile-avatar {{
                     width: 120px;
@@ -1163,6 +1167,7 @@ def profile_page():
                 }}
                 .profile-section {{
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 20px;
                     padding: 2rem;
                     border: 1px solid var(--border-color);
@@ -1184,12 +1189,14 @@ def profile_page():
                 }}
                 .info-item {{
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     padding: 1.2rem;
                     border-radius: 12px;
                     transition: all 0.3s ease;
                 }}
                 .info-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
                 .info-label {{
@@ -1212,11 +1219,13 @@ def profile_page():
                     gap: 1rem;
                     padding: 1rem;
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 12px;
                     transition: all 0.3s ease;
                 }}
                 .activity-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
                 .activity-icon {{
@@ -1244,6 +1253,7 @@ def profile_page():
                 .subscription-info {{
                     padding: 1.5rem;
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
                     border-radius: 15px;
                     margin-top: 2rem;
                 }}
@@ -1282,10 +1292,12 @@ def profile_page():
                 }}
                 .btn-secondary {{
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.1);
                     color: white;
                 }}
                 .btn-secondary:hover {{
                     background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 255, 255, 0.2);
                     transform: translateY(-2px);
                 }}
                 @media (max-width: 1200px) {{
@@ -1637,6 +1649,7 @@ def reset_password_page():
                     text-align: center;
                     padding: 0.8rem;
                     border-radius: 12px;
+                    border-radius: 8px;
                     font-size: 0.9rem;
                     transition: all 0.3s ease;
                 }
@@ -1651,6 +1664,8 @@ def reset_password_page():
                     border: 1px solid #ff0000;
                     color: #ff0000;
                     animation: errorAnimation 0.3s ease-out forwards;
+                    background: rgba(255, 68, 68, 0.2);
+                    color: #ff4444;
                 }
                 @keyframes logoRotate {
                     0% { transform: rotateY(0deg); }
@@ -1956,6 +1971,7 @@ def billing_page():
                 }}
                 body {{
                     background: var(--background-dark);
+                    color: var(--text-light);
                     min-height: 100vh;
                 }}
                 .dashboard-layout {{
@@ -1974,8 +1990,10 @@ def billing_page():
                     margin-bottom: 2rem;
                     padding: 1.5rem;
                     background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
+                    backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
                     font-size: 2rem;
@@ -1995,9 +2013,11 @@ def billing_page():
                 }}
                 .billing-card {{
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     padding: 1.5rem;
                     border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
                 }}
                 .billing-summary {{
                     display: grid;
@@ -2007,15 +2027,18 @@ def billing_page():
                 }}
                 .summary-item {{
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
                     padding: 1.5rem;
                     border-radius: 12px;
                     text-align: center;
                     border: 1px solid var(--border-color);
+                    border: 1px solid var(--primary-color);
                     transition: all 0.3s ease;
                 }}
                 .summary-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
                     transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
                 }}
                 .summary-value {{
                     font-size: 2rem;
@@ -2035,6 +2058,7 @@ def billing_page():
                 }}
                 .month-card {{
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
                     border-radius: 10px;
                     text-align: center;
@@ -2042,6 +2066,7 @@ def billing_page():
                 }}
                 .month-card:hover {{
                     background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: scale(1.05);
                 }}
                 .month-name {{
@@ -2085,11 +2110,13 @@ def billing_page():
                     gap: 1rem;
                     padding: 1rem;
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 10px;
                     transition: all 0.3s ease;
                 }}
                 .payment-method:hover {{
                     background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateX(5px);
                 }}
                 .method-icon {{
@@ -2159,6 +2186,7 @@ def billing_page():
                 .payment-history {{
                     margin-top: 1rem;
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     border-radius: 12px;
                     overflow: hidden;
                 }}
@@ -2179,9 +2207,11 @@ def billing_page():
                 }}
                 .history-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.05);
                 }}
                 .history-item.pending {{
                     background: rgba(255, 170, 0, 0.15);
+                    background: rgba(255, 170, 0, 0.05);
                 }}
                 .status-badge {{
                     padding: 0.3rem 0.8rem;
@@ -2207,6 +2237,7 @@ def billing_page():
                 }}
                 .stat-card {{
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
                     border-radius: 12px;
                     display: flex;
@@ -2216,6 +2247,7 @@ def billing_page():
                 }}
                 .stat-card:hover {{
                     background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: translateY(-2px);
                 }}
                 .stat-icon {{
@@ -2251,6 +2283,7 @@ def billing_page():
                     margin: 2rem 0;
                     padding: 1rem;
                     background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
                 }}
