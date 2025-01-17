@@ -295,13 +295,47 @@ def login_page():
                     color: var(--text-light);
                 }
                 
-                /* Container y Form Section */
+                /* Layout Components */
                 .container {
                     position: relative;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
+                    z-index: 2;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
                     min-height: 100vh;
+                }
+                
+                /* Image Section */
+                .image-section {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .logo {
+                    width: 400px;
+                    height: auto;
+                    filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
+                    animation: logoFloat 6s ease-in-out infinite,
+                              logoGlow 3s ease-in-out infinite;
+                }
+                
+                @keyframes logoFloat {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-20px); }
+                }
+                
+                @keyframes logoGlow {
+                    0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); }
+                    50% { filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); }
+                }
+                
+                /* Form Section */
+                .form-section {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     padding: 2rem;
                 }
                 
@@ -315,7 +349,6 @@ def login_page():
                     border: 1px solid rgba(255, 0, 153, 0.1);
                 }
                 
-                /* Form Elements */
                 h1 {
                     color: white;
                     font-size: 2rem;
@@ -363,7 +396,7 @@ def login_page():
                     padding: 1rem;
                     background: var(--primary-color);
                     border: none;
-                    border-radius: 10px;
+                    border-radius: 12px;
                     color: white;
                     font-size: 1rem;
                     font-weight: 500;
@@ -386,31 +419,35 @@ def login_page():
                 .reset-password-link a {
                     display: inline-flex;
                     align-items: center;
-                    gap: 8px;
+                    justify-content: center;
                     width: 100%;
+                    gap: 8px;
                     color: var(--text-lighter);
                     text-decoration: none;
                     font-size: 0.9rem;
-                    padding: 0.8rem 1.5rem;
+                    padding: 1rem;
                     border-radius: 12px;
                     background: rgba(60, 60, 60, 0.95);
                     border: 1px solid var(--border-color);
                     transition: all 0.3s ease;
-                    justify-content: center;
                 }
                 
                 .reset-password-link a:hover {
                     background: rgba(255, 0, 153, 0.15);
                 }
                 
-                .reset-password-link i {
-                    color: var(--primary-color);
-                }
-                
                 /* Media Queries */
                 @media (max-width: 768px) {
                     .container {
-                        padding: 1rem;
+                        grid-template-columns: 1fr;
+                    }
+                    
+                    .image-section {
+                        display: none;
+                    }
+                    
+                    .form-section {
+                        padding: 1.5rem;
                     }
                     
                     .login-container {
@@ -420,10 +457,6 @@ def login_page():
                     h1 {
                         font-size: 1.8rem;
                         margin-bottom: 1.5rem;
-                    }
-                    
-                    .form-group {
-                        margin-bottom: 1.2rem;
                     }
                 }
             </style>
