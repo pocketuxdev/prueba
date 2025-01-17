@@ -307,12 +307,11 @@ def login_page():
                 /* Root Variables */
                 :root {
                     --primary-color: #FF0099;
-                    --primary-hover: #D6006F;
+                    --primary-hover: #FF1493;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
-                    --border-color: rgba(255, 0, 153, 0.2);
-                    --shadow-color: rgba(255, 0, 153, 0.3);
+                    --border-color: #FF0099;
                 }
                 
                 /* Reset and Base Styles */
@@ -363,16 +362,15 @@ def login_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgba(0, 0, 0, 0.8);
                 }
 
                 .login-container {
-                    background: rgba(255, 255, 255, 1);
+                    background: white;
                     padding: 2.5rem;
                     border-radius: 20px;
                     width: 100%;
                     max-width: 400px;
-                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
                 }
 
                 /* Animaciones mantenidas pero ajustadas */
@@ -407,6 +405,9 @@ def login_page():
                 .form-group {
                     position: relative;
                     margin-bottom: 1.5rem;
+                    border: 2px solid var(--primary-color);
+                    border-radius: 12px;
+                    background: transparent;
                 }
 
                 .form-group i {
@@ -420,17 +421,19 @@ def login_page():
 
                 input {
                     width: 100%;
-                    padding: 1rem 1rem 1rem 3rem;
+                    padding: 0.8rem 1rem 0.8rem 3rem;
                     background: transparent;
-                    border: 2px solid var(--border-color);
-                    border-radius: 12px;
-                    color: #333;
+                    border: none;
+                    color: #666;
                     font-size: 1rem;
                 }
 
                 input:focus {
                     outline: none;
-                    border-color: var(--primary-color);
+                }
+
+                input::placeholder {
+                    color: #999;
                 }
 
                 button {
@@ -474,6 +477,7 @@ def login_page():
                 .reset-password-link {
                     margin-top: 1.5rem;
                     text-align: center;
+                    padding: 1rem;
                 }
 
                 .reset-password-link a {
@@ -483,9 +487,11 @@ def login_page():
                     color: var(--primary-color);
                     text-decoration: none;
                     font-size: 0.9rem;
-                    padding: 0.5rem 1rem;
+                    padding: 1rem;
                     background: rgba(255, 0, 153, 0.1);
-                    border-radius: 20px;
+                    border-radius: 12px;
+                    width: 100%;
+                    justify-content: center;
                 }
 
                 .reset-password-link i {
@@ -508,12 +514,12 @@ def login_page():
                         padding: 2rem;
                         border-radius: 20px;
                         width: 90%;
-                        margin: 2rem auto;
+                        margin: 1rem auto;
                     }
 
                     h1 {
                         font-size: 1.8rem;
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 2rem;
                     }
 
                     .form-group {
@@ -522,12 +528,10 @@ def login_page():
 
                     input {
                         font-size: 1rem;
-                        padding: 0.8rem 0.8rem 0.8rem 2.5rem;
                     }
 
                     .form-group i {
                         font-size: 1.1rem;
-                        left: 0.8rem;
                     }
 
                     button {
@@ -535,8 +539,13 @@ def login_page():
                         padding: 0.8rem;
                     }
 
+                    .reset-password-link {
+                        margin-top: 2rem;
+                    }
+
                     .reset-password-link a {
                         font-size: 0.9rem;
+                        padding: 1rem;
                     }
 
                     #message {
@@ -1067,10 +1076,10 @@ def dashboard_page():
             <style>
                 :root {{
                     --primary-color: #FF0099;
-                    --primary-hover: #D6006F;
+                    --primary-hover: #FF1493;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --border-color: rgba(255, 0, 153, 0.2);
+                    --border-color: #FF0099;
                 }}
 
                 * {{
@@ -1274,10 +1283,10 @@ def profile_page():
             <style>
                 :root {{
                     --primary-color: #FF0099;
-                    --primary-hover: #D6006F;
+                    --primary-hover: #FF1493;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --border-color: rgba(255, 0, 153, 0.2);
+                    --border-color: #FF0099;
                 }}
 
                 * {{
@@ -1720,11 +1729,11 @@ def reset_password_page():
             <style>
                 :root {
                     --primary-color: #FF0099;
-                    --primary-hover: #D6006F;
+                    --primary-hover: #FF1493;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
-                    --border-color: rgba(255, 0, 153, 0.2);
+                    --border-color: #FF0099;
                 }
 
                 * {
@@ -1766,18 +1775,15 @@ def reset_password_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgba(0, 0, 0, 0.8);
                 }
 
                 .form-container {
-                    background: rgba(40, 40, 40, 0.95);
+                    background: white;
                     padding: 2.5rem;
                     border-radius: 20px;
                     width: 100%;
                     max-width: 400px;
-                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                    border: 1px solid rgba(255, 0, 153, 0.1);
-                    backdrop-filter: blur(10px);
                 }
 
                 h1 {
@@ -1930,7 +1936,8 @@ def reset_password_page():
                     }
 
                     .form-section {
-                        padding: 1.5rem;
+                        padding: 1rem;
+                        background: var(--background-dark);
                     }
 
                     .form-container {
@@ -2178,10 +2185,10 @@ def billing_page():
             <style>
                 :root {{
                     --primary-color: #FF0099;
-                    --primary-hover: #D6006F;
+                    --primary-hover: #FF1493;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --border-color: rgba(255, 0, 153, 0.2);
+                    --border-color: #FF0099;
                 }}
 
                 * {{
