@@ -279,7 +279,6 @@ def login_page():
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
-                    --shadow-color: rgba(255, 0, 153, 0.3);
                 }
                 
                 /* Reset and Base Styles */
