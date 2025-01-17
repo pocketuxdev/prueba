@@ -307,11 +307,11 @@ def login_page():
                 /* Root Variables */
                 :root {
                     --primary-color: #FF0099;
-                    --primary-hover: #FF1493;
+                    --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
-                    --border-color: #FF0099;
+                    --border-color: rgba(255, 0, 153, 0.2);
                 }
                 
                 /* Reset and Base Styles */
@@ -326,15 +326,21 @@ def login_page():
                     min-height: 100vh;
                     background: var(--background-dark);
                     color: var(--text-light);
+                    overflow: hidden;
                     overflow-x: hidden;
                     max-width: 100vw;
                 }
 
                 /* Layout Components */
                 .container {
+                    position: relative;
+                    z-index: 2;
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
+                    grid-template-columns: 50vw 50vw;
                     min-height: 100vh;
+                    backdrop-filter: blur(10px);
+                    max-width: 100vw;
+                    overflow-x: hidden;
                 }
 
                 /* Image Section con efectos visuales */
@@ -348,29 +354,35 @@ def login_page():
                 }
 
                 .logo {
-                    width: 400px;
+                    width: 25vw;
                     height: auto;
-                    filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
+                    filter: brightness(1.2) drop-shadow(0 0 2vw rgba(255, 0, 153, 0.7));
                     animation: logoFloat 6s ease-in-out infinite,
-                              logoGlow 3s ease-in-out infinite;
+                              logoGlow 3s ease-in-out infinite,
+                              logoRotate 12s linear infinite;
                     transform-origin: center center;
+                    perspective: 1000px;
                 }
 
                 /* Form Section con fondo y efectos */
                 .form-section {
+                    padding: 3vw;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    padding: 2rem;
-                    background: rgba(0, 0, 0, 0.8);
+                    background: rgba(255, 255, 255, 0.05);
                 }
 
                 .login-container {
-                    background: white;
-                    padding: 2.5rem;
-                    border-radius: 20px;
-                    width: 100%;
-                    max-width: 400px;
+                    width: 90%;
+                    max-width: 40vw;
+                    padding: 2.5vw;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 1vw;
+                    box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.2),
+                               0 0 1vw var(--shadow-color);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid var(--border-color);
                 }
 
                 /* Animaciones mantenidas pero ajustadas */
@@ -395,103 +407,113 @@ def login_page():
 
                 /* Form Elements ajustados */
                 h1 {
-                    color: var(--primary-color);
-                    font-size: 2rem;
+                    font-size: 2.5vw;
+                    margin-bottom: 2vw;
+                    color: white;
                     text-align: center;
-                    margin-bottom: 2rem;
-                    font-weight: 600;
+                    text-shadow: 0 0 0.5vw var(--shadow-color);
                 }
 
                 .form-group {
                     position: relative;
-                    margin-bottom: 1.5rem;
-                    border: 2px solid var(--primary-color);
-                    border-radius: 12px;
-                    background: transparent;
+                    margin-bottom: 1.5vw;
                 }
 
                 .form-group i {
                     position: absolute;
-                    left: 1rem;
+                    left: 1vw;
                     top: 50%;
                     transform: translateY(-50%);
                     color: var(--primary-color);
-                    font-size: 1.2rem;
+                    font-size: 1.2vw;
                 }
 
                 input {
                     width: 100%;
-                    padding: 0.8rem 1rem 0.8rem 3rem;
-                    background: transparent;
-                    border: none;
-                    color: #666;
-                    font-size: 1rem;
+                    padding: 1vw 1vw 1vw 3vw;
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 2px solid var(--border-color);
+                    border-radius: 0.8vw;
+                    color: white;
+                    font-size: 1vw;
+                    transition: all 0.3s ease;
                 }
 
                 input:focus {
                     outline: none;
-                }
-
-                input::placeholder {
-                    color: #999;
+                    border-color: var(--primary-color);
+                    box-shadow: 0 0 1vw var(--shadow-color);
                 }
 
                 button {
                     width: 100%;
-                    padding: 1rem;
-                    background: var(--primary-color);
+                    padding: 1vw;
+                    background: linear-gradient(45deg, var(--primary-color), #ff1493);
                     color: white;
                     border: none;
-                    border-radius: 12px;
-                    font-size: 1rem;
+                    border-radius: 0.8vw;
+                    font-size: 1.1vw;
                     font-weight: 600;
                     cursor: pointer;
+                    transition: all 0.3s ease;
                     text-transform: uppercase;
-                    letter-spacing: 1px;
+                    letter-spacing: 0.1vw;
                 }
 
                 button:hover {
-                    background: var(--primary-hover);
+                    transform: translateY(-0.2vw);
+                    box-shadow: 0 0.5vw 1vw var(--shadow-color);
                 }
 
                 /* Message Styles */
                 #message {
                     margin-top: 1rem;
                     text-align: center;
-                    padding: 0.8rem;
-                    border-radius: 8px;
-                    font-size: 0.9rem;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    font-weight: 500;
+                    color: white;
                 }
 
                 .success {
                     background: rgba(0, 179, 104, 0.2);
-                    color: #00b368;
+                    border: 1px solid #00b368;
                 }
 
                 .error {
-                    background: rgba(255, 68, 68, 0.2);
-                    color: #ff4444;
+                    background: rgba(204, 0, 0, 0.2);
+                    border: 1px solid #cc0000;
                 }
 
                 /* Password Reset Link */
                 .reset-password-link {
                     margin-top: 1.5rem;
                     text-align: center;
-                    padding: 1rem;
+                    padding: 0.5rem;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
                 }
 
                 .reset-password-link a {
+                    color: var(--text-light);
+                    text-decoration: none;
+                    font-size: 0.95rem;
+                    transition: all 0.3s ease;
                     display: inline-flex;
                     align-items: center;
-                    gap: 0.5rem;
-                    color: var(--primary-color);
-                    text-decoration: none;
-                    font-size: 0.9rem;
-                    padding: 1rem;
+                    gap: 8px;
+                    padding: 8px 16px;
+                    border-radius: 20px;
                     background: rgba(255, 0, 153, 0.1);
-                    border-radius: 12px;
-                    width: 100%;
-                    justify-content: center;
+                    border: 1px solid var(--border-color);
+                }
+
+                .reset-password-link a:hover {
+                    color: var(--primary-color);
+                    background: rgba(255, 0, 153, 0.15);
+                    border-color: var(--primary-color);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px var(--shadow-color);
                 }
 
                 .reset-password-link i {
@@ -502,7 +524,7 @@ def login_page():
                 /* Media queries ajustados */
                 @media (max-width: 768px) {
                     .container {
-                        grid-template-columns: 1fr;
+                        grid-template-columns: 100vw;
                     }
 
                     .image-section {
@@ -510,94 +532,26 @@ def login_page():
                     }
 
                     .login-container {
-                        background: white;
-                        padding: 2rem;
-                        border-radius: 20px;
-                        width: 90%;
-                        margin: 1rem auto;
+                        max-width: 90vw;
+                        padding: 5vw;
                     }
 
                     h1 {
-                        font-size: 1.8rem;
-                        margin-bottom: 2rem;
+                        font-size: 6vw;
                     }
 
-                    .form-group {
-                        margin-bottom: 1.2rem;
+                    input, button {
+                        font-size: 3vw;
+                        padding: 3vw;
+                    }
+
+                    .form-group i {
+                        font-size: 4vw;
+                        left: 3vw;
                     }
 
                     input {
-                        font-size: 1rem;
-                    }
-
-                    .form-group i {
-                        font-size: 1.1rem;
-                    }
-
-                    button {
-                        font-size: 1rem;
-                        padding: 0.8rem;
-                    }
-
-                    .reset-password-link {
-                        margin-top: 2rem;
-                    }
-
-                    .reset-password-link a {
-                        font-size: 0.9rem;
-                        padding: 1rem;
-                    }
-
-                    #message {
-                        font-size: 3.5vw;
-                        padding: 3vw;
-                        margin-top: 3vw;
-                    }
-                }
-
-                /* Estilos para tablets y pantallas medianas */
-                @media (min-width: 769px) and (max-width: 1024px) {
-                    .login-container {
-                        max-width: 60vw;
-                    }
-
-                    h1 {
-                        font-size: 4vw;
-                    }
-
-                    input, button {
-                        font-size: 2.5vw;
-                    }
-
-                    .form-group i {
-                        font-size: 2.5vw;
-                    }
-                }
-
-                /* Estilos para pantallas grandes */
-                @media (min-width: 1025px) {
-                    .login-container {
-                        max-width: 30vw;
-                        padding: 2vw;
-                    }
-
-                    h1 {
-                        font-size: 2vw;
-                    }
-
-                    input, button {
-                        font-size: 1.2vw;
-                        padding: 1vw 1vw 1vw 3vw;
-                    }
-
-                    .form-group i {
-                        font-size: 1.2vw;
-                        left: 1vw;
-                    }
-
-                    .reset-password-link a {
-                        font-size: 1vw;
-                        padding: 1vw 2vw;
+                        padding-left: 10vw;
                     }
                 }
 
@@ -1076,10 +1030,10 @@ def dashboard_page():
             <style>
                 :root {{
                     --primary-color: #FF0099;
-                    --primary-hover: #FF1493;
+                    --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --border-color: #FF0099;
+                    --border-color: rgba(255, 0, 153, 0.2);
                 }}
 
                 * {{
@@ -1283,16 +1237,18 @@ def profile_page():
             <style>
                 :root {{
                     --primary-color: #FF0099;
-                    --primary-hover: #FF1493;
+                    --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --border-color: #FF0099;
+                    --text-lighter: rgba(255, 255, 255, 0.5);
+                    --border-color: rgba(255, 0, 153, 0.2);
                 }}
 
                 * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
                 }}
 
                 body {{
@@ -1729,11 +1685,11 @@ def reset_password_page():
             <style>
                 :root {
                     --primary-color: #FF0099;
-                    --primary-hover: #FF1493;
+                    --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
-                    --border-color: #FF0099;
+                    --border-color: rgba(255, 0, 153, 0.2);
                 }
 
                 * {
@@ -1766,7 +1722,8 @@ def reset_password_page():
                     height: auto;
                     filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
                     animation: logoFloat 6s ease-in-out infinite,
-                             logoGlow 3s ease-in-out infinite;
+                             logoGlow 3s ease-in-out infinite,
+                             logoRotate 12s linear infinite;
                     transform-origin: center center;
                 }
 
@@ -1775,15 +1732,18 @@ def reset_password_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
-                    background: rgba(0, 0, 0, 0.8);
+                    background: rgba(255, 255, 255, 0.05);
                 }
 
                 .form-container {
-                    background: white;
+                    background: rgba(40, 40, 40, 0.95);
                     padding: 2.5rem;
                     border-radius: 20px;
                     width: 100%;
                     max-width: 400px;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    backdrop-filter: blur(10px);
                 }
 
                 h1 {
@@ -1936,8 +1896,7 @@ def reset_password_page():
                     }
 
                     .form-section {
-                        padding: 1rem;
-                        background: var(--background-dark);
+                        padding: 1.5rem;
                     }
 
                     .form-container {
@@ -2185,16 +2144,18 @@ def billing_page():
             <style>
                 :root {{
                     --primary-color: #FF0099;
-                    --primary-hover: #FF1493;
+                    --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
-                    --border-color: #FF0099;
+                    --text-lighter: rgba(255, 255, 255, 0.5);
+                    --border-color: rgba(255, 0, 153, 0.2);
                 }}
 
                 * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
                 }}
 
                 body {{
