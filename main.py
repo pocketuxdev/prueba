@@ -1607,11 +1607,13 @@ def reset_password_page():
                     background: rgba(0, 179, 104, 0.2);
                     border: 1px solid #00b368;
                     color: #00b368;
+                    animation: successAnimation 0.3s ease-out forwards;
                 }
                 .error {
-                    background: rgba(255, 68, 68, 0.2);
-                    border: 1px solid #ff4444;
-                    color: #ff4444;
+                    background: rgba(255, 0, 0, 0.2);
+                    border: 1px solid #ff0000;
+                    color: #ff0000;
+                    animation: errorAnimation 0.3s ease-out forwards;
                 }
                 @keyframes logoRotate {
                     0% { transform: rotateY(0deg); }
@@ -1696,6 +1698,30 @@ def reset_password_page():
                 }
                 .success {
                     animation: successAnimation 0.3s ease-out forwards;
+                }
+                /* Animaciones */
+                @keyframes errorAnimation {
+                    0% { 
+                        transform: translateX(-10px);
+                        opacity: 0;
+                    }
+                    50% { 
+                        transform: translateX(10px);
+                    }
+                    100% { 
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                /* Estilos para inputs no válidos */
+                input:invalid {
+                    border-color: #ff0000;
+                    animation: shake 0.3s ease-in-out;
+                }
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-5px); }
+                    75% { transform: translateX(5px); }
                 }
             </style>
         </head>
