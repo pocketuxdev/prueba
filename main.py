@@ -914,9 +914,11 @@ def dashboard_page():
                 }}
                 .dashboard-layout {{
                     display: grid;
-                    grid-template-columns: 1fr;
-                    padding-left: 100px;
-                    min-height: 100vh;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1.5rem;
+                    padding: 2rem;
+                    max-width: 100%;
+                    margin: 0 auto;
                 }}
                 .main-content {{
                     padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
@@ -926,65 +928,170 @@ def dashboard_page():
                     justify-content: space-between;
                     align-items: center;
                     margin-bottom: 2rem;
-                    padding: 1rem;
+                    padding: 1.5rem;
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
-                    font-size: 1.8rem;
+                    font-size: 2rem;
                     color: white;
-                }}
-                .metrics-grid {{
-                    display: grid;
-                    grid-template-columns: repeat(4, 1fr);
+                    display: flex;
+                    align-items: center;
                     gap: 1rem;
+                }}
+                .header-icon {{
+                    color: var(--primary-color);
+                }}
+                .billing-grid {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr;
+                    gap: 2rem;
                     margin-bottom: 2rem;
                 }}
-                .metric-card {{
+                .billing-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     padding: 1.5rem;
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
                 }}
-                .chart-container {{
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    min-height: 200px;
-                }}
-                .kpi-grid {{
+                .billing-summary {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-columns: repeat(3, 1fr);
                     gap: 1rem;
                     margin-bottom: 2rem;
                 }}
-                .kpi-card {{
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 12px;
+                .summary-item {{
+                    background: rgba(255, 0, 153, 0.1);
                     padding: 1.5rem;
+                    border-radius: 12px;
                     text-align: center;
-                    border: 1px solid var(--border-color);
+                    border: 1px solid var(--primary-color);
+                    transition: all 0.3s ease;
                 }}
-                .kpi-value {{
+                .summary-item:hover {{
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
+                }}
+                .summary-value {{
                     font-size: 2rem;
                     font-weight: 600;
                     color: var(--primary-color);
                     margin-bottom: 0.5rem;
                 }}
-                .kpi-label {{
+                .summary-label {{
                     font-size: 0.9rem;
                     color: var(--text-light);
                 }}
+                .calendar-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .month-card {{
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 10px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                }}
+                .month-card:hover {{
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: scale(1.05);
+                }}
+                .month-name {{
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                    color: white;
+                }}
+                .month-amount {{
+                    font-size: 1.2rem;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                }}
+                .month-status {{
+                    font-size: 0.8rem;
+                    margin-top: 0.5rem;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    display: inline-block;
+                }}
+                .status-paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin-top: 2rem;
+                }}
+                .payment-methods {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .payment-method {{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 10px;
+                    transition: all 0.3s ease;
+                }}
+                .payment-method:hover {{
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .method-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .section-title {{
+                    font-size: 1.3rem;
+                    color: white;
+                    margin-bottom: 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .section-title i {{
+                    color: var(--primary-color);
+                }}
                 @media (max-width: 1400px) {{
-                    .metrics-grid {{
+                    .charts-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                    }}
+                }}
+                @media (max-width: 1024px) {{
+                    .stats-container {{
                         grid-template-columns: repeat(2, 1fr);
                     }}
                 }}
                 @media (max-width: 768px) {{
-                    .metrics-grid, .kpi-grid {{
+                    .dashboard-layout {{
+                        padding: 1rem;
+                    }}
+                    .charts-grid {{
                         grid-template-columns: 1fr;
+                    }}
+                    .chart-container {{
+                        min-height: 250px;
+                    }}
+                    .chart-container canvas {{
+                        height: 200px !important;
                     }}
                 }}
             </style>
@@ -1001,72 +1108,256 @@ def dashboard_page():
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
-                        <h1>Dashboard Tiffany Medical Assistant</h1>
+                        <h1>
+                            <i class="fas fa-file-invoice-dollar header-icon"></i>
+                            Centro de Facturación
+                        </h1>
                     </div>
-                    <div class="kpi-grid">
-                        <div class="kpi-card">
-                            <div class="kpi-value">30%</div>
-                            <div class="kpi-label">Incremento en Follow-ups</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value">25%</div>
-                            <div class="kpi-label">Reducción Tareas Admin</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value">5min</div>
-                            <div class="kpi-label">Tiempo Onboarding</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value">80%</div>
-                            <div class="kpi-label">Resolución WhatsApp</div>
-                        </div>
-                    </div>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
+                    <div class="billing-grid">
+                        <div class="billing-card">
+                            <div class="billing-summary">
+                                <div class="summary-item">
+                                    <div class="summary-value">$25,500</div>
+                                    <div class="summary-label">Facturación Anual</div>
+                                </div>
+                                <div class="summary-item">
+                                    <div class="summary-value">15</div>
+                                    <div class="summary-label">Facturas Pendientes</div>
+                                </div>
+                                <div class="summary-item">
+                                    <div class="summary-value">85%</div>
+                                    <div class="summary-label">Tasa de Pago</div>
+                                </div>
+                            </div>
+                            <div class="section-title">
+                                <i class="fas fa-calendar-alt"></i>
+                                Facturación Mensual 2024
+                            </div>
+                            <div class="calendar-grid">
+                                <div class="month-card">
+                                    <div class="month-name">Enero</div>
+                                    <div class="month-amount">$2,500</div>
+                                    <div class="month-status status-paid">Pagado</div>
+                                </div>
+                                <div class="month-card">
+                                    <div class="month-name">Febrero</div>
+                                    <div class="month-amount">$2,300</div>
+                                    <div class="month-status status-paid">Pagado</div>
+                                </div>
+                                <div class="month-card">
+                                    <div class="month-name">Marzo</div>
+                                    <div class="month-amount">$2,800</div>
+                                    <div class="month-status status-pending">Pendiente</div>
+                                </div>
+                                <div class="month-card">
+                                    <div class="month-name">Abril</div>
+                                    <div class="month-amount">$2,100</div>
+                                    <div class="month-status status-pending">Próximo</div>
+                                </div>
+                                <!-- Continuar con los demás meses... -->
+                            </div>
                             <div class="chart-container">
-                                <canvas id="userEngagementChart"></canvas>
+                                <canvas id="billingChart"></canvas>
                             </div>
                         </div>
-                        <div class="metric-card">
-                            <div class="chart-container">
-                                <canvas id="automationChart"></canvas>
+                        <div class="billing-card">
+                            <div class="section-title">
+                                <i class="fas fa-credit-card"></i>
+                                Métodos de Pago y Estado de Cuenta
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-container">
-                                <canvas id="patientCareChart"></canvas>
+                            
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <div class="method-icon">
+                                        <i class="fab fa-cc-visa"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <h3>Visa Premium</h3>
+                                        <p>**** 4589</p>
+                                        <span class="method-status">Principal</span>
+                                    </div>
+                                    <div class="method-actions">
+                                        <button class="action-btn">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="payment-method">
+                                    <div class="method-icon mastercard">
+                                        <i class="fab fa-cc-mastercard"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <h3>Mastercard Business</h3>
+                                        <p>**** 7856</p>
+                                        <span class="method-status">Respaldo</span>
+                                    </div>
+                                    <div class="method-actions">
+                                        <button class="action-btn">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-container">
-                                <canvas id="efficiencyChart"></canvas>
+                            <div class="section-title mt-4">
+                                <i class="fas fa-history"></i>
+                                Historial de Pagos
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-container">
-                                <canvas id="trainingChart"></canvas>
+                            
+                            <div class="payment-history">
+                                <div class="history-header">
+                                    <span>Período</span>
+                                    <span>Estado</span>
+                                    <span>Monto</span>
+                                    <span>Método</span>
+                                </div>
+                                <div class="history-item">
+                                    <div class="period">
+                                        <i class="fas fa-calendar-check text-success"></i>
+                                        Marzo 2024
+                                    </div>
+                                    <div class="status">
+                                        <span class="status-badge paid">
+                                            <i class="fas fa-check"></i> Pagado
+                                        </span>
+                                    </div>
+                                    <div class="amount">$2,800</div>
+                                    <div class="payment-type">
+                                        <i class="fab fa-cc-visa"></i> Visa
+                                    </div>
+                                </div>
+                                <div class="history-item">
+                                    <div class="period">
+                                        <i class="fas fa-calendar-check text-success"></i>
+                                        Febrero 2024
+                                    </div>
+                                    <div class="status">
+                                        <span class="status-badge paid">
+                                            <i class="fas fa-check"></i> Pagado
+                                        </span>
+                                    </div>
+                                    <div class="amount">$2,300</div>
+                                    <div class="payment-type">
+                                        <i class="fab fa-cc-mastercard"></i> Mastercard
+                                    </div>
+                                </div>
+                                <div class="history-item pending">
+                                    <div class="period">
+                                        <i class="fas fa-clock text-warning"></i>
+                                        Abril 2024
+                                    </div>
+                                    <div class="status">
+                                        <span class="status-badge pending">
+                                            Pendiente
+                                        </span>
+                                    </div>
+                                    <div class="amount">$2,100</div>
+                                    <div class="payment-type">
+                                        <i class="fas fa-clock"></i> Por definir
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-container">
-                                <canvas id="systemPerformanceChart"></canvas>
+                            <div class="section-title mt-4">
+                                <i class="fas fa-chart-pie"></i>
+                                Resumen de Pagos
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-container">
-                                <canvas id="adoptionChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-container">
-                                <canvas id="insightsChart"></canvas>
+                            <div class="payment-stats">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>Pagos a Tiempo</h4>
+                                        <p>98%</p>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>Tiempo Promedio</h4>
+                                        <p>2 días antes</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <script>
-                {charts_js}
+                // Configuración del gráfico
+                const ctx = document.getElementById('billingChart').getContext('2d');
+                new Chart(ctx, {{
+                    type: 'line',
+                    data: {{
+                        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                        datasets: [{{
+                            label: 'Facturación Mensual',
+                            data: [2500, 2300, 2800, 2100, 2600, 2400, 2700, 2900, 2200, 2400, 2600, 2800],
+                            borderColor: '#FF0099',
+                            backgroundColor: 'rgba(255, 0, 153, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#FF0099',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#FF0099',
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }}]
+                    }},
+                    options: {{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {{
+                            legend: {{
+                                display: false
+                            }},
+                            tooltip: {{
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#FF0099',
+                                bodyColor: '#fff',
+                                padding: 12,
+                                displayColors: false,
+                                callbacks: {{
+                                    label: function(context) {{
+                                        return '$ ' + context.parsed.y;
+                                    }}
+                                }}
+                            }}
+                        }},
+                        scales: {{
+                            y: {{
+                                beginAtZero: true,
+                                grid: {{
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }},
+                                ticks: {{
+                                    color: 'rgba(255, 255, 255, 0.8)',
+                                    callback: function(value) {{
+                                        return '$ ' + value;
+                                    }}
+                                }}
+                            }},
+                            x: {{
+                                grid: {{
+                                    display: false
+                                }},
+                                ticks: {{
+                                    color: 'rgba(255, 255, 255, 0.8)'
+                                }}
+                            }}
+                        }},
+                        interaction: {{
+                            intersect: false,
+                            mode: 'index'
+                        }},
+                        hover: {{
+                            mode: 'nearest',
+                            intersect: true
+                        }}
+                    }}
+                }});
             </script>
         </body>
     </html>
