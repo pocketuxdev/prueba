@@ -475,6 +475,49 @@ def login_page():
                         margin-bottom: 1.5rem;
                     }
                 }
+
+                /* Message Styles */
+                #message {
+                    margin-top: 1rem;
+                    text-align: center;
+                    padding: 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.9rem;
+                    transition: all 0.3s ease;
+                }
+
+                .success {
+                    background: rgba(0, 179, 104, 0.2);
+                    border: 1px solid #00b368;
+                    color: #00b368;
+                    animation: successAnimation 0.3s ease-out forwards;
+                }
+
+                .error {
+                    background: rgba(255, 0, 0, 0.2);
+                    border: 1px solid #ff0000;
+                    color: #ff0000;
+                    animation: errorAnimation 0.3s ease-out forwards;
+                }
+
+                /* Animaciones */
+                @keyframes errorAnimation {
+                    0% { transform: translateX(-10px); opacity: 0; }
+                    50% { transform: translateX(10px); }
+                    100% { transform: translateX(0); opacity: 1; }
+                }
+
+                /* Estilos para inputs no válidos */
+                input:invalid {
+                    border-color: #ff0000;
+                    animation: shake 0.3s ease-in-out;
+                }
+
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-5px); }
+                    75% { transform: translateX(5px); }
+                }
             </style>
         </head>
         <body>
