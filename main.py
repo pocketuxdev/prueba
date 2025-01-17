@@ -1599,15 +1599,18 @@ def reset_password_page():
                     margin-top: 1rem;
                     text-align: center;
                     padding: 0.8rem;
-                    border-radius: 8px;
+                    border-radius: 12px;
                     font-size: 0.9rem;
+                    transition: all 0.3s ease;
                 }
                 .success {
                     background: rgba(0, 179, 104, 0.2);
+                    border: 1px solid #00b368;
                     color: #00b368;
                 }
                 .error {
                     background: rgba(255, 68, 68, 0.2);
+                    border: 1px solid #ff4444;
                     color: #ff4444;
                 }
                 @keyframes logoRotate {
@@ -1676,6 +1679,23 @@ def reset_password_page():
                 .submit-button:disabled {
                     opacity: 0.7;
                     cursor: not-allowed;
+                }
+                /* Animación para el mensaje de éxito */
+                @keyframes successAnimation {
+                    0% { 
+                        transform: scale(0.9);
+                        opacity: 0;
+                    }
+                    50% { 
+                        transform: scale(1.1);
+                    }
+                    100% { 
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+                .success {
+                    animation: successAnimation 0.3s ease-out forwards;
                 }
             </style>
         </head>
