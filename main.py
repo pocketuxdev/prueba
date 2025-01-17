@@ -327,7 +327,6 @@ def login_page():
                     min-height: 100vh;
                     background: var(--background-dark);
                     color: var(--text-light);
-                    overflow: hidden;
                     overflow-x: hidden;
                     max-width: 100vw;
                 }
@@ -372,16 +371,16 @@ def login_page():
                     align-items: center;
                     justify-content: center;
                     background: rgba(255, 255, 255, 0.05);
+                    width: 100%;
                 }
 
                 .login-container {
                     width: 90%;
                     max-width: 40vw;
-                    padding: 2.5vw;
+                    padding: 5vw;
                     background: rgba(255, 255, 255, 0.1);
-                    border-radius: 1vw;
-                    box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.2),
-                               0 0 1vw var(--shadow-color);
+                    border-radius: 4vw;
+                    box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.2);
                     backdrop-filter: blur(10px);
                     border: 1px solid var(--border-color);
                 }
@@ -408,36 +407,34 @@ def login_page():
 
                 /* Form Elements ajustados */
                 h1 {
-                    font-size: 2.5vw;
-                    margin-bottom: 2vw;
+                    font-size: 6vw;
+                    margin-bottom: 4vw;
                     color: white;
                     text-align: center;
-                    text-shadow: 0 0 0.5vw var(--shadow-color);
                 }
 
                 .form-group {
                     position: relative;
-                    margin-bottom: 1.5vw;
+                    margin-bottom: 4vw;
                 }
 
                 .form-group i {
                     position: absolute;
-                    left: 1vw;
+                    left: 3vw;
                     top: 50%;
                     transform: translateY(-50%);
                     color: var(--primary-color);
-                    font-size: 1.2vw;
+                    font-size: 4vw;
                 }
 
                 input {
                     width: 100%;
-                    padding: 1vw 1vw 1vw 3vw;
+                    padding: 3vw 3vw 3vw 10vw;
                     background: rgba(255, 255, 255, 0.1);
                     border: 2px solid var(--border-color);
-                    border-radius: 0.8vw;
+                    border-radius: 3vw;
                     color: white;
-                    font-size: 1vw;
-                    transition: all 0.3s ease;
+                    font-size: 4vw;
                 }
 
                 input:focus {
@@ -448,17 +445,17 @@ def login_page():
 
                 button {
                     width: 100%;
-                    padding: 1vw;
+                    padding: 3vw;
                     background: linear-gradient(45deg, var(--primary-color), #ff1493);
                     color: white;
                     border: none;
-                    border-radius: 0.8vw;
-                    font-size: 1.1vw;
+                    border-radius: 3vw;
+                    font-size: 4vw;
                     font-weight: 600;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     text-transform: uppercase;
-                    letter-spacing: 0.1vw;
+                    letter-spacing: 0.5vw;
                 }
 
                 button:hover {
@@ -488,23 +485,20 @@ def login_page():
 
                 /* Password Reset Link */
                 .reset-password-link {
-                    margin-top: 1.5rem;
+                    margin-top: 4vw;
                     text-align: center;
-                    padding: 0.5rem;
-                    border-radius: 8px;
-                    transition: all 0.3s ease;
                 }
 
                 .reset-password-link a {
                     color: var(--text-light);
                     text-decoration: none;
-                    font-size: 0.95rem;
+                    font-size: 3.5vw;
                     transition: all 0.3s ease;
                     display: inline-flex;
                     align-items: center;
-                    gap: 8px;
-                    padding: 8px 16px;
-                    border-radius: 20px;
+                    gap: 2vw;
+                    padding: 2vw 4vw;
+                    border-radius: 5vw;
                     background: rgba(255, 0, 153, 0.1);
                     border: 1px solid var(--border-color);
                 }
@@ -525,7 +519,7 @@ def login_page():
                 /* Media queries ajustados */
                 @media (max-width: 768px) {
                     .container {
-                        grid-template-columns: 100vw;
+                        grid-template-columns: 1fr;
                     }
 
                     .image-section {
@@ -534,25 +528,94 @@ def login_page():
 
                     .login-container {
                         max-width: 90vw;
+                        margin: 5vw auto;
+                    }
+
+                    .form-section {
                         padding: 5vw;
+                        min-height: 100vh;
+                        align-items: center;
                     }
 
                     h1 {
-                        font-size: 6vw;
+                        font-size: 8vw;
+                        margin-bottom: 6vw;
                     }
 
-                    input, button {
-                        font-size: 3vw;
-                        padding: 3vw;
-                    }
-
-                    .form-group i {
-                        font-size: 4vw;
-                        left: 3vw;
+                    .form-group {
+                        margin-bottom: 5vw;
                     }
 
                     input {
-                        padding-left: 10vw;
+                        font-size: 4vw;
+                        padding: 4vw 4vw 4vw 12vw;
+                    }
+
+                    .form-group i {
+                        font-size: 5vw;
+                        left: 4vw;
+                    }
+
+                    button {
+                        font-size: 4.5vw;
+                        padding: 4vw;
+                    }
+
+                    .reset-password-link a {
+                        font-size: 3.5vw;
+                        padding: 3vw 6vw;
+                    }
+
+                    #message {
+                        font-size: 3.5vw;
+                        padding: 3vw;
+                        margin-top: 3vw;
+                    }
+                }
+
+                /* Estilos para tablets y pantallas medianas */
+                @media (min-width: 769px) and (max-width: 1024px) {
+                    .login-container {
+                        max-width: 60vw;
+                    }
+
+                    h1 {
+                        font-size: 4vw;
+                    }
+
+                    input, button {
+                        font-size: 2.5vw;
+                    }
+
+                    .form-group i {
+                        font-size: 2.5vw;
+                    }
+                }
+
+                /* Estilos para pantallas grandes */
+                @media (min-width: 1025px) {
+                    .login-container {
+                        max-width: 30vw;
+                        padding: 2vw;
+                    }
+
+                    h1 {
+                        font-size: 2vw;
+                    }
+
+                    input, button {
+                        font-size: 1.2vw;
+                        padding: 1vw 1vw 1vw 3vw;
+                    }
+
+                    .form-group i {
+                        font-size: 1.2vw;
+                        left: 1vw;
+                    }
+
+                    .reset-password-link a {
+                        font-size: 1vw;
+                        padding: 1vw 2vw;
                     }
                 }
 
