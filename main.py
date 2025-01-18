@@ -28,18 +28,18 @@ def get_common_sidebar():
             left: 50%;
             transform: translateX(-50%);
             height: 60px;
-            background: rgba(40, 40, 40, 0.95);
+            background: rgba(40, 40, 40, 0.75); /* Aumentada la transparencia */
             padding: 0 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px); /* Ajustado el blur */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             border-radius: 20px;
             width: auto;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde más sutil */
         }
         .sidebar-logo {
             width: 40px;
@@ -60,7 +60,7 @@ def get_common_sidebar():
             cursor: pointer;
             transition: all 0.3s ease;
             color: var(--text-light);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08); /* Items más transparentes */
         }
         .nav-item:hover {
             background: var(--primary-hover);
