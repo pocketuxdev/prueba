@@ -21,23 +21,25 @@ def get_common_sidebar():
     return """
     <!-- Estilos comunes del Sidebar -->
     <style>
+        /* Sidebar Styles */
         .sidebar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px; /* Altura fija para la barra inferior */
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0 1rem;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 60px;
+            background: rgba(40, 40, 40, 0.95);
+            padding: 0 1.5rem;
             display: flex;
-            flex-direction: row;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             backdrop-filter: blur(10px);
-            box-shadow: 0 -5px 20px rgba(255, 0, 153, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             z-index: 1000;
-            border-top: 1px solid var(--border-color);
+            border-radius: 20px;
+            width: auto;
+            border: 1px solid var(--border-color);
         }
         .sidebar-logo {
             width: 40px;
@@ -49,8 +51,8 @@ def get_common_sidebar():
             transform: scale(1.1);
         }
         .nav-item {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -59,17 +61,14 @@ def get_common_sidebar():
             transition: all 0.3s ease;
             color: var(--text-light);
             background: rgba(255, 255, 255, 0.1);
-            position: relative;
         }
         .nav-item:hover {
             background: var(--primary-hover);
-            transform: translateY(-5px);
-            color: white;
+            transform: translateY(-3px);
         }
         .nav-item.active {
             background: var(--primary-color);
             color: white;
-            box-shadow: 0 0 15px rgba(255, 0, 153, 0.3);
         }
         .nav-item::after {
             content: attr(data-tooltip);
@@ -108,8 +107,13 @@ def get_common_sidebar():
                 padding: 1rem 1rem 100px 1rem;
             }
             .sidebar {
-                padding: 0 0.5rem;
-                gap: 1rem;
+                bottom: 1.5rem;
+                padding: 0 1rem;
+                height: 50px;
+            }
+            .nav-item {
+                width: 35px;
+                height: 35px;
             }
             .metrics-grid {
                 grid-template-columns: 1fr;
