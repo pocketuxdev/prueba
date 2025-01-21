@@ -297,6 +297,7 @@ def login_page():
                     min-height: 100vh;
                     background: var(--background-dark);
                     color: var(--text-light);
+                    overflow: hidden; /* Deshabilitar scroll */
                 }
                 
                 /* Layout Components */
@@ -307,6 +308,7 @@ def login_page():
                     grid-template-columns: 1fr 1fr;
                     min-height: 100vh;
                     backdrop-filter: blur(10px);
+                    overflow: hidden; /* Deshabilitar scroll */
                 }
                 
                 /* Image Section */
@@ -355,7 +357,7 @@ def login_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
-                    background: rgba(255, 255, 255, 0.05); /* Agregado el fondo semi-transparente */
+                    background: rgba(40, 40, 40, 0.95); /* Cambiado a gris */
                 }
                 
                 .login-container {
