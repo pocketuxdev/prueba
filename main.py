@@ -295,9 +295,12 @@ def login_page():
                 
                 body {
                     min-height: 100vh;
+                    height: 100vh; /* Asegurar altura exacta del viewport */
                     background: var(--background-dark);
                     color: var(--text-light);
-                    overflow: hidden; /* Deshabilitar scroll */
+                    display: flex; /* Ayuda a centrar el contenido verticalmente */
+                    align-items: center;
+                    justify-content: center;
                 }
                 
                 /* Layout Components */
@@ -306,9 +309,8 @@ def login_page():
                     z-index: 2;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
-                    min-height: 100vh;
+                    height: 100vh; /* Ajustar a altura exacta del viewport */
                     backdrop-filter: blur(10px);
-                    overflow: hidden; /* Deshabilitar scroll */
                 }
                 
                 /* Image Section */
@@ -357,7 +359,8 @@ def login_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
-                    background: rgba(40, 40, 40, 0.95); /* Cambiado a gris */
+                    background: rgba(40, 40, 40, 0.95); /* Mantener el fondo gris */
+                    height: 100%; /* Asegurar que ocupe toda la altura */
                 }
                 
                 .login-container {
@@ -462,6 +465,7 @@ def login_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
+                        height: 100vh;
                     }
                     
                     .image-section {
@@ -469,7 +473,7 @@ def login_page():
                     }
                     
                     .form-section {
-                        padding: 1.5rem;
+                        height: 100vh;
                     }
                     
                     .login-container {
