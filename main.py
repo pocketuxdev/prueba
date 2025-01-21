@@ -295,21 +295,20 @@ def login_page():
                 
                 body {
                     min-height: 100vh;
-                    background: rgba(40, 40, 40, 0.95); /* Color gris oscuro para todo el fondo */
+                    background: rgba(40, 40, 40, 0.95);
                     color: var(--text-light);
-                    overflow: hidden; /* Deshabilitar scroll */
+                    overflow: hidden;
                 }
                 
                 /* Layout Components */
                 .container {
                     position: relative;
                     z-index: 2;
-                    display: flex; /* Cambiado de grid a flex */
-                    justify-content: center;
-                    align-items: center;
+                    display: grid; /* Mantenemos el grid para la separación */
+                    grid-template-columns: 1fr 1fr; /* Mantenemos las dos columnas */
                     min-height: 100vh;
                     backdrop-filter: blur(10px);
-                    overflow: hidden; /* Deshabilitar scroll */
+                    overflow: hidden;
                 }
                 
                 /* Image Section */
@@ -459,7 +458,7 @@ def login_page():
                 /* Media Queries */
                 @media (max-width: 768px) {
                     .container {
-                        padding: 1.5rem;
+                        grid-template-columns: 1fr;
                     }
                     
                     .image-section {
