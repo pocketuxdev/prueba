@@ -1528,13 +1528,18 @@ def reset_password_page():
                     font-family: 'Poppins', sans-serif;
                 }
                 body {
-                    min-height: 100vh;
+                    height: 100vh;
+                    width: 100vw;
                     background: var(--background-dark);
+                    color: var(--text-light);
+                    overflow: hidden;
                 }
                 .container {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
-                    min-height: 100vh;
+                    height: 100vh;
+                    width: 100vw;
+                    overflow: hidden;
                 }
                 .logo-section {
                     display: flex;
@@ -1558,6 +1563,9 @@ def reset_password_page():
                     justify-content: center;
                     padding: 2rem;
                     background: rgba(255, 255, 255, 0.05);
+                    height: 100vh;
+                    width: 100vw;
+                    overflow: hidden;
                 }
                 .form-container {
                     background: rgba(40, 40, 40, 0.95);
@@ -1709,15 +1717,23 @@ def reset_password_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
                     }
                     .logo-section {
                         display: none;
                     }
                     .form-section {
                         padding: 1.5rem;
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
                     }
                     .form-container {
                         padding: 2rem;
+                        max-height: 100vh;
+                        width: 100%;
                     }
                 }
                 /* Validación del número */
