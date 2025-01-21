@@ -1556,6 +1556,7 @@ def reset_password_page():
                     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     backdrop-filter: blur(10px);
+                    margin: 0 auto; /* Centrar el contenedor */
                 }
                 h1 {
                     color: white;
@@ -1578,6 +1579,7 @@ def reset_password_page():
                     padding: 0.8rem;
                     border-radius: 12px;
                     border: 1px solid var(--border-color);
+                    width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
                 }
                 .country-code {
                     display: flex;
@@ -1588,6 +1590,8 @@ def reset_password_page():
                     border-radius: 8px;
                     border: 1px solid var(--border-color);
                     height: 42px;
+                    min-width: 90px; /* Ancho mínimo para el código de país */
+                    flex-shrink: 0; /* Evitar que se encoja */
                 }
                 .country-code input {
                     width: 50px;
@@ -1613,6 +1617,8 @@ def reset_password_page():
                     color: white;
                     font-size: 0.95rem;
                     height: 42px;
+                    width: 100%; /* Asegurar que ocupe el espacio restante */
+                    min-width: 0; /* Permitir que se encoja si es necesario */
                 }
                 .submit-button {
                     width: 100%;
