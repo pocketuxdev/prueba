@@ -302,6 +302,7 @@ def login_page():
                     min-height: 100vh;
                     background: var(--background-dark);
                     color: var(--text-light);
++                   overflow: hidden; /* Prevenir scroll */
                 }
                 
                 /* Layout Components */
@@ -312,6 +313,7 @@ def login_page():
                     grid-template-columns: 1fr 1fr;
                     min-height: 100vh;
                     backdrop-filter: blur(10px);
++                   overflow: hidden; /* Prevenir scroll en el contenedor */
                 }
                 
                 /* Image Section */
@@ -465,6 +467,8 @@ def login_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
                     }
                     
                     .image-section {
@@ -473,10 +477,13 @@ def login_page():
                     
                     .form-section {
                         padding: 1.5rem;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
                     }
                     
                     .login-container {
                         padding: 2rem;
++                       max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
                     }
                     
                     h1 {
