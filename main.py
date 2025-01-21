@@ -295,12 +295,9 @@ def login_page():
                 
                 body {
                     min-height: 100vh;
-                    height: 100vh; /* Asegurar altura exacta del viewport */
                     background: var(--background-dark);
                     color: var(--text-light);
-                    display: flex; /* Ayuda a centrar el contenido verticalmente */
-                    align-items: center;
-                    justify-content: center;
+                    overflow: hidden; /* Deshabilitar scroll */
                 }
                 
                 /* Layout Components */
@@ -309,8 +306,9 @@ def login_page():
                     z-index: 2;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
-                    height: 100vh; /* Ajustar a altura exacta del viewport */
+                    min-height: 100vh;
                     backdrop-filter: blur(10px);
+                    overflow: hidden; /* Deshabilitar scroll */
                 }
                 
                 /* Image Section */
@@ -359,8 +357,8 @@ def login_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
-                    background: rgba(40, 40, 40, 0.95); /* Mantener el fondo gris */
-                    height: 100%; /* Asegurar que ocupe toda la altura */
+                    background: rgba(255, 255, 255, 0.05); /* Agregado el fondo semi-transparente */
+                    background: rgba(40, 40, 40, 0.95); /* Cambiado a gris */
                 }
                 
                 .login-container {
@@ -465,7 +463,6 @@ def login_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
-                        height: 100vh;
                     }
                     
                     .image-section {
@@ -473,7 +470,7 @@ def login_page():
                     }
                     
                     .form-section {
-                        height: 100vh;
+                        padding: 1.5rem;
                     }
                     
                     .login-container {
