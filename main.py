@@ -295,7 +295,7 @@ def login_page():
                 
                 body {
                     min-height: 100vh;
-                    background: var(--background-dark);
+                    background: rgba(40, 40, 40, 0.95); /* Color gris oscuro para todo el fondo */
                     color: var(--text-light);
                     overflow: hidden; /* Deshabilitar scroll */
                 }
@@ -318,7 +318,7 @@ def login_page():
                     justify-content: center;
                     position: relative;
                     overflow: hidden;
-                    background: rgba(0, 0, 0, 0.5);
+                    background: transparent; /* Removemos el fondo negro semitransparente */
                 }
                 
                 .logo {
@@ -357,8 +357,7 @@ def login_page():
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
-                    background: rgba(255, 255, 255, 0.05); /* Agregado el fondo semi-transparente */
-                    background: rgba(40, 40, 40, 0.95); /* Cambiado a gris */
+                    background: rgba(40, 40, 40, 0.95);
                 }
                 
                 .login-container {
