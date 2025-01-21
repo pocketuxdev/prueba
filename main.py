@@ -299,10 +299,12 @@ def login_page():
                 }
                 
                 body {
+                    min-height: 100vh;
                     height: 100vh;
                     width: 100vw;
                     background: var(--background-dark);
                     color: var(--text-light);
++                   overflow: hidden; /* Prevenir scroll */
                     overflow: hidden;
                 }
                 
@@ -312,9 +314,11 @@ def login_page():
                     z-index: 2;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
+                    min-height: 100vh;
                     height: 100vh;
                     width: 100vw;
                     backdrop-filter: blur(10px);
++                   overflow: hidden; /* Prevenir scroll en el contenedor */
                     overflow: hidden;
                 }
                 
@@ -469,6 +473,8 @@ def login_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
                         height: 100vh;
                         width: 100vw;
                         overflow: hidden;
@@ -480,6 +486,8 @@ def login_page():
                     
                     .form-section {
                         padding: 1.5rem;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
                         height: 100vh;
                         width: 100vw;
                         overflow: hidden;
@@ -487,6 +495,7 @@ def login_page():
                     
                     .login-container {
                         padding: 2rem;
++                       max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
                         max-height: 100vh;
                         width: 100%;
                     }
@@ -1528,18 +1537,13 @@ def reset_password_page():
                     font-family: 'Poppins', sans-serif;
                 }
                 body {
-                    height: 100vh;
-                    width: 100vw;
+                    min-height: 100vh;
                     background: var(--background-dark);
-                    color: var(--text-light);
-                    overflow: hidden;
                 }
                 .container {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
-                    height: 100vh;
-                    width: 100vw;
-                    overflow: hidden;
+                    min-height: 100vh;
                 }
                 .logo-section {
                     display: flex;
@@ -1563,9 +1567,6 @@ def reset_password_page():
                     justify-content: center;
                     padding: 2rem;
                     background: rgba(255, 255, 255, 0.05);
-                    height: 100vh;
-                    width: 100vw;
-                    overflow: hidden;
                 }
                 .form-container {
                     background: rgba(40, 40, 40, 0.95);
@@ -1717,23 +1718,15 @@ def reset_password_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
-                        height: 100vh;
-                        width: 100vw;
-                        overflow: hidden;
                     }
                     .logo-section {
                         display: none;
                     }
                     .form-section {
                         padding: 1.5rem;
-                        height: 100vh;
-                        width: 100vw;
-                        overflow: hidden;
                     }
                     .form-container {
                         padding: 2rem;
-                        max-height: 100vh;
-                        width: 100%;
                     }
                 }
                 /* Validación del número */
