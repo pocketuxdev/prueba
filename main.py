@@ -299,10 +299,11 @@ def login_page():
                 }
                 
                 body {
-                    min-height: 100vh;
+                    height: 100vh;
+                    width: 100vw;
                     background: var(--background-dark);
                     color: var(--text-light);
-+                   overflow: hidden; /* Prevenir scroll */
+                    overflow: hidden;
                 }
                 
                 /* Layout Components */
@@ -311,9 +312,10 @@ def login_page():
                     z-index: 2;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
-                    min-height: 100vh;
+                    height: 100vh;
+                    width: 100vw;
                     backdrop-filter: blur(10px);
-+                   overflow: hidden; /* Prevenir scroll en el contenedor */
+                    overflow: hidden;
                 }
                 
                 /* Image Section */
@@ -467,8 +469,9 @@ def login_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
-+                       height: 100vh; /* Altura fija en móvil */
-+                       overflow: hidden; /* Prevenir scroll */
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
                     }
                     
                     .image-section {
@@ -477,13 +480,15 @@ def login_page():
                     
                     .form-section {
                         padding: 1.5rem;
-+                       height: 100vh; /* Altura fija en móvil */
-+                       overflow: hidden; /* Prevenir scroll */
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
                     }
                     
                     .login-container {
                         padding: 2rem;
-+                       max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
+                        max-height: 100vh;
+                        width: 100%;
                     }
                     
                     h1 {
