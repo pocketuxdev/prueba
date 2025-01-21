@@ -1818,7 +1818,7 @@ def reset_password_page():
                                 <input type="tel" 
                                        class="phone-number" 
                                        id="phone" 
-                                       placeholder="Número de teléfono"
+                                       placeholder="Teléfono"
                                        required>
                             </div>
                             
