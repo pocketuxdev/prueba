@@ -127,17 +127,18 @@ def get_common_sidebar():
             }
             
             .kpi-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                margin-bottom: 1.5rem;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
             }
             
             .kpi-card {
-                background: rgba(0, 0, 0, 0.7);
-                border: 1px solid var(--primary-color);
-                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
                 padding: 1.5rem;
+                border: 1px solid var(--border-color);
+                height: auto;
             }
             
             .kpi-value {
@@ -154,17 +155,16 @@ def get_common_sidebar():
             }
             
             .metrics-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 2rem;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
                 width: 95vw;
                 margin: 1rem auto;
             }
             
             .metric-card {
-                background: rgba(0, 0, 0, 0.95);
-                border: 1px solid var(--primary-color);
-                border-radius: 25px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
                 padding: 1.5rem;
                 width: 100%;
                 min-height: 350px;
@@ -212,29 +212,28 @@ def get_common_sidebar():
             
             /* Ajustes para las tarjetas KPI */
             .kpi-grid {
-                width: 95vw;
-                margin: 0 auto 2rem auto;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
             }
             
             .kpi-card {
-                background: rgba(0, 0, 0, 0.95);
-                border: 1px solid var(--primary-color);
-                border-radius: 25px;
-                padding: 2rem 1.5rem;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
+                padding: 1.5rem;
                 text-align: center;
             }
             
             .kpi-value {
-                font-size: 3rem;
+                font-size: 2.5rem;
                 color: var(--primary-color);
                 margin-bottom: 0.5rem;
-                font-weight: 600;
             }
             
             .kpi-label {
-                font-size: 1.2rem;
+                font-size: 1rem;
                 color: var(--text-light);
-                font-family: 'Playfair Display', serif;
             }
             
             .sidebar {
