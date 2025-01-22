@@ -522,4 +522,49 @@ p {
     .country-code {
         width: 100%;
     }
+}
+
+/* Typography Styles
+   ========================================================================== */
+.dashboard-layout h1,
+.profile-name {
+    font-size: var(--display-small);  /* 2rem / 32px */
+    font-weight: 600;
+    color: white;
+    margin-bottom: var(--spacing-sm);
+}
+
+.dashboard-layout h2,
+.profile-role {
+    font-size: var(--headline-medium);  /* 1.25rem / 20px */
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.chart-title {
+    font-size: var(--headline-medium);
+    font-weight: 500;
+    color: white;
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.kpi-value {
+    font-size: var(--display-medium);  /* 2.5rem / 40px */
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.kpi-label {
+    font-size: var(--body-medium);  /* 0.875rem / 14px */
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+/* Ajustar el texto dentro de las métricas */
+.metric-card {
+    font-size: var(--body-large);
+    color: var(--text-light);
 } 
