@@ -104,7 +104,7 @@ def get_common_sidebar():
             min-height: 100vh;
             max-width: 1400px; /* Ancho máximo más controlado */
             margin: 0 auto;
-            padding: 0 2rem 120px 2rem;
+            padding: 2rem 2rem 100px 2rem;
             overflow-x: hidden;
         }
         @media (max-width: 768px) {
@@ -182,9 +182,9 @@ def get_common_sidebar():
         /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
         .main-content {
             width: 100%;
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 2rem 0;
+            padding: 0;
         }
         /* Ajustes para el scroll */
         html, body {
@@ -939,14 +939,11 @@ def dashboard_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    padding: 0 2rem 120px 2rem;
+                    padding-left: 100px;
                     min-height: 100vh;
                 }}
                 .main-content {{
-                    padding: 2rem 0;
-                    width: 100%;
-                    max-width: 1400px;
-                    margin: 0 auto;
+                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
                 }}
                 .header {{
                     display: flex;
@@ -961,12 +958,6 @@ def dashboard_page():
                 .header h1 {{
                     font-size: 1.8rem;
                     color: white;
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                }}
-                .header-icon {{
-                    color: var(--primary-color);
                 }}
                 .metrics-grid {{
                     display: grid;
@@ -1014,9 +1005,6 @@ def dashboard_page():
                     .metrics-grid {{
                         grid-template-columns: repeat(2, 1fr);
                     }}
-                    .main-content {{
-                        padding: 2rem 1rem;
-                    }}
                 }}
                 @media (max-width: 768px) {{
                     .metrics-grid, .kpi-grid {{
@@ -1037,10 +1025,7 @@ def dashboard_page():
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
-                        <h1>
-                            <i class="fas fa-file-invoice-dollar header-icon"></i>
-                            Centro de Facturación
-                        </h1>
+                        <h1>Dashboard Tiffany Medical Assistant</h1>
                     </div>
                     <div class="kpi-grid">
                         <div class="kpi-card">
@@ -1552,12 +1537,19 @@ def reset_password_page():
                     font-family: 'Poppins', sans-serif;
                 }
                 body {
+                    height: 100vh;
+                    width: 100vw;
                     min-height: 100vh;
                     background: var(--background-dark);
+                    color: var(--text-light);
+                    overflow: hidden;
                 }
                 .container {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
+                    height: 100vh;
+                    width: 100vw;
+                    overflow: hidden;
                     min-height: 100vh;
                 }
                 .logo-section {
@@ -1582,6 +1574,9 @@ def reset_password_page():
                     justify-content: center;
                     padding: 2rem;
                     background: rgba(255, 255, 255, 0.05);
+                    height: 100vh;
+                    width: 100vw;
+                    overflow: hidden;
                 }
                 .form-container {
                     background: rgba(40, 40, 40, 0.95);
@@ -1733,15 +1728,23 @@ def reset_password_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
                     }
                     .logo-section {
                         display: none;
                     }
                     .form-section {
                         padding: 1.5rem;
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
                     }
                     .form-container {
                         padding: 2rem;
+                        max-height: 100vh;
+                        width: 100%;
                     }
                 }
                 /* Validación del número */
