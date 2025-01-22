@@ -1019,7 +1019,7 @@ def dashboard_page():
                     grid-template-columns: repeat(4, 1fr);
                     gap: 0.5rem;
                     height: 65vh; /* Reducido de 75vh a 65vh */
-                    margin-bottom: 1rem; /* Espacio para el scroll */
+                    margin-bottom: 2rem; /* Espacio para el scroll */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1055,10 +1055,7 @@ def dashboard_page():
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     gap: 0.5rem;
-                    height: 6vh;
-                    position: sticky; /* Mantener KPIs visibles */
-                    top: calc(3.5vh + 0.8rem);
-                    z-index: 9;
+                    height: 6vh; /* Reducido */
                 }}
                 .kpi-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1321,21 +1318,6 @@ def dashboard_page():
                     .history-item {{
                         font-size: 0.9rem;
                     }}
-                }}
-                /* Scroll personalizado */
-                .dashboard-layout::-webkit-scrollbar {{
-                    width: 8px;
-                }}
-                .dashboard-layout::-webkit-scrollbar-track {{
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 4px;
-                }}
-                .dashboard-layout::-webkit-scrollbar-thumb {{
-                    background: rgba(255, 0, 153, 0.3);
-                    border-radius: 4px;
-                }}
-                .dashboard-layout::-webkit-scrollbar-thumb:hover {{
-                    background: rgba(255, 0, 153, 0.5);
                 }}
             </style>
             <!-- Agregar en el <style> de cada página -->
