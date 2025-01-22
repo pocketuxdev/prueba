@@ -996,7 +996,7 @@ def dashboard_page():
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 180px; // Reducido de 200px a 180px
+                    height: 180px;
                     padding: 0.8rem;
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
@@ -1006,8 +1006,37 @@ def dashboard_page():
                 .chart-title {{
                     font-size: 0.9rem;
                     color: white;
-                    margin-bottom: 0.3rem; // Reducido de 0.4rem a 0.3rem
+                    margin-bottom: 0.3rem;
                     text-align: center;
+                }}
+                @media (max-width: 768px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        padding: 1rem;
+                        gap: 2rem; // Aumentado el espacio entre gráficas
+                    }}
+                    
+                    .metric-card {{
+                        padding: 1.2rem;
+                        margin-bottom: 1rem;
+                    }}
+                    
+                    .chart-container {{
+                        height: 250px; // Aumentado para mejor visualización en móvil
+                        padding: 1rem;
+                    }}
+                    
+                    .chart-title {{
+                        font-size: 1.1rem; // Aumentado el tamaño del título
+                        margin-bottom: 1rem;
+                        font-weight: 500;
+                    }}
+
+                    // Estilos específicos para mejorar la legibilidad de las gráficas en móvil
+                    canvas {{
+                        max-width: 100% !important;
+                        height: auto !important;
+                    }}
                 }}
                 @media (max-width: 1400px) {{
                     .metrics-grid {{
