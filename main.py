@@ -1161,33 +1161,42 @@ def dashboard_page():
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
-                    padding: 1.5rem 1rem; /* Aumentado el padding vertical */
+                    padding: 1.5rem 1rem;
                     border: 1px solid var(--border-color);
                     height: auto;
                     min-height: 35vh;
                     display: flex;
                     flex-direction: column;
-                    align-items: center; /* Centrar contenido horizontalmente */
-                    justify-content: center; /* Centrar contenido verticalmente */
-                    overflow: hidden; /* Prevenir que el contenido se salga */
+                    align-items: center;
+                    justify-content: flex-start; /* Cambiado a flex-start para mejor control del espacio */
+                    overflow: hidden;
                 }}
                 .chart-title {{
                     font-size: 1.2rem;
-                    margin-bottom: 1rem;
+                    margin: 0 0 1rem 0; /* Margen uniforme */
                     text-align: center;
                     width: 100%;
-                    padding: 0 0.5rem;
+                    padding: 0.5rem;
+                    white-space: normal; /* Permitir múltiples líneas */
+                    overflow-wrap: break-word; /* Romper palabras largas si es necesario */
+                    word-wrap: break-word;
+                    min-height: 2.5em; /* Altura mínima para dos líneas */
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; /* Máximo dos líneas */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    line-height: 1.2;
                 }}
                 .chart-container {{
                     flex: 1;
                     position: relative;
-                    width: 95%; /* Reducido para dar margen interno */
-                    min-height: 28vh; /* Reducido ligeramente */
+                    width: 95%;
+                    min-height: 28vh;
                     padding: 0.5rem;
-                    margin: 0 auto; /* Centrar horizontalmente */
+                    margin: 0 auto;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center; /* Centrar contenido verticalmente */
+                    justify-content: center;
                 }}
                 canvas {{
                     width: 100% !important;
