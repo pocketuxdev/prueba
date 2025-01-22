@@ -111,52 +111,64 @@ def get_common_sidebar():
         @media (max-width: 768px) {
             .dashboard-layout {
                 padding: 1rem 1rem 100px 1rem;
-                width: 100vw; /* Asegurar ancho completo en móviles */
+                width: 100vw;
             }
+            
+            .header {
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 20px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+                font-family: 'Playfair Display', serif;
+            }
+            
+            .kpi-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .kpi-card {
+                background: rgba(0, 0, 0, 0.7);
+                border: 1px solid var(--primary-color);
+                border-radius: 20px;
+                padding: 1.5rem;
+            }
+            
+            .kpi-value {
+                font-size: 2.5rem;
+                color: var(--primary-color);
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+            
+            .kpi-label {
+                font-size: 1rem;
+                color: var(--text-light);
+                text-align: center;
+            }
+            
+            .metrics-grid {
+                display: none; /* Ocultar las gráficas en móvil */
+            }
+            
             .sidebar {
-                bottom: 1.5rem;
-                padding: 0 1rem;
-                height: 50px;
+                background: rgba(40, 40, 40, 0.95);
+                padding: 0.5rem 1rem;
+                gap: 1rem;
             }
+            
             .nav-item {
                 width: 35px;
                 height: 35px;
             }
-            .metrics-grid {
-                grid-template-columns: 1fr; /* Una sola columna en móvil */
-                height: auto; /* Altura automática */
-                gap: 1rem;
-            }
-            .chart-container {
-                width: 100%;
-                max-width: 100vw;
-                height: 200px;
-                margin: 0.5rem auto;
-            }
-            .billing-grid,
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
-            .billing-summary,
-            .payment-methods {
-                grid-template-columns: 1fr;
-            }
-            .calendar-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .history-header,
-            .history-item {
-                font-size: 0.85rem;
-                padding: 0.75rem;
-            }
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.5rem;
-            }
-            .profile-stats {
-                flex-wrap: wrap;
-                justify-content: center;
+            
+            .sidebar-logo {
+                width: 35px;
             }
         }
         /* Ajustes para tablets */
@@ -1355,59 +1367,6 @@ def dashboard_page():
                     }}
                     .history-item {{
                         font-size: 0.9rem;
-                    }}
-                    .kpi-grid {{
-                        display: grid;
-                        grid-template-columns: 1fr;
-                        gap: 1rem;
-                        padding: 0 1rem;
-                    }
-
-                    .kpi-card {{
-                        background: rgba(20, 20, 20, 0.8);
-                        border: 1px solid rgba(255, 0, 153, 0.2);
-                        border-radius: 20px;
-                        padding: 2rem;
-                        text-align: center;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        gap: 0.5rem;
-                    }}
-
-                    .kpi-value {{
-                        font-size: 2.5rem;
-                        color: var(--primary-color);
-                        font-weight: 600;
-                        margin-bottom: 0.5rem;
-                    }}
-
-                    .kpi-label {{
-                        font-size: 1rem;
-                        color: var(--text-light);
-                        font-weight: 400;
-                    }}
-
-                    .header {{
-                        background: rgba(20, 20, 20, 0.8);
-                        border-radius: 20px;
-                        padding: 1.5rem;
-                        margin-bottom: 1.5rem;
-                    }}
-
-                    .header h1 {{
-                        font-size: 1.8rem;
-                        line-height: 1.2;
-                        text-align: left;
-                        color: white;
-                    }}
-
-                    .dashboard-layout {{
-                        padding: 1rem 1rem 100px 1rem;
-                    }}
-
-                    .metrics-grid {{
-                        margin-top: 1.5rem;
                     }}
                 }}
             </style>
