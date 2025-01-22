@@ -101,11 +101,11 @@ def get_common_sidebar():
         .dashboard-layout {
             display: grid;
             grid-template-columns: 1fr;
-            min-height: 100vh;
+            height: 100vh;
             max-width: 100vw; /* Agregar ancho máximo viewport */
             margin: 0 auto;
-            padding: 2rem 2rem 100px 2rem;
-            overflow-x: hidden;
+            padding: 0.8rem 1.5rem; /* Reducido el padding general */
+            overflow: hidden;
         }
         @media (max-width: 768px) {
             .dashboard-layout {
@@ -985,26 +985,26 @@ def dashboard_page():
                     height: 100vh;
                     max-width: 100vw;
                     margin: 0 auto;
-                    padding: 1rem 2rem;
+                    padding: 0.8rem 1.5rem; /* Reducido el padding general */
                     overflow: hidden;
                 }}
                 .main-content {{
-                    height: calc(100vh - 2rem);
+                    height: calc(100vh - 1.6rem);
                     display: flex;
                     flex-direction: column;
-                    gap: 0.8rem; /* Reducido el gap */
+                    gap: 0.6rem; /* Reducido más el gap */
                 }}
                 .header {{
                     display: flex;
                     align-items: center;
-                    padding: 0.4rem 1.5rem;
+                    padding: 0.3rem 1rem;
                     background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
+                    border-radius: 12px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    height: 6vh; /* Reducido de 8vh a 6vh */
+                    height: 5vh; /* Reducido aún más */
                 }}
                 .header h1 {{
-                    font-size: 1.2rem;
+                    font-size: 1.1rem;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -1012,8 +1012,8 @@ def dashboard_page():
                 .metrics-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 1rem;
-                    height: 76vh; /* Aumentado para usar el espacio disponible */
+                    gap: 0.8rem;
+                    height: 80vh; /* Aumentado para aprovechar el espacio ahorrado */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1030,40 +1030,40 @@ def dashboard_page():
                     position: relative;
                     width: 100%;
                     height: 100%;
-                    padding: 0.8rem;
+                    padding: 0.6rem;
                     margin: 0;
                     display: flex;
                     flex-direction: column;
                 }}
                 .chart-title {{
-                    font-size: 0.9rem;
-                    margin-bottom: 0.4rem;
+                    font-size: 0.8rem;
+                    margin-bottom: 0.3rem;
                     flex-shrink: 0; /* Evita que el título se comprima */
                 }}
                 canvas {{
                     flex-grow: 1; /* Permite que el canvas ocupe el espacio disponible */
-                    max-height: calc(100% - 2rem); /* Resta el espacio del título */
+                    max-height: calc(100% - 1.5rem); /* Reducido el espacio reservado para el título */
                 }}
                 .kpi-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 1rem;
-                    height: 10vh; /* Reducido de 12vh a 10vh */
+                    gap: 0.8rem;
+                    height: 8vh; /* Reducido */
                 }}
                 .kpi-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 12px;
-                    padding: 0.6rem;
+                    padding: 0.4rem;
                     text-align: center;
                     border: 1px solid var(--border-color);
                     transition: all 0.3s ease;
                 }}
                 .kpi-value {{
-                    font-size: 1.6rem;
-                    margin-bottom: 0.2rem;
+                    font-size: 1.4rem;
+                    margin-bottom: 0.1rem;
                 }}
                 .kpi-label {{
-                    font-size: 0.75rem;
+                    font-size: 0.7rem;
                 }}
                 .billing-grid {{
                     display: grid;
