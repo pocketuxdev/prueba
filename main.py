@@ -952,6 +952,7 @@ def dashboard_page():
                     width: 100%;
                     max-width: 1600px;
                     margin: 0 auto;
+                    overflow: visible; /* Asegurar que el contenido no se recorte */
                 }}
                 .header {{
                     display: flex;
@@ -978,6 +979,7 @@ def dashboard_page():
                     grid-template-columns: repeat(4, 1fr);
                     gap: 1rem;
                     margin-bottom: 2rem;
+                    padding: 0.5rem; /* Añadido padding para evitar recorte */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -985,12 +987,19 @@ def dashboard_page():
                     padding: 1.5rem;
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
+                    margin: 0.5rem; /* Añadido margen para evitar recorte */
+                    overflow: visible; /* Asegurar que el contenido no se recorte */
                 }}
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 100%;
-                    min-height: 200px;
+                    height: 300px;
+                    padding: 1.5rem;
+                    margin: 0.5rem; /* Añadido margen para evitar recorte */
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    overflow: visible; /* Asegurar que las gráficas no se recorten */
                 }}
                 .kpi-grid {{
                     display: grid;
