@@ -1356,6 +1356,59 @@ def dashboard_page():
                     .history-item {{
                         font-size: 0.9rem;
                     }}
+                    .kpi-grid {{
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: 1rem;
+                        padding: 0 1rem;
+                    }
+
+                    .kpi-card {{
+                        background: rgba(20, 20, 20, 0.8);
+                        border: 1px solid rgba(255, 0, 153, 0.2);
+                        border-radius: 20px;
+                        padding: 2rem;
+                        text-align: center;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }}
+
+                    .kpi-value {{
+                        font-size: 2.5rem;
+                        color: var(--primary-color);
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }}
+
+                    .kpi-label {{
+                        font-size: 1rem;
+                        color: var(--text-light);
+                        font-weight: 400;
+                    }}
+
+                    .header {{
+                        background: rgba(20, 20, 20, 0.8);
+                        border-radius: 20px;
+                        padding: 1.5rem;
+                        margin-bottom: 1.5rem;
+                    }}
+
+                    .header h1 {{
+                        font-size: 1.8rem;
+                        line-height: 1.2;
+                        text-align: left;
+                        color: white;
+                    }}
+
+                    .dashboard-layout {{
+                        padding: 1rem 1rem 100px 1rem;
+                    }}
+
+                    .metrics-grid {{
+                        margin-top: 1.5rem;
+                    }}
                 }}
             </style>
             <!-- Agregar en el <style> de cada página -->
