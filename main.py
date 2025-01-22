@@ -102,15 +102,15 @@ def get_common_sidebar():
             display: grid;
             grid-template-columns: 1fr;
             min-height: 100vh;
-            max-width: 1400px; /* Ancho máximo más controlado */
+            max-width: 100vw; /* Agregar ancho máximo viewport */
             margin: 0 auto;
             padding: 2rem 2rem 100px 2rem;
-            padding: 0 2rem 120px 2rem;
             overflow-x: hidden;
         }
         @media (max-width: 768px) {
             .dashboard-layout {
                 padding: 1rem 1rem 100px 1rem;
+                width: 100vw; /* Asegurar ancho completo en móviles */
             }
             .sidebar {
                 bottom: 1.5rem;
@@ -123,11 +123,14 @@ def get_common_sidebar():
             }
             .metrics-grid {
                 grid-template-columns: 1fr;
-                padding: 0; /* Eliminar padding en móviles */
+                padding: 0.5rem;
+                width: 100vw;
             }
             .chart-container {
-                height: 200px; /* Altura aún más reducida para móviles */
-                margin: 0.5rem auto; /* Reducir margen en móviles */
+                width: 100%;
+                max-width: 100vw;
+                height: 200px;
+                margin: 0.5rem auto;
             }
             .billing-grid,
             .profile-grid {
@@ -184,10 +187,8 @@ def get_common_sidebar():
         /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
         .main-content {
             width: 100%;
-            max-width: 100%;
-            max-width: 1400px;
+            max-width: 100vw; /* Cambiar a viewport width */
             margin: 0 auto;
-            padding: 0;
             padding: 2rem 0;
         }
         /* Ajustes para el scroll */
@@ -944,12 +945,16 @@ def dashboard_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    padding: 0 3rem 150px 3rem;
                     min-height: 100vh;
+                    max-width: 100vw; /* Agregar ancho máximo viewport */
+                    margin: 0 auto;
+                    padding: 2rem 2rem 100px 2rem;
+                    overflow-x: hidden;
                 }}
                 .main-content {{
-                    width: min(1400px, 100% - 2rem);
-                    margin-inline: auto;
+                    width: 100%;
+                    max-width: 100vw; /* Cambiar a viewport width */
+                    margin: 0 auto;
                     padding: 2rem 0;
                     overflow: visible;
                 }}
@@ -977,11 +982,12 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Hacer grid responsive */
                     gap: 1.5rem;
                     margin: 2rem auto;
                     padding: 0 1rem;
-                    max-width: 1600px;
+                    width: 100%;
+                    max-width: 100vw; /* Ajustar al viewport width */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1016,6 +1022,7 @@ def dashboard_page():
                         gap: 2rem; // Aumentado el espacio entre gráficas
                         padding: 0.5rem;
                         gap: 1.5rem;
+                        width: 100vw;
                     }}
                     
                     .metric-card {{
@@ -1077,6 +1084,7 @@ def dashboard_page():
                     .metrics-grid {{
                         grid-template-columns: 1fr;
                         padding: 0.5rem;
+                        width: 100vw;
                     }}
                     .chart-container {{
                         height: 160px; // Reducido de 180px a 160px
