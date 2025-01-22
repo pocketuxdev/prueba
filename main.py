@@ -982,7 +982,7 @@ def dashboard_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    height: 100vh; /* Altura fija al viewport */
+                    height: 100vh;
                     max-width: 100vw;
                     margin: 0 auto;
                     padding: 1rem 2rem;
@@ -992,19 +992,19 @@ def dashboard_page():
                     height: calc(100vh - 2rem);
                     display: flex;
                     flex-direction: column;
-                    gap: 1rem;
+                    gap: 0.8rem; /* Reducido el gap */
                 }}
                 .header {{
                     display: flex;
                     align-items: center;
-                    padding: 0.5rem 1.5rem;
+                    padding: 0.4rem 1.5rem;
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    height: 8vh; /* Altura proporcional */
+                    height: 6vh; /* Reducido de 8vh a 6vh */
                 }}
                 .header h1 {{
-                    font-size: 1.3rem;
+                    font-size: 1.2rem;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -1013,7 +1013,7 @@ def dashboard_page():
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     gap: 1rem;
-                    height: 70vh; /* Usar el espacio restante */
+                    height: 76vh; /* Aumentado para usar el espacio disponible */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1029,111 +1029,41 @@ def dashboard_page():
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 300px; /* Aumentado de 180px a 300px */
-                    background: rgba(255, 255, 255, 0.02);
-                    border-radius: 15px;
-                    border: 1px solid rgba(255, 0, 153, 0.1);
-                    padding: 1.5rem; /* Aumentado padding */
-                    margin: 1rem auto; /* Centrado con auto */
+                    height: 100%;
+                    padding: 0.8rem;
+                    margin: 0;
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    flex-direction: column;
                 }}
                 .chart-title {{
-                    font-size: 1.2rem;
-                    color: white;
-                    margin-bottom: 1.5rem;
-                    font-weight: 500;
-                    text-align: center; /* Centrar título */
+                    font-size: 0.9rem;
+                    margin-bottom: 0.4rem;
+                    flex-shrink: 0; /* Evita que el título se comprima */
                 }}
-                /* Ajustes para tablets */
-                @media (max-width: 1200px) {{
-                    .chart-container {{
-                        height: 350px; /* Aún más alto en tablets */
-                    }}
-                }}
-                /* Ajustes para móvil */
-                @media (max-width: 768px) {{
-                    .chart-container {{
-                        height: 400px; /* Máxima altura en móvil */
-                        padding: 1rem;
-                        margin: 1rem auto;
-                        width: 95%; /* Dar un pequeño margen en los bordes */
-                    }}
-                    
-                    canvas {{
-                        width: 100% !important;
-                        height: 100% !important;
-                        max-width: none !important;
-                    }}
-                    
-                    .chart-title {{
-                        font-size: 1.1rem;
-                        padding: 0;
-                        margin-bottom: 1rem;
-                    }}
-                }}
-                /* Asegurar que los gráficos se centren correctamente */
                 canvas {{
-                    margin: 0 auto;
-                    display: block;
+                    flex-grow: 1; /* Permite que el canvas ocupe el espacio disponible */
+                    max-height: calc(100% - 2rem); /* Resta el espacio del título */
                 }}
                 .kpi-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr); /* 4 columnas igual que las gráficas */
-                    gap: 1.5rem;
-                    margin-bottom: 2rem;
-                    padding: 0 1rem;
-                    width: 100%;
-                    max-width: 100vw;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    height: 10vh; /* Reducido de 12vh a 10vh */
                 }}
                 .kpi-card {{
                     background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
-                    padding: 1.5rem;
+                    border-radius: 12px;
+                    padding: 0.6rem;
                     text-align: center;
                     border: 1px solid var(--border-color);
                     transition: all 0.3s ease;
                 }}
                 .kpi-value {{
-                    font-size: 2.5rem;
-                    font-weight: 600;
-                    color: var(--primary-color);
-                    margin-bottom: 0.5rem;
+                    font-size: 1.6rem;
+                    margin-bottom: 0.2rem;
                 }}
                 .kpi-label {{
-                    font-size: 1rem;
-                    color: var(--text-light);
-                }}
-                /* Tablets */
-                @media (max-width: 1200px) {{
-                    .kpi-grid {{
-                        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
-                        gap: 1rem;
-                    }}
-                }}
-                /* Móviles */
-                @media (max-width: 768px) {{
-                    .kpi-grid {{
-                        grid-template-columns: 1fr; /* 1 columna en móvil */
-                        gap: 1rem;
-                        padding: 0.5rem;
-                    }}
-                    .kpi-card {{
-                        padding: 1.2rem;
-                    }}
-                    .kpi-value {{
-                        font-size: 2.2rem;
-                    }}
-                    .kpi-label {{
-                        font-size: 0.9rem;
-                    }}
-                }}
-                /* Hover effect para las KPI cards */
-                .kpi-card:hover {{
-                    transform: translateY(-5px);
-                    background: rgba(255, 0, 153, 0.1);
-                    border-color: var(--primary-color);
+                    font-size: 0.75rem;
                 }}
                 .billing-grid {{
                     display: grid;
