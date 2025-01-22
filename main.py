@@ -177,12 +177,49 @@ def get_common_sidebar():
         .chart-container {
             position: relative;
             width: 100%;
-            height: 180px; // Reducido de 200px a 180px
-            padding: 0.8rem;
+            height: 300px; /* Aumentado de 180px a 300px */
             background: rgba(255, 255, 255, 0.02);
             border-radius: 15px;
             border: 1px solid rgba(255, 0, 153, 0.1);
-            margin: 0;
+            padding: 1.5rem; /* Aumentado padding */
+            margin: 1rem auto; /* Centrado con auto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chart-title {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            text-align: center; /* Centrar título */
+        }
+        /* Ajustes para tablets */
+        @media (max-width: 1200px) {
+            .chart-container {
+                height: 350px; /* Aún más alto en tablets */
+            }
+        }
+        /* Ajustes para móvil */
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 400px; /* Máxima altura en móvil */
+                padding: 1rem;
+                margin: 1rem auto;
+                width: 95%; /* Dar un pequeño margen en los bordes */
+            }
+            
+            canvas {
+                width: 100% !important;
+                height: 100% !important;
+                max-width: none !important;
+            }
+            
+            .chart-title {
+                font-size: 1.1rem;
+                padding: 0;
+                margin-bottom: 1rem;
+            }
         }
         /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
         .main-content {
@@ -1003,55 +1040,54 @@ def dashboard_page():
                 .chart-container {{
                     position: relative;
                     width: 100%;
+                    height: 300px; /* Aumentado de 180px a 300px */
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    padding: 1rem;
-                    margin-top: 1rem;
+                    padding: 1.5rem; /* Aumentado padding */
+                    margin: 1rem auto; /* Centrado con auto */
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }}
                 .chart-title {{
-                    font-size: 1.1rem;
+                    font-size: 1.2rem;
                     color: white;
-                    margin-bottom: 1rem;
+                    margin-bottom: 1.5rem;
                     font-weight: 500;
+                    text-align: center; /* Centrar título */
                 }}
+                /* Ajustes para tablets */
                 @media (max-width: 1200px) {{
-                    .metrics-grid {{
-                        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
-                        gap: 1rem;
+                    .chart-container {{
+                        height: 350px; /* Aún más alto en tablets */
                     }}
                 }}
+                /* Ajustes para móvil */
                 @media (max-width: 768px) {{
-                    .metrics-grid {{
-                        grid-template-columns: 1fr; /* 1 columna en móvil */
-                        gap: 1rem;
-                        padding: 0.5rem;
-                        width: 100vw;
-                    }}
-                    .metric-card {{
-                        margin-bottom: 1rem;
-                    }}
                     .chart-container {{
-                        width: 100%;
-                        max-width: 100vw;
-                        height: 250px; /* Altura aumentada para mejor visualización */
-                        margin: 0.5rem auto;
+                        height: 400px; /* Máxima altura en móvil */
+                        padding: 1rem;
+                        margin: 1rem auto;
+                        width: 95%; /* Dar un pequeño margen en los bordes */
                     }}
-                    /* Ajustar KPIs para móvil */
-                    .kpi-grid {{
-                        grid-template-columns: 1fr;
-                        gap: 1rem;
+                    
+                    canvas {{
+                        width: 100% !important;
+                        height: 100% !important;
+                        max-width: none !important;
                     }}
-                    .kpi-card {{
-                        padding: 1.2rem;
-                    }}
-                    /* Mejorar legibilidad de títulos en móvil */
+                    
                     .chart-title {{
-                        font-size: 1rem;
+                        font-size: 1.1rem;
+                        padding: 0;
                         margin-bottom: 1rem;
-                        text-align: left;
-                        padding: 0 0.5rem;
                     }}
+                }}
+                /* Asegurar que los gráficos se centren correctamente */
+                canvas {{
+                    margin: 0 auto;
+                    display: block;
                 }}
                 .kpi-grid {{
                     display: grid;
