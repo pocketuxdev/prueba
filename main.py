@@ -158,19 +158,15 @@ def get_common_sidebar():
                 display: grid;
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
-                width: 95vw;
-                margin: 1rem auto;
+                padding: 0.5rem;
             }
             
             .metric-card {
                 background: rgba(255, 255, 255, 0.05);
                 border-radius: 15px;
                 padding: 1.5rem;
-                width: 100%;
-                min-height: 350px;
-                display: flex;
-                flex-direction: column;
-                box-shadow: 0 4px 15px rgba(255, 0, 153, 0.1);
+                border: 1px solid var(--border-color);
+                height: auto;
             }
             
             .chart-title {
@@ -183,31 +179,37 @@ def get_common_sidebar():
             }
             
             .chart-container {
-                flex: 1;
                 position: relative;
                 width: 100%;
-                height: calc(100% - 60px);
-                padding: 1rem;
+                height: 280px;
+                margin: 0;
+                padding: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
             
             canvas {
-                max-width: 90vw !important;
-                max-height: 300px !important;
-                margin: 0 auto;
+                width: 100% !important;
+                height: 100% !important;
             }
             
             /* Ajustes específicos para cada tipo de gráfica */
-            .metric-card[data-chart-type="doughnut"] canvas,
-            .metric-card[data-chart-type="pie"] canvas {
-                max-height: 250px !important;
+            .metric-card[data-chart="line"] .chart-container,
+            .metric-card[data-chart="bar"] .chart-container {
+                height: 200px;
             }
             
-            .metric-card[data-chart-type="line"] canvas,
-            .metric-card[data-chart-type="bar"] canvas {
-                max-height: 200px !important;
+            .metric-card[data-chart="doughnut"] .chart-container,
+            .metric-card[data-chart="pie"] .chart-container {
+                height: 220px;
+            }
+            
+            .chart-title {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                color: white;
+                text-align: center;
             }
             
             /* Ajustes para las tarjetas KPI */
@@ -1332,6 +1334,49 @@ def dashboard_page():
                     gap: 0.5rem;
                 }}
                 .section-title i {{
+                    color: var(--primary-color);
+                }}
+                @media (max-width: 1200px) {{
+                    .billing-grid {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .calendar-grid {{
+                        grid-template-columns: repeat(3, 1fr);
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .calendar-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                    }}
+                    .billing-summary {{
+                        grid-template-columns: 1fr;
+                    }}
+                }}
+                .payment-method {{
+                    position: relative;
+                    overflow: hidden;
+                }}
+                .method-details {{
+                    flex: 1;
+                }}
+                .method-status {{
+                    font-size: 0.8rem;
+                    padding: 0.2rem 0.5rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 12px;
+                    color: var(--primary-color);
+                }}
+                .action-btn {{
+                    background: transparent;
+                    border: none;
+                    color: var(--text-light);
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }}
+                .action-btn:hover {{
+                    background: rgba(255, 255, 255, 0.1);
                     color: var(--primary-color);
                 }}
                 .payment-history {{
