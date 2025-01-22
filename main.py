@@ -1051,10 +1051,9 @@ def dashboard_page():
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
-                        <h1>Dashboard Tiffany Medical Assistant</h1>
                         <h1>
                             <i class="fas fa-file-invoice-dollar header-icon"></i>
-                            Centro de Facturación
+                            Dashboard Tiffany Medical Assistant
                         </h1>
                     </div>
                     <div class="kpi-grid">
@@ -2370,7 +2369,7 @@ def billing_page():
                     <div class="header">
                         <h1>
                             <i class="fas fa-file-invoice-dollar header-icon"></i>
-                            Centro de Facturación
+                            Dashboard Tiffany Medical Assistant
                         </h1>
                     </div>
                     <div class="billing-grid">
