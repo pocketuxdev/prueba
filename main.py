@@ -123,7 +123,12 @@ def get_common_sidebar():
             
             .header h1 {
                 font-size: 1.5rem;
-                font-family: 'Playfair Display', serif;
+                font-weight: 600;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                font-family: 'Poppins', sans-serif;
             }
             
             .kpi-grid {
@@ -138,20 +143,22 @@ def get_common_sidebar():
                 border-radius: 15px;
                 padding: 1.5rem;
                 border: 1px solid var(--border-color);
-                height: auto;
+                text-align: center;
             }
             
             .kpi-value {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                font-weight: 600;
                 color: var(--primary-color);
-                text-align: center;
                 margin-bottom: 0.5rem;
+                font-family: 'Poppins', sans-serif;
             }
             
             .kpi-label {
-                font-size: 1rem;
+                font-size: 0.95rem;
                 color: var(--text-light);
-                text-align: center;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 400;
             }
             
             .metrics-grid {
@@ -166,25 +173,26 @@ def get_common_sidebar():
                 border-radius: 15px;
                 padding: 1.5rem;
                 border: 1px solid var(--border-color);
-                aspect-ratio: 1.2; /* Mantiene una proporción consistente */
+                aspect-ratio: 1.2;
                 height: auto;
                 width: 100%;
             }
             
             .chart-title {
-                color: white;
-                font-size: 1.4rem;
-                text-align: center;
-                margin-bottom: 1.5rem;
+                font-size: 1.1rem;
                 font-weight: 500;
-                font-family: 'Playfair Display', serif;
+                color: white;
+                text-align: center;
+                margin-bottom: 1rem;
+                font-family: 'Poppins', sans-serif;
             }
             
+            /* Ajustes para las leyendas de las gráficas */
             .chart-container {
                 position: relative;
                 width: 100%;
                 height: 0;
-                padding-bottom: 75%; /* Mantiene una proporción 4:3 */
+                padding-bottom: 75%;
                 margin: 0;
                 display: flex;
                 align-items: center;
@@ -199,62 +207,58 @@ def get_common_sidebar():
                 height: 100% !important;
                 object-fit: contain;
             }
+        }
+        /* Ajustes de Chart.js para consistencia tipográfica */
+        @media (max-width: 768px) {
+            Chart.defaults.font.family = "'Poppins', sans-serif";
+            Chart.defaults.font.size = 11;
+            Chart.defaults.color = '#fff';
             
-            /* Ajustes específicos para cada tipo de gráfica */
-            .metric-card[data-chart="line"] .chart-container,
-            .metric-card[data-chart="bar"] .chart-container,
-            .metric-card[data-chart="doughnut"] .chart-container,
-            .metric-card[data-chart="pie"] .chart-container {
-                padding-bottom: 75%; /* Mantiene la misma proporción para todos los tipos */
-            }
-            
-            .chart-title {
-                font-size: 1.1rem;
-                margin-bottom: 1rem;
-                color: white;
-                text-align: center;
-            }
-            
-            /* Ajustes para las tarjetas KPI */
-            .kpi-grid {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .kpi-card {
-                background: rgba(255, 255, 255, 0.05);
-                border-radius: 15px;
-                padding: 1.5rem;
-                text-align: center;
-            }
-            
-            .kpi-value {
-                font-size: 2.5rem;
-                color: var(--primary-color);
-                margin-bottom: 0.5rem;
-            }
-            
-            .kpi-label {
-                font-size: 1rem;
-                color: var(--text-light);
-            }
-            
-            .sidebar {
-                background: rgba(40, 40, 40, 0.95);
-                padding: 0.5rem 1rem;
-                gap: 1rem;
-            }
-            
-            .nav-item {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .sidebar-logo {
-                width: 35px;
-            }
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: true,
+                aspectRatio: 1.2,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 11,
+                                weight: 400
+                            },
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            padding: 8,
+                            boxWidth: 10
+                        }
+                    },
+                    title: {
+                        font: {
+                            family: "'Poppins', sans-serif",
+                            size: 13,
+                            weight: 500
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 10
+                            }
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 10
+                            }
+                        }
+                    }
+                }
+            };
         }
         /* Ajustes para tablets */
         @media (min-width: 769px) and (max-width: 1024px) {
