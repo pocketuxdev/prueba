@@ -24,27 +24,43 @@ def get_common_sidebar():
         /* Sidebar Styles */
         .sidebar {
             position: fixed;
-            bottom: 2rem;
+            bottom: 1rem; /* Cambiado de 2rem a 1rem para bajar más el sidebar */
             left: 50%;
             transform: translateX(-50%);
             height: 60px;
             background: rgba(40, 40, 40, 0.95);
-            background: rgba(40, 40, 40, 0.75); /* Aumentada la transparencia */
+            background: rgba(40, 40, 40, 0.75);
             padding: 0 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px); /* Ajustado el blur */
+            backdrop-filter: blur(8px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             border-radius: 20px;
             width: auto;
-            border: 1px solid var(--border-color);
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde más sutil */
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* Ajustar el padding-bottom del contenido principal */
+        .dashboard-layout {
+            padding-bottom: 80px; /* Aumentado para dar más espacio al sidebar */
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                bottom: 0.5rem; /* Ajustado para móviles */
+                padding: 0.5rem 1rem;
+                gap: 1rem;
+            }
+
+            .dashboard-layout {
+                padding-bottom: 70px; /* Ajustado para móviles */
+            }
+        }
+
+        /* Resto de los estilos del sidebar se mantienen igual */
         .sidebar-logo {
             width: 40px;
             height: auto;
