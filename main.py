@@ -945,7 +945,7 @@ def dashboard_page():
                     margin: 0 auto;
                 }}
                 .main-content {{
-                    width: min(1400px, 100% - 2rem);
+                    width: min(1400px, 100% - 4rem);
                     margin-inline: auto;
                     padding: 2rem 0;
                 }}
@@ -965,8 +965,8 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                    gap: 1rem;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 2rem;
                     margin-bottom: 2rem;
                 }}
                 .metric-card {{
@@ -976,17 +976,20 @@ def dashboard_page():
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
                     height: 100%;
+                    min-height: 300px;
+                    display: flex;
+                    flex-direction: column;
                 }}
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    aspect-ratio: 16/9;
-                    min-height: 200px;
+                    flex: 1;
+                    min-height: 250px;
                 }}
                 .kpi-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 1rem;
+                    gap: 1.5rem;
                     margin-bottom: 2rem;
                 }}
                 .kpi-card {{
@@ -1006,24 +1009,28 @@ def dashboard_page():
                     font-size: 0.9rem;
                     color: var(--text-light);
                 }}
-                @media (max-width: 1400px) {{
+                @media (max-width: 1200px) {{
                     .metrics-grid {{
-                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5rem;
                     }}
                     .kpi-grid {{
                         grid-template-columns: repeat(2, 1fr);
                     }}
                 }}
                 @media (max-width: 768px) {{
-                    .metrics-grid, .kpi-grid {{
-                        grid-template-columns: 1fr;
-                    }}
                     .main-content {{
-                        padding: 1rem;
                         width: 100%;
+                        padding: 1rem;
+                    }}
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 1rem;
+                    }}
+                    .metric-card {{
+                        min-height: 250px;
                     }}
                     .chart-container {{
-                        aspect-ratio: 4/3;
+                        min-height: 200px;
                     }}
                 }}
             </style>
