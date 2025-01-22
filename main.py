@@ -1137,30 +1137,29 @@ def dashboard_page():
                 .metrics-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 0.5rem;
-                    height: 65vh;
+                    gap: 1rem;
                     margin-bottom: 2rem;
+                    height: auto; /* Cambiado de height fijo a auto */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
-                    padding: 1.5rem;
+                    padding: 1rem;
                     border: 1px solid var(--border-color);
-                    backdrop-filter: blur(10px);
-                    height: 100%;
+                    height: auto; /* Cambiado de height fijo a auto */
+                    min-height: 300px;
                     display: flex;
                     flex-direction: column;
-                    transition: all 0.3s ease;
                 }}
                 .chart-container {{
+                    flex: 1;
                     position: relative;
                     width: 100%;
-                    height: 100%;
-                    padding: 0.4rem;
+                    min-height: 250px;
+                    padding: 0.5rem;
                     margin: 0;
                     display: flex;
                     flex-direction: column;
-                    border-radius: 10px; /* Consistente con header y KPIs */
                 }}
                 .chart-title {{
                     font-size: 0.7rem;
