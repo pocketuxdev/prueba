@@ -1161,33 +1161,38 @@ def dashboard_page():
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
-                    padding: 1rem;
+                    padding: 1.5rem 1rem; /* Aumentado el padding vertical */
                     border: 1px solid var(--border-color);
                     height: auto;
                     min-height: 35vh;
                     display: flex;
                     flex-direction: column;
+                    align-items: center; /* Centrar contenido horizontalmente */
+                    justify-content: center; /* Centrar contenido verticalmente */
+                    overflow: hidden; /* Prevenir que el contenido se salga */
+                }}
+                .chart-title {{
+                    font-size: 1.2rem;
+                    margin-bottom: 1rem;
+                    text-align: center;
+                    width: 100%;
+                    padding: 0 0.5rem;
                 }}
                 .chart-container {{
                     flex: 1;
                     position: relative;
-                    width: 100%;
-                    min-height: 30vh;
+                    width: 95%; /* Reducido para dar margen interno */
+                    min-height: 28vh; /* Reducido ligeramente */
                     padding: 0.5rem;
-                    margin: 0;
+                    margin: 0 auto; /* Centrar horizontalmente */
                     display: flex;
                     flex-direction: column;
-                }}
-                .chart-title {{
-                    font-size: 0.7rem;
-                    margin-bottom: 0.2rem;
-                    flex-shrink: 0;
-                    font-size: 0.8rem; /* Reducido de 1.2rem */
-                    margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+                    justify-content: center; /* Centrar contenido verticalmente */
                 }}
                 canvas {{
-                    flex-grow: 1;
-                    max-height: calc(100% - 1rem);
+                    width: 100% !important;
+                    height: 100% !important;
+                    max-height: calc(100% - 2rem) !important; /* Prevenir desbordamiento */
                 }}
                 .kpi-grid {{
                     display: grid;
