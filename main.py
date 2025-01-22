@@ -930,6 +930,7 @@ def dashboard_page():
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
                 }}
                 body {{
                     background: var(--background-dark);
@@ -939,11 +940,13 @@ def dashboard_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    padding-left: 100px;
                     min-height: 100vh;
+                    max-width: 1400px;
+                    margin: 0 auto;
                 }}
                 .main-content {{
-                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
+                    width: 100%;
+                    padding: 2rem;
                 }}
                 .header {{
                     display: flex;
@@ -975,7 +978,7 @@ def dashboard_page():
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 100%;
+                    height: 300px;
                     min-height: 200px;
                 }}
                 .kpi-grid {{
@@ -1005,18 +1008,20 @@ def dashboard_page():
                     .metrics-grid {{
                         grid-template-columns: repeat(2, 1fr);
                     }}
+                    .kpi-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                    }}
                 }}
                 @media (max-width: 768px) {{
                     .metrics-grid, .kpi-grid {{
                         grid-template-columns: 1fr;
                     }}
-                }}
-            </style>
-            <!-- Agregar en el <style> de cada página -->
-            <style>
-                html {{
-                    scroll-behavior: smooth;
-                    scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
+                    .main-content {{
+                        padding: 1rem;
+                    }}
+                    .chart-container {{
+                        height: 250px;
+                    }}
                 }}
             </style>
         </head>
