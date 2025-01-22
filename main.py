@@ -1157,7 +1157,166 @@ def dashboard_page():
                     margin-bottom: 2rem;
                     height: auto;
                     width: 100%;
+                    padding: 0 1rem;
                 }}
+
+                /* Resoluciones más comunes y Safari fixes */
+                
+                /* 4K - 3840x2160 */
+                @media screen and (min-width: 2560px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        max-width: 90vw;
+                        margin: 0 auto;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 30vh;
+                    }}
+                }}
+
+                /* Desktop grande - 1920x1080 */
+                @media screen and (min-width: 1920px) and (max-width: 2559px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 35vh;
+                    }}
+                }}
+
+                /* Desktop común - 1366x768 */
+                @media screen and (min-width: 1366px) and (max-width: 1919px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 1vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 40vh;
+                    }}
+                }}
+
+                /* MacBook Pro 13" - 1280x800 */
+                @media screen and (min-width: 1280px) and (max-width: 1365px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+
+                /* Safari específico */
+                @supports (-webkit-hyphens:none) {{
+                    .metrics-grid {{
+                        display: grid;
+                        grid-template-columns: repeat(4, minmax(0, 1fr)); /* Fix para Safari */
+                        gap: 1rem;
+                        width: 100%;
+                        height: auto;
+                        padding: 0 1rem;
+                    }}
+
+                    .metric-card {{
+                        min-width: 0; /* Fix para Safari */
+                        height: auto;
+                        min-height: 40vh;
+                    }}
+
+                    .chart-container {{
+                        width: 100%;
+                        min-height: 25vh;
+                        transform: translateZ(0); /* Fix para renderizado en Safari */
+                        -webkit-transform: translateZ(0);
+                    }}
+                }}
+
+                /* Tablet landscape */
+                @media screen and (min-width: 1024px) and (max-width: 1279px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 42vh;
+                    }}
+                }}
+
+                /* Tablet portrait */
+                @media screen and (min-width: 768px) and (max-width: 1023px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 2vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+
+                /* Mobile landscape */
+                @media screen and (min-width: 480px) and (max-width: 767px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 2vh;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 48vh;
+                    }}
+                }}
+
+                /* Mobile portrait */
+                @media screen and (max-width: 479px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 2vh;
+                        padding: 0 0.5rem;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+
+                /* Fix específico para Safari en diferentes resoluciones */
+                @media not all and (min-resolution:.001dpcm) {{ 
+                    @supports (-webkit-appearance:none) {{
+                        .metrics-grid {{
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            gap: 1rem;
+                            width: 100%;
+                            height: auto;
+                        }}
+                        
+                        .metric-card {{
+                            break-inside: avoid;
+                            page-break-inside: avoid;
+                            -webkit-column-break-inside: avoid;
+                        }}
+                    }}
+                }}
+
+                /* Asegurar compatibilidad con diferentes alturas de viewport */
+                @media screen and (max-height: 800px) {{
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+
+                @media screen and (max-height: 600px) {{
+                    .metric-card {{
+                        min-height: 50vh;
+                    }}
+                }}
+
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
