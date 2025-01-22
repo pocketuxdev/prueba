@@ -123,9 +123,9 @@ def get_common_sidebar():
                 height: 35px;
             }
             .metrics-grid {
-                grid-template-columns: 1fr;
-                padding: 0.5rem;
-                width: 100vw;
+                grid-template-columns: 1fr; /* Una sola columna en móvil */
+                height: auto; /* Altura automática */
+                gap: 1rem;
             }
             .chart-container {
                 width: 100%;
