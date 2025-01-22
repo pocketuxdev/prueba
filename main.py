@@ -174,8 +174,8 @@ def get_common_sidebar():
         .chart-container {
             position: relative;
             width: 100%;
-            height: 240px; // Reducido de 280px a 240px
-            padding: 1.2rem;
+            height: 200px; // Reducido de 240px a 200px
+            padding: 1rem;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 15px;
             border: 1px solid rgba(255, 0, 153, 0.1);
@@ -996,17 +996,17 @@ def dashboard_page():
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 240px; // Reducido de 280px a 240px
-                    padding: 1.2rem;
+                    height: 200px; // Reducido de 240px a 200px
+                    padding: 1rem;
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     margin: 0;
                 }}
                 .chart-title {{
-                    font-size: 1rem;
+                    font-size: 0.95rem;
                     color: white;
-                    margin-bottom: 0.5rem; // Reducido de 0.8rem a 0.5rem
+                    margin-bottom: 0.4rem; // Reducido de 0.5rem a 0.4rem
                     text-align: center;
                 }}
                 @media (max-width: 1400px) {{
@@ -1015,7 +1015,7 @@ def dashboard_page():
                         max-width: 1200px;
                     }}
                     .chart-container {{
-                        height: 220px; // Reducido de 260px a 220px
+                        height: 190px; // Reducido de 220px a 190px
                     }}
                 }}
                 @media (max-width: 768px) {{
@@ -1024,8 +1024,8 @@ def dashboard_page():
                         padding: 0.5rem;
                     }}
                     .chart-container {{
-                        height: 200px; // Reducido de 240px a 200px
-                        padding: 1rem;
+                        height: 180px; // Reducido de 200px a 180px
+                        padding: 0.8rem;
                     }}
                 }}
                 .kpi-grid {{
