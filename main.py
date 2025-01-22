@@ -104,7 +104,7 @@ def get_common_sidebar():
             height: 100vh;
             max-width: 100vw; /* Agregar ancho máximo viewport */
             margin: 0 auto;
-            padding: 0.6rem 1.2rem; /* Reducido aún más el padding general */
+            padding: 0.5rem 1rem; /* Reducido aún más */
             overflow: hidden;
         }
         @media (max-width: 768px) {
@@ -985,26 +985,26 @@ def dashboard_page():
                     height: 100vh;
                     max-width: 100vw;
                     margin: 0 auto;
-                    padding: 0.6rem 1.2rem; /* Reducido aún más el padding general */
+                    padding: 0.5rem 1rem; /* Reducido aún más */
                     overflow: hidden;
                 }}
                 .main-content {{
-                    height: calc(100vh - 1.2rem);
+                    height: calc(100vh - 1rem);
                     display: flex;
                     flex-direction: column;
-                    gap: 0.5rem; /* Gap más pequeño */
+                    gap: 0.4rem; /* Gap más pequeño */
                 }}
                 .header {{
                     display: flex;
                     align-items: center;
                     padding: 0.3rem 1rem;
                     background: rgba(255, 255, 255, 0.05);
-                    border-radius: 10px; /* Consistente con otros elementos */
+                    border-radius: 10px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    height: 4vh; /* Reducido para mejor proporción */
+                    height: 3.5vh; /* Reducido */
                 }}
                 .header h1 {{
-                    font-size: 1rem;
+                    font-size: 0.95rem;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -1012,8 +1012,8 @@ def dashboard_page():
                 .metrics-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 0.6rem;
-                    height: 82vh; /* Aumentado para aprovechar el espacio */
+                    gap: 0.5rem;
+                    height: 75vh; /* Reducido de 82vh a 75vh */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1030,26 +1030,26 @@ def dashboard_page():
                     position: relative;
                     width: 100%;
                     height: 100%;
-                    padding: 0.5rem;
+                    padding: 0.4rem;
                     margin: 0;
                     display: flex;
                     flex-direction: column;
                     border-radius: 10px; /* Consistente con header y KPIs */
                 }}
                 .chart-title {{
-                    font-size: 0.75rem;
+                    font-size: 0.7rem;
                     margin-bottom: 0.2rem;
                     flex-shrink: 0;
                 }}
                 canvas {{
                     flex-grow: 1;
-                    max-height: calc(100% - 1.2rem);
+                    max-height: calc(100% - 1rem);
                 }}
                 .kpi-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 0.6rem;
-                    height: 7vh; /* Ajustado proporcionalmente */
+                    gap: 0.5rem;
+                    height: 6vh; /* Reducido */
                 }}
                 .kpi-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1060,11 +1060,11 @@ def dashboard_page():
                     transition: all 0.3s ease;
                 }}
                 .kpi-value {{
-                    font-size: 1.3rem;
+                    font-size: 1.2rem;
                     margin-bottom: 0.1rem;
                 }}
                 .kpi-label {{
-                    font-size: 0.65rem;
+                    font-size: 0.6rem;
                 }}
                 .billing-grid {{
                     display: grid;
