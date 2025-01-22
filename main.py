@@ -1091,24 +1091,20 @@ def dashboard_page():
                 }}
                 .kpi-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-columns: repeat(4, 1fr); /* 4 columnas igual que las gráficas */
                     gap: 1.5rem;
-                    margin: 0 auto 2rem auto;
+                    margin-bottom: 2rem;
                     padding: 0 1rem;
-                    max-width: 1600px;
+                    width: 100%;
+                    max-width: 100vw;
                 }}
                 .kpi-card {{
                     background: rgba(255, 255, 255, 0.05);
-                    border-radius: 12px;
+                    border-radius: 15px;
                     padding: 1.5rem;
                     text-align: center;
                     border: 1px solid var(--border-color);
                     transition: all 0.3s ease;
-                }}
-                .kpi-card:hover {{
-                    transform: translateY(-5px);
-                    background: rgba(255, 0, 153, 0.1);
-                    border-color: var(--primary-color);
                 }}
                 .kpi-value {{
                     font-size: 2.5rem;
@@ -1120,20 +1116,35 @@ def dashboard_page():
                     font-size: 1rem;
                     color: var(--text-light);
                 }}
-                @media (max-width: 1400px) {{
+                /* Tablets */
+                @media (max-width: 1200px) {{
                     .kpi-grid {{
-                        grid-template-columns: repeat(2, 1fr);
-                        max-width: 1200px;
+                        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+                        gap: 1rem;
                     }}
                 }}
+                /* Móviles */
                 @media (max-width: 768px) {{
                     .kpi-grid {{
-                        grid-template-columns: 1fr;
+                        grid-template-columns: 1fr; /* 1 columna en móvil */
+                        gap: 1rem;
                         padding: 0.5rem;
                     }}
-                    .kpi-value {{
-                        font-size: 2rem;
+                    .kpi-card {{
+                        padding: 1.2rem;
                     }}
+                    .kpi-value {{
+                        font-size: 2.2rem;
+                    }}
+                    .kpi-label {{
+                        font-size: 0.9rem;
+                    }}
+                }}
+                /* Hover effect para las KPI cards */
+                .kpi-card:hover {{
+                    transform: translateY(-5px);
+                    background: rgba(255, 0, 153, 0.1);
+                    border-color: var(--primary-color);
                 }}
                 .billing-grid {{
                     display: grid;
