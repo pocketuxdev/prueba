@@ -174,11 +174,12 @@ def get_common_sidebar():
         .chart-container {
             position: relative;
             width: 100%;
-            height: 300px;
-            padding: 1.5rem;
+            height: 240px; // Reducido de 280px a 240px
+            padding: 1.2rem;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 15px;
             border: 1px solid rgba(255, 0, 153, 0.1);
+            margin: 0;
         }
         /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
         .main-content {
@@ -995,17 +996,17 @@ def dashboard_page():
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 280px; // Reducido de 320px a 280px
-                    padding: 1.5rem;
+                    height: 240px; // Reducido de 280px a 240px
+                    padding: 1.2rem;
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     margin: 0;
                 }}
                 .chart-title {{
-                    font-size: 1.1rem;
+                    font-size: 1rem;
                     color: white;
-                    margin-bottom: 0.8rem; // Reducido de 1rem a 0.8rem
+                    margin-bottom: 0.5rem; // Reducido de 0.8rem a 0.5rem
                     text-align: center;
                 }}
                 @media (max-width: 1400px) {{
@@ -1014,7 +1015,7 @@ def dashboard_page():
                         max-width: 1200px;
                     }}
                     .chart-container {{
-                        height: 260px; // Reducido de 300px a 260px
+                        height: 220px; // Reducido de 260px a 220px
                     }}
                 }}
                 @media (max-width: 768px) {{
@@ -1023,7 +1024,7 @@ def dashboard_page():
                         padding: 0.5rem;
                     }}
                     .chart-container {{
-                        height: 240px; // Reducido de 280px a 240px
+                        height: 200px; // Reducido de 240px a 200px
                         padding: 1rem;
                     }}
                 }}
