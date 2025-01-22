@@ -982,12 +982,12 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Hacer grid responsive */
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                     gap: 1.5rem;
                     margin: 2rem auto;
                     padding: 0 1rem;
                     width: 100%;
-                    max-width: 100vw; /* Ajustar al viewport width */
+                    max-width: 100vw;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1016,59 +1016,68 @@ def dashboard_page():
                     text-align: center;
                 }}
                 @media (max-width: 768px) {{
+                    .dashboard-layout {{
+                        padding: 1rem 1rem 100px 1rem;
+                        width: 100vw;
+                    }}
+                    
                     .metrics-grid {{
-                        grid-template-columns: 1fr;
-                        padding: 1rem;
-                        gap: 2rem; // Aumentado el espacio entre gráficas
+                        grid-template-columns: 1fr; /* Forzar una columna en móvil */
+                        gap: 1rem; /* Reducir el espacio entre cards */
                         padding: 0.5rem;
-                        gap: 1.5rem;
                         width: 100vw;
                     }}
                     
                     .metric-card {{
-                        padding: 1.2rem;
                         margin-bottom: 1rem;
-                        padding: 1rem;
-                        margin: 0;
-                        width: 100%;
-                        background: rgba(255, 255, 255, 0.03);
+                        min-height: auto; /* Permitir que la altura se ajuste al contenido */
                     }}
                     
                     .chart-container {{
-                        height: 250px; // Aumentado para mejor visualización en móvil
-                        padding: 1rem;
-                        height: 300px; // Aumentado significativamente para móvil
-                        padding: 0.8rem;
-                        margin: 0 -0.5rem; // Extender un poco los márgenes
-                        width: calc(100% + 1rem); // Compensar los márgenes negativos
+                        width: 100%;
+                        max-width: 100vw;
+                        height: 250px; /* Aumentar altura para mejor visualización */
+                        margin: 0.5rem auto;
                     }}
                     
-                    .chart-title {{
-                        font-size: 1.1rem; // Aumentado el tamaño del título
-                        margin-bottom: 1rem;
-                        font-size: 1.2rem;
-                        margin-bottom: 0.8rem;
-                        font-weight: 500;
-                        padding: 0 0.5rem;
-                    }}
-                    // Estilos específicos para mejorar la legibilidad de las gráficas en móvil
-                    canvas {{
-                        max-width: 100% !important;
-                        height: auto !important;
-                        max-width: none !important; // Permitir que el canvas ocupe todo el espacio
-                        width: 100% !important;
-                        height: 100% !important;
-                    }}
-                    // Ajustar los KPIs para móvil también
+                    /* Ajustar el contenido dentro de las cards */
                     .kpi-grid {{
-                        padding: 0.5rem;
+                        grid-template-columns: 1fr;
                         gap: 1rem;
                     }}
+                    
                     .kpi-card {{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
                         padding: 1.2rem;
                     }}
+                    
                     .kpi-value {{
                         font-size: 2.2rem;
+                        margin-bottom: 0.5rem;
+                    }}
+                    
+                    .kpi-label {{
+                        font-size: 1rem;
+                    }}
+                }}
+                @media (max-width: 360px) {{
+                    .metrics-grid {{
+                        padding: 0.25rem;
+                    }}
+                    
+                    .metric-card {{
+                        padding: 1rem;
+                    }}
+                    
+                    .chart-container {{
+                        height: 200px;
+                    }}
+                    
+                    .kpi-value {{
+                        font-size: 2rem;
                     }}
                 }}
                 @media (max-width: 1400px) {{
