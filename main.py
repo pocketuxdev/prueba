@@ -995,7 +995,7 @@ def dashboard_page():
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 320px;
+                    height: 280px; // Reducido de 320px a 280px
                     padding: 1.5rem;
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
@@ -1005,7 +1005,7 @@ def dashboard_page():
                 .chart-title {{
                     font-size: 1.1rem;
                     color: white;
-                    margin-bottom: 1rem;
+                    margin-bottom: 0.8rem; // Reducido de 1rem a 0.8rem
                     text-align: center;
                 }}
                 @media (max-width: 1400px) {{
@@ -1014,7 +1014,7 @@ def dashboard_page():
                         max-width: 1200px;
                     }}
                     .chart-container {{
-                        height: 300px;
+                        height: 260px; // Reducido de 300px a 260px
                     }}
                 }}
                 @media (max-width: 768px) {{
@@ -1023,7 +1023,7 @@ def dashboard_page():
                         padding: 0.5rem;
                     }}
                     .chart-container {{
-                        height: 280px;
+                        height: 240px; // Reducido de 280px a 240px
                         padding: 1rem;
                     }}
                 }}
@@ -1161,6 +1161,10 @@ def dashboard_page():
                 .status-pending {{
                     background: rgba(255, 170, 0, 0.2);
                     color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin-top: 2rem;
                 }}
                 .payment-methods {{
                     display: grid;
