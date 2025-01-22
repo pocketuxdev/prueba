@@ -166,7 +166,9 @@ def get_common_sidebar():
                 border-radius: 15px;
                 padding: 1.5rem;
                 border: 1px solid var(--border-color);
+                aspect-ratio: 1.2; /* Mantiene una proporción consistente */
                 height: auto;
+                width: 100%;
             }
             
             .chart-title {
@@ -181,28 +183,29 @@ def get_common_sidebar():
             .chart-container {
                 position: relative;
                 width: 100%;
-                height: 280px;
+                height: 0;
+                padding-bottom: 75%; /* Mantiene una proporción 4:3 */
                 margin: 0;
-                padding: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
             
             canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
                 width: 100% !important;
                 height: 100% !important;
+                object-fit: contain;
             }
             
             /* Ajustes específicos para cada tipo de gráfica */
             .metric-card[data-chart="line"] .chart-container,
-            .metric-card[data-chart="bar"] .chart-container {
-                height: 200px;
-            }
-            
+            .metric-card[data-chart="bar"] .chart-container,
             .metric-card[data-chart="doughnut"] .chart-container,
             .metric-card[data-chart="pie"] .chart-container {
-                height: 220px;
+                padding-bottom: 75%; /* Mantiene la misma proporción para todos los tipos */
             }
             
             .chart-title {
