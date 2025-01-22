@@ -927,6 +927,7 @@ def dashboard_page():
                     --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
+                    --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
                 * {{
@@ -956,13 +957,15 @@ def dashboard_page():
                     justify-content: space-between;
                     align-items: center;
                     margin-bottom: 2rem;
-                    padding: 1rem;
+                    padding: 1.5rem;
+                    background: rgba(40, 40, 40, 0.95);
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
                     backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
-                    font-size: 1.8rem;
+                    font-size: 2rem;
                     color: white;
                     display: flex;
                     align-items: center;
@@ -973,10 +976,11 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                    gap: 1rem;
-                    margin-bottom: 2rem;
-                    padding: 0.5rem;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    margin: 2rem auto;
+                    padding: 0 1rem;
+                    max-width: 1600px;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -984,27 +988,52 @@ def dashboard_page():
                     padding: 1.5rem;
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
-                    margin: 0.5rem;
-                    overflow: visible;
                     height: 100%;
+                    display: flex;
+                    flex-direction: column;
                 }}
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    aspect-ratio: 16/9;
-                    min-height: 200px;
+                    height: 320px;
                     padding: 1.5rem;
-                    margin: 0.5rem;
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    overflow: visible;
+                    margin: 0;
+                }}
+                .chart-title {{
+                    font-size: 1.1rem;
+                    color: white;
+                    margin-bottom: 1rem;
+                    text-align: center;
+                }}
+                @media (max-width: 1400px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        max-width: 1200px;
+                    }}
+                    .chart-container {{
+                        height: 300px;
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        padding: 0.5rem;
+                    }}
+                    .chart-container {{
+                        height: 280px;
+                        padding: 1rem;
+                    }}
                 }}
                 .kpi-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 1rem;
-                    margin-bottom: 2rem;
+                    gap: 1.5rem;
+                    margin: 0 auto 2rem auto;
+                    padding: 0 1rem;
+                    max-width: 1600px;
                 }}
                 .kpi-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1012,32 +1041,279 @@ def dashboard_page():
                     padding: 1.5rem;
                     text-align: center;
                     border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                }}
+                .kpi-card:hover {{
+                    transform: translateY(-5px);
+                    background: rgba(255, 0, 153, 0.1);
+                    border-color: var(--primary-color);
                 }}
                 .kpi-value {{
-                    font-size: 2rem;
+                    font-size: 2.5rem;
                     font-weight: 600;
                     color: var(--primary-color);
                     margin-bottom: 0.5rem;
                 }}
                 .kpi-label {{
-                    font-size: 0.9rem;
+                    font-size: 1rem;
                     color: var(--text-light);
                 }}
                 @media (max-width: 1400px) {{
-                    .main-content {{
-                        padding: 1.5rem;
+                    .kpi-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        max-width: 1200px;
                     }}
                 }}
                 @media (max-width: 768px) {{
-                    .metrics-grid, .kpi-grid {{
+                    .kpi-grid {{
+                        grid-template-columns: 1fr;
+                        padding: 0.5rem;
+                    }}
+                    .kpi-value {{
+                        font-size: 2rem;
+                    }}
+                }}
+                .billing-grid {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr;
+                    gap: 2rem;
+                    margin-bottom: 2rem;
+                }}
+                .billing-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem;
+                    border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
+                }}
+                .billing-summary {{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                }}
+                .summary-item {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
+                    padding: 1.5rem;
+                    border-radius: 12px;
+                    text-align: center;
+                    border: 1px solid var(--border-color);
+                    border: 1px solid var(--primary-color);
+                    transition: all 0.3s ease;
+                }}
+                .summary-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
+                }}
+                .summary-value {{
+                    font-size: 2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    margin-bottom: 0.5rem;
+                }}
+                .summary-label {{
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                }}
+                .calendar-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .month-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 10px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                }}
+                .month-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: scale(1.05);
+                }}
+                .month-name {{
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                    color: white;
+                }}
+                .month-amount {{
+                    font-size: 1.2rem;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                }}
+                .month-status {{
+                    font-size: 0.8rem;
+                    margin-top: 0.5rem;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    display: inline-block;
+                }}
+                .status-paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .payment-methods {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .payment-method {{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 10px;
+                    transition: all 0.3s ease;
+                }}
+                .payment-method:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .method-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .section-title {{
+                    font-size: 1.3rem;
+                    color: white;
+                    margin-bottom: 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .section-title i {{
+                    color: var(--primary-color);
+                }}
+                .payment-history {{
+                    margin-top: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    overflow: hidden;
+                }}
+                .history-header {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    font-weight: 500;
+                }}
+                .history-item {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    align-items: center;
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }}
+                .history-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.05);
+                }}
+                .history-item.pending {{
+                    background: rgba(255, 170, 0, 0.15);
+                    background: rgba(255, 170, 0, 0.05);
+                }}
+                .status-badge {{
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.85rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .status-badge.paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-badge.pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .payment-stats {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .stat-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    transition: all 0.3s ease;
+                }}
+                .stat-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateY(-2px);
+                }}
+                .stat-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .stat-info h4 {{
+                    font-size: 0.9rem;
+                    margin-bottom: 0.2rem;
+                }}
+                .stat-info p {{
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                }}
+                .mt-4 {{
+                    margin-top: 2rem;
+                }}
+                .text-success {{
+                    color: #00b368;
+                }}
+                .text-warning {{
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin: 2rem 0;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                }}
+                @media (max-width: 768px) {{
+                    .payment-stats {{
                         grid-template-columns: 1fr;
                     }}
-                    .main-content {{
-                        padding: 1rem;
-                        width: 100%;
-                    }}
-                    .chart-container {{
-                        aspect-ratio: 4/3;
+                    .history-item {{
+                        font-size: 0.9rem;
                     }}
                 }}
             </style>
@@ -1055,10 +1331,11 @@ def dashboard_page():
                 <div class="main-content">
                     <div class="header">
                         <h1>
-                            <i class="fas fa-file-invoice-dollar header-icon"></i>
+                            <i class="fas fa-chart-line header-icon"></i>
                             Dashboard Tiffany Medical Assistant
                         </h1>
                     </div>
+                    
                     <div class="kpi-grid">
                         <div class="kpi-card">
                             <div class="kpi-value">30%</div>
@@ -1077,43 +1354,52 @@ def dashboard_page():
                             <div class="kpi-label">Resolución WhatsApp</div>
                         </div>
                     </div>
+
                     <div class="metrics-grid">
                         <div class="metric-card">
+                            <div class="chart-title">Engagement de Usuarios Activos</div>
                             <div class="chart-container">
                                 <canvas id="userEngagementChart"></canvas>
                             </div>
                         </div>
                         <div class="metric-card">
+                            <div class="chart-title">Rendimiento de Automatización</div>
                             <div class="chart-container">
                                 <canvas id="automationChart"></canvas>
                             </div>
                         </div>
                         <div class="metric-card">
+                            <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
                             <div class="chart-container">
                                 <canvas id="patientCareChart"></canvas>
                             </div>
                         </div>
                         <div class="metric-card">
+                            <div class="chart-title">Reducción de Tareas Administrativas</div>
                             <div class="chart-container">
                                 <canvas id="efficiencyChart"></canvas>
                             </div>
                         </div>
                         <div class="metric-card">
+                            <div class="chart-title">Estado de Capacitación del Personal</div>
                             <div class="chart-container">
                                 <canvas id="trainingChart"></canvas>
                             </div>
                         </div>
                         <div class="metric-card">
+                            <div class="chart-title">Rendimiento del Sistema</div>
                             <div class="chart-container">
                                 <canvas id="systemPerformanceChart"></canvas>
                             </div>
                         </div>
                         <div class="metric-card">
+                            <div class="chart-title">Adopción de Nuevas Funcionalidades</div>
                             <div class="chart-container">
                                 <canvas id="adoptionChart"></canvas>
                             </div>
                         </div>
                         <div class="metric-card">
+                            <div class="chart-title">Insights Generales</div>
                             <div class="chart-container">
                                 <canvas id="insightsChart"></canvas>
                             </div>
@@ -2212,49 +2498,6 @@ def billing_page():
                     gap: 0.5rem;
                 }}
                 .section-title i {{
-                    color: var(--primary-color);
-                }}
-                @media (max-width: 1200px) {{
-                    .billing-grid {{
-                        grid-template-columns: 1fr;
-                    }}
-                    .calendar-grid {{
-                        grid-template-columns: repeat(3, 1fr);
-                    }}
-                }}
-                @media (max-width: 768px) {{
-                    .calendar-grid {{
-                        grid-template-columns: repeat(2, 1fr);
-                    }}
-                    .billing-summary {{
-                        grid-template-columns: 1fr;
-                    }}
-                }}
-                .payment-method {{
-                    position: relative;
-                    overflow: hidden;
-                }}
-                .method-details {{
-                    flex: 1;
-                }}
-                .method-status {{
-                    font-size: 0.8rem;
-                    padding: 0.2rem 0.5rem;
-                    background: rgba(255, 0, 153, 0.1);
-                    border-radius: 12px;
-                    color: var(--primary-color);
-                }}
-                .action-btn {{
-                    background: transparent;
-                    border: none;
-                    color: var(--text-light);
-                    cursor: pointer;
-                    padding: 0.5rem;
-                    border-radius: 50%;
-                    transition: all 0.3s ease;
-                }}
-                .action-btn:hover {{
-                    background: rgba(255, 255, 255, 0.1);
                     color: var(--primary-color);
                 }}
                 .payment-history {{
