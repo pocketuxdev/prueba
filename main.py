@@ -998,18 +998,19 @@ def dashboard_page():
                 }}
                 .header {{
                     display: flex;
-                    align-items: center;
-                    padding: 0.3rem 1rem;
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 10px;
+                    align-items: flex-start; /* Alinear al inicio */
+                    padding: 1.5rem;
+                    background: rgba(20, 20, 20, 0.8);
+                    border-radius: 20px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    height: 3.5vh;
-                    position: sticky; /* Mantener header visible */
-                    top: 0;
-                    z-index: 10;
+                    margin-bottom: 1.5rem;
                 }}
                 .header h1 {{
-                    font-size: 0.95rem;
+                    font-size: 2.2rem;
+                    font-weight: 600;
+                    color: white;
+                    font-family: 'Playfair Display', serif; /* Fuente más elegante */
+                    line-height: 1.2;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -1053,24 +1054,31 @@ def dashboard_page():
                 }}
                 .kpi-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr);
-                    gap: 0.5rem;
-                    height: 6vh; /* Reducido */
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
                 }}
                 .kpi-card {{
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 10px;
-                    padding: 0.3rem;
+                    background: rgba(20, 20, 20, 0.8);
+                    padding: 1.5rem;
+                    border-radius: 20px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
                     text-align: center;
-                    border: 1px solid var(--border-color);
-                    transition: all 0.3s ease;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.5rem;
                 }}
                 .kpi-value {{
-                    font-size: 1.2rem;
-                    margin-bottom: 0.1rem;
+                    font-size: 3rem;
+                    font-weight: 600;
+                    color: #FF0099;
+                    margin-bottom: 0.5rem;
                 }}
                 .kpi-label {{
-                    font-size: 0.6rem;
+                    font-size: 1.2rem;
+                    color: rgba(255, 255, 255, 0.8);
+                    font-weight: 400;
                 }}
                 .billing-grid {{
                     display: grid;
