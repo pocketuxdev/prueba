@@ -982,12 +982,12 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Hacer grid responsive */
                     gap: 1.5rem;
                     margin: 2rem auto;
                     padding: 0 1rem;
                     width: 100%;
-                    max-width: 100vw;
+                    max-width: 100vw; /* Ajustar al viewport width */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1018,7 +1018,7 @@ def dashboard_page():
                 @media (max-width: 768px) {{
                     .dashboard-layout {{
                         padding: 1rem 1rem 100px 1rem;
-                        width: 100vw;
+                        width: 100vw; /* Asegurar ancho completo en móviles */
                     }}
                     
                     .metrics-grid {{
