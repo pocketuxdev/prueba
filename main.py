@@ -2876,14 +2876,212 @@ def billing_page():
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             {get_common_styles()}
-            <!-- Estilos específicos de la página aquí -->
+            
             <style>
-                /* Estilos específicos manteniendo la consistencia */
+                /* Estilos específicos de facturación */
+                .billing-grid {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr;
+                    gap: var(--spacing-lg);
+                    margin-bottom: var(--spacing-xl);
+                }}
+
+                .billing-summary {{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: var(--spacing-md);
+                    margin-bottom: var(--spacing-lg);
+                }}
+
+                .summary-item {{
+                    background: var(--primary-transparent);
+                    padding: var(--spacing-lg);
+                    border-radius: var(--radius-md);
+                    text-align: center;
+                    border: 1px solid var(--primary-color);
+                    transition: all var(--transition-normal);
+                }}
+
+                .summary-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    transform: translateY(-5px);
+                    box-shadow: var(--elevation-2);
+                }}
+
+                .summary-value {{
+                    font-size: var(--headline-large);
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    margin-bottom: var(--spacing-sm);
+                }}
+
+                .calendar-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: var(--spacing-md);
+                    margin-top: var(--spacing-md);
+                }}
+
+                .month-card {{
+                    background: var(--surface-01);
+                    padding: var(--spacing-md);
+                    border-radius: var(--radius-md);
+                    text-align: center;
+                    transition: all var(--transition-normal);
+                }}
+
+                .month-card:hover {{
+                    background: var(--primary-transparent);
+                    transform: scale(1.05);
+                }}
+
+                .status-badge {{
+                    padding: var(--spacing-xs) var(--spacing-sm);
+                    border-radius: var(--radius-sm);
+                    font-size: var(--body-small);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--spacing-xs);
+                }}
+
+                .status-badge.paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+
+                .status-badge.pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+
+                .chart-container {{
+                    height: 300px;
+                    margin: var(--spacing-lg) 0;
+                    padding: var(--spacing-md);
+                    background: var(--surface-01);
+                    border-radius: var(--radius-lg);
+                    border: 1px solid var(--border-primary);
+                }}
+
+                @media (max-width: 1200px) {{
+                    .billing-grid {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .calendar-grid {{
+                        grid-template-columns: repeat(3, 1fr);
+                    }}
+                }}
+
+                @media (max-width: 768px) {{
+                    .calendar-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                    }}
+                    .billing-summary {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .chart-container {{
+                        height: 250px;
+                    }}
+                }}
             </style>
         </head>
         <body>
-            <!-- Contenido de la página -->
+            {get_common_sidebar()}
+            <div class="dashboard-layout">
+                <div class="main-content">
+                    <div class="header">
+                        <h1 class="headline-large">
+                            <i class="fas fa-file-invoice-dollar header-icon"></i>
+                            Centro de Facturación
+                        </h1>
+                    </div>
+                    <div class="billing-grid">
+                        <div class="card">
+                            <div class="billing-summary">
+                                <div class="summary-item">
+                                    <div class="summary-value">$25,500</div>
+                                    <div class="body-medium">Facturación Anual</div>
+                                </div>
+                                <div class="summary-item">
+                                    <div class="summary-value">15</div>
+                                    <div class="body-medium">Facturas Pendientes</div>
+                                </div>
+                                <div class="summary-item">
+                                    <div class="summary-value">85%</div>
+                                    <div class="body-medium">Tasa de Pago</div>
+                                </div>
+                            </div>
+                            <div class="title-large mb-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                Facturación Mensual 2024
+                            </div>
+                            <div class="calendar-grid">
+                                <div class="month-card">
+                                    <div class="title-medium">Enero</div>
+                                    <div class="headline-small">$2,500</div>
+                                    <div class="status-badge paid">Pagado</div>
+                                </div>
+                                <!-- Resto de las month-cards -->
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="billingChart"></canvas>
+                            </div>
+                        </div>
+                        <!-- Resto del contenido de facturación -->
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Configuración del gráfico
+                const ctx = document.getElementById('billingChart').getContext('2d');
+                new Chart(ctx, {{
+                    type: 'line',
+                    data: {{
+                        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                        datasets: [{{
+                            label: 'Facturación Mensual',
+                            data: [2500, 2300, 2800, 2100, 2600, 2400, 2700, 2900, 2200, 2400, 2600, 2800],
+                            borderColor: '#FF0099',
+                            backgroundColor: 'rgba(255, 0, 153, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }}]
+                    }},
+                    options: {{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {{
+                            legend: {{
+                                display: false
+                            }}
+                        }},
+                        scales: {{
+                            y: {{
+                                beginAtZero: true,
+                                grid: {{
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }},
+                                ticks: {{
+                                    color: 'rgba(255, 255, 255, 0.8)',
+                                    callback: function(value) {{
+                                        return '$ ' + value;
+                                    }}
+                                }}
+                            }},
+                            x: {{
+                                grid: {{
+                                    display: false
+                                }},
+                                ticks: {{
+                                    color: 'rgba(255, 255, 255, 0.8)'
+                                }}
+                            }}
+                        }}
+                    }}
+                }});
+            </script>
         </body>
     </html>
     """
