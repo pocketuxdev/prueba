@@ -156,40 +156,85 @@ def get_common_sidebar():
             .metrics-grid {
                 display: flex;
                 flex-direction: column;
-                gap: 1.5rem;
-                padding: 0.5rem;
-                margin-top: 1rem;
+                gap: 2rem;
+                width: 95vw;
+                margin: 1rem auto;
             }
             
             .metric-card {
-                background: rgba(0, 0, 0, 0.7);
+                background: rgba(0, 0, 0, 0.95);
                 border: 1px solid var(--primary-color);
-                border-radius: 20px;
-                padding: 1rem;
-                height: auto;
-                min-height: 300px;
-            }
-            
-            .chart-container {
-                background: transparent;
-                border: none;
-                height: 250px;
-                padding: 0.5rem;
-                margin: 0;
+                border-radius: 25px;
+                padding: 1.5rem;
+                width: 100%;
+                min-height: 350px;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 4px 15px rgba(255, 0, 153, 0.1);
             }
             
             .chart-title {
                 color: white;
-                font-size: 1.1rem;
+                font-size: 1.4rem;
                 text-align: center;
-                margin-bottom: 1rem;
+                margin-bottom: 1.5rem;
                 font-weight: 500;
+                font-family: 'Playfair Display', serif;
             }
             
-            /* Estilos específicos para Chart.js en móvil */
+            .chart-container {
+                flex: 1;
+                position: relative;
+                width: 100%;
+                height: calc(100% - 60px);
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
             canvas {
-                width: 100% !important;
-                height: 100% !important;
+                max-width: 90vw !important;
+                max-height: 300px !important;
+                margin: 0 auto;
+            }
+            
+            /* Ajustes específicos para cada tipo de gráfica */
+            .metric-card[data-chart-type="doughnut"] canvas,
+            .metric-card[data-chart-type="pie"] canvas {
+                max-height: 250px !important;
+            }
+            
+            .metric-card[data-chart-type="line"] canvas,
+            .metric-card[data-chart-type="bar"] canvas {
+                max-height: 200px !important;
+            }
+            
+            /* Ajustes para las tarjetas KPI */
+            .kpi-grid {
+                width: 95vw;
+                margin: 0 auto 2rem auto;
+            }
+            
+            .kpi-card {
+                background: rgba(0, 0, 0, 0.95);
+                border: 1px solid var(--primary-color);
+                border-radius: 25px;
+                padding: 2rem 1.5rem;
+                text-align: center;
+            }
+            
+            .kpi-value {
+                font-size: 3rem;
+                color: var(--primary-color);
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+            
+            .kpi-label {
+                font-size: 1.2rem;
+                color: var(--text-light);
+                font-family: 'Playfair Display', serif;
             }
             
             .sidebar {
