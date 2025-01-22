@@ -985,8 +985,8 @@ def dashboard_page():
                     min-height: 100vh;
                     max-width: 100vw; /* Agregar ancho máximo viewport */
                     margin: 0 auto;
-                    padding: 2rem 2rem 100px 2rem;
-                    overflow-x: hidden;
+                    padding: 1rem 2rem;
+                    overflow: hidden;
                 }}
                 .main-content {{
                     width: 100%;
@@ -999,16 +999,14 @@ def dashboard_page():
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 2rem;
-                    padding: 1.5rem;
-                    background: rgba(40, 40, 40, 0.95);
+                    margin-bottom: 1rem;
+                    padding: 0.8rem 1.5rem;
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     color: white;
                     display: flex;
                     align-items: center;
