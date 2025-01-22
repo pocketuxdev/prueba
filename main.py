@@ -1012,30 +1012,49 @@ def dashboard_page():
                 @media (max-width: 768px) {{
                     .metrics-grid {{
                         grid-template-columns: 1fr;
-                        padding: 1rem;
-                        gap: 2rem; // Aumentado el espacio entre gráficas
+                        padding: 0.5rem;
+                        gap: 1.5rem;
                     }}
                     
                     .metric-card {{
-                        padding: 1.2rem;
-                        margin-bottom: 1rem;
+                        padding: 1rem;
+                        margin: 0;
+                        width: 100%;
+                        background: rgba(255, 255, 255, 0.03);
                     }}
                     
                     .chart-container {{
-                        height: 250px; // Aumentado para mejor visualización en móvil
-                        padding: 1rem;
+                        height: 300px; // Aumentado significativamente para móvil
+                        padding: 0.8rem;
+                        margin: 0 -0.5rem; // Extender un poco los márgenes
+                        width: calc(100% + 1rem); // Compensar los márgenes negativos
                     }}
                     
                     .chart-title {{
-                        font-size: 1.1rem; // Aumentado el tamaño del título
-                        margin-bottom: 1rem;
+                        font-size: 1.2rem;
+                        margin-bottom: 0.8rem;
                         font-weight: 500;
+                        padding: 0 0.5rem;
                     }}
 
-                    // Estilos específicos para mejorar la legibilidad de las gráficas en móvil
                     canvas {{
-                        max-width: 100% !important;
-                        height: auto !important;
+                        max-width: none !important; // Permitir que el canvas ocupe todo el espacio
+                        width: 100% !important;
+                        height: 100% !important;
+                    }}
+
+                    // Ajustar los KPIs para móvil también
+                    .kpi-grid {{
+                        padding: 0.5rem;
+                        gap: 1rem;
+                    }}
+
+                    .kpi-card {{
+                        padding: 1.2rem;
+                    }}
+
+                    .kpi-value {{
+                        font-size: 2.2rem;
                     }}
                 }}
                 @media (max-width: 1400px) {{
@@ -2489,8 +2508,9 @@ def billing_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 300px;
+                    height: 200px;
                     margin-top: 2rem;
+                    padding: 0.8rem;
                 }}
                 .payment-methods {{
                     display: grid;
@@ -2630,9 +2650,9 @@ def billing_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 300px;
+                    height: 200px;
                     margin: 2rem 0;
-                    padding: 1rem;
+                    padding: 0.8rem;
                     background: rgba(60, 60, 60, 0.95);
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
@@ -2644,6 +2664,52 @@ def billing_page():
                     }}
                     .history-item {{
                         font-size: 0.9rem;
+                    }}
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        padding: 0.5rem;
+                        gap: 1.5rem;
+                    }}
+                    
+                    .metric-card {{
+                        padding: 1rem;
+                        margin: 0;
+                        width: 100%;
+                        background: rgba(255, 255, 255, 0.03);
+                    }}
+                    
+                    .chart-container {{
+                        height: 300px; // Aumentado significativamente para móvil
+                        padding: 0.8rem;
+                        margin: 0 -0.5rem; // Extender un poco los márgenes
+                        width: calc(100% + 1rem); // Compensar los márgenes negativos
+                    }}
+                    
+                    .chart-title {{
+                        font-size: 1.2rem;
+                        margin-bottom: 0.8rem;
+                        font-weight: 500;
+                        padding: 0 0.5rem;
+                    }}
+
+                    canvas {{
+                        max-width: none !important; // Permitir que el canvas ocupe todo el espacio
+                        width: 100% !important;
+                        height: 100% !important;
+                    }}
+
+                    // Ajustar los KPIs para móvil también
+                    .kpi-grid {{
+                        padding: 0.5rem;
+                        gap: 1rem;
+                    }}
+
+                    .kpi-card {{
+                        padding: 1.2rem;
+                    }}
+
+                    .kpi-value {{
+                        font-size: 2.2rem;
                     }}
                 }}
             </style>
@@ -2903,6 +2969,64 @@ def billing_page():
                         }}
                     }}
                 }});
+
+                // Actualizar las opciones de Chart.js para móvil
+                const mobileChartOptions = {{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {{
+                        padding: {{
+                            left: 10,
+                            right: 10,
+                            top: 10,
+                            bottom: 10
+                        }}
+                    }},
+                    plugins: {{
+                        legend: {{
+                            position: 'top',
+                            labels: {{
+                                boxWidth: 15,
+                                padding: 15,
+                                font: {{
+                                    size: 14
+                                }}
+                            }}
+                        }}
+                    }},
+                    scales: {{
+                        x: {{
+                            grid: {{
+                                display: false
+                            }},
+                            ticks: {{
+                                font: {{
+                                    size: 12
+                                }},
+                                maxRotation: 45,
+                                minRotation: 45
+                            }}
+                        }},
+                        y: {{
+                            grid: {{
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }},
+                            ticks: {{
+                                font: {{
+                                    size: 12
+                                }},
+                                padding: 8
+                            }}
+                        }}
+                    }}
+                }};
+
+                // Aplicar opciones específicas para móvil
+                if (window.innerWidth <= 768) {{
+                    Chart.defaults.set('plugins.legend.position', 'top');
+                    Chart.defaults.set('plugins.legend.labels.boxWidth', 15);
+                    Chart.defaults.font.size = 12;
+                }}
             </script>
         </body>
     </html>
