@@ -1138,12 +1138,8 @@ def dashboard_page():
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     gap: 0.5rem;
-                    height: 65vh; /* Reducido de 75vh a 65vh */
-                    margin-bottom: 2rem; /* Espacio para el scroll */
                     height: 65vh;
                     margin-bottom: 2rem;
-                    height: 55vh; /* Reducido de 65vh */
-                    margin-bottom: 1.5rem; /* Reducido de 2rem */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
