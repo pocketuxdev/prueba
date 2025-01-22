@@ -1139,15 +1139,16 @@ def dashboard_page():
                     grid-template-columns: repeat(4, 1fr);
                     gap: 1rem;
                     margin-bottom: 2rem;
-                    height: auto; /* Cambiado de height fijo a auto */
+                    height: auto;
+                    width: 100%;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     padding: 1rem;
                     border: 1px solid var(--border-color);
-                    height: auto; /* Cambiado de height fijo a auto */
-                    min-height: 300px;
+                    height: auto;
+                    min-height: 35vh;
                     display: flex;
                     flex-direction: column;
                 }}
@@ -1155,7 +1156,7 @@ def dashboard_page():
                     flex: 1;
                     position: relative;
                     width: 100%;
-                    min-height: 250px;
+                    min-height: 30vh;
                     padding: 0.5rem;
                     margin: 0;
                     display: flex;
