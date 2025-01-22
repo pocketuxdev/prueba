@@ -633,73 +633,283 @@ def login_page():
 @rt('/dashboard')
 def dashboard_page():
     charts_js = """
-    // Configuración de Chart.js para móvil
-    const chartOptions = {
+    Chart.defaults.color = '#fff';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+    Chart.defaults.font.size = 11;
+    Chart.defaults.layout.padding = 10;
+    // Opciones comunes para todos los gráficos
+    const commonOptions = {
         responsive: true,
-        maintainAspectRatio: false,
-        layout: {
-            padding: {
-                left: 5,
-                right: 5,
-                top: 5,
-                bottom: 5
-            }
-        },
+        maintainAspectRatio: true,
+        aspectRatio: 1.5,
         plugins: {
             legend: {
                 position: 'top',
-                align: 'start',
                 labels: {
                     boxWidth: 12,
-                    padding: 20,
-                    font: {
-                        size: 13,
-                        family: "'Poppins', sans-serif"
-                    },
-                    color: 'rgba(255, 255, 255, 0.8)'
+                    padding: 8
                 }
+            },
+            title: {
+                display: false
             }
         },
         scales: {
             x: {
                 grid: {
-                    display: false,
-                    drawBorder: false
-                },
-                ticks: {
-                    font: {
-                        size: 12,
-                        family: "'Poppins', sans-serif"
-                    },
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    padding: 8
+                    display: false
                 }
             },
             y: {
                 grid: {
-                    color: 'rgba(255, 255, 255, 0.1)',
-                    drawBorder: false
-                },
-                ticks: {
-                    font: {
-                        size: 12,
-                        family: "'Poppins', sans-serif"
-                    },
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    padding: 10
+                    color: 'rgba(255, 255, 255, 0.05)'
                 }
             }
         }
     };
-
-    // Aplicar configuración específica para móvil
-    if (window.innerWidth <= 768) {
-        Chart.defaults.set('plugins.legend.position', 'top');
-        Chart.defaults.set('plugins.legend.align', 'start');
-        Chart.defaults.font.size = 12;
-        Chart.defaults.font.family = "'Poppins', sans-serif";
-        Chart.defaults.color = 'rgba(255, 255, 255, 0.7)';
-    }
+    // 1. User Engagement Metrics
+    const userEngagementChart = new Chart(
+        document.getElementById('userEngagementChart').getContext('2d'),
+        {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Tasa de Engagement',
+                    data: [65, 70, 75, 80, 85, 90],
+                    borderColor: '#FF0099',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(255, 0, 153, 0.1)'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Engagement de Usuarios Activos',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
+    // 2. Automation Performance
+    const automationChart = new Chart(
+        document.getElementById('automationChart').getContext('2d'),
+        {
+            type: 'bar',
+            data: {
+                labels: ['Agendamiento', 'Follow-ups', 'Recordatorios', 'Onboarding'],
+                datasets: [{
+                    label: 'Tasa de Éxito de Automatización',
+                    data: [95, 88, 92, 85],
+                    backgroundColor: 'rgba(255, 0, 153, 0.5)'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Rendimiento de Automatización',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
+    // 3. Patient Care Metrics
+    const patientCareChart = new Chart(
+        document.getElementById('patientCareChart').getContext('2d'),
+        {
+            type: 'line',
+            data: {
+                labels: ['8am', '10am', '12pm', '2pm', '4pm', '6pm'],
+                datasets: [{
+                    label: 'Tiempo de Respuesta Urgencias (min)',
+                    data: [12, 8, 15, 10, 7, 13],
+                    borderColor: '#FF0099',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Tiempos de Respuesta en Urgencias',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
+    // 4. Operational Efficiency
+    const efficiencyChart = new Chart(
+        document.getElementById('efficiencyChart').getContext('2d'),
+        {
+            type: 'bar',
+            data: {
+                labels: ['Pre-Tiffany', 'Post-Tiffany'],
+                datasets: [{
+                    label: 'Tiempo en Tareas Administrativas (horas)',
+                    data: [7.5, 5.6],
+                    backgroundColor: ['rgba(255, 0, 153, 0.3)', 'rgba(255, 0, 153, 0.7)']
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Reducción de Tareas Administrativas',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
+    // 5. Training and Support
+    const trainingChart = new Chart(
+        document.getElementById('trainingChart').getContext('2d'),
+        {
+            type: 'doughnut',
+            data: {
+                labels: ['Completado', 'En Progreso', 'No Iniciado'],
+                datasets: [{
+                    data: [70, 20, 10],
+                    backgroundColor: [
+                        'rgba(255, 0, 153, 0.8)',
+                        'rgba(255, 0, 153, 0.5)',
+                        'rgba(255, 0, 153, 0.2)'
+                    ]
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Estado de Capacitación del Personal',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
+    // 6. System Performance
+    const systemPerformanceChart = new Chart(
+        document.getElementById('systemPerformanceChart').getContext('2d'),
+        {
+            type: 'line',
+            data: {
+                labels: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
+                datasets: [{
+                    label: 'Uptime (%)',
+                    data: [99.9, 99.8, 99.9, 99.7, 99.9, 99.9, 99.8],
+                    borderColor: '#FF0099',
+                    fill: true,
+                    backgroundColor: 'rgba(255, 0, 153, 0.1)'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Rendimiento del Sistema',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
+    // 7. Adoption Metrics
+    const adoptionChart = new Chart(
+        document.getElementById('adoptionChart').getContext('2d'),
+        {
+            type: 'bar',
+            data: {
+                labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+                datasets: [{
+                    label: 'Tasa de Adopción de Nuevas Funciones (%)',
+                    data: [30, 45, 65, 80],
+                    backgroundColor: 'rgba(255, 0, 153, 0.5)'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Adopción de Nuevas Funcionalidades',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
+    // 8. General Insights
+    const insightsChart = new Chart(
+        document.getElementById('insightsChart').getContext('2d'),
+        {
+            type: 'radar',
+            data: {
+                labels: ['Satisfacción', 'Engagement', 'Efectividad', 'Confianza', 'Usabilidad'],
+                datasets: [{
+                    label: 'Métricas Generales',
+                    data: [85, 88, 92, 87, 90],
+                    backgroundColor: 'rgba(255, 0, 153, 0.2)',
+                    borderColor: '#FF0099',
+                    pointBackgroundColor: '#FF0099'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: 'Insights Generales',
+                        padding: {
+                            top: 0,
+                            bottom: 10
+                        }
+                    }
+                }
+            }
+        }
+    );
     """
 
     return f"""
@@ -713,66 +923,548 @@ def dashboard_page():
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             
             <style>
+                :root {{
+                    --primary-color: #FF0099;
+                    --primary-hover: #D6006F;
+                    --background-dark: #000000;
+                    --text-light: rgba(255, 255, 255, 0.8);
+                    --text-lighter: rgba(255, 255, 255, 0.5);
+                    --border-color: rgba(255, 0, 153, 0.2);
+                }}
+                * {{
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }}
+                body {{
+                    background: var(--background-dark);
+                    color: var(--text-light);
+                    min-height: 100vh;
+                }}
+                .dashboard-layout {{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    padding: 0 3rem 150px 3rem;
+                    min-height: 100vh;
+                }}
+                .main-content {{
+                    width: min(1400px, 100% - 2rem);
+                    margin-inline: auto;
+                    padding: 2rem 0;
+                    overflow: visible;
+                }}
+                .header {{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 2rem;
+                    padding: 1.5rem;
+                    background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    backdrop-filter: blur(10px);
+                }}
+                .header h1 {{
+                    font-size: 2rem;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }}
+                .header-icon {{
+                    color: var(--primary-color);
+                }}
+                .metrics-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    margin: 2rem auto;
+                    padding: 0 1rem;
+                    max-width: 1600px;
+                }}
+                .metric-card {{
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem;
+                    border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                }}
+                .chart-container {{
+                    position: relative;
+                    width: 100%;
+                    height: 180px;
+                    padding: 0.8rem;
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    margin: 0;
+                }}
+                .chart-title {{
+                    font-size: 0.9rem;
+                    color: white;
+                    margin-bottom: 0.3rem;
+                    text-align: center;
+                }}
                 @media (max-width: 768px) {{
                     .metrics-grid {{
                         grid-template-columns: 1fr;
+                        padding: 1rem;
+                        gap: 2rem; // Aumentado el espacio entre gráficas
                         padding: 0.5rem;
-                        gap: 1.8rem;
+                        gap: 1.5rem;
                     }}
                     
                     .metric-card {{
-                        padding: 0.8rem;
+                        padding: 1.2rem;
+                        margin-bottom: 1rem;
+                        padding: 1rem;
                         margin: 0;
                         width: 100%;
-                        background: rgba(20, 20, 20, 0.95);
-                        border-radius: 20px;
+                        background: rgba(255, 255, 255, 0.03);
                     }}
                     
                     .chart-container {{
-                        height: 280px;
-                        padding: 1rem 0.5rem;
-                        margin: 0;
-                        width: 100%;
-                        background: transparent;
-                        border: none;
+                        height: 250px; // Aumentado para mejor visualización en móvil
+                        padding: 1rem;
+                        height: 300px; // Aumentado significativamente para móvil
+                        padding: 0.8rem;
+                        margin: 0 -0.5rem; // Extender un poco los márgenes
+                        width: calc(100% + 1rem); // Compensar los márgenes negativos
                     }}
                     
                     .chart-title {{
-                        font-size: 1.3rem;
-                        margin-bottom: 1.2rem;
+                        font-size: 1.1rem; // Aumentado el tamaño del título
+                        margin-bottom: 1rem;
+                        font-size: 1.2rem;
+                        margin-bottom: 0.8rem;
                         font-weight: 500;
-                        padding: 0;
-                        text-align: left;
-                        color: rgba(255, 255, 255, 0.9);
+                        padding: 0 0.5rem;
                     }}
-
+                    // Estilos específicos para mejorar la legibilidad de las gráficas en móvil
                     canvas {{
+                        max-width: 100% !important;
+                        height: auto !important;
+                        max-width: none !important; // Permitir que el canvas ocupe todo el espacio
                         width: 100% !important;
                         height: 100% !important;
                     }}
-
+                    // Ajustar los KPIs para móvil también
                     .kpi-grid {{
                         padding: 0.5rem;
                         gap: 1rem;
                     }}
-
                     .kpi-card {{
-                        padding: 1.5rem;
-                        background: rgba(20, 20, 20, 0.95);
-                        border-radius: 20px;
+                        padding: 1.2rem;
                     }}
-
                     .kpi-value {{
-                        font-size: 2.5rem;
-                        color: #FF0099;
+                        font-size: 2.2rem;
                     }}
+                }}
+                @media (max-width: 1400px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        max-width: 1200px;
+                    }}
+                    .chart-container {{
+                        height: 170px; // Reducido de 190px a 170px
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        padding: 0.5rem;
+                    }}
+                    .chart-container {{
+                        height: 160px; // Reducido de 180px a 160px
+                        padding: 0.7rem;
+                    }}
+                }}
+                .kpi-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    margin: 0 auto 2rem auto;
+                    padding: 0 1rem;
+                    max-width: 1600px;
+                }}
+                .kpi-card {{
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    text-align: center;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                }}
+                .kpi-card:hover {{
+                    transform: translateY(-5px);
+                    background: rgba(255, 0, 153, 0.1);
+                    border-color: var(--primary-color);
+                }}
+                .kpi-value {{
+                    font-size: 2.5rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    margin-bottom: 0.5rem;
+                }}
+                .kpi-label {{
+                    font-size: 1rem;
+                    color: var(--text-light);
+                }}
+                @media (max-width: 1400px) {{
+                    .kpi-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        max-width: 1200px;
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .kpi-grid {{
+                        grid-template-columns: 1fr;
+                        padding: 0.5rem;
+                    }}
+                    .kpi-value {{
+                        font-size: 2rem;
+                    }}
+                }}
+                .billing-grid {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr;
+                    gap: 2rem;
+                    margin-bottom: 2rem;
+                }}
+                .billing-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem;
+                    border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
+                }}
+                .billing-summary {{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                }}
+                .summary-item {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
+                    padding: 1.5rem;
+                    border-radius: 12px;
+                    text-align: center;
+                    border: 1px solid var(--border-color);
+                    border: 1px solid var(--primary-color);
+                    transition: all 0.3s ease;
+                }}
+                .summary-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
+                }}
+                .summary-value {{
+                    font-size: 2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    margin-bottom: 0.5rem;
+                }}
+                .summary-label {{
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                }}
+                .calendar-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .month-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 10px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                }}
+                .month-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: scale(1.05);
+                }}
+                .month-name {{
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                    color: white;
+                }}
+                .month-amount {{
+                    font-size: 1.2rem;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                }}
+                .month-status {{
+                    font-size: 0.8rem;
+                    margin-top: 0.5rem;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    display: inline-block;
+                }}
+                .status-paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin-top: 2rem;
+                }}
+                .payment-methods {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .payment-method {{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 10px;
+                    transition: all 0.3s ease;
+                }}
+                .payment-method:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .method-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .section-title {{
+                    font-size: 1.3rem;
+                    color: white;
+                    margin-bottom: 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .section-title i {{
+                    color: var(--primary-color);
+                }}
+                .payment-history {{
+                    margin-top: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    overflow: hidden;
+                }}
+                .history-header {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    font-weight: 500;
+                }}
+                .history-item {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    align-items: center;
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }}
+                .history-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.05);
+                }}
+                .history-item.pending {{
+                    background: rgba(255, 170, 0, 0.15);
+                    background: rgba(255, 170, 0, 0.05);
+                }}
+                .status-badge {{
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.85rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .status-badge.paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-badge.pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .payment-stats {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .stat-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    transition: all 0.3s ease;
+                }}
+                .stat-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateY(-2px);
+                }}
+                .stat-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .stat-info h4 {{
+                    font-size: 0.9rem;
+                    margin-bottom: 0.2rem;
+                }}
+                .stat-info p {{
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                }}
+                .mt-4 {{
+                    margin-top: 2rem;
+                }}
+                .text-success {{
+                    color: #00b368;
+                }}
+                .text-warning {{
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin: 2rem 0;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                }}
+                @media (max-width: 768px) {{
+                    .payment-stats {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .history-item {{
+                        font-size: 0.9rem;
+                    }}
+                }}
+            </style>
+            <!-- Agregar en el <style> de cada página -->
+            <style>
+                html {{
+                    scroll-behavior: smooth;
+                    scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
                 }}
             </style>
         </head>
         <body>
             {get_common_sidebar()}
             <div class="dashboard-layout">
-                <!-- Resto del contenido del dashboard -->
+                <div class="main-content">
+                    <div class="header">
+                        <h1>
+                            <i class="fas fa-chart-line header-icon"></i>
+                            Dashboard Tiffany Medical Assistant
+                        </h1>
+                    </div>
+                    
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-value">30%</div>
+                            <div class="kpi-label">Incremento en Follow-ups</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">25%</div>
+                            <div class="kpi-label">Reducción Tareas Admin</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">5min</div>
+                            <div class="kpi-label">Tiempo Onboarding</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">80%</div>
+                            <div class="kpi-label">Resolución WhatsApp</div>
+                        </div>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="chart-title">Engagement de Usuarios Activos</div>
+                            <div class="chart-container">
+                                <canvas id="userEngagementChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Rendimiento de Automatización</div>
+                            <div class="chart-container">
+                                <canvas id="automationChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
+                            <div class="chart-container">
+                                <canvas id="patientCareChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Reducción de Tareas Administrativas</div>
+                            <div class="chart-container">
+                                <canvas id="efficiencyChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Estado de Capacitación del Personal</div>
+                            <div class="chart-container">
+                                <canvas id="trainingChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Rendimiento del Sistema</div>
+                            <div class="chart-container">
+                                <canvas id="systemPerformanceChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Adopción de Nuevas Funcionalidades</div>
+                            <div class="chart-container">
+                                <canvas id="adoptionChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Insights Generales</div>
+                            <div class="chart-container">
+                                <canvas id="insightsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <script>
                 {charts_js}
@@ -1701,14 +2393,11 @@ def billing_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    padding: 0 3rem 150px 3rem;
+                    padding-left: 100px;
                     min-height: 100vh;
                 }}
                 .main-content {{
-                    width: min(1400px, 100% - 2rem);
-                    margin-inline: auto;
-                    padding: 2rem 0;
-                    overflow: visible;
+                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
                 }}
                 .header {{
                     display: flex;
@@ -1822,9 +2511,8 @@ def billing_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 200px;
+                    height: 300px;
                     margin-top: 2rem;
-                    padding: 0.8rem;
                 }}
                 .payment-methods {{
                     display: grid;
@@ -1866,6 +2554,49 @@ def billing_page():
                     gap: 0.5rem;
                 }}
                 .section-title i {{
+                    color: var(--primary-color);
+                }}
+                @media (max-width: 1200px) {{
+                    .billing-grid {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .calendar-grid {{
+                        grid-template-columns: repeat(3, 1fr);
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .calendar-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                    }}
+                    .billing-summary {{
+                        grid-template-columns: 1fr;
+                    }}
+                }}
+                .payment-method {{
+                    position: relative;
+                    overflow: hidden;
+                }}
+                .method-details {{
+                    flex: 1;
+                }}
+                .method-status {{
+                    font-size: 0.8rem;
+                    padding: 0.2rem 0.5rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 12px;
+                    color: var(--primary-color);
+                }}
+                .action-btn {{
+                    background: transparent;
+                    border: none;
+                    color: var(--text-light);
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }}
+                .action-btn:hover {{
+                    background: rgba(255, 255, 255, 0.1);
                     color: var(--primary-color);
                 }}
                 .payment-history {{
@@ -1964,9 +2695,9 @@ def billing_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 200px;
+                    height: 300px;
                     margin: 2rem 0;
-                    padding: 0.8rem;
+                    padding: 1rem;
                     background: rgba(60, 60, 60, 0.95);
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
@@ -1979,58 +2710,6 @@ def billing_page():
                     .history-item {{
                         font-size: 0.9rem;
                     }}
-                    .metrics-grid {{
-                        grid-template-columns: 1fr;
-                        padding: 0.5rem;
-                        gap: 1.8rem;
-                    }}
-                    
-                    .metric-card {{
-                        padding: 0.8rem;
-                        margin: 0;
-                        width: 100%;
-                        background: rgba(20, 20, 20, 0.95);
-                        border-radius: 20px;
-                    }}
-                    
-                    .chart-container {{
-                        height: 280px;
-                        padding: 1rem 0.5rem;
-                        margin: 0;
-                        width: 100%;
-                        background: transparent;
-                        border: none;
-                    }}
-                    
-                    .chart-title {{
-                        font-size: 1.3rem;
-                        margin-bottom: 1.2rem;
-                        font-weight: 500;
-                        padding: 0;
-                        text-align: left;
-                        color: rgba(255, 255, 255, 0.9);
-                    }}
-
-                    canvas {{
-                        width: 100% !important;
-                        height: 100% !important;
-                    }}
-
-                    .kpi-grid {{
-                        padding: 0.5rem;
-                        gap: 1rem;
-                    }}
-
-                    .kpi-card {{
-                        padding: 1.5rem;
-                        background: rgba(20, 20, 20, 0.95);
-                        border-radius: 20px;
-                    }}
-
-                    .kpi-value {{
-                        font-size: 2.5rem;
-                        color: #FF0099;
-                    }}
                 }}
             </style>
         </head>
@@ -2041,7 +2720,7 @@ def billing_page():
                     <div class="header">
                         <h1>
                             <i class="fas fa-file-invoice-dollar header-icon"></i>
-                            Dashboard Tiffany Medical Assistant
+                            Centro de Facturación
                         </h1>
                     </div>
                     <div class="billing-grid">
@@ -2289,64 +2968,6 @@ def billing_page():
                         }}
                     }}
                 }});
-
-                // Actualizar las opciones de Chart.js para móvil
-                const mobileChartOptions = {{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {{
-                        padding: {{
-                            left: 10,
-                            right: 10,
-                            top: 10,
-                            bottom: 10
-                        }}
-                    }},
-                    plugins: {{
-                        legend: {{
-                            position: 'top',
-                            labels: {{
-                                boxWidth: 15,
-                                padding: 15,
-                                font: {{
-                                    size: 14
-                                }}
-                            }}
-                        }}
-                    }},
-                    scales: {{
-                        x: {{
-                            grid: {{
-                                display: false
-                            }},
-                            ticks: {{
-                                font: {{
-                                    size: 12
-                                }},
-                                maxRotation: 45,
-                                minRotation: 45
-                            }}
-                        }},
-                        y: {{
-                            grid: {{
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            }},
-                            ticks: {{
-                                font: {{
-                                    size: 12
-                                }},
-                                padding: 8
-                            }}
-                        }}
-                    }}
-                }};
-
-                // Aplicar opciones específicas para móvil
-                if (window.innerWidth <= 768) {{
-                    Chart.defaults.set('plugins.legend.position', 'top');
-                    Chart.defaults.set('plugins.legend.labels.boxWidth', 15);
-                    Chart.defaults.font.size = 12;
-                }}
             </script>
         </body>
     </html>
