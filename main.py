@@ -965,18 +965,18 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr);
-                    gap: 1rem;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 2rem;
                     margin-bottom: 2rem;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
-                    padding: 1rem;
+                    padding: 1.5rem;
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
-                    height: calc(40vh - 2rem);
-                    min-height: 250px;
+                    height: 100%;
+                    min-height: 300px;
                     display: flex;
                     flex-direction: column;
                 }}
@@ -984,7 +984,7 @@ def dashboard_page():
                     position: relative;
                     width: 100%;
                     flex: 1;
-                    min-height: 200px;
+                    min-height: 250px;
                 }}
                 .kpi-grid {{
                     display: grid;
@@ -1011,12 +1011,10 @@ def dashboard_page():
                 }}
                 @media (max-width: 1200px) {{
                     .metrics-grid {{
-                        grid-template-columns: repeat(2, 1fr);
-                        gap: 1rem;
+                        gap: 1.5rem;
                     }}
-                    
-                    .metric-card {{
-                        height: calc(45vh - 2rem);
+                    .kpi-grid {{
+                        grid-template-columns: repeat(2, 1fr);
                     }}
                 }}
                 @media (max-width: 768px) {{
@@ -1028,9 +1026,11 @@ def dashboard_page():
                         grid-template-columns: 1fr;
                         gap: 1rem;
                     }}
-                    
                     .metric-card {{
-                        height: calc(50vh - 2rem);
+                        min-height: 250px;
+                    }}
+                    .chart-container {{
+                        min-height: 200px;
                     }}
                 }}
             </style>
