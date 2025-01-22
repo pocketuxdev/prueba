@@ -942,17 +942,14 @@ def dashboard_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    padding-left: 100px;
                     padding: 0 3rem 150px 3rem;
                     min-height: 100vh;
                 }}
                 .main-content {{
-                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
+                    width: min(1400px, 100% - 2rem);
+                    margin-inline: auto;
                     padding: 2rem 0;
-                    width: 100%;
-                    max-width: 1600px;
-                    margin: 0 auto;
-                    overflow: visible; /* Asegurar que el contenido no se recorte */
+                    overflow: visible;
                 }}
                 .header {{
                     display: flex;
@@ -976,10 +973,10 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                     gap: 1rem;
                     margin-bottom: 2rem;
-                    padding: 0.5rem; /* Añadido padding para evitar recorte */
+                    padding: 0.5rem;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -987,19 +984,21 @@ def dashboard_page():
                     padding: 1.5rem;
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
-                    margin: 0.5rem; /* Añadido margen para evitar recorte */
-                    overflow: visible; /* Asegurar que el contenido no se recorte */
+                    margin: 0.5rem;
+                    overflow: visible;
+                    height: 100%;
                 }}
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 300px;
+                    aspect-ratio: 16/9;
+                    min-height: 200px;
                     padding: 1.5rem;
-                    margin: 0.5rem; /* Añadido margen para evitar recorte */
+                    margin: 0.5rem;
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    overflow: visible; /* Asegurar que las gráficas no se recorten */
+                    overflow: visible;
                 }}
                 .kpi-grid {{
                     display: grid;
@@ -1025,16 +1024,20 @@ def dashboard_page():
                     color: var(--text-light);
                 }}
                 @media (max-width: 1400px) {{
-                    .metrics-grid {{
-                        grid-template-columns: repeat(2, 1fr);
-                    }}
                     .main-content {{
-                        padding: 2rem 1rem;
+                        padding: 1.5rem;
                     }}
                 }}
                 @media (max-width: 768px) {{
                     .metrics-grid, .kpi-grid {{
                         grid-template-columns: 1fr;
+                    }}
+                    .main-content {{
+                        padding: 1rem;
+                        width: 100%;
+                    }}
+                    .chart-container {{
+                        aspect-ratio: 4/3;
                     }}
                 }}
             </style>
@@ -1160,11 +1163,14 @@ def profile_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    padding-left: 100px;
+                    padding: 0 3rem 150px 3rem;
                     min-height: 100vh;
                 }}
                 .main-content {{
-                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
+                    width: min(1400px, 100% - 2rem);
+                    margin-inline: auto;
+                    padding: 2rem 0;
+                    overflow: visible;
                 }}
                 .profile-header {{
                     display: flex;
@@ -2042,11 +2048,14 @@ def billing_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    padding-left: 100px;
+                    padding: 0 3rem 150px 3rem;
                     min-height: 100vh;
                 }}
                 .main-content {{
-                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
+                    width: min(1400px, 100% - 2rem);
+                    margin-inline: auto;
+                    padding: 2rem 0;
+                    overflow: visible;
                 }}
                 .header {{
                     display: flex;
