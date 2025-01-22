@@ -982,12 +982,12 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Hacer grid responsive */
+                    grid-template-columns: repeat(4, 1fr); /* 4 columnas en escritorio */
                     gap: 1.5rem;
                     margin: 2rem auto;
                     padding: 0 1rem;
                     width: 100%;
-                    max-width: 100vw; /* Ajustar al viewport width */
+                    max-width: 100vw;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -998,106 +998,59 @@ def dashboard_page():
                     height: 100%;
                     display: flex;
                     flex-direction: column;
+                    transition: all 0.3s ease;
                 }}
                 .chart-container {{
                     position: relative;
                     width: 100%;
-                    height: 180px;
-                    padding: 0.8rem;
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    margin: 0;
+                    padding: 1rem;
+                    margin-top: 1rem;
                 }}
                 .chart-title {{
-                    font-size: 0.9rem;
+                    font-size: 1.1rem;
                     color: white;
-                    margin-bottom: 0.3rem;
-                    text-align: center;
+                    margin-bottom: 1rem;
+                    font-weight: 500;
+                }}
+                @media (max-width: 1200px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+                        gap: 1rem;
+                    }}
                 }}
                 @media (max-width: 768px) {{
-                    .dashboard-layout {{
-                        padding: 1rem 1rem 100px 1rem;
-                        width: 100vw; /* Asegurar ancho completo en móviles */
-                    }}
-                    
                     .metrics-grid {{
-                        grid-template-columns: 1fr; /* Forzar una columna en móvil */
-                        gap: 1rem; /* Reducir el espacio entre cards */
+                        grid-template-columns: 1fr; /* 1 columna en móvil */
+                        gap: 1rem;
                         padding: 0.5rem;
                         width: 100vw;
                     }}
-                    
                     .metric-card {{
                         margin-bottom: 1rem;
-                        min-height: auto; /* Permitir que la altura se ajuste al contenido */
                     }}
-                    
                     .chart-container {{
                         width: 100%;
                         max-width: 100vw;
-                        height: 250px; /* Aumentar altura para mejor visualización */
+                        height: 250px; /* Altura aumentada para mejor visualización */
                         margin: 0.5rem auto;
                     }}
-                    
-                    /* Ajustar el contenido dentro de las cards */
+                    /* Ajustar KPIs para móvil */
                     .kpi-grid {{
                         grid-template-columns: 1fr;
                         gap: 1rem;
                     }}
-                    
                     .kpi-card {{
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        text-align: center;
                         padding: 1.2rem;
                     }}
-                    
-                    .kpi-value {{
-                        font-size: 2.2rem;
-                        margin-bottom: 0.5rem;
-                    }}
-                    
-                    .kpi-label {{
+                    /* Mejorar legibilidad de títulos en móvil */
+                    .chart-title {{
                         font-size: 1rem;
-                    }}
-                }}
-                @media (max-width: 360px) {{
-                    .metrics-grid {{
-                        padding: 0.25rem;
-                    }}
-                    
-                    .metric-card {{
-                        padding: 1rem;
-                    }}
-                    
-                    .chart-container {{
-                        height: 200px;
-                    }}
-                    
-                    .kpi-value {{
-                        font-size: 2rem;
-                    }}
-                }}
-                @media (max-width: 1400px) {{
-                    .metrics-grid {{
-                        grid-template-columns: repeat(2, 1fr);
-                        max-width: 1200px;
-                    }}
-                    .chart-container {{
-                        height: 170px; // Reducido de 190px a 170px
-                    }}
-                }}
-                @media (max-width: 768px) {{
-                    .metrics-grid {{
-                        grid-template-columns: 1fr;
-                        padding: 0.5rem;
-                        width: 100vw;
-                    }}
-                    .chart-container {{
-                        height: 160px; // Reducido de 180px a 160px
-                        padding: 0.7rem;
+                        margin-bottom: 1rem;
+                        text-align: left;
+                        padding: 0 0.5rem;
                     }}
                 }}
                 .kpi-grid {{
