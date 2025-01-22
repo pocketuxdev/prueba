@@ -2877,94 +2877,200 @@ def billing_page():
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            {get_common_styles()}
             
             <style>
-                /* Estilos específicos de facturación */
+                :root {{
+                    --primary-color: #FF0099;
+                    --primary-hover: #D6006F;
+                    --background-dark: #000000;
+                    --text-light: rgba(255, 255, 255, 0.8);
+                    --text-lighter: rgba(255, 255, 255, 0.5);
+                    --border-color: rgba(255, 0, 153, 0.2);
+                }}
+                * {{
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
+                }}
+                body {{
+                    background: var(--background-dark);
+                    color: var(--text-light);
+                    min-height: 100vh;
+                }}
+                .dashboard-layout {{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    padding-left: 100px;
+                    min-height: 100vh;
+                }}
+                .main-content {{
+                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
+                }}
+                .header {{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 2rem;
+                    padding: 1.5rem;
+                    margin-bottom: 1rem; /* Reducido de 2rem */
+                    padding: 1rem; /* Reducido de 1.5rem */
+                    background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    backdrop-filter: blur(10px);
+                }}
+                .header h1 {{
+                    font-size: 2rem;
+                    font-size: 1.5rem; /* Reducido de 2rem */
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    gap: 0.8rem; /* Reducido de 1rem */
+                }}
+                .header-icon {{
+                    color: var(--primary-color);
+                }}
                 .billing-grid {{
                     display: grid;
                     grid-template-columns: 2fr 1fr;
-                    gap: var(--spacing-lg);
-                    margin-bottom: var(--spacing-xl);
+                    gap: 2rem;
+                    margin-bottom: 2rem;
                 }}
-
+                .billing-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem;
+                    border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
+                }}
                 .billing-summary {{
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    gap: var(--spacing-md);
-                    margin-bottom: var(--spacing-lg);
+                    gap: 1rem;
+                    margin-bottom: 2rem;
                 }}
-
                 .summary-item {{
-                    background: var(--primary-transparent);
-                    padding: var(--spacing-lg);
-                    border-radius: var(--radius-md);
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
+                    padding: 1.5rem;
+                    border-radius: 12px;
                     text-align: center;
+                    border: 1px solid var(--border-color);
                     border: 1px solid var(--primary-color);
-                    transition: all var(--transition-normal);
+                    transition: all 0.3s ease;
                 }}
-
                 .summary-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
                     transform: translateY(-5px);
-                    box-shadow: var(--elevation-2);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
                 }}
-
                 .summary-value {{
-                    font-size: var(--headline-large);
+                    font-size: 2rem;
                     font-weight: 600;
                     color: var(--primary-color);
-                    margin-bottom: var(--spacing-sm);
+                    margin-bottom: 0.5rem;
                 }}
-
+                .summary-label {{
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                }}
                 .calendar-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: var(--spacing-md);
-                    margin-top: var(--spacing-md);
+                    gap: 1rem;
+                    margin-top: 1rem;
                 }}
-
                 .month-card {{
-                    background: var(--surface-01);
-                    padding: var(--spacing-md);
-                    border-radius: var(--radius-md);
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 10px;
                     text-align: center;
-                    transition: all var(--transition-normal);
+                    transition: all 0.3s ease;
                 }}
-
                 .month-card:hover {{
-                    background: var(--primary-transparent);
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
                     transform: scale(1.05);
                 }}
-
-                .status-badge {{
-                    padding: var(--spacing-xs) var(--spacing-sm);
-                    border-radius: var(--radius-sm);
-                    font-size: var(--body-small);
-                    display: inline-flex;
-                    align-items: center;
-                    gap: var(--spacing-xs);
+                .month-name {{
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                    color: white;
                 }}
-
-                .status-badge.paid {{
+                .month-amount {{
+                    font-size: 1.2rem;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                }}
+                .month-status {{
+                    font-size: 0.8rem;
+                    margin-top: 0.5rem;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    display: inline-block;
+                }}
+                .status-paid {{
                     background: rgba(0, 179, 104, 0.2);
                     color: #00b368;
                 }}
-
-                .status-badge.pending {{
+                .status-pending {{
                     background: rgba(255, 170, 0, 0.2);
                     color: #ffaa00;
                 }}
-
                 .chart-container {{
                     height: 300px;
-                    margin: var(--spacing-lg) 0;
-                    padding: var(--spacing-md);
-                    background: var(--surface-01);
-                    border-radius: var(--radius-lg);
-                    border: 1px solid var(--border-primary);
+                    margin-top: 2rem;
+                    height: 250px; /* Reducido de 300px */
+                    margin: 1rem 0; /* Reducido de 2rem */
+                    padding: 0.8rem; /* Reducido de 1rem */
                 }}
-
+                .payment-methods {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .payment-method {{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 10px;
+                    transition: all 0.3s ease;
+                }}
+                .payment-method:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .method-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .section-title {{
+                    font-size: 1.3rem;
+                    color: white;
+                    margin-bottom: 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .section-title i {{
+                    color: var(--primary-color);
+                }}
                 @media (max-width: 1200px) {{
                     .billing-grid {{
                         grid-template-columns: 1fr;
@@ -2973,7 +3079,6 @@ def billing_page():
                         grid-template-columns: repeat(3, 1fr);
                     }}
                 }}
-
                 @media (max-width: 768px) {{
                     .calendar-grid {{
                         grid-template-columns: repeat(2, 1fr);
@@ -2981,8 +3086,147 @@ def billing_page():
                     .billing-summary {{
                         grid-template-columns: 1fr;
                     }}
-                    .chart-container {{
-                        height: 250px;
+                }}
+                .payment-method {{
+                    position: relative;
+                    overflow: hidden;
+                }}
+                .method-details {{
+                    flex: 1;
+                }}
+                .method-status {{
+                    font-size: 0.8rem;
+                    padding: 0.2rem 0.5rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 12px;
+                    color: var(--primary-color);
+                }}
+                .action-btn {{
+                    background: transparent;
+                    border: none;
+                    color: var(--text-light);
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }}
+                .action-btn:hover {{
+                    background: rgba(255, 255, 255, 0.1);
+                    color: var(--primary-color);
+                }}
+                .payment-history {{
+                    margin-top: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    overflow: hidden;
+                }}
+                .history-header {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    font-weight: 500;
+                }}
+                .history-item {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    align-items: center;
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }}
+                .history-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.05);
+                }}
+                .history-item.pending {{
+                    background: rgba(255, 170, 0, 0.15);
+                    background: rgba(255, 170, 0, 0.05);
+                }}
+                .status-badge {{
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.85rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .status-badge.paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-badge.pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .payment-stats {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .stat-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    transition: all 0.3s ease;
+                }}
+                .stat-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateY(-2px);
+                }}
+                .stat-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .stat-info h4 {{
+                    font-size: 0.9rem;
+                    margin-bottom: 0.2rem;
+                }}
+                .stat-info p {{
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                }}
+                .mt-4 {{
+                    margin-top: 2rem;
+                }}
+                .text-success {{
+                    color: #00b368;
+                }}
+                .text-warning {{
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin: 2rem 0;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    height: 250px; /* Reducido de 300px */
+                    margin: 1rem 0; /* Reducido de 2rem */
+                    padding: 0.8rem; /* Reducido de 1rem */
+                }}
+                @media (max-width: 768px) {{
+                    .payment-stats {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .history-item {{
+                        font-size: 0.9rem;
                     }}
                 }}
             </style>
@@ -2992,44 +3236,179 @@ def billing_page():
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
-                        <h1 class="headline-large">
+                        <h1>
                             <i class="fas fa-file-invoice-dollar header-icon"></i>
                             Centro de Facturación
                         </h1>
                     </div>
                     <div class="billing-grid">
-                        <div class="card">
+                        <div class="billing-card">
                             <div class="billing-summary">
                                 <div class="summary-item">
                                     <div class="summary-value">$25,500</div>
-                                    <div class="body-medium">Facturación Anual</div>
+                                    <div class="summary-label">Facturación Anual</div>
                                 </div>
                                 <div class="summary-item">
                                     <div class="summary-value">15</div>
-                                    <div class="body-medium">Facturas Pendientes</div>
+                                    <div class="summary-label">Facturas Pendientes</div>
                                 </div>
                                 <div class="summary-item">
                                     <div class="summary-value">85%</div>
-                                    <div class="body-medium">Tasa de Pago</div>
+                                    <div class="summary-label">Tasa de Pago</div>
                                 </div>
                             </div>
-                            <div class="title-large mb-3">
+                            <div class="section-title">
                                 <i class="fas fa-calendar-alt"></i>
                                 Facturación Mensual 2024
                             </div>
                             <div class="calendar-grid">
                                 <div class="month-card">
-                                    <div class="title-medium">Enero</div>
-                                    <div class="headline-small">$2,500</div>
-                                    <div class="status-badge paid">Pagado</div>
+                                    <div class="month-name">Enero</div>
+                                    <div class="month-amount">$2,500</div>
+                                    <div class="month-status status-paid">Pagado</div>
                                 </div>
-                                <!-- Resto de las month-cards -->
+                                <div class="month-card">
+                                    <div class="month-name">Febrero</div>
+                                    <div class="month-amount">$2,300</div>
+                                    <div class="month-status status-paid">Pagado</div>
+                                </div>
+                                <div class="month-card">
+                                    <div class="month-name">Marzo</div>
+                                    <div class="month-amount">$2,800</div>
+                                    <div class="month-status status-pending">Pendiente</div>
+                                </div>
+                                <div class="month-card">
+                                    <div class="month-name">Abril</div>
+                                    <div class="month-amount">$2,100</div>
+                                    <div class="month-status status-pending">Próximo</div>
+                                </div>
+                                <!-- Continuar con los demás meses... -->
                             </div>
                             <div class="chart-container">
                                 <canvas id="billingChart"></canvas>
                             </div>
                         </div>
-                        <!-- Resto del contenido de facturación -->
+                        <div class="billing-card">
+                            <div class="section-title">
+                                <i class="fas fa-credit-card"></i>
+                                Métodos de Pago y Estado de Cuenta
+                            </div>
+                            
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <div class="method-icon">
+                                        <i class="fab fa-cc-visa"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <h3>Visa Premium</h3>
+                                        <p>**** 4589</p>
+                                        <span class="method-status">Principal</span>
+                                    </div>
+                                    <div class="method-actions">
+                                        <button class="action-btn">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="payment-method">
+                                    <div class="method-icon mastercard">
+                                        <i class="fab fa-cc-mastercard"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <h3>Mastercard Business</h3>
+                                        <p>**** 7856</p>
+                                        <span class="method-status">Respaldo</span>
+                                    </div>
+                                    <div class="method-actions">
+                                        <button class="action-btn">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section-title mt-4">
+                                <i class="fas fa-history"></i>
+                                Historial de Pagos
+                            </div>
+                            
+                            <div class="payment-history">
+                                <div class="history-header">
+                                    <span>Período</span>
+                                    <span>Estado</span>
+                                    <span>Monto</span>
+                                    <span>Método</span>
+                                </div>
+                                <div class="history-item">
+                                    <div class="period">
+                                        <i class="fas fa-calendar-check text-success"></i>
+                                        Marzo 2024
+                                    </div>
+                                    <div class="status">
+                                        <span class="status-badge paid">
+                                            <i class="fas fa-check"></i> Pagado
+                                        </span>
+                                    </div>
+                                    <div class="amount">$2,800</div>
+                                    <div class="payment-type">
+                                        <i class="fab fa-cc-visa"></i> Visa
+                                    </div>
+                                </div>
+                                <div class="history-item">
+                                    <div class="period">
+                                        <i class="fas fa-calendar-check text-success"></i>
+                                        Febrero 2024
+                                    </div>
+                                    <div class="status">
+                                        <span class="status-badge paid">
+                                            <i class="fas fa-check"></i> Pagado
+                                        </span>
+                                    </div>
+                                    <div class="amount">$2,300</div>
+                                    <div class="payment-type">
+                                        <i class="fab fa-cc-mastercard"></i> Mastercard
+                                    </div>
+                                </div>
+                                <div class="history-item pending">
+                                    <div class="period">
+                                        <i class="fas fa-clock text-warning"></i>
+                                        Abril 2024
+                                    </div>
+                                    <div class="status">
+                                        <span class="status-badge pending">
+                                            Pendiente
+                                        </span>
+                                    </div>
+                                    <div class="amount">$2,100</div>
+                                    <div class="payment-type">
+                                        <i class="fas fa-clock"></i> Por definir
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section-title mt-4">
+                                <i class="fas fa-chart-pie"></i>
+                                Resumen de Pagos
+                            </div>
+                            <div class="payment-stats">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>Pagos a Tiempo</h4>
+                                        <p>98%</p>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h4>Tiempo Promedio</h4>
+                                        <p>2 días antes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3046,7 +3425,13 @@ def billing_page():
                             borderColor: '#FF0099',
                             backgroundColor: 'rgba(255, 0, 153, 0.1)',
                             tension: 0.4,
-                            fill: true
+                            fill: true,
+                            pointBackgroundColor: '#FF0099',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#FF0099',
+                            pointRadius: 4,
+                            pointHoverRadius: 6
                         }}]
                     }},
                     options: {{
@@ -3055,6 +3440,18 @@ def billing_page():
                         plugins: {{
                             legend: {{
                                 display: false
+                            }},
+                            tooltip: {{
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#FF0099',
+                                bodyColor: '#fff',
+                                padding: 12,
+                                displayColors: false,
+                                callbacks: {{
+                                    label: function(context) {{
+                                        return '$ ' + context.parsed.y;
+                                    }}
+                                }}
                             }}
                         }},
                         scales: {{
@@ -3078,6 +3475,14 @@ def billing_page():
                                     color: 'rgba(255, 255, 255, 0.8)'
                                 }}
                             }}
+                        }},
+                        interaction: {{
+                            intersect: false,
+                            mode: 'index'
+                        }},
+                        hover: {{
+                            mode: 'nearest',
+                            intersect: true
                         }}
                     }}
                 }});
