@@ -988,6 +988,7 @@ def dashboard_page():
                     margin: 0 auto;
                     padding: 0.5rem 1rem;
                     overflow-y: auto; /* Restaurar scroll vertical */
+                    overflow-y: auto;
                     overflow-x: hidden;
                 }}
                 .main-content {{
@@ -999,6 +1000,7 @@ def dashboard_page():
                 .header {{
                     display: flex;
                     align-items: flex-start; /* Alinear al inicio */
+                    align-items: flex-start;
                     padding: 1.5rem;
                     background: rgba(20, 20, 20, 0.8);
                     border-radius: 20px;
@@ -1010,6 +1012,7 @@ def dashboard_page():
                     font-weight: 600;
                     color: white;
                     font-family: 'Playfair Display', serif; /* Fuente más elegante */
+                    font-family: 'Playfair Display', serif;
                     line-height: 1.2;
                 }}
                 .header-icon {{
@@ -1021,6 +1024,8 @@ def dashboard_page():
                     gap: 0.5rem;
                     height: 65vh; /* Reducido de 75vh a 65vh */
                     margin-bottom: 2rem; /* Espacio para el scroll */
+                    height: 65vh;
+                    margin-bottom: 2rem;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
@@ -1054,7 +1059,7 @@ def dashboard_page():
                 }}
                 .kpi-grid {{
                     display: grid;
-                    grid-template-columns: 1fr;
+                    grid-template-columns: repeat(4, 1fr); /* Cambio de 1fr a repeat(4, 1fr) */
                     gap: 1rem;
                     margin-bottom: 1.5rem;
                 }}
