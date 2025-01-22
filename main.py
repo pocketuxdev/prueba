@@ -112,6 +112,7 @@ def get_common_sidebar():
             .dashboard-layout {
                 padding: 1rem 1rem 100px 1rem;
                 width: 100vw;
+                overflow-x: hidden;
             }
             
             .header {
