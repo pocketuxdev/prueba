@@ -1001,20 +1001,19 @@ def dashboard_page():
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 1rem; /* Reducido de 2rem */
-                    padding: 1rem; /* Reducido de 1.5rem */
-                    background: rgba(40, 40, 40, 0.95);
+                    margin-bottom: 0.5rem; /* Reducido de 1rem */
+                    padding: 0.7rem; /* Reducido de 1rem */
                     background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
+                    border-radius: 12px; /* Reducido de 15px */
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
-                    font-size: 1.5rem; /* Reducido de 2rem */
+                    font-size: 1.2rem; /* Reducido de 1.5rem */
                     color: white;
                     display: flex;
                     align-items: center;
-                    gap: 0.8rem; /* Reducido de 1rem */
+                    gap: 0.5rem; /* Reducido de 0.8rem */
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -1022,14 +1021,14 @@ def dashboard_page():
                 .metrics-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
-                    gap: 0.5rem;
-                    height: 55vh; /* Reducido de 65vh */
-                    margin-bottom: 1.5rem; /* Reducido de 2rem */
+                    gap: 0.4rem; /* Reducido de 0.5rem */
+                    height: 45vh; /* Reducido de 55vh */
+                    margin-bottom: 1rem; /* Reducido de 1.5rem */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
-                    padding: 1.5rem;
+                    padding: 0.8rem; /* Reducido de 1.5rem */
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
                     height: 100%;
@@ -1041,15 +1040,15 @@ def dashboard_page():
                     position: relative;
                     width: 100%;
                     height: 100%;
-                    padding: 0.4rem;
+                    padding: 0.5rem; /* Reducido de 0.8rem */
                     margin: 0;
                     display: flex;
                     flex-direction: column;
                     border-radius: 10px; /* Consistente con header y KPIs */
                 }}
                 .chart-title {{
-                    font-size: 0.8rem; /* Reducido de 1.2rem */
-                    margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+                    font-size: 0.7rem; /* Reducido de 0.8rem */
+                    margin-bottom: 0.2rem; /* Reducido de 0.3rem */
                 }}
                 canvas {{
                     flex-grow: 1;
@@ -1057,13 +1056,13 @@ def dashboard_page():
                 }}
                 .kpi-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr); /* Cambio de 1fr a repeat(4, 1fr) */
-                    gap: 1rem;
-                    margin-bottom: 1.5rem;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 0.5rem; /* Reducido de 0.8rem */
+                    margin-bottom: 0.5rem; /* Reducido de 1rem */
                 }}
                 .kpi-card {{
                     background: rgba(20, 20, 20, 0.8);
-                    padding: 1.5rem;
+                    padding: 0.5rem; /* Reducido de 0.8rem */
                     border-radius: 20px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     text-align: center;
@@ -1073,13 +1072,13 @@ def dashboard_page():
                     gap: 0.5rem;
                 }}
                 .kpi-value {{
-                    font-size: 1.8rem; /* Reducido de 2rem */
+                    font-size: 1.4rem; /* Reducido de 1.8rem */
                     font-weight: 600;
                     color: #FF0099;
-                    margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+                    margin-bottom: 0.2rem; /* Reducido de 0.3rem */
                 }}
                 .kpi-label {{
-                    font-size: 0.9rem; /* Reducido de 1.1rem */
+                    font-size: 0.8rem; /* Reducido de 0.9rem */
                     color: rgba(255, 255, 255, 0.8);
                     font-weight: 400;
                 }}
@@ -1173,9 +1172,9 @@ def dashboard_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
+                    height: 200px; /* Reducido de 250px */
+                    margin: 0.5rem 0; /* Reducido de 1rem */
+                    padding: 0.5rem; /* Reducido de 0.8rem */
                 }}
                 .payment-methods {{
                     display: grid;
@@ -1315,9 +1314,9 @@ def dashboard_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
+                    height: 200px; /* Reducido de 250px */
+                    margin: 0.5rem 0; /* Reducido de 1rem */
+                    padding: 0.5rem; /* Reducido de 0.8rem */
                 }}
                 @media (max-width: 768px) {{
                     .payment-stats {{
@@ -2354,20 +2353,19 @@ def billing_page():
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 1rem; /* Reducido de 2rem */
-                    padding: 1rem; /* Reducido de 1.5rem */
-                    background: rgba(40, 40, 40, 0.95);
+                    margin-bottom: 0.5rem; /* Reducido de 1rem */
+                    padding: 0.7rem; /* Reducido de 1rem */
                     background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
+                    border-radius: 12px; /* Reducido de 15px */
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
-                    font-size: 1.5rem; /* Reducido de 2rem */
+                    font-size: 1.2rem; /* Reducido de 1.5rem */
                     color: white;
                     display: flex;
                     align-items: center;
-                    gap: 0.8rem; /* Reducido de 1rem */
+                    gap: 0.5rem; /* Reducido de 0.8rem */
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -2462,9 +2460,9 @@ def billing_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
+                    height: 200px; /* Reducido de 250px */
+                    margin: 0.5rem 0; /* Reducido de 1rem */
+                    padding: 0.5rem; /* Reducido de 0.8rem */
                 }}
                 .payment-methods {{
                     display: grid;
@@ -2647,9 +2645,9 @@ def billing_page():
                     color: #ffaa00;
                 }}
                 .chart-container {{
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
+                    height: 200px; /* Reducido de 250px */
+                    margin: 0.5rem 0; /* Reducido de 1rem */
+                    padding: 0.5rem; /* Reducido de 0.8rem */
                 }}
                 @media (max-width: 768px) {{
                     .payment-stats {{
