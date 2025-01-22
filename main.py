@@ -982,47 +982,38 @@ def dashboard_page():
                 .dashboard-layout {{
                     display: grid;
                     grid-template-columns: 1fr;
-                    min-height: 100vh;
-                    max-width: 100vw; /* Agregar ancho máximo viewport */
+                    height: 100vh; /* Altura fija al viewport */
+                    max-width: 100vw;
                     margin: 0 auto;
                     padding: 1rem 2rem;
                     overflow: hidden;
                 }}
                 .main-content {{
-                    width: 100%;
-                    max-width: 100vw; /* Cambiar a viewport width */
-                    margin: 0 auto;
-                    padding: 2rem 0;
-                    overflow: visible;
+                    height: calc(100vh - 2rem);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
                 }}
                 .header {{
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 1rem;
-                    padding: 0.8rem 1.5rem;
+                    padding: 0.5rem 1.5rem;
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
+                    height: 8vh; /* Altura proporcional */
                 }}
                 .header h1 {{
-                    font-size: 1.5rem;
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
+                    font-size: 1.3rem;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr); /* 4 columnas en escritorio */
-                    gap: 1.5rem;
-                    margin: 2rem auto;
-                    padding: 0 1rem;
-                    width: 100%;
-                    max-width: 100vw;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    height: 70vh; /* Usar el espacio restante */
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
