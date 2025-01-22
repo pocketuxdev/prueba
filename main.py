@@ -42,24 +42,20 @@ def get_common_sidebar():
             width: auto;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         /* Ajustar el padding-bottom del contenido principal */
         .dashboard-layout {
             padding-bottom: 80px; /* Aumentado para dar más espacio al sidebar */
         }
-
         @media (max-width: 768px) {
             .sidebar {
                 bottom: 0.5rem; /* Ajustado para móviles */
                 padding: 0.5rem 1rem;
                 gap: 1rem;
             }
-
             .dashboard-layout {
                 padding-bottom: 70px; /* Ajustado para móviles */
             }
         }
-
         /* Resto de los estilos del sidebar se mantienen igual */
         .sidebar-logo {
             width: 40px;
@@ -430,7 +426,7 @@ def get_common_styles():
     return """
     <style>
         /* Sistema de Diseño - Variables */
-        :root {{
+        :root {
             /* Colores */
             --primary-color: #FF0099;
             --primary-hover: #D6006F;
@@ -489,64 +485,75 @@ def get_common_styles():
             --transition-fast: 150ms ease;
             --transition-normal: 300ms ease;
             --transition-slow: 500ms ease;
-        }}
+        }
 
+        /* Unificando estilos de encabezados */
+        h1 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+        }
         /* Reset y Estilos Base */
-        * {{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }}
-
-        body {{
+        }
+        body {
             font-family: 'Poppins', sans-serif;
             background: var(--background-dark);
             color: var(--text-primary);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-        }}
-
+        }
         /* Sistema de Layout */
-        .container {{
+        .container {
             width: 100%;
             max-width: 1440px;
             margin: 0 auto;
             padding: 0 var(--spacing-md);
-        }}
-
+        }
         /* Componentes Base */
-        .card {{
+        .card {
             background: var(--surface-01);
             border-radius: var(--radius-lg);
             padding: var(--spacing-md);
             border: 1px solid var(--border-light);
             transition: transform var(--transition-normal);
-        }}
-
-        .card:hover {{
+        }
+        .card:hover {
             transform: translateY(-2px);
-        }}
-
+        }
         /* Tipografía */
-        .display-large {{ font-size: var(--display-large); font-weight: 400; }}
-        .display-medium {{ font-size: var(--display-medium); font-weight: 400; }}
-        .display-small {{ font-size: var(--display-small); font-weight: 400; }}
-        .headline-large {{ font-size: var(--headline-large); font-weight: 500; }}
-        .headline-medium {{ font-size: var(--headline-medium); font-weight: 500; }}
-        .headline-small {{ font-size: var(--headline-small); font-weight: 500; }}
-        .title-large {{ font-size: var(--title-large); font-weight: 500; }}
-        .title-medium {{ font-size: var(--title-medium); font-weight: 500; }}
-        .title-small {{ font-size: var(--title-small); font-weight: 500; }}
-        .label-large {{ font-size: var(--label-large); font-weight: 500; }}
-        .label-medium {{ font-size: var(--label-medium); font-weight: 500; }}
-        .label-small {{ font-size: var(--label-small); font-weight: 500; }}
-        .body-large {{ font-size: var(--body-large); font-weight: 400; }}
-        .body-medium {{ font-size: var(--body-medium); font-weight: 400; }}
-        .body-small {{ font-size: var(--body-small); font-weight: 400; }}
-
+        .display-large { font-size: var(--display-large); font-weight: 400; }
+        .display-medium { font-size: var(--display-medium); font-weight: 400; }
+        .display-small { font-size: var(--display-small); font-weight: 400; }
+        .headline-large { font-size: var(--headline-large); font-weight: 500; }
+        .headline-medium { font-size: var(--headline-medium); font-weight: 500; }
+        .headline-small { font-size: var(--headline-small); font-weight: 500; }
+        .title-large { font-size: var(--title-large); font-weight: 500; }
+        .title-medium { font-size: var(--title-medium); font-weight: 500; }
+        .title-small { font-size: var(--title-small); font-weight: 500; }
+        .label-large { font-size: var(--label-large); font-weight: 500; }
+        .label-medium { font-size: var(--label-medium); font-weight: 500; }
+        .label-small { font-size: var(--label-small); font-weight: 500; }
+        .body-large { font-size: var(--body-large); font-weight: 400; }
+        .body-medium { font-size: var(--body-medium); font-weight: 400; }
+        .body-small { font-size: var(--body-small); font-weight: 400; }
         /* Botones */
-        .btn {{
+        .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -558,66 +565,58 @@ def get_common_styles():
             cursor: pointer;
             border: none;
             gap: var(--spacing-sm);
-        }}
-
-        .btn-primary {{
+        }
+        .btn-primary {
             background: var(--primary-color);
             color: white;
-        }}
-
-        .btn-primary:hover {{
+        }
+        .btn-primary:hover {
             background: var(--primary-hover);
             transform: translateY(-2px);
-        }}
-
+        }
         /* Iconos */
-        .icon {{
+        .icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             width: 24px;
             height: 24px;
-        }}
-
+        }
         /* Utilidades */
-        .mt-1 {{ margin-top: var(--spacing-xs); }}
-        .mt-2 {{ margin-top: var(--spacing-sm); }}
-        .mt-3 {{ margin-top: var(--spacing-md); }}
-        .mt-4 {{ margin-top: var(--spacing-lg); }}
-        .mt-5 {{ margin-top: var(--spacing-xl); }}
-
-        .mb-1 {{ margin-bottom: var(--spacing-xs); }}
-        .mb-2 {{ margin-bottom: var(--spacing-sm); }}
-        .mb-3 {{ margin-bottom: var(--spacing-md); }}
-        .mb-4 {{ margin-bottom: var(--spacing-lg); }}
-        .mb-5 {{ margin-bottom: var(--spacing-xl); }}
-
+        .mt-1 { margin-top: var(--spacing-xs); }
+        .mt-2 { margin-top: var(--spacing-sm); }
+        .mt-3 { margin-top: var(--spacing-md); }
+        .mt-4 { margin-top: var(--spacing-lg); }
+        .mt-5 { margin-top: var(--spacing-xl); }
+        .mb-1 { margin-bottom: var(--spacing-xs); }
+        .mb-2 { margin-bottom: var(--spacing-sm); }
+        .mb-3 { margin-bottom: var(--spacing-md); }
+        .mb-4 { margin-bottom: var(--spacing-lg); }
+        .mb-5 { margin-bottom: var(--spacing-xl); }
         /* Media Queries */
-        @media screen and (max-width: 1366px) {{
-            :root {{
+        @media screen and (max-width: 1366px) {
+            :root {
                 --display-large: 3rem;
                 --display-medium: 2.5rem;
                 --display-small: 2rem;
                 --headline-large: 1.75rem;
                 --headline-medium: 1.5rem;
                 --headline-small: 1.25rem;
-            }}
-        }}
-
-        @media screen and (max-width: 768px) {{
-            :root {{
+            }
+        }
+        @media screen and (max-width: 768px) {
+            :root {
                 --display-large: 2.5rem;
                 --display-medium: 2rem;
                 --display-small: 1.75rem;
                 --headline-large: 1.5rem;
                 --headline-medium: 1.25rem;
                 --headline-small: 1.125rem;
-            }}
-
-            .container {{
+            }
+            .container {
                 padding: 0 var(--spacing-sm);
-            }}
-        }}
+            }
+        }
     </style>
     """
 
@@ -1354,7 +1353,6 @@ def dashboard_page():
                     width: 100%;
                     padding: 0 1rem;
                 }}
-
                 /* Resoluciones más comunes y Safari fixes */
                 
                 /* 4K - 3840x2160 */
@@ -1369,7 +1367,6 @@ def dashboard_page():
                         min-height: 30vh;
                     }}
                 }}
-
                 /* Desktop grande - 1920x1080 */
                 @media screen and (min-width: 1920px) and (max-width: 2559px) {{
                     .metrics-grid {{
@@ -1381,7 +1378,6 @@ def dashboard_page():
                         min-height: 35vh;
                     }}
                 }}
-
                 /* Desktop común - 1366x768 */
                 @media screen and (min-width: 1366px) and (max-width: 1919px) {{
                     .metrics-grid {{
@@ -1393,7 +1389,6 @@ def dashboard_page():
                         min-height: 40vh;
                     }}
                 }}
-
                 /* MacBook Pro 13" - 1280x800 */
                 @media screen and (min-width: 1280px) and (max-width: 1365px) {{
                     .metrics-grid {{
@@ -1405,7 +1400,6 @@ def dashboard_page():
                         min-height: 45vh;
                     }}
                 }}
-
                 /* Safari específico */
                 @supports (-webkit-hyphens:none) {{
                     .metrics-grid {{
@@ -1416,13 +1410,11 @@ def dashboard_page():
                         height: auto;
                         padding: 0 1rem;
                     }}
-
                     .metric-card {{
                         min-width: 0; /* Fix para Safari */
                         height: auto;
                         min-height: 40vh;
                     }}
-
                     .chart-container {{
                         width: 100%;
                         min-height: 25vh;
@@ -1430,7 +1422,6 @@ def dashboard_page():
                         -webkit-transform: translateZ(0);
                     }}
                 }}
-
                 /* Tablet landscape */
                 @media screen and (min-width: 1024px) and (max-width: 1279px) {{
                     .metrics-grid {{
@@ -1442,7 +1433,6 @@ def dashboard_page():
                         min-height: 42vh;
                     }}
                 }}
-
                 /* Tablet portrait */
                 @media screen and (min-width: 768px) and (max-width: 1023px) {{
                     .metrics-grid {{
@@ -1454,7 +1444,6 @@ def dashboard_page():
                         min-height: 45vh;
                     }}
                 }}
-
                 /* Mobile landscape */
                 @media screen and (min-width: 480px) and (max-width: 767px) {{
                     .metrics-grid {{
@@ -1466,7 +1455,6 @@ def dashboard_page():
                         min-height: 48vh;
                     }}
                 }}
-
                 /* Mobile portrait */
                 @media screen and (max-width: 479px) {{
                     .metrics-grid {{
@@ -1479,7 +1467,6 @@ def dashboard_page():
                         min-height: 45vh;
                     }}
                 }}
-
                 /* Fix específico para Safari en diferentes resoluciones */
                 @media not all and (min-resolution:.001dpcm) {{ 
                     @supports (-webkit-appearance:none) {{
@@ -1498,20 +1485,17 @@ def dashboard_page():
                         }}
                     }}
                 }}
-
                 /* Asegurar compatibilidad con diferentes alturas de viewport */
                 @media screen and (max-height: 800px) {{
                     .metric-card {{
                         min-height: 45vh;
                     }}
                 }}
-
                 @media screen and (max-height: 600px) {{
                     .metric-card {{
                         min-height: 50vh;
                     }}
                 }}
-
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
@@ -1686,7 +1670,7 @@ def dashboard_page():
                 }}
                 .payment-methods {{
                     display: grid;
-                    grid-template-columns: repeat(2, 1fr);
+                        grid-template-columns: repeat(2, 1fr);
                     gap: 1rem;
                     margin-top: 1rem;
                 }}
@@ -2877,8 +2861,10 @@ def billing_page():
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            {get_common_styles()}
             
             <style>
+                /* Estilos específicos de facturación */
                 :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
@@ -2936,6 +2922,8 @@ def billing_page():
                 .billing-grid {{
                     display: grid;
                     grid-template-columns: 2fr 1fr;
+                    gap: var(--spacing-lg);
+                    margin-bottom: var(--spacing-xl);
                     gap: 2rem;
                     margin-bottom: 2rem;
                 }}
@@ -2950,10 +2938,15 @@ def billing_page():
                 .billing-summary {{
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
+                    gap: var(--spacing-md);
+                    margin-bottom: var(--spacing-lg);
                     gap: 1rem;
                     margin-bottom: 2rem;
                 }}
                 .summary-item {{
+                    background: var(--primary-transparent);
+                    padding: var(--spacing-lg);
+                    border-radius: var(--radius-md);
                     background: rgba(60, 60, 60, 0.95);
                     background: rgba(255, 0, 153, 0.1);
                     padding: 1.5rem;
@@ -2961,17 +2954,21 @@ def billing_page():
                     text-align: center;
                     border: 1px solid var(--border-color);
                     border: 1px solid var(--primary-color);
+                    transition: all var(--transition-normal);
                     transition: all 0.3s ease;
                 }}
                 .summary-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
                     transform: translateY(-5px);
+                    box-shadow: var(--elevation-2);
                     box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
                 }}
                 .summary-value {{
+                    font-size: var(--headline-large);
                     font-size: 2rem;
                     font-weight: 600;
                     color: var(--primary-color);
+                    margin-bottom: var(--spacing-sm);
                     margin-bottom: 0.5rem;
                 }}
                 .summary-label {{
@@ -2981,27 +2978,42 @@ def billing_page():
                 .calendar-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
+                    gap: var(--spacing-md);
+                    margin-top: var(--spacing-md);
                     gap: 1rem;
                     margin-top: 1rem;
                 }}
                 .month-card {{
+                    background: var(--surface-01);
+                    padding: var(--spacing-md);
+                    border-radius: var(--radius-md);
                     background: rgba(60, 60, 60, 0.95);
                     background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
                     border-radius: 10px;
                     text-align: center;
+                    transition: all var(--transition-normal);
                     transition: all 0.3s ease;
                 }}
                 .month-card:hover {{
+                    background: var(--primary-transparent);
                     background: rgba(255, 0, 153, 0.15);
                     background: rgba(255, 0, 153, 0.1);
                     transform: scale(1.05);
                 }}
+                .status-badge {{
+                    padding: var(--spacing-xs) var(--spacing-sm);
+                    border-radius: var(--radius-sm);
+                    font-size: var(--body-small);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--spacing-xs);
                 .month-name {{
                     font-size: 1.1rem;
                     margin-bottom: 0.5rem;
                     color: white;
                 }}
+                .status-badge.paid {{
                 .month-amount {{
                     font-size: 1.2rem;
                     color: var(--primary-color);
@@ -3018,12 +3030,18 @@ def billing_page():
                     background: rgba(0, 179, 104, 0.2);
                     color: #00b368;
                 }}
+                .status-badge.pending {{
                 .status-pending {{
                     background: rgba(255, 170, 0, 0.2);
                     color: #ffaa00;
                 }}
                 .chart-container {{
                     height: 300px;
+                    margin: var(--spacing-lg) 0;
+                    padding: var(--spacing-md);
+                    background: var(--surface-01);
+                    border-radius: var(--radius-lg);
+                    border: 1px solid var(--border-primary);
                     margin-top: 2rem;
                     height: 250px; /* Reducido de 300px */
                     margin: 1rem 0; /* Reducido de 2rem */
@@ -3086,6 +3104,8 @@ def billing_page():
                     .billing-summary {{
                         grid-template-columns: 1fr;
                     }}
+                    .chart-container {{
+                        height: 250px;
                 }}
                 .payment-method {{
                     position: relative;
@@ -3236,33 +3256,42 @@ def billing_page():
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
+                        <h1 class="headline-large">
                         <h1>
                             <i class="fas fa-file-invoice-dollar header-icon"></i>
                             Centro de Facturación
                         </h1>
                     </div>
                     <div class="billing-grid">
+                        <div class="card">
                         <div class="billing-card">
                             <div class="billing-summary">
                                 <div class="summary-item">
                                     <div class="summary-value">$25,500</div>
+                                    <div class="body-medium">Facturación Anual</div>
                                     <div class="summary-label">Facturación Anual</div>
                                 </div>
                                 <div class="summary-item">
                                     <div class="summary-value">15</div>
+                                    <div class="body-medium">Facturas Pendientes</div>
                                     <div class="summary-label">Facturas Pendientes</div>
                                 </div>
                                 <div class="summary-item">
                                     <div class="summary-value">85%</div>
+                                    <div class="body-medium">Tasa de Pago</div>
                                     <div class="summary-label">Tasa de Pago</div>
                                 </div>
                             </div>
+                            <div class="title-large mb-3">
                             <div class="section-title">
                                 <i class="fas fa-calendar-alt"></i>
                                 Facturación Mensual 2024
                             </div>
                             <div class="calendar-grid">
                                 <div class="month-card">
+                                    <div class="title-medium">Enero</div>
+                                    <div class="headline-small">$2,500</div>
+                                    <div class="status-badge paid">Pagado</div>
                                     <div class="month-name">Enero</div>
                                     <div class="month-amount">$2,500</div>
                                     <div class="month-status status-paid">Pagado</div>
@@ -3282,12 +3311,14 @@ def billing_page():
                                     <div class="month-amount">$2,100</div>
                                     <div class="month-status status-pending">Próximo</div>
                                 </div>
+                                <!-- Resto de las month-cards -->
                                 <!-- Continuar con los demás meses... -->
                             </div>
                             <div class="chart-container">
                                 <canvas id="billingChart"></canvas>
                             </div>
                         </div>
+                        <!-- Resto del contenido de facturación -->
                         <div class="billing-card">
                             <div class="section-title">
                                 <i class="fas fa-credit-card"></i>
@@ -3425,6 +3456,7 @@ def billing_page():
                             borderColor: '#FF0099',
                             backgroundColor: 'rgba(255, 0, 153, 0.1)',
                             tension: 0.4,
+                            fill: true
                             fill: true,
                             pointBackgroundColor: '#FF0099',
                             pointBorderColor: '#fff',
