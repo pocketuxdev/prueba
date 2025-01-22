@@ -943,14 +943,14 @@ def dashboard_page():
                     display: grid;
                     grid-template-columns: 1fr;
                     padding-left: 100px;
-                    padding: 0 2rem 120px 2rem;
+                    padding: 0 3rem 150px 3rem;
                     min-height: 100vh;
                 }}
                 .main-content {{
                     padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
                     padding: 2rem 0;
                     width: 100%;
-                    max-width: 1400px;
+                    max-width: 1600px;
                     margin: 0 auto;
                 }}
                 .header {{
