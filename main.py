@@ -965,18 +965,18 @@ def dashboard_page():
                 }}
                 .metrics-grid {{
                     display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 2rem;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
                     margin-bottom: 2rem;
                 }}
                 .metric-card {{
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
-                    padding: 1.5rem;
+                    padding: 1rem;
                     border: 1px solid var(--border-color);
                     backdrop-filter: blur(10px);
-                    height: 100%;
-                    min-height: 300px;
+                    height: calc(40vh - 2rem);
+                    min-height: 250px;
                     display: flex;
                     flex-direction: column;
                 }}
@@ -984,7 +984,7 @@ def dashboard_page():
                     position: relative;
                     width: 100%;
                     flex: 1;
-                    min-height: 250px;
+                    min-height: 200px;
                 }}
                 .kpi-grid {{
                     display: grid;
@@ -1011,10 +1011,12 @@ def dashboard_page():
                 }}
                 @media (max-width: 1200px) {{
                     .metrics-grid {{
-                        gap: 1.5rem;
-                    }}
-                    .kpi-grid {{
                         grid-template-columns: repeat(2, 1fr);
+                        gap: 1rem;
+                    }}
+                    
+                    .metric-card {{
+                        height: calc(45vh - 2rem);
                     }}
                 }}
                 @media (max-width: 768px) {{
@@ -1026,11 +1028,9 @@ def dashboard_page():
                         grid-template-columns: 1fr;
                         gap: 1rem;
                     }}
+                    
                     .metric-card {{
-                        min-height: 250px;
-                    }}
-                    .chart-container {{
-                        min-height: 200px;
+                        height: calc(50vh - 2rem);
                     }}
                 }}
             </style>
@@ -1122,7 +1122,7 @@ def profile_page():
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             
-            <style>
+    <style>
                 :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
@@ -1157,7 +1157,7 @@ def profile_page():
                     align-items: center;
                     gap: 2rem;
                     padding: 2rem;
-                    background: rgba(40, 40, 40, 0.95);
+            background: rgba(40, 40, 40, 0.95);
                     background: rgba(255, 0, 153, 0.1);
                     border-radius: 20px;
                     margin-bottom: 2rem;
@@ -1169,9 +1169,9 @@ def profile_page():
                     height: 120px;
                     border-radius: 50%;
                     background: var(--primary-color);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
                     font-size: 3rem;
                     color: white;
                     border: 4px solid rgba(255, 255, 255, 0.1);
@@ -1213,9 +1213,9 @@ def profile_page():
                 .profile-section {{
                     background: rgba(60, 60, 60, 0.95);
                     background: rgba(255, 255, 255, 0.05);
-                    border-radius: 20px;
+            border-radius: 20px;
                     padding: 2rem;
-                    border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
                 }}
                 .section-title {{
                     font-size: 1.3rem;
@@ -1237,7 +1237,7 @@ def profile_page():
                     background: rgba(255, 255, 255, 0.05);
                     padding: 1.2rem;
                     border-radius: 12px;
-                    transition: all 0.3s ease;
+            transition: all 0.3s ease;
                 }}
                 .info-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
@@ -1274,13 +1274,13 @@ def profile_page():
                     transform: translateX(5px);
                 }}
                 .activity-icon {{
-                    width: 40px;
-                    height: 40px;
+            width: 40px;
+            height: 40px;
                     background: var(--primary-color);
                     border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
                     color: white;
                 }}
                 .activity-details {{
@@ -1321,15 +1321,15 @@ def profile_page():
                     border: none;
                     border-radius: 10px;
                     font-size: 1rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
+            cursor: pointer;
+            transition: all 0.3s ease;
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
                 }}
                 .btn-primary {{
-                    background: var(--primary-color);
-                    color: white;
+            background: var(--primary-color);
+            color: white;
                 }}
                 .btn-primary:hover {{
                     background: var(--primary-hover);
@@ -1337,7 +1337,7 @@ def profile_page():
                 }}
                 .btn-secondary {{
                     background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
                     color: white;
                 }}
                 .btn-secondary:hover {{
@@ -1347,26 +1347,26 @@ def profile_page():
                 }}
                 @media (max-width: 1200px) {{
                     .profile-grid {{
-                        grid-template-columns: 1fr;
+            grid-template-columns: 1fr;
                     }}
                 }}
                 @media (max-width: 768px) {{
                     .profile-header {{
-                        flex-direction: column;
-                        text-align: center;
+                flex-direction: column;
+                text-align: center;
                     }}
                     .profile-stats {{
-                        justify-content: center;
+                justify-content: center;
                     }}
                 }}
             </style>
             <!-- Agregar en el <style> de cada página -->
             <style>
                 html {{
-                    scroll-behavior: smooth;
+            scroll-behavior: smooth;
                     scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
                 }}
-            </style>
+    </style>
         </head>
         <body>
             {get_common_sidebar()}
@@ -1374,8 +1374,8 @@ def profile_page():
                 <div class="main-content">
                     <div class="profile-header">
                         <div class="profile-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
+            <i class="fas fa-user"></i>
+        </div>
                         <div class="profile-info">
                             <h1 class="profile-name" id="userName">Cargando...</h1>
                             <div class="profile-role" id="userRole">Cargando...</div>
@@ -1383,15 +1383,15 @@ def profile_page():
                                 <div class="stat-item">
                                     <div class="stat-value">28</div>
                                     <div class="stat-label">Consultas</div>
-                                </div>
+        </div>
                                 <div class="stat-item">
                                     <div class="stat-value">15</div>
                                     <div class="stat-label">Reportes</div>
-                                </div>
+        </div>
                                 <div class="stat-item">
                                     <div class="stat-value">95%</div>
                                     <div class="stat-label">Satisfacción</div>
-                                </div>
+    </div>
                             </div>
                         </div>
                         <div class="action-buttons">
@@ -1483,12 +1483,12 @@ def profile_page():
                     </div>
                 </div>
             </div>
-            <script>
+    <script>
                 window.onload = function() {{
-                    const clientData = localStorage.getItem('clientData');
+            const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
-                        window.location.href = '/';
-                        return;
+                window.location.href = '/';
+                return;
                     }}
                     
                     const userData = JSON.parse(clientData);
@@ -1518,7 +1518,7 @@ def profile_page():
                         </div>
                     `;
                 }};
-            </script>
+    </script>
         </body>
     </html>
     """
@@ -1578,8 +1578,8 @@ def reset_password_page():
                     height: auto;
                     filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
                     animation: logoFloat 6s ease-in-out infinite,
-                             logoGlow 3s ease-in-out infinite,
-                             logoRotate 12s linear infinite;
+                              logoGlow 3s ease-in-out infinite,
+                              logoRotate 12s linear infinite;
                              logoGlow 3s ease-in-out infinite;
                     transform-origin: center center;
                 }
@@ -1790,7 +1790,7 @@ def reset_password_page():
                     margin-bottom: 1rem;
                 }
                 .subtitle {
-                    margin-bottom: 1.5rem;
+                        margin-bottom: 1.5rem;
                     line-height: 1.4;
                 }
                 /* Mejoras visuales */
@@ -1868,7 +1868,7 @@ def reset_password_page():
                                          alt="Country flag" 
                                          class="country-flag" 
                                          id="countryFlag">
-                                </div>
+                            </div>
                                 <input type="tel" 
                                        class="phone-number" 
                                        id="phone" 
@@ -1891,10 +1891,10 @@ def reset_password_page():
                         <a href="/" class="back-link">
                             <i class="fas fa-arrow-left"></i>
                             Volver al inicio de sesión
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <script>
                 // Country Codes Configuration
                 const countryCodeMap = {
