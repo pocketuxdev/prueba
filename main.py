@@ -153,7 +153,42 @@ def get_common_sidebar():
             }
             
             .metrics-grid {
-                display: none; /* Ocultar las gráficas en móvil */
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 0.5rem;
+                margin-top: 1rem;
+            }
+            
+            .metric-card {
+                background: rgba(0, 0, 0, 0.7);
+                border: 1px solid var(--primary-color);
+                border-radius: 20px;
+                padding: 1rem;
+                height: auto;
+                min-height: 300px;
+            }
+            
+            .chart-container {
+                background: transparent;
+                border: none;
+                height: 250px;
+                padding: 0.5rem;
+                margin: 0;
+            }
+            
+            .chart-title {
+                color: white;
+                font-size: 1.1rem;
+                text-align: center;
+                margin-bottom: 1rem;
+                font-weight: 500;
+            }
+            
+            /* Estilos específicos para Chart.js en móvil */
+            canvas {
+                width: 100% !important;
+                height: 100% !important;
             }
             
             .sidebar {
