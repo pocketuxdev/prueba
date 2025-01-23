@@ -422,19 +422,6 @@ def get_common_sidebar():
     </script>
     """
 
-def get_common_head(title):
-    """Returns the common head section for all pages"""
-    return f'''
-    <head>
-        <title>{title}</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link href="/static/css/styles.css" rel="stylesheet">
-    </head>
-    '''
-
 # Route definitions
 @rt('/')
 def login_page():
@@ -1082,9 +1069,618 @@ def dashboard_page():
 
     return f"""
     <html>
-        ''' + get_common_head('Tiffany Medical Assistant - Dashboard') + '''
+        <head>
+            <title>Tiffany Medical Assistant - Dashboard</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            
+            <style>
+                :root {{
+                    --primary-color: #FF0099;
+                    --primary-hover: #D6006F;
+                    --background-dark: #000000;
+                    --text-light: rgba(255, 255, 255, 0.8);
+                    --text-lighter: rgba(255, 255, 255, 0.5);
+                    --border-color: rgba(255, 0, 153, 0.2);
+                }}
+                * {{
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }}
+                body {{
+                    background: var(--background-dark);
+                    color: var(--text-light);
+                    min-height: 100vh;
+                }}
+                .dashboard-layout {{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    height: 100vh;
+                    max-width: 100vw;
+                    margin: 0 auto;
+                    padding: 0.5rem 1rem;
+                    overflow-y: auto; /* Restaurar scroll vertical */
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                }}
+                .main-content {{
+                    height: calc(100vh - 1rem);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.4rem;
+                }}
+                .header {{
+                    display: flex;
+                    align-items: flex-start; /* Alinear al inicio */
+                    align-items: flex-start;
+                    padding: 1.5rem;
+                    background: rgba(20, 20, 20, 0.8);
+                    border-radius: 20px;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1rem; /* Reducido de 2rem */
+                    padding: 1rem; /* Reducido de 1.5rem */
+                    background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    margin-bottom: 1.5rem;
+                    backdrop-filter: blur(10px);
+                }}
+                .header h1 {{
+                    font-size: 2.2rem;
+                    font-weight: 600;
+                    font-size: 1.5rem; /* Reducido de 2rem */
+                    color: white;
+                    font-family: 'Playfair Display', serif; /* Fuente más elegante */
+                    font-family: 'Playfair Display', serif;
+                    line-height: 1.2;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem; /* Reducido de 1rem */
+                }}
+                .header-icon {{
+                    color: var(--primary-color);
+                }}
+                .metrics-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                    height: auto;
+                    width: 100%;
+                    padding: 0 1rem;
+                }}
+                /* Resoluciones más comunes y Safari fixes */
+                
+                /* 4K - 3840x2160 */
+                @media screen and (min-width: 2560px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        max-width: 90vw;
+                        margin: 0 auto;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 30vh;
+                    }}
+                }}
+                /* Desktop grande - 1920x1080 */
+                @media screen and (min-width: 1920px) and (max-width: 2559px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 35vh;
+                    }}
+                }}
+                /* Desktop común - 1366x768 */
+                @media screen and (min-width: 1366px) and (max-width: 1919px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 1vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 40vh;
+                    }}
+                }}
+                /* MacBook Pro 13" - 1280x800 */
+                @media screen and (min-width: 1280px) and (max-width: 1365px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                /* Safari específico */
+                @supports (-webkit-hyphens:none) {{
+                    .metrics-grid {{
+                        display: grid;
+                        grid-template-columns: repeat(4, minmax(0, 1fr)); /* Fix para Safari */
+                        gap: 1rem;
+                        width: 100%;
+                        height: auto;
+                        padding: 0 1rem;
+                    }}
+                    .metric-card {{
+                        min-width: 0; /* Fix para Safari */
+                        height: auto;
+                        min-height: 40vh;
+                    }}
+                    .chart-container {{
+                        width: 100%;
+                        min-height: 25vh;
+                        transform: translateZ(0); /* Fix para renderizado en Safari */
+                        -webkit-transform: translateZ(0);
+                    }}
+                }}
+                /* Tablet landscape */
+                @media screen and (min-width: 1024px) and (max-width: 1279px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 42vh;
+                    }}
+                }}
+                /* Tablet portrait */
+                @media screen and (min-width: 768px) and (max-width: 1023px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 2vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                /* Mobile landscape */
+                @media screen and (min-width: 480px) and (max-width: 767px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 2vh;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 48vh;
+                    }}
+                }}
+                /* Mobile portrait */
+                @media screen and (max-width: 479px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 2vh;
+                        padding: 0 0.5rem;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                /* Fix específico para Safari en diferentes resoluciones */
+                @media not all and (min-resolution:.001dpcm) {{ 
+                    @supports (-webkit-appearance:none) {{
+                        .metrics-grid {{
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            gap: 1rem;
+                            width: 100%;
+                            height: auto;
+                        }}
+                        
+                        .metric-card {{
+                            break-inside: avoid;
+                            page-break-inside: avoid;
+                            -webkit-column-break-inside: avoid;
+                        }}
+                    }}
+                }}
+                /* Asegurar compatibilidad con diferentes alturas de viewport */
+                @media screen and (max-height: 800px) {{
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                @media screen and (max-height: 600px) {{
+                    .metric-card {{
+                        min-height: 50vh;
+                    }}
+                }}
+                .metric-card {{
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem 1rem;
+                    border: 1px solid var(--border-color);
+                    height: auto;
+                    min-height: 35vh;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start; /* Cambiado a flex-start para mejor control del espacio */
+                    overflow: hidden;
+                }}
+                .chart-title {{
+                    font-size: 1.2rem;
+                    margin: 0 0 1rem 0; /* Margen uniforme */
+                    text-align: center;
+                    width: 100%;
+                    padding: 0.5rem;
+                    white-space: normal; /* Permitir múltiples líneas */
+                    overflow-wrap: break-word; /* Romper palabras largas si es necesario */
+                    word-wrap: break-word;
+                    min-height: 2.5em; /* Altura mínima para dos líneas */
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; /* Máximo dos líneas */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    line-height: 1.2;
+                }}
+                .chart-container {{
+                    flex: 1;
+                    position: relative;
+                    width: 95%;
+                    min-height: 28vh;
+                    padding: 0.5rem;
+                    margin: 0 auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }}
+                canvas {{
+                    width: 100% !important;
+                    height: 100% !important;
+                    max-height: calc(100% - 2rem) !important; /* Prevenir desbordamiento */
+                }}
+                .kpi-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr); /* Cambio de 1fr a repeat(4, 1fr) */
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }}
+                .kpi-card {{
+                    background: rgba(20, 20, 20, 0.8);
+                    padding: 1.5rem;
+                    border-radius: 20px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .kpi-value {{
+                    font-size: 3rem;
+                    font-size: 1.8rem; /* Reducido de 2rem */
+                    font-weight: 600;
+                    color: #FF0099;
+                    margin-bottom: 0.5rem;
+                    margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+                }}
+                .kpi-label {{
+                    font-size: 1.2rem;
+                    font-size: 0.9rem; /* Reducido de 1.1rem */
+                    color: rgba(255, 255, 255, 0.8);
+                    font-weight: 400;
+                }}
+                .billing-grid {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr;
+                    gap: 2rem;
+                    margin-bottom: 2rem;
+                }}
+                .billing-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem;
+                    border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
+                }}
+                .billing-summary {{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                }}
+                .summary-item {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
+                    padding: 1.5rem;
+                    border-radius: 12px;
+                    text-align: center;
+                    border: 1px solid var(--border-color);
+                    border: 1px solid var(--primary-color);
+                    transition: all 0.3s ease;
+                }}
+                .summary-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
+                }}
+                .summary-value {{
+                    font-size: 2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    margin-bottom: 0.5rem;
+                }}
+                .summary-label {{
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                }}
+                .calendar-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .month-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 10px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                }}
+                .month-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: scale(1.05);
+                }}
+                .month-name {{
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                    color: white;
+                }}
+                .month-amount {{
+                    font-size: 1.2rem;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                }}
+                .month-status {{
+                    font-size: 0.8rem;
+                    margin-top: 0.5rem;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    display: inline-block;
+                }}
+                .status-paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin-top: 2rem;
+                    height: 250px; /* Reducido de 300px */
+                    margin: 1rem 0; /* Reducido de 2rem */
+                    padding: 0.8rem; /* Reducido de 1rem */
+                }}
+                .payment-methods {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .payment-method {{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 10px;
+                    transition: all 0.3s ease;
+                }}
+                .payment-method:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .method-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .section-title {{
+                    font-size: 1.3rem;
+                    color: white;
+                    margin-bottom: 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .section-title i {{
+                    color: var(--primary-color);
+                }}
+                @media (max-width: 1200px) {{
+                    .billing-grid {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .calendar-grid {{
+                        grid-template-columns: repeat(3, 1fr);
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .calendar-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                    }}
+                    .billing-summary {{
+                        grid-template-columns: 1fr;
+                    }}
+                }}
+                .payment-method {{
+                    position: relative;
+                    overflow: hidden;
+                }}
+                .method-details {{
+                    flex: 1;
+                }}
+                .method-status {{
+                    font-size: 0.8rem;
+                    padding: 0.2rem 0.5rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 12px;
+                    color: var(--primary-color);
+                }}
+                .action-btn {{
+                    background: transparent;
+                    border: none;
+                    color: var(--text-light);
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }}
+                .action-btn:hover {{
+                    background: rgba(255, 255, 255, 0.1);
+                    color: var(--primary-color);
+                }}
+                .payment-history {{
+                    margin-top: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    overflow: hidden;
+                }}
+                .history-header {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    font-weight: 500;
+                }}
+                .history-item {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    align-items: center;
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }}
+                .history-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.05);
+                }}
+                .history-item.pending {{
+                    background: rgba(255, 170, 0, 0.15);
+                    background: rgba(255, 170, 0, 0.05);
+                }}
+                .status-badge {{
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.85rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .status-badge.paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-badge.pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .payment-stats {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .stat-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    transition: all 0.3s ease;
+                }}
+                .stat-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateY(-2px);
+                }}
+                .stat-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .stat-info h4 {{
+                    font-size: 0.9rem;
+                    margin-bottom: 0.2rem;
+                }}
+                .stat-info p {{
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                }}
+                .mt-4 {{
+                    margin-top: 2rem;
+                }}
+                .text-success {{
+                    color: #00b368;
+                }}
+                .text-warning {{
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin: 2rem 0;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    height: 250px; /* Reducido de 300px */
+                    margin: 1rem 0; /* Reducido de 2rem */
+                    padding: 0.8rem; /* Reducido de 1rem */
+                }}
+                @media (max-width: 768px) {{
+                    .payment-stats {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .history-item {{
+                        font-size: 0.9rem;
+                    }}
+                }}
+            </style>
+            <!-- Agregar en el <style> de cada página -->
+            <style>
+                html {{
+                    scroll-behavior: smooth;
+                    scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
+                }}
+            </style>
+        </head>
         <body>
-            ''' + get_common_sidebar() + '''
+            {get_common_sidebar()}
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
@@ -1173,12 +1769,268 @@ def dashboard_page():
 
 @rt('/profile')
 def profile_page():
-    return '''
+    return f"""
     <html>
-        ''' + get_common_head('Tiffany Medical Assistant - Perfil') + '''
+        <head>
+            <title>Tiffany Medical Assistant - Perfil</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            
+            <style>
+                :root {{
+                    --primary-color: #FF0099;
+                    --primary-hover: #D6006F;
+                    --background-dark: #000000;
+                    --text-light: rgba(255, 255, 255, 0.8);
+                    --text-lighter: rgba(255, 255, 255, 0.5);
+                    --border-color: rgba(255, 0, 153, 0.2);
+                }}
+                * {{
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
+                }}
+                body {{
+                    min-height: 100vh;
+                    background: var(--background-dark);
+                    color: var(--text-light);
+                    min-height: 100vh;
+                }}
+                .dashboard-layout {{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    padding: 0 3rem 150px 3rem;
+                    min-height: 100vh;
+                }}
+                .main-content {{
+                    width: min(1400px, 100% - 2rem);
+                    margin-inline: auto;
+                    padding: 2rem 0;
+                    overflow: visible;
+                }}
+                .profile-header {{
+                    display: flex;
+                    align-items: center;
+                    gap: 2rem;
+                    padding: 2rem;
+                    background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 20px;
+                    margin-bottom: 2rem;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    border: 1px solid var(--primary-color);
+                }}
+                .profile-avatar {{
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    background: var(--primary-color);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 3rem;
+                    color: white;
+                    border: 4px solid rgba(255, 255, 255, 0.1);
+                }}
+                .profile-info {{
+                    flex: 1;
+                }}
+                .profile-name {{
+                    font-size: 2rem;
+                    color: white;
+                    margin-bottom: 0.5rem;
+                }}
+                .profile-role {{
+                    font-size: 1.1rem;
+                    color: var(--primary-color);
+                    margin-bottom: 1rem;
+                }}
+                .profile-stats {{
+                    display: flex;
+                    gap: 2rem;
+                }}
+                .stat-item {{
+                    text-align: center;
+                }}
+                .stat-value {{
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: white;
+                }}
+                .stat-label {{
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                }}
+                .profile-grid {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr;
+                    gap: 2rem;
+                }}
+                .profile-section {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 20px;
+                    padding: 2rem;
+                    border: 1px solid var(--border-color);
+                }}
+                .section-title {{
+                    font-size: 1.3rem;
+                    color: white;
+                    margin-bottom: 1.5rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .section-title i {{
+                    color: var(--primary-color);
+                }}
+                .info-grid {{
+                    display: grid;
+                    gap: 1.5rem;
+                }}
+                .info-item {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1.2rem;
+                    border-radius: 12px;
+                    transition: all 0.3s ease;
+                }}
+                .info-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .info-label {{
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                    margin-bottom: 0.5rem;
+                }}
+                .info-value {{
+                    font-size: 1.1rem;
+                    color: white;
+                }}
+                .activity-list {{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                }}
+                .activity-item {{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    transition: all 0.3s ease;
+                }}
+                .activity-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .activity-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .activity-details {{
+                    flex: 1;
+                }}
+                .activity-title {{
+                    font-size: 1rem;
+                    color: white;
+                    margin-bottom: 0.2rem;
+                }}
+                .activity-time {{
+                    font-size: 0.85rem;
+                    color: var(--text-light);
+                }}
+                .subscription-info {{
+                    padding: 1.5rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 15px;
+                    margin-top: 2rem;
+                }}
+                .subscription-status {{
+                    display: inline-block;
+                    padding: 0.5rem 1rem;
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                    border-radius: 20px;
+                    font-size: 0.9rem;
+                    margin-bottom: 1rem;
+                }}
+                .action-buttons {{
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .action-btn {{
+                    padding: 0.8rem 1.5rem;
+                    border: none;
+                    border-radius: 10px;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .btn-primary {{
+                    background: var(--primary-color);
+                    color: white;
+                }}
+                .btn-primary:hover {{
+                    background: var(--primary-hover);
+                    transform: translateY(-2px);
+                }}
+                .btn-secondary {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.1);
+                    color: white;
+                }}
+                .btn-secondary:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-2px);
+                }}
+                @media (max-width: 1200px) {{
+                    .profile-grid {{
+                        grid-template-columns: 1fr;
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .profile-header {{
+                        flex-direction: column;
+                        text-align: center;
+                    }}
+                    .profile-stats {{
+                        justify-content: center;
+                    }}
+                }}
+            </style>
+            <!-- Agregar en el <style> de cada página -->
+            <style>
+                html {{
+                    scroll-behavior: smooth;
+                    scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
+                }}
+            </style>
+        </head>
         <body>
-            ''' + get_common_sidebar() + '''
+            {get_common_sidebar()}
             <div class="dashboard-layout">
+                <div class="main-content">
                     <div class="profile-header">
                         <div class="profile-avatar">
                             <i class="fas fa-user"></i>
@@ -1201,74 +2053,134 @@ def profile_page():
                                 </div>
                             </div>
                         </div>
+                        <div class="action-buttons">
+                            <button class="action-btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                                Editar Perfil
+                            </button>
+                            <button class="action-btn btn-secondary">
+                                <i class="fas fa-cog"></i>
+                                Configuración
+                            </button>
                         </div>
-                <div class="info-section">
-                    <h2>Información Personal</h2>
+                    </div>
+                    <div class="profile-grid">
+                        <div class="profile-section">
+                            <div class="section-title">
+                                <i class="fas fa-user-circle"></i>
+                                Información Personal
+                            </div>
+                            <div class="info-grid" id="userInfo">
+                                <!-- Se llenará con JavaScript -->
+                            </div>
+                            <div class="section-title mt-4">
+                                <i class="fas fa-clock"></i>
+                                Actividad Reciente
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-file-medical"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <div class="activity-title">Reporte Generado</div>
+                                        <div class="activity-time">Hace 2 horas</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <div class="activity-title">Consulta Completada</div>
+                                        <div class="activity-time">Hace 5 horas</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <div class="activity-title">Análisis de Datos</div>
+                                        <div class="activity-time">Ayer</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-section">
+                            <div class="section-title">
+                                <i class="fas fa-shield-alt"></i>
+                                Estado de la Cuenta
+                            </div>
+                            <div class="subscription-info">
+                                <span class="subscription-status">
+                                    <i class="fas fa-check-circle"></i>
+                                    Activa
+                                </span>
+                                <h3>Plan Premium</h3>
+                                <p>Próxima facturación: 15/04/2024</p>
+                            </div>
+                            <div class="section-title mt-4">
+                                <i class="fas fa-bell"></i>
+                                Notificaciones
+                            </div>
                             <div class="info-grid">
                                 <div class="info-item">
                                     <div class="info-label">Email</div>
-                            <div class="info-value" id="userEmail">Cargando...</div>
+                                    <div class="info-value">Activadas</div>
                                 </div>
                                 <div class="info-item">
-                            <div class="info-label">Teléfono</div>
-                            <div class="info-value" id="userPhone">Cargando...</div>
+                                    <div class="info-label">SMS</div>
+                                    <div class="info-value">Activadas</div>
                                 </div>
                                 <div class="info-item">
-                            <div class="info-label">Empresa</div>
-                            <div class="info-value" id="userCompany">Cargando...</div>
+                                    <div class="info-label">WhatsApp</div>
+                                    <div class="info-value">Activado</div>
                                 </div>
-                        <div class="info-item">
-                            <div class="info-label">Ubicación</div>
-                            <div class="info-value" id="userLocation">Cargando...</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <script>
-                window.onload = function() {
+                window.onload = function() {{
                     const clientData = localStorage.getItem('clientData');
-                    if (!clientData) {
+                    if (!clientData) {{
                         window.location.href = '/';
                         return;
-                    }
+                    }}
                     
                     const userData = JSON.parse(clientData);
                     
-                    // Nombre y rol
+                    // Actualizar nombre y rol
                     document.getElementById('userName').textContent = userData.fullName || 'Usuario';
-                    document.getElementById('userRole').textContent = Array.isArray(userData.roles) ? 
-                        userData.roles.join(', ') : 'Usuario';
+                    document.getElementById('userRole').textContent = Array.isArray(userData.roles) ? userData.roles.join(', ') : 'Usuario';
                     
-                    // Información personal
+                    // Actualizar información personal
                     const userInfo = document.getElementById('userInfo');
                     userInfo.innerHTML = `
                         <div class="info-item">
                             <div class="info-label">Email</div>
-                            <div class="info-value">${userData.email || 'No especificado'}</div>
+                            <div class="info-value">${{userData.email || 'No especificado'}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Empresa</div>
-                            <div class="info-value">${(userData.company && userData.company.name) || 'No especificado'}</div>
+                            <div class="info-value">${{userData.company || 'No especificado'}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Teléfono</div>
-                            <div class="info-value">${userData.phone || 'No especificado'}</div>
+                            <div class="info-value">${{userData.phone || 'No especificado'}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Ubicación</div>
-                            <div class="info-value">${[
-                                userData.address?.street,
-                                userData.address?.city,
-                                userData.address?.state,
-                                userData.address?.country
-                            ].filter(Boolean).join(', ') || 'No especificado'}</div>
+                            <div class="info-value">${{userData.location || 'No especificado'}}</div>
                         </div>
                     `;
-                };
+                }};
             </script>
         </body>
     </html>
-    '''
+    """
 
 @rt('/reset-password')
 def reset_password_page():
@@ -2106,7 +3018,7 @@ def billing_page():
             </style>
         </head>
         <body>
-            ''' + get_common_sidebar() + '''
+            {get_common_sidebar()}
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
