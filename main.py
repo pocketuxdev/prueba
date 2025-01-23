@@ -422,6 +422,185 @@ def get_common_sidebar():
     </script>
     """
 
+def get_common_styles():
+    return """
+    <style>
+        /* Sistema de Diseño - Variables */
+        :root {{
+            /* Colores */
+            --primary-color: #FF0099;
+            --primary-hover: #D6006F;
+            --primary-transparent: rgba(255, 0, 153, 0.1);
+            --background-dark: #000000;
+            --surface-01: rgba(255, 255, 255, 0.05);
+            --surface-02: rgba(255, 255, 255, 0.08);
+            --surface-03: rgba(255, 255, 255, 0.11);
+            
+            /* Texto */
+            --text-primary: rgba(255, 255, 255, 0.87);
+            --text-secondary: rgba(255, 255, 255, 0.60);
+            --text-disabled: rgba(255, 255, 255, 0.38);
+            
+            /* Bordes */
+            --border-light: rgba(255, 255, 255, 0.12);
+            --border-primary: rgba(255, 0, 153, 0.2);
+            
+            /* Tipografía - Material Design */
+            --display-large: 3.562rem;
+            --display-medium: 2.812rem;
+            --display-small: 2.25rem;
+            --headline-large: 2rem;
+            --headline-medium: 1.75rem;
+            --headline-small: 1.5rem;
+            --title-large: 1.375rem;
+            --title-medium: 1rem;
+            --title-small: 0.875rem;
+            --label-large: 0.875rem;
+            --label-medium: 0.75rem;
+            --label-small: 0.688rem;
+            --body-large: 1rem;
+            --body-medium: 0.875rem;
+            --body-small: 0.75rem;
+            
+            /* Espaciado */
+            --spacing-unit: 0.25rem;
+            --spacing-xs: calc(var(--spacing-unit) * 1);
+            --spacing-sm: calc(var(--spacing-unit) * 2);
+            --spacing-md: calc(var(--spacing-unit) * 4);
+            --spacing-lg: calc(var(--spacing-unit) * 6);
+            --spacing-xl: calc(var(--spacing-unit) * 8);
+            
+            /* Elevación */
+            --elevation-1: 0 2px 4px rgba(0, 0, 0, 0.2);
+            --elevation-2: 0 4px 8px rgba(0, 0, 0, 0.3);
+            --elevation-3: 0 8px 16px rgba(0, 0, 0, 0.4);
+            
+            /* Bordes redondeados */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* Transiciones */
+            --transition-fast: 150ms ease;
+            --transition-normal: 300ms ease;
+            --transition-slow: 500ms ease;
+        }}
+        /* Reset y Estilos Base */
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        body {{
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-dark);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }}
+        /* Sistema de Layout */
+        .container {{
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }}
+        /* Componentes Base */
+        .card {{
+            background: var(--surface-01);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-light);
+            transition: transform var(--transition-normal);
+        }}
+        .card:hover {{
+            transform: translateY(-2px);
+        }}
+        /* Tipografía */
+        .display-large {{ font-size: var(--display-large); font-weight: 400; }}
+        .display-medium {{ font-size: var(--display-medium); font-weight: 400; }}
+        .display-small {{ font-size: var(--display-small); font-weight: 400; }}
+        .headline-large {{ font-size: var(--headline-large); font-weight: 500; }}
+        .headline-medium {{ font-size: var(--headline-medium); font-weight: 500; }}
+        .headline-small {{ font-size: var(--headline-small); font-weight: 500; }}
+        .title-large {{ font-size: var(--title-large); font-weight: 500; }}
+        .title-medium {{ font-size: var(--title-medium); font-weight: 500; }}
+        .title-small {{ font-size: var(--title-small); font-weight: 500; }}
+        .label-large {{ font-size: var(--label-large); font-weight: 500; }}
+        .label-medium {{ font-size: var(--label-medium); font-weight: 500; }}
+        .label-small {{ font-size: var(--label-small); font-weight: 500; }}
+        .body-large {{ font-size: var(--body-large); font-weight: 400; }}
+        .body-medium {{ font-size: var(--body-medium); font-weight: 400; }}
+        .body-small {{ font-size: var(--body-small); font-weight: 400; }}
+        /* Botones */
+        .btn {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: var(--body-medium);
+            font-weight: 500;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: none;
+            gap: var(--spacing-sm);
+        }}
+        .btn-primary {{
+            background: var(--primary-color);
+            color: white;
+        }}
+        .btn-primary:hover {{
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }}
+        /* Iconos */
+        .icon {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }}
+        /* Utilidades */
+        .mt-1 {{ margin-top: var(--spacing-xs); }}
+        .mt-2 {{ margin-top: var(--spacing-sm); }}
+        .mt-3 {{ margin-top: var(--spacing-md); }}
+        .mt-4 {{ margin-top: var(--spacing-lg); }}
+        .mt-5 {{ margin-top: var(--spacing-xl); }}
+        .mb-1 {{ margin-bottom: var(--spacing-xs); }}
+        .mb-2 {{ margin-bottom: var(--spacing-sm); }}
+        .mb-3 {{ margin-bottom: var(--spacing-md); }}
+        .mb-4 {{ margin-bottom: var(--spacing-lg); }}
+        .mb-5 {{ margin-bottom: var(--spacing-xl); }}
+        /* Media Queries */
+        @media screen and (max-width: 1366px) {{
+            :root {{
+                --display-large: 3rem;
+                --display-medium: 2.5rem;
+                --display-small: 2rem;
+                --headline-large: 1.75rem;
+                --headline-medium: 1.5rem;
+                --headline-small: 1.25rem;
+            }}
+        }}
+        @media screen and (max-width: 768px) {{
+            :root {{
+                --display-large: 2.5rem;
+                --display-medium: 2rem;
+                --display-small: 1.75rem;
+                --headline-large: 1.5rem;
+                --headline-medium: 1.25rem;
+                --headline-small: 1.125rem;
+            }}
+            .container {{
+                padding: 0 var(--spacing-sm);
+            }}
+        }}
+    </style>
+    """
 # Route definitions
 @rt('/')
 def login_page():
@@ -2663,8 +2842,10 @@ def billing_page():
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            {get_common_styles()}
             
             <style>
+                /* Estilos específicos de facturación */
                 :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
@@ -2722,6 +2903,8 @@ def billing_page():
                 .billing-grid {{
                     display: grid;
                     grid-template-columns: 2fr 1fr;
+                    gap: var(--spacing-lg);
+                    margin-bottom: var(--spacing-xl);
                     gap: 2rem;
                     margin-bottom: 2rem;
                 }}
@@ -2736,10 +2919,15 @@ def billing_page():
                 .billing-summary {{
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
+                    gap: var(--spacing-md);
+                    margin-bottom: var(--spacing-lg);
                     gap: 1rem;
                     margin-bottom: 2rem;
                 }}
                 .summary-item {{
+                    background: var(--primary-transparent);
+                    padding: var(--spacing-lg);
+                    border-radius: var(--radius-md);
                     background: rgba(60, 60, 60, 0.95);
                     background: rgba(255, 0, 153, 0.1);
                     padding: 1.5rem;
@@ -2747,17 +2935,21 @@ def billing_page():
                     text-align: center;
                     border: 1px solid var(--border-color);
                     border: 1px solid var(--primary-color);
+                    transition: all var(--transition-normal);
                     transition: all 0.3s ease;
                 }}
                 .summary-item:hover {{
                     background: rgba(255, 0, 153, 0.15);
                     transform: translateY(-5px);
+                    box-shadow: var(--elevation-2);
                     box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
                 }}
                 .summary-value {{
+                    font-size: var(--headline-large);
                     font-size: 2rem;
                     font-weight: 600;
                     color: var(--primary-color);
+                    margin-bottom: var(--spacing-sm);
                     margin-bottom: 0.5rem;
                 }}
                 .summary-label {{
@@ -2767,27 +2959,42 @@ def billing_page():
                 .calendar-grid {{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
+                    gap: var(--spacing-md);
+                    margin-top: var(--spacing-md);
                     gap: 1rem;
                     margin-top: 1rem;
                 }}
                 .month-card {{
+                    background: var(--surface-01);
+                    padding: var(--spacing-md);
+                    border-radius: var(--radius-md);
                     background: rgba(60, 60, 60, 0.95);
                     background: rgba(255, 255, 255, 0.05);
                     padding: 1rem;
                     border-radius: 10px;
                     text-align: center;
+                    transition: all var(--transition-normal);
                     transition: all 0.3s ease;
                 }}
                 .month-card:hover {{
+                    background: var(--primary-transparent);
                     background: rgba(255, 0, 153, 0.15);
                     background: rgba(255, 0, 153, 0.1);
                     transform: scale(1.05);
                 }}
+                .status-badge {{
+                    padding: var(--spacing-xs) var(--spacing-sm);
+                    border-radius: var(--radius-sm);
+                    font-size: var(--body-small);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--spacing-xs);
                 .month-name {{
                     font-size: 1.1rem;
                     margin-bottom: 0.5rem;
                     color: white;
                 }}
+                .status-badge.paid {{
                 .month-amount {{
                     font-size: 1.2rem;
                     color: var(--primary-color);
@@ -2804,12 +3011,18 @@ def billing_page():
                     background: rgba(0, 179, 104, 0.2);
                     color: #00b368;
                 }}
+                .status-badge.pending {{
                 .status-pending {{
                     background: rgba(255, 170, 0, 0.2);
                     color: #ffaa00;
                 }}
                 .chart-container {{
                     height: 300px;
+                    margin: var(--spacing-lg) 0;
+                    padding: var(--spacing-md);
+                    background: var(--surface-01);
+                    border-radius: var(--radius-lg);
+                    border: 1px solid var(--border-primary);
                     margin-top: 2rem;
                     height: 250px; /* Reducido de 300px */
                     margin: 1rem 0; /* Reducido de 2rem */
@@ -2872,6 +3085,8 @@ def billing_page():
                     .billing-summary {{
                         grid-template-columns: 1fr;
                     }}
+                    .chart-container {{
+                        height: 250px;
                 }}
                 .payment-method {{
                     position: relative;
@@ -3022,33 +3237,42 @@ def billing_page():
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
+                        <h1 class="headline-large">
                         <h1>
                             <i class="fas fa-file-invoice-dollar header-icon"></i>
                             Centro de Facturación
                         </h1>
                     </div>
                     <div class="billing-grid">
+                        <div class="card">
                         <div class="billing-card">
                             <div class="billing-summary">
                                 <div class="summary-item">
                                     <div class="summary-value">$25,500</div>
+                                    <div class="body-medium">Facturación Anual</div>
                                     <div class="summary-label">Facturación Anual</div>
                                 </div>
                                 <div class="summary-item">
                                     <div class="summary-value">15</div>
+                                    <div class="body-medium">Facturas Pendientes</div>
                                     <div class="summary-label">Facturas Pendientes</div>
                                 </div>
                                 <div class="summary-item">
                                     <div class="summary-value">85%</div>
+                                    <div class="body-medium">Tasa de Pago</div>
                                     <div class="summary-label">Tasa de Pago</div>
                                 </div>
                             </div>
+                            <div class="title-large mb-3">
                             <div class="section-title">
                                 <i class="fas fa-calendar-alt"></i>
                                 Facturación Mensual 2024
                             </div>
                             <div class="calendar-grid">
                                 <div class="month-card">
+                                    <div class="title-medium">Enero</div>
+                                    <div class="headline-small">$2,500</div>
+                                    <div class="status-badge paid">Pagado</div>
                                     <div class="month-name">Enero</div>
                                     <div class="month-amount">$2,500</div>
                                     <div class="month-status status-paid">Pagado</div>
@@ -3068,12 +3292,14 @@ def billing_page():
                                     <div class="month-amount">$2,100</div>
                                     <div class="month-status status-pending">Próximo</div>
                                 </div>
+                                <!-- Resto de las month-cards -->
                                 <!-- Continuar con los demás meses... -->
                             </div>
                             <div class="chart-container">
                                 <canvas id="billingChart"></canvas>
                             </div>
                         </div>
+                        <!-- Resto del contenido de facturación -->
                         <div class="billing-card">
                             <div class="section-title">
                                 <i class="fas fa-credit-card"></i>
@@ -3211,6 +3437,7 @@ def billing_page():
                             borderColor: '#FF0099',
                             backgroundColor: 'rgba(255, 0, 153, 0.1)',
                             tension: 0.4,
+                            fill: true
                             fill: true,
                             pointBackgroundColor: '#FF0099',
                             pointBorderColor: '#fff',
