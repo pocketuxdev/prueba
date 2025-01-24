@@ -411,13 +411,7 @@ def get_common_sidebar():
             }
             // Activar item actual según la ruta
             const path = window.location.pathname;
-            let route = path.substring(1) || 'dashboard';
-            
-            // Asegurar que 'profile' se maneje igual que las otras rutas
-            if (path === '/profile') {
-                route = 'profile';
-            }
-            
+            const route = path.substring(1) || 'dashboard';
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
@@ -2245,6 +2239,15 @@ def profile_page():
                             <div class="info-value">${{userData.roles}}</div>
                         </div>
                     `;
+
+                    // Activar el ícono de perfil
+                    const profileIcon = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
+                    if (profileIcon) {{
+                        document.querySelectorAll('.nav-item').forEach(item => {{
+                            item.classList.remove('active');
+                        }});
+                        profileIcon.classList.add('active');
+                    }}
                 }};
             </script>
         </body>
