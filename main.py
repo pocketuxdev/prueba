@@ -2205,9 +2205,8 @@ def profile_page():
                     }}
                     
                     const userData = JSON.parse(clientData);
-                    console.log('userData:', userData); // Para debug
                     
-                    // Actualizar nombre y rol
+                    // Actualizar nombre y cargo
                     document.getElementById('userName').textContent = userData.fullName;
                     document.getElementById('userRole').textContent = userData.position;
                     
@@ -2239,7 +2238,47 @@ def profile_page():
                             <div class="info-value">${{userData.roles}}</div>
                         </div>
                     `;
+                    
+                    // Activar el ítem del sidebar
+                    const path = window.location.pathname;
+                    const route = path.substring(1) || 'dashboard';
+                    const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
+                    if (currentItem) {{
+                        document.querySelectorAll('.nav-item').forEach(item => {{
+                            item.classList.remove('active');
+                        }});
+                        currentItem.classList.add('active');
+                    }}
                 }};
+
+                function handleNavigation(route) {{
+                    // Remover clase active de todos los items
+                    document.querySelectorAll('.nav-item').forEach(item => {{
+                        item.classList.remove('active');
+                    }});
+                    
+                    // Agregar clase active al item actual
+                    const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+                    if (currentItem) {{
+                        currentItem.classList.add('active');
+                    }}
+                    
+                    // Animación suave antes de la navegación
+                    document.body.style.opacity = '0.5';
+                    setTimeout(() => {{
+                        switch(route) {{
+                            case 'dashboard':
+                                window.location.href = '/dashboard';
+                                break;
+                            case 'profile':
+                                window.location.href = '/profile';
+                                break;
+                            case 'billing':
+                                window.location.href = '/billing';
+                                break;
+                        }}
+                    }}, 200);
+                }}
             </script>
         </body>
     </html>
