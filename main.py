@@ -376,7 +376,7 @@ def get_common_sidebar():
                 item.classList.remove('active');
             });
             // Agregar clase active al item actual
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
@@ -412,7 +412,7 @@ def get_common_sidebar():
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
@@ -763,14 +763,14 @@ def login_page():
                         const data = await response.json();
                         if (response.ok) {
                             messageDiv.className = 'success';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                            messageDiv.innerHTML = `<p>${{data.message}}</p>`;
                             localStorage.setItem('clientData', JSON.stringify(data.clientData));
                             setTimeout(() => {
                                 window.location.href = '/dashboard';
                             }, 1000);
                         } else {
                             messageDiv.className = 'error';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                            messageDiv.innerHTML = `<p>${{data.message}}</p>`;
                         }
                     } catch (error) {
                         messageDiv.className = 'error';
@@ -2259,36 +2259,36 @@ def reset_password_page():
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             
             <style>
-                :root {
+                :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
-                }
-                * {
+                }}
+                * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
                     font-family: 'Poppins', sans-serif;
-                }
-                body {
+                }}
+                body {{
                     min-height: 100vh;
                     background: var(--background-dark);
-                }
-                .container {
+                }}
+                .container {{
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     min-height: 100vh;
-                }
-                .logo-section {
+                }}
+                .logo-section {{
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     background: rgba(0, 0, 0, 0.5);
-                }
-                .logo {
+                }}
+                .logo {{
                     width: 400px;
                     height: auto;
                     filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
@@ -2297,15 +2297,15 @@ def reset_password_page():
                              logoRotate 12s linear infinite;
                              logoGlow 3s ease-in-out infinite;
                     transform-origin: center center;
-                }
-                .form-section {
+                }}
+                .form-section {{
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
                     background: rgba(255, 255, 255, 0.05);
-                }
-                .form-container {
+                }}
+                .form-container {{
                     background: rgba(40, 40, 40, 0.95);
                     padding: 2.5rem;
                     border-radius: 20px;
@@ -2315,20 +2315,20 @@ def reset_password_page():
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     backdrop-filter: blur(10px);
                     margin: 0 auto; /* Centrar el contenedor */
-                }
-                h1 {
+                }}
+                h1 {{
                     color: white;
                     font-size: 2rem;
                     text-align: center;
                     margin-bottom: 0.5rem;
-                }
-                .subtitle {
+                }}
+                .subtitle {{
                     color: var(--text-lighter);
                     text-align: center;
                     font-size: 0.9rem;
                     margin-bottom: 2rem;
-                }
-                .phone-input {
+                }}
+                .phone-input {{
                     display: flex;
                     align-items: stretch;
                     gap: 8px;
@@ -2338,8 +2338,8 @@ def reset_password_page():
                     border-radius: 12px;
                     border: 1px solid var(--border-color);
                     width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
-                }
-                .country-code {
+                }}
+                .country-code {{
                     display: flex;
                     align-items: center;
                     gap: 6px;
@@ -2350,8 +2350,8 @@ def reset_password_page():
                     height: 42px;
                     min-width: 90px; /* Ancho mínimo para el código de país */
                     flex-shrink: 0; /* Evitar que se encoja */
-                }
-                .country-code input {
+                }}
+                .country-code input {{
                     width: 50px;
                     background: transparent;
                     border: none;
@@ -2359,14 +2359,14 @@ def reset_password_page():
                     font-size: 0.9rem;
                     text-align: center;
                     padding: 0;
-                }
-                .country-flag {
+                }}
+                .country-flag {{
                     width: 24px;
                     height: 16px;
                     border-radius: 4px;
                     transition: all 0.3s ease;
-                }
-                .phone-number {
+                }}
+                .phone-number {{
                     flex: 1;
                     background: rgba(255, 255, 255, 0.1);
                     border: 1px solid var(--border-color);
@@ -2377,8 +2377,8 @@ def reset_password_page():
                     height: 42px;
                     width: 100%; /* Asegurar que ocupe el espacio restante */
                     min-width: 0; /* Permitir que se encoja si es necesario */
-                }
-                .submit-button {
+                }}
+                .submit-button {{
                     width: 100%;
                     padding: 1rem;
                     background: var(--primary-color);
@@ -2391,12 +2391,12 @@ def reset_password_page():
                     transition: all 0.3s ease;
                     text-transform: uppercase;
                     letter-spacing: 1px;
-                }
-                .submit-button:hover {
+                }}
+                .submit-button:hover {{
                     background: var(--primary-hover);
                     transform: translateY(-2px);
-                }
-                .back-link {
+                }}
+                .back-link {{
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -2410,14 +2410,14 @@ def reset_password_page():
                     border-radius: 20px;
                     background: rgba(255, 0, 153, 0.1);
                     border: 1px solid var(--border-color);
-                }
-                .back-link:hover {
+                }}
+                .back-link:hover {{
                     color: var(--primary-color);
                     background: rgba(255, 0, 153, 0.15);
                     border-color: var(--primary-color);
                     transform: translateY(-2px);
-                }
-                #message {
+                }}
+                #message {{
                     margin-top: 1rem;
                     text-align: center;
                     padding: 0.8rem;
@@ -2425,49 +2425,49 @@ def reset_password_page():
                     border-radius: 8px;
                     font-size: 0.9rem;
                     transition: all 0.3s ease;
-                }
-                .success {
+                }}
+                .success {{
                     background: rgba(0, 179, 104, 0.2);
                     border: 1px solid #00b368;
                     color: #00b368;
                     animation: successAnimation 0.3s ease-out forwards;
-                }
-                .error {
+                }}
+                .error {{
                     background: rgba(255, 0, 0, 0.2);
                     border: 1px solid #ff0000;
                     color: #ff0000;
                     animation: errorAnimation 0.3s ease-out forwards;
                     background: rgba(255, 68, 68, 0.2);
                     color: #ff4444;
-                }
-                @keyframes logoRotate {
-                    0% { transform: rotateY(0deg); }
-                    100% { transform: rotateY(360deg); }
-                }
-                @keyframes logoFloat {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-20px); }
-                }
-                @keyframes logoGlow {
-                    0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); }
-                    50% { filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); }
-                }
-                @media (max-width: 768px) {
-                    .container {
+                }}
+                @keyframes logoRotate {{
+                    0% {{ transform: rotateY(0deg); }}
+                    100% {{ transform: rotateY(360deg); }}
+                }}
+                @keyframes logoFloat {{
+                    0%, 100% {{ transform: translateY(0); }}
+                    50% {{ transform: translateY(-20px); }}
+                }}
+                @keyframes logoGlow {{
+                    0%, 100% {{ filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); }}
+                    50% {{ filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); }}
+                }}
+                @media (max-width: 768px) {{
+                    .container {{
                         grid-template-columns: 1fr;
-                    }
-                    .logo-section {
+                    }}
+                    .logo-section {{
                         display: none;
-                    }
-                    .form-section {
+                    }}
+                    .form-section {{
                         padding: 1.5rem;
-                    }
-                    .form-container {
+                    }}
+                    .form-container {{
                         padding: 2rem;
-                    }
-                }
+                    }}
+                }}
                 /* Validación del número */
-                .phone-validation {
+                .phone-validation {{
                     font-size: 0.85rem;
                     margin-top: 0.5rem;
                     padding: 0.5rem;
@@ -2476,78 +2476,78 @@ def reset_password_page():
                     align-items: center;
                     gap: 6px;
                     transition: all 0.3s ease;
-                }
-                .phone-validation.valid {
+                }}
+                .phone-validation.valid {{
                     color: #00b368;
                     background: rgba(0, 179, 104, 0.1);
-                }
-                .phone-validation.invalid {
+                }}
+                .phone-validation.invalid {{
                     color: #ff4444;
                     background: rgba(255, 68, 68, 0.1);
-                }
+                }}
                 /* Ajustes de espaciado */
-                .form-container {
+                .form-container {{
                     padding: 2rem;
                     max-width: 380px;
-                }
-                .phone-input {
+                }}
+                .phone-input {{
                     margin-bottom: 1rem;
-                }
-                .subtitle {
+                }}
+                .subtitle {{
                     margin-bottom: 1.5rem;
                     line-height: 1.4;
-                }
+                }}
                 /* Mejoras visuales */
-                .phone-number:focus, .country-code input:focus {
+                .phone-number:focus, .country-code input:focus {{
                     outline: none;
                     border-color: var(--primary-color);
                     box-shadow: 0 0 0 2px rgba(255, 0, 153, 0.2);
-                }
-                .submit-button:disabled {
+                }}
+                .submit-button:disabled {{
                     opacity: 0.7;
                     cursor: not-allowed;
-                }
+                }}
                 /* Animación para el mensaje de éxito */
-                @keyframes successAnimation {
-                    0% { 
+                @keyframes successAnimation {{
+                    0% {{ 
                         transform: scale(0.9);
                         opacity: 0;
-                    }
-                    50% { 
+                    }}
+                    50% {{ 
                         transform: scale(1.1);
-                    }
-                    100% { 
+                    }}
+                    100% {{ 
                         transform: scale(1);
                         opacity: 1;
-                    }
-                }
-                .success {
+                    }}
+                }}
+                .success {{
                     animation: successAnimation 0.3s ease-out forwards;
-                }
+                }}
                 /* Animaciones */
-                @keyframes errorAnimation {
-                    0% { 
+                @keyframes errorAnimation {{
+                    0% {{ 
                         transform: translateX(-10px);
                         opacity: 0;
-                    }
-                    50% { 
+                    }}
+                    50% {{ 
                         transform: translateX(10px);
-                    }
-                    100% { 
+                    }}
+                    100% {{ 
                         transform: translateX(0);
                         opacity: 1;
-                    }
-                }
+                    }}
+                }}
                 /* Estilos para inputs no válidos */
-                input:invalid {
+                input:invalid {{
                     border-color: #ff0000;
                     animation: shake 0.3s ease-in-out;
-                }
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    25% { transform: translateX(-5px); }
-                    75% { transform: translateX(5px); }
-                }
+                }}
+                @keyframes shake {{
+                    0%, 100% {{ transform: translateX(0); }}
+                    25% {{ transform: translateX(-5px); }}
+                    75% {{ transform: translateX(5px); }}
+                }}
             </style>
         </head>
         <body>
@@ -2601,72 +2601,72 @@ def reset_password_page():
             </div>
             <script>
                 // Country Codes Configuration
-                const countryCodeMap = {
+                const countryCodeMap = {{
                     '+57': 'co', '+52': 'mx', '+34': 'es', '+54': 'ar',
                     '+51': 'pe', '+56': 'cl', '+55': 'br', '+58': 've',
                     '+593': 'ec', '+502': 'gt', '+503': 'sv', '+504': 'hn',
                     '+505': 'ni', '+506': 'cr', '+507': 'pa', '+591': 'bo',
                     '+595': 'py', '+598': 'uy', '+1': 'us'
-                };
+                }};
                 // Initialize elements
                 const dialCodeInput = document.getElementById('dialCode');
                 const countryFlag = document.getElementById('countryFlag');
                 const phoneInput = document.getElementById('phone');
                 // Validación del número de teléfono
-                function validatePhoneNumber(number) {
+                function validatePhoneNumber(number) {{
                     // Eliminar espacios y caracteres especiales
                     number = number.replace(/[^0-9]/g, '');
                     return number.length >= 10 && number.length <= 12;
-                }
-                function updateValidationUI(isValid, message) {
+                }}
+                function updateValidationUI(isValid, message) {{
                     const validation = document.querySelector('.phone-validation');
                     const submitButton = document.getElementById('submitButton');
                     
-                    if (isValid) {
+                    if (isValid) {{
                         validation.className = 'phone-validation valid';
                         validation.innerHTML = '<i class="fas fa-check-circle"></i>' + message;
                         submitButton.disabled = false;
-                    } else {
+                    }} else {{
                         validation.className = 'phone-validation invalid';
                         validation.innerHTML = '<i class="fas fa-exclamation-circle"></i>' + message;
                         submitButton.disabled = true;
-                    }
-                }
+                    }}
+                }}
                 // Event listeners para validación en tiempo real
-                phoneInput.addEventListener('input', function() {
+                phoneInput.addEventListener('input', function() {{
                     const number = this.value;
                     const dialCode = dialCodeInput.value;
                     const isValidCode = countryCodeMap[dialCode];
                     
-                    if (!isValidCode) {
+                    if (!isValidCode) {{
                         updateValidationUI(false, 'Código de país no válido');
                         return;
-                    }
-                    if (validatePhoneNumber(number)) {
+                    }}
+                    if (validatePhoneNumber(number)) {{
                         updateValidationUI(true, 'Número válido');
-                    } else {
+                    }} else {{
                         updateValidationUI(false, 'El número debe tener entre 10 y 12 dígitos');
-                    }
-                });
-                dialCodeInput.addEventListener('input', function(e) {
+                    }}
+                }});
+                dialCodeInput.addEventListener('input', function(e) {{
                     let value = e.target.value;
-                    if (!value.startsWith('+')) {
+                    if (!value.startsWith('+')) {{
                         value = '+' + value;
-                    }
+                    }}
                     e.target.value = value;
                     
                     const countryCode = countryCodeMap[value];
-                    if (countryCode) {
-                        countryFlag.src = `https://flagcdn.com/w160/${countryCode}.png`;
-                        if (phoneInput.value) {
+                    if (countryCode) {{
+                        countryFlag.src = `https://flagcdn.com/w160/${{countryCode}}.png`;
+                        if (phoneInput.value) {{
                             validatePhoneNumber(phoneInput.value);
-                        }
-                    } else {
+                        }}
+                    }} else {{
                         updateValidationUI(false, 'Código de país no válido');
-                    }
-                });
+                    }}
+                }});
                 // Handle form submission
-                document.getElementById('resetForm').addEventListener('submit', async (e) => {
+                document.getElementById('resetForm').addEventListener('submit', async (e) => {{
                     e.preventDefault();
                     const fullNumber = dialCodeInput.value + phoneInput.value;
                     const submitButton = document.getElementById('submitButton');
@@ -2674,42 +2674,42 @@ def reset_password_page():
                     
                     submitButton.disabled = true;
                     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                    try {
-                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/resetPassword', {
+                    try {{
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/resetPassword', {{
                             method: 'POST',
-                            headers: {
+                            headers: {{
                                 'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ phone: fullNumber })
-                        });
-                        if (response.ok) {
+                            }},
+                            body: JSON.stringify({{ phone: fullNumber }})
+                        }});
+                        if (response.ok) {{
                             messageDiv.className = 'success';
                             messageDiv.innerHTML = `
                                 <i class="fas fa-check-circle"></i>
                                 Código enviado correctamente
                             `;
                             localStorage.setItem('resetPhoneNumber', fullNumber);
-                            setTimeout(() => {
+                            setTimeout(() => {{
                                 window.location.href = '/verify-code';
-                            }, 2000);
-                        } else {
+                            }}, 2000);
+                        }} else {{
                             messageDiv.className = 'error';
                             messageDiv.innerHTML = `
                                 <i class="fas fa-exclamation-circle"></i>
                                 Error al enviar el código
                             `;
-                        }
-                    } catch (error) {
+                        }}
+                    }} catch (error) {{
                         messageDiv.className = 'error';
                         messageDiv.innerHTML = `
                             <i class="fas fa-times-circle"></i>
                             Error de conexión
                         `;
-                    } finally {
+                    }} finally {{
                         submitButton.disabled = false;
                         submitButton.innerHTML = 'Enviar código';
-                    }
-                });
+                    }}
+                }});
             </script>
         </body>
     </html>
