@@ -375,19 +375,25 @@ def get_common_sidebar():
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
-            
             // Agregar clase active al item actual
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
-            
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
-            
-            // Redirección según la ruta
             setTimeout(() => {
-                window.location.href = '/' + (route === 'dashboard' ? '' : route);
+                switch(route) {
+                    case 'dashboard':
+                        window.location.href = '/dashboard';
+                        break;
+                    case 'profile':
+                        window.location.href = '/profile';
+                        break;
+                    case 'billing':
+                        window.location.href = '/billing';
+                        break;
+                }
             }, 200);
         }
         function handleLogout() {
@@ -403,34 +409,13 @@ def get_common_sidebar():
                 window.location.href = '/';
                 return;
             }
-            
-            // Obtener la ruta actual
+            // Activar item actual según la ruta
             const path = window.location.pathname;
-            let currentRoute = path.substring(1);
-            
-            // Limpiar clases active existentes
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Activar el ítem correspondiente a la ruta actual
-            let navItem;
-            switch(currentRoute) {
-                case 'profile':
-                    navItem = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
-                    break;
-                case 'billing':
-                    navItem = document.querySelector('[onclick="handleNavigation(\'billing\')"]');
-                    break;
-                default:
-                    // Si no hay ruta o es dashboard, activar dashboard
-                    navItem = document.querySelector('[onclick="handleNavigation(\'dashboard\')"]');
+            const route = path.substring(1) || 'dashboard';
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            if (currentItem) {
+                currentItem.classList.add('active');
             }
-            
-            if (navItem) {
-                navItem.classList.add('active');
-            }
-            
             // Restaurar opacidad del body
             document.body.style.opacity = '1';
         };
