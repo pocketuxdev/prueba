@@ -2210,7 +2210,7 @@ def profile_page():
                     // Verificar elementos y actualizar nombre y rol
                     const userNameElement = document.getElementById('userName');
                     const userRoleElement = document.getElementById('userRole');
-                    console.log('Elementos:', {{ userName: userNameElement, userRole: userRoleElement }});
+                    console.log('Elementos:', userNameElement, userRoleElement);
                     
                     if (userNameElement && userRoleElement) {{
                         userNameElement.textContent = userData.fullName;
