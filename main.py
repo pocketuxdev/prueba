@@ -1976,7 +1976,7 @@ def profile_page():
                     margin-top: 1rem;
                 }}
                 .action-btn {{
-                    padding: 0.8rem 1.5rem;
+                    padding: 0.8rem;
                     border: none;
                     border-radius: 10px;
                     font-size: 1rem;
@@ -1984,7 +1984,9 @@ def profile_page():
                     transition: all 0.3s ease;
                     display: flex;
                     align-items: center;
-                    gap: 0.5rem;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
                 }}
                 .btn-primary {{
                     background: var(--primary-color);
@@ -2056,11 +2058,9 @@ def profile_page():
                         <div class="action-buttons">
                             <button class="action-btn btn-primary">
                                 <i class="fas fa-edit"></i>
-                                Editar Perfil
                             </button>
                             <button class="action-btn btn-secondary">
                                 <i class="fas fa-cog"></i>
-                                Configuración
                             </button>
                         </div>
                     </div>
