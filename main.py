@@ -375,11 +375,14 @@ def get_common_sidebar():
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
-            // Agregar clase active al item actual
+            
+            // Agregar clase active al item actual y guardarlo en localStorage
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
+                localStorage.setItem('currentRoute', route);
             }
+            
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
@@ -410,29 +413,31 @@ def get_common_sidebar():
                 return;
             }
             
-            // Activar item actual según la ruta
+            // Obtener la ruta actual
             const path = window.location.pathname;
-            let route = path.substring(1) || 'dashboard';
+            let currentRoute = path.substring(1);
             
-            // Normalizar rutas específicas si es necesario
-            const routeMap = {
-                'profile': 'profile',
-                'billing': 'billing',
-                'dashboard': 'dashboard',
-                '': 'dashboard'
-            };
-            
-            route = routeMap[route] || route;
-            
-            // Remover active de todos los items primero
+            // Limpiar clases active existentes
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // Buscar y activar el item correspondiente
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
-            if (currentItem) {
-                currentItem.classList.add('active');
+            // Activar el ítem correspondiente a la ruta actual
+            let navItem;
+            switch(currentRoute) {
+                case 'profile':
+                    navItem = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
+                    break;
+                case 'billing':
+                    navItem = document.querySelector('[onclick="handleNavigation(\'billing\')"]');
+                    break;
+                default:
+                    // Si no hay ruta o es dashboard, activar dashboard
+                    navItem = document.querySelector('[onclick="handleNavigation(\'dashboard\')"]');
+            }
+            
+            if (navItem) {
+                navItem.classList.add('active');
             }
             
             // Restaurar opacidad del body
