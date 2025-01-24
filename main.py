@@ -383,17 +383,7 @@ def get_common_sidebar():
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
-                switch(route) {
-                    case 'dashboard':
-                        window.location.href = '/dashboard';
-                        break;
-                    case 'profile':
-                        window.location.href = '/profile';
-                        break;
-                    case 'billing':
-                        window.location.href = '/billing';
-                        break;
-                }
+                window.location.href = route === 'dashboard' ? '/' : `/${route}`;
             }, 200);
         }
         function handleLogout() {
