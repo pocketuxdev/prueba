@@ -383,7 +383,17 @@ def get_common_sidebar():
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
-                window.location.href = route === 'dashboard' ? '/' : `/${route}`;
+                switch(route) {
+                    case 'dashboard':
+                        window.location.href = '/dashboard';
+                        break;
+                    case 'profile':
+                        window.location.href = '/profile';
+                        break;
+                    case 'billing':
+                        window.location.href = '/billing';
+                        break;
+                }
             }, 200);
         }
         function handleLogout() {
@@ -401,7 +411,13 @@ def get_common_sidebar():
             }
             // Activar item actual según la ruta
             const path = window.location.pathname;
-            const route = path.substring(1) || 'dashboard';
+            let route = path.substring(1) || 'dashboard';
+            
+            // Asegurar que 'profile' se maneje igual que las otras rutas
+            if (path === '/profile') {
+                route = 'profile';
+            }
+            
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
