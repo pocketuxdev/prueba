@@ -2211,8 +2211,7 @@ def profile_page():
                     document.getElementById('userRole').textContent = userData.position;
                     
                     // Actualizar información personal
-                    const userInfo = document.getElementById('userInfo');
-                    userInfo.innerHTML = `
+                    document.getElementById('userInfo').innerHTML = `
                         <div class="info-item">
                             <div class="info-label">Email</div>
                             <div class="info-value">${{userData.email}}</div>
@@ -2240,11 +2239,11 @@ def profile_page():
                     `;
 
                     // Activar el ícono de perfil
-                    document.querySelectorAll('.nav-item').forEach(item => {{
-                        item.classList.remove('active');
-                    }});
                     const profileNav = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
                     if (profileNav) {{
+                        document.querySelectorAll('.nav-item').forEach(item => {{
+                            item.classList.remove('active');
+                        }});
                         profileNav.classList.add('active');
                     }}
                 }};
