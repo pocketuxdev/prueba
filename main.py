@@ -414,8 +414,11 @@ def get_common_sidebar():
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
             
-            // Activar el ítem correspondiente
-            activateNavItem(route);
+            // Agregar clase active al item actual
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            if (currentItem) {
+                currentItem.classList.add('active');
+            }
             
             document.body.style.opacity = '1';
         };
@@ -2204,41 +2207,33 @@ def profile_page():
             </div>
             <script>
                 window.onload = function() {{
-                    // Verificar autenticación
                     const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
                         window.location.href = '/';
                         return;
                     }}
                     
-                    // Activar item actual según la ruta
                     const path = window.location.pathname;
                     const route = path.substring(1) || 'dashboard';
                     
-                    // Activar el ítem correspondiente
-                    activateNavItem(route);
-                    
-                    document.body.style.opacity = '1';
-                }};
-
-                function activateNavItem(route) {{
-                    // Remover clase active de todos los items
-                    document.querySelectorAll('.nav-item').forEach(item => {{
-                        item.classList.remove('active');
-                    }});
-                    
-                    // Agregar clase active al item actual
                     const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
                     if (currentItem) {{
                         currentItem.classList.add('active');
                     }}
-                }}
+                    
+                    document.body.style.opacity = '1';
+                }};
 
                 function handleNavigation(route) {{
-                    // Activar el ítem correspondiente
-                    activateNavItem(route);
+                    document.querySelectorAll('.nav-item').forEach(item => {{
+                        item.classList.remove('active');
+                    }});
                     
-                    // Animación suave antes de la navegación
+                    const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
+                    if (currentItem) {{
+                        currentItem.classList.add('active');
+                    }}
+                    
                     document.body.style.opacity = '0.5';
                     setTimeout(() => {{
                         switch(route) {{
