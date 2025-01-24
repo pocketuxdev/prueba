@@ -409,14 +409,24 @@ def get_common_sidebar():
                 window.location.href = '/';
                 return;
             }
+            
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            
+            // Mapeo de rutas para manejar casos especiales
+            const routeMap = {
+                'dashboard': 'dashboard',
+                'profile': 'profile',
+                'billing': 'billing'
+            };
+            
+            const mappedRoute = routeMap[route] || route;
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${mappedRoute}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
-            // Restaurar opacidad del body
+            
             document.body.style.opacity = '1';
         };
     </script>
@@ -463,8 +473,7 @@ def login_page():
                     width: 100vw;
                     background: var(--background-dark);
                     color: var(--text-light);
-+                   overflow: hidden; /* Prevenir scroll */
-                    overflow: hidden;
+                    overflow: hidden; /* Prevenir scroll */
                 }
                 
                 /* Layout Components */
@@ -477,8 +486,7 @@ def login_page():
                     height: 100vh;
                     width: 100vw;
                     backdrop-filter: blur(10px);
-+                   overflow: hidden; /* Prevenir scroll en el contenedor */
-                    overflow: hidden;
+                    overflow: hidden; /* Prevenir scroll en el contenedor */
                 }
                 
                 /* Image Section */
@@ -632,11 +640,9 @@ def login_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
-+                       height: 100vh; /* Altura fija en móvil */
-+                       overflow: hidden; /* Prevenir scroll */
-                        height: 100vh;
+                        height: 100vh; /* Altura fija en móvil */
+                        overflow: hidden; /* Prevenir scroll */
                         width: 100vw;
-                        overflow: hidden;
                     }
                     
                     .image-section {
@@ -645,17 +651,14 @@ def login_page():
                     
                     .form-section {
                         padding: 1.5rem;
-+                       height: 100vh; /* Altura fija en móvil */
-+                       overflow: hidden; /* Prevenir scroll */
-                        height: 100vh;
+                        height: 100vh; /* Altura fija en móvil */
+                        overflow: hidden; /* Prevenir scroll */
                         width: 100vw;
-                        overflow: hidden;
                     }
                     
                     .login-container {
                         padding: 2rem;
-+                       max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
-                        max-height: 100vh;
+                        max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
                         width: 100%;
                     }
                     
