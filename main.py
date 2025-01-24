@@ -2208,7 +2208,7 @@ def profile_page():
                     
                     // Actualizar nombre y rol
                     document.getElementById('userName').textContent = userData.fullName || 'Usuario';
-                    document.getElementById('userRole').textContent = Array.isArray(userData.roles) ? userData.roles.join(', ') : 'Usuario';
+                    document.getElementById('userRole').textContent = userData.company?.position || 'Usuario';
                     
                     // Actualizar información personal
                     const userInfo = document.getElementById('userInfo');
@@ -2219,7 +2219,7 @@ def profile_page():
                         </div>
                         <div class="info-item">
                             <div class="info-label">Empresa</div>
-                            <div class="info-value">${{userData.company || 'No especificado'}}</div>
+                            <div class="info-value">${{userData.company?.name || 'No especificado'}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Teléfono</div>
@@ -2227,7 +2227,15 @@ def profile_page():
                         </div>
                         <div class="info-item">
                             <div class="info-label">Ubicación</div>
-                            <div class="info-value">${{userData.location || 'No especificado'}}</div>
+                            <div class="info-value">${{userData.address?.city || 'No especificado'}}, ${{userData.address?.state || ''}} ${{userData.address?.country || ''}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Departamento</div>
+                            <div class="info-value">${{userData.company?.department || 'No especificado'}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Cargo</div>
+                            <div class="info-value">${{userData.company?.position || 'No especificado'}}</div>
                         </div>
                     `;
                 }};
