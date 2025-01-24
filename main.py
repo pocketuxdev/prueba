@@ -376,7 +376,7 @@ def get_common_sidebar():
                 item.classList.remove('active');
             });
             // Agregar clase active al item actual
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
@@ -412,7 +412,7 @@ def get_common_sidebar():
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
@@ -763,14 +763,14 @@ def login_page():
                         const data = await response.json();
                         if (response.ok) {
                             messageDiv.className = 'success';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                            messageDiv.innerHTML = `<p>${{data.message}}</p>`;
                             localStorage.setItem('clientData', JSON.stringify(data.clientData));
                             setTimeout(() => {
                                 window.location.href = '/dashboard';
                             }, 1000);
                         } else {
                             messageDiv.className = 'error';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                            messageDiv.innerHTML = `<p>${{data.message}}</p>`;
                         }
                     } catch (error) {
                         messageDiv.className = 'error';
