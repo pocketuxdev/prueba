@@ -2205,10 +2205,11 @@ def profile_page():
                     }}
                     
                     const userData = JSON.parse(clientData);
+                    console.log('userData:', userData); // Para debug
                     
                     // Actualizar nombre y rol
                     document.getElementById('userName').textContent = userData.fullName || 'Usuario';
-                    document.getElementById('userRole').textContent = userData.company?.position || 'Usuario';
+                    document.getElementById('userRole').textContent = userData.roles?.[0] || 'Usuario';
                     
                     // Actualizar información personal
                     const userInfo = document.getElementById('userInfo');
@@ -2227,7 +2228,7 @@ def profile_page():
                         </div>
                         <div class="info-item">
                             <div class="info-label">Ubicación</div>
-                            <div class="info-value">${{userData.address?.city || 'No especificado'}}, ${{userData.address?.state || ''}} ${{userData.address?.country || ''}}</div>
+                            <div class="info-value">${{userData.address?.street || 'No especificado'}} ${{userData.address?.city ? ',' + userData.address?.city : ''}} ${{userData.address?.state || ''}} ${{userData.address?.country || ''}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Departamento</div>
