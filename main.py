@@ -2096,17 +2096,14 @@ def profile_page():
                             <div class="profile-role" id="userRole">Cargando...</div>
                             <div class="profile-stats">
                                 <div class="stat-item">
-                                    <div class="stat-value" id="consultasCount">28</div>
                                     <div class="stat-value">28</div>
                                     <div class="stat-label">Consultas</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-value" id="reportesCount">15</div>
                                     <div class="stat-value">15</div>
                                     <div class="stat-label">Reportes</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-value" id="satisfaccionCount">95%</div>
                                     <div class="stat-value">95%</div>
                                     <div class="stat-label">Satisfacción</div>
                                 </div>
@@ -2134,8 +2131,6 @@ def profile_page():
                                 <i class="fas fa-clock"></i>
                                 Actividad Reciente
                             </div>
-                            <div class="activity-list" id="actividadReciente">
-                                <!-- Se llenará con JavaScript -->
                             <div class="activity-list">
                                 <div class="activity-item">
                                     <div class="activity-icon">
@@ -2212,24 +2207,10 @@ def profile_page():
                     const userData = JSON.parse(clientData);
                     console.log('userData:', userData); // Para debug
                     
-                    // Actualizar nombre y cargo
                     // Actualizar nombre y rol
                     document.getElementById('userName').textContent = userData.fullName;
                     document.getElementById('userRole').textContent = userData.position;
                     
-                    // Actualizar estadísticas
-                    document.getElementById('consultasCount').textContent = '28';
-                    document.getElementById('reportesCount').textContent = '15';
-                    document.getElementById('satisfaccionCount').textContent = '95%';
-                    
-                    // Actualizar actividad reciente
-                    const actividadReciente = `
-                        <div class="activity-item">
-                            <i class="fas fa-file-alt"></i>
-                            <div class="activity-details">
-                                <h4>Reporte Generado</h4>
-                                <p>Hace 2 horas</p>
-                            </div>
                     // Actualizar información personal
                     const userInfo = document.getElementById('userInfo');
                     userInfo.innerHTML = `
@@ -2237,22 +2218,10 @@ def profile_page():
                             <div class="info-label">Email</div>
                             <div class="info-value">${{userData.email}}</div>
                         </div>
-                        <div class="activity-item">
-                            <i class="fas fa-user-md"></i>
-                            <div class="activity-details">
-                                <h4>Consulta Completada</h4>
-                                <p>Hace 5 horas</p>
-                            </div>
                         <div class="info-item">
                             <div class="info-label">Nombre Completo</div>
                             <div class="info-value">${{userData.fullName}}</div>
                         </div>
-                        <div class="activity-item">
-                            <i class="fas fa-chart-bar"></i>
-                            <div class="activity-details">
-                                <h4>Análisis de Datos</h4>
-                                <p>Ayer</p>
-                            </div>
                         <div class="info-item">
                             <div class="info-label">Empresa</div>
                             <div class="info-value">${{userData.company}}</div>
@@ -2270,17 +2239,6 @@ def profile_page():
                             <div class="info-value">${{userData.roles}}</div>
                         </div>
                     `;
-                    document.getElementById('actividadReciente').innerHTML = actividadReciente;
-                    
-                    // Activar navegación
-                    const path = window.location.pathname;
-                    const route = path.substring(1) || 'dashboard';
-                    const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
-                    if (currentItem) {{
-                        currentItem.classList.add('active');
-                    }}
-                    
-                    document.body.style.opacity = '1';
                 }};
             </script>
         </body>
