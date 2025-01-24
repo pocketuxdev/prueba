@@ -414,21 +414,24 @@ def get_common_sidebar():
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
             
-            // Mapeo de rutas para manejar casos especiales
-            const routeMap = {
-                'dashboard': 'dashboard',
-                'profile': 'profile',
-                'billing': 'billing'
-            };
-            
-            const mappedRoute = routeMap[route] || route;
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${mappedRoute}')"]`);
-            if (currentItem) {
-                currentItem.classList.add('active');
-            }
+            // Activar el ítem correspondiente
+            activateNavItem(route);
             
             document.body.style.opacity = '1';
         };
+
+        function activateNavItem(route) {
+            // Remover clase active de todos los items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Agregar clase active al item actual
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            if (currentItem) {
+                currentItem.classList.add('active');
+            }
+        }
     </script>
     """
 
@@ -2201,48 +2204,56 @@ def profile_page():
             </div>
             <script>
                 window.onload = function() {{
+                    // Verificar autenticación
                     const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
                         window.location.href = '/';
                         return;
                     }}
                     
-                    const userData = JSON.parse(clientData);
-                    console.log('userData:', userData); // Para debug
+                    // Activar item actual según la ruta
+                    const path = window.location.pathname;
+                    const route = path.substring(1) || 'dashboard';
                     
-                    // Actualizar nombre y rol
-                    document.getElementById('userName').textContent = userData.fullName;
-                    document.getElementById('userRole').textContent = userData.position;
+                    // Activar el ítem correspondiente
+                    activateNavItem(route);
                     
-                    // Actualizar información personal
-                    const userInfo = document.getElementById('userInfo');
-                    userInfo.innerHTML = `
-                        <div class="info-item">
-                            <div class="info-label">Email</div>
-                            <div class="info-value">${{userData.email}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Nombre Completo</div>
-                            <div class="info-value">${{userData.fullName}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Empresa</div>
-                            <div class="info-value">${{userData.company}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Departamento</div>
-                            <div class="info-value">${{userData.department}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Cargo</div>
-                            <div class="info-value">${{userData.position}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Roles</div>
-                            <div class="info-value">${{userData.roles}}</div>
-                        </div>
-                    `;
+                    document.body.style.opacity = '1';
                 }};
+
+                function activateNavItem(route) {{
+                    // Remover clase active de todos los items
+                    document.querySelectorAll('.nav-item').forEach(item => {{
+                        item.classList.remove('active');
+                    }});
+                    
+                    // Agregar clase active al item actual
+                    const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
+                    if (currentItem) {{
+                        currentItem.classList.add('active');
+                    }}
+                }}
+
+                function handleNavigation(route) {{
+                    // Activar el ítem correspondiente
+                    activateNavItem(route);
+                    
+                    // Animación suave antes de la navegación
+                    document.body.style.opacity = '0.5';
+                    setTimeout(() => {{
+                        switch(route) {{
+                            case 'dashboard':
+                                window.location.href = '/dashboard';
+                                break;
+                            case 'profile':
+                                window.location.href = '/profile';
+                                break;
+                            case 'billing':
+                                window.location.href = '/billing';
+                                break;
+                        }}
+                    }}, 200);
+                }}
             </script>
         </body>
     </html>
