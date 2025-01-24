@@ -1103,7 +1103,6 @@ def dashboard_page():
                     max-width: 100vw;
                     margin: 0 auto;
                     padding: 0.5rem 1rem;
-                    overflow-y: auto; /* Restaurar scroll vertical */
                     overflow-y: auto;
                     overflow-x: hidden;
                 }}
@@ -2015,17 +2014,72 @@ def profile_page():
                     .profile-header {{
                         flex-direction: column;
                         text-align: center;
+                        padding: 1rem;
+                        margin-bottom: 1rem;
                     }}
                     .profile-stats {{
                         justify-content: center;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                    }}
+                    .profile-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 1rem;
+                    }}
+                    .profile-section {{
+                        padding: 1rem;
+                    }}
+                    .section-title {{
+                        font-size: 1.1rem;
+                        margin-bottom: 1rem;
+                    }}
+                    .info-grid {{
+                        gap: 1rem;
+                    }}
+                    .info-item {{
+                        padding: 1rem;
+                    }}
+                    .activity-item {{
+                        padding: 0.8rem;
                     }}
                 }}
-            </style>
-            <!-- Agregar en el <style> de cada página -->
-            <style>
-                html {{
+                @media (min-width: 769px) and (max-width: 1024px) {{
+                    .dashboard-layout {{
+                        padding: 0 1.5rem 100px 1.5rem;
+                    }}
+                    
+                    .profile-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 1.5rem;
+                    }}
+                }}
+                /* Ajustes específicos para tablets */
+                @media (max-width: 1200px) {{
+                    .chart-container {{
+                        height: 350px;
+                    }}
+                }}
+                /* Ajustes para móvil */
+                @media (max-width: 768px) {{
+                    .chart-container {{
+                        height: 400px;
+                        padding: 1rem;
+                        margin: 1rem auto;
+                        width: 95%;
+                    }}
+                }}
+                /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
+                .main-content {{
+                    width: 100%;
+                    max-width: 100vw;
+                    margin: 0 auto;
+                    padding: 2rem 0;
+                }}
+                /* Ajustes para el scroll */
+                html, body {{
+                    overflow-x: hidden;
                     scroll-behavior: smooth;
-                    scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
+                    scroll-padding-bottom: 100px;
                 }}
             </style>
         </head>
