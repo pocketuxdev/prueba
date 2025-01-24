@@ -413,28 +413,24 @@ def get_common_sidebar():
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
-            
-            // Agregar clase active al item actual
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            
+            // Mapeo de rutas para manejar casos especiales
+            const routeMap = {
+                'dashboard': 'dashboard',
+                'profile': 'profile',
+                'billing': 'billing'
+            };
+            
+            const mappedRoute = routeMap[route] || route;
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${mappedRoute}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
+            // Restaurar opacidad del body
             
             document.body.style.opacity = '1';
         };
-
-        function activateNavItem(route) {
-            // Remover clase active de todos los items
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Agregar clase active al item actual
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
-            if (currentItem) {
-                currentItem.classList.add('active');
-            }
-        }
     </script>
     """
 
@@ -479,6 +475,8 @@ def login_page():
                     width: 100vw;
                     background: var(--background-dark);
                     color: var(--text-light);
++                   overflow: hidden; /* Prevenir scroll */
+                    overflow: hidden;
                     overflow: hidden; /* Prevenir scroll */
                 }
                 
@@ -492,6 +490,8 @@ def login_page():
                     height: 100vh;
                     width: 100vw;
                     backdrop-filter: blur(10px);
++                   overflow: hidden; /* Prevenir scroll en el contenedor */
+                    overflow: hidden;
                     overflow: hidden; /* Prevenir scroll en el contenedor */
                 }
                 
@@ -646,9 +646,13 @@ def login_page():
                 @media (max-width: 768px) {
                     .container {
                         grid-template-columns: 1fr;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
+                        height: 100vh;
                         height: 100vh; /* Altura fija en móvil */
                         overflow: hidden; /* Prevenir scroll */
                         width: 100vw;
+                        overflow: hidden;
                     }
                     
                     .image-section {
@@ -657,13 +661,19 @@ def login_page():
                     
                     .form-section {
                         padding: 1.5rem;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
+                        height: 100vh;
                         height: 100vh; /* Altura fija en móvil */
                         overflow: hidden; /* Prevenir scroll */
                         width: 100vw;
+                        overflow: hidden;
                     }
                     
                     .login-container {
                         padding: 2rem;
++                       max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
+                        max-height: 100vh;
                         max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
                         width: 100%;
                     }
@@ -2213,42 +2223,42 @@ def profile_page():
                         return;
                     }}
                     
-                    const path = window.location.pathname;
-                    const route = path.substring(1) || 'dashboard';
+                    const userData = JSON.parse(clientData);
+                    console.log('userData:', userData); // Para debug
                     
-                    const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
-                    if (currentItem) {{
-                        currentItem.classList.add('active');
-                    }}
+                    // Actualizar nombre y rol
+                    document.getElementById('userName').textContent = userData.fullName;
+                    document.getElementById('userRole').textContent = userData.position;
                     
-                    document.body.style.opacity = '1';
+                    // Actualizar información personal
+                    const userInfo = document.getElementById('userInfo');
+                    userInfo.innerHTML = `
+                        <div class="info-item">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">${{userData.email}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Nombre Completo</div>
+                            <div class="info-value">${{userData.fullName}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Empresa</div>
+                            <div class="info-value">${{userData.company}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Departamento</div>
+                            <div class="info-value">${{userData.department}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Cargo</div>
+                            <div class="info-value">${{userData.position}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Roles</div>
+                            <div class="info-value">${{userData.roles}}</div>
+                        </div>
+                    `;
                 }};
-
-                function handleNavigation(route) {{
-                    document.querySelectorAll('.nav-item').forEach(item => {{
-                        item.classList.remove('active');
-                    }});
-                    
-                    const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
-                    if (currentItem) {{
-                        currentItem.classList.add('active');
-                    }}
-                    
-                    document.body.style.opacity = '0.5';
-                    setTimeout(() => {{
-                        switch(route) {{
-                            case 'dashboard':
-                                window.location.href = '/dashboard';
-                                break;
-                            case 'profile':
-                                window.location.href = '/profile';
-                                break;
-                            case 'billing':
-                                window.location.href = '/billing';
-                                break;
-                        }}
-                    }}, 200);
-                }}
             </script>
         </body>
     </html>
