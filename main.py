@@ -2219,16 +2219,12 @@ def profile_page():
                             <div class="info-value">${{userData.email || 'No especificado'}}</div>
                         </div>
                         <div class="info-item">
+                            <div class="info-label">Nombre Completo</div>
+                            <div class="info-value">${{userData.fullName || 'No especificado'}}</div>
+                        </div>
+                        <div class="info-item">
                             <div class="info-label">Empresa</div>
                             <div class="info-value">${{userData.company?.name || 'No especificado'}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Teléfono</div>
-                            <div class="info-value">${{userData.phone || 'No especificado'}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Ubicación</div>
-                            <div class="info-value">${{userData.address?.street || 'No especificado'}} ${{userData.address?.city ? ',' + userData.address?.city : ''}} ${{userData.address?.state || ''}} ${{userData.address?.country || ''}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Departamento</div>
@@ -2237,6 +2233,18 @@ def profile_page():
                         <div class="info-item">
                             <div class="info-label">Cargo</div>
                             <div class="info-value">${{userData.company?.position || 'No especificado'}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Rol</div>
+                            <div class="info-value">${{userData.roles?.join(', ') || 'No especificado'}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Idioma</div>
+                            <div class="info-value">${{userData.preferences?.language || 'No especificado'}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Zona Horaria</div>
+                            <div class="info-value">${{userData.preferences?.timezone || 'No especificado'}}</div>
                         </div>
                     `;
                 }};
