@@ -2208,43 +2208,35 @@ def profile_page():
                     console.log('userData:', userData); // Para debug
                     
                     // Actualizar nombre y rol
-                    document.getElementById('userName').textContent = userData.fullName || 'Usuario';
-                    document.getElementById('userRole').textContent = userData.roles?.[0] || 'Usuario';
+                    document.getElementById('userName').textContent = userData.fullName;
+                    document.getElementById('userRole').textContent = userData.position;
                     
                     // Actualizar información personal
                     const userInfo = document.getElementById('userInfo');
                     userInfo.innerHTML = `
                         <div class="info-item">
                             <div class="info-label">Email</div>
-                            <div class="info-value">${{userData.email || 'No especificado'}}</div>
+                            <div class="info-value">${{userData.email}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Nombre Completo</div>
-                            <div class="info-value">${{userData.fullName || 'No especificado'}}</div>
+                            <div class="info-value">${{userData.fullName}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Empresa</div>
-                            <div class="info-value">${{userData.company?.name || 'No especificado'}}</div>
+                            <div class="info-value">${{userData.company}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Departamento</div>
-                            <div class="info-value">${{userData.company?.department || 'No especificado'}}</div>
+                            <div class="info-value">${{userData.department}}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label">Cargo</div>
-                            <div class="info-value">${{userData.company?.position || 'No especificado'}}</div>
+                            <div class="info-value">${{userData.position}}</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label">Rol</div>
-                            <div class="info-value">${{userData.roles?.join(', ') || 'No especificado'}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Idioma</div>
-                            <div class="info-value">${{userData.preferences?.language || 'No especificado'}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Zona Horaria</div>
-                            <div class="info-value">${{userData.preferences?.timezone || 'No especificado'}}</div>
+                            <div class="info-label">Roles</div>
+                            <div class="info-value">${{userData.roles}}</div>
                         </div>
                     `;
                 }};
