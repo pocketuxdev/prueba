@@ -2239,11 +2239,13 @@ def profile_page():
                     `;
 
                     // Activar el ícono de perfil
+                    const navItems = document.querySelectorAll('.nav-item');
+                    navItems.forEach(item => {{
+                        item.classList.remove('active');
+                    }});
+                    
                     const profileNav = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
                     if (profileNav) {{
-                        document.querySelectorAll('.nav-item').forEach(item => {{
-                            item.classList.remove('active');
-                        }});
                         profileNav.classList.add('active');
                     }}
                 }};
