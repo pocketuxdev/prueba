@@ -376,27 +376,18 @@ def get_common_sidebar():
                 item.classList.remove('active');
             });
             
-            // Agregar clase active al item actual y guardarlo en localStorage
+            // Agregar clase active al item actual
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
-                localStorage.setItem('currentRoute', route);
             }
             
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
+            
+            // Redirección según la ruta
             setTimeout(() => {
-                switch(route) {
-                    case 'dashboard':
-                        window.location.href = '/dashboard';
-                        break;
-                    case 'profile':
-                        window.location.href = '/profile';
-                        break;
-                    case 'billing':
-                        window.location.href = '/billing';
-                        break;
-                }
+                window.location.href = '/' + (route === 'dashboard' ? '' : route);
             }, 200);
         }
         function handleLogout() {
