@@ -409,13 +409,32 @@ def get_common_sidebar():
                 window.location.href = '/';
                 return;
             }
+            
             // Activar item actual según la ruta
             const path = window.location.pathname;
-            const route = path.substring(1) || 'dashboard';
+            let route = path.substring(1) || 'dashboard';
+            
+            // Normalizar rutas específicas si es necesario
+            const routeMap = {
+                'profile': 'profile',
+                'billing': 'billing',
+                'dashboard': 'dashboard',
+                '': 'dashboard'
+            };
+            
+            route = routeMap[route] || route;
+            
+            // Remover active de todos los items primero
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Buscar y activar el item correspondiente
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
+            
             // Restaurar opacidad del body
             document.body.style.opacity = '1';
         };
