@@ -376,7 +376,7 @@ def get_common_sidebar():
                 item.classList.remove('active');
             });
             // Agregar clase active al item actual
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
@@ -412,7 +412,7 @@ def get_common_sidebar():
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
