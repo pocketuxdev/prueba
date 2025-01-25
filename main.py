@@ -1108,17 +1108,14 @@ def dashboard_page():
     return f"""
     <html>
         <head>
-            <title>POCKET UX - Dashboard</title>
             <title>Tiffany Medical Assistant - Dashboard</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- Agregar Poppins junto a los recursos existentes -->
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             
             <style>
-                /* Agregar variables globales manteniendo los estilos existentes */
                 :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
@@ -1127,16 +1124,14 @@ def dashboard_page():
                     --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
-                /* Actualizar solo la fuente base */
+
                 * {{
-                    font-family: 'Poppins', sans-serif;
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
                     font-family: 'Poppins', sans-serif;  /* Solo agregamos esta línea */
                 }}
-                /* Mantener TODOS los demás estilos existentes exactamente como estaban */
-                /* ... resto del código CSS original sin cambios ... */
+
                 body {{
                     background: var(--background-dark);
                     color: var(--text-light);
@@ -1723,33 +1718,6 @@ def dashboard_page():
                 }}
             </style>
         </head>
-        <!-- Mantener todo el HTML y estructura existente sin cambios -->
-        {get_common_sidebar()}
-        <div class="dashboard-layout">
-            <div class="main-content">
-                <div class="header">
-                    <h1>
-                        <i class="fas fa-chart-line header-icon"></i>
-                        Dashboard Tiffany Medical Assistant
-                    </h1>
-                </div>
-                
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-value">30%</div>
-                        <div class="kpi-label">Incremento en Follow-ups</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-value">25%</div>
-                        <div class="kpi-label">Reducción Tareas Admin</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-value">5min</div>
-                        <div class="kpi-label">Tiempo Onboarding</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-value">80%</div>
-                        <div class="kpi-label">Resolución WhatsApp</div>
         <body>
             {get_common_sidebar()}
             <div class="dashboard-layout">
@@ -1760,50 +1728,25 @@ def dashboard_page():
                             Dashboard Tiffany Medical Assistant
                         </h1>
                     </div>
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="chart-title">Engagement de Usuarios Activos</div>
-                        <div class="chart-container">
-                            <canvas id="userEngagementChart"></canvas>
                     
                     <div class="kpi-grid">
                         <div class="kpi-card">
                             <div class="kpi-value">30%</div>
                             <div class="kpi-label">Incremento en Follow-ups</div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Rendimiento de Automatización</div>
-                        <div class="chart-container">
-                            <canvas id="automationChart"></canvas>
                         <div class="kpi-card">
                             <div class="kpi-value">25%</div>
                             <div class="kpi-label">Reducción Tareas Admin</div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
-                        <div class="chart-container">
-                            <canvas id="patientCareChart"></canvas>
                         <div class="kpi-card">
                             <div class="kpi-value">5min</div>
                             <div class="kpi-label">Tiempo Onboarding</div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Reducción de Tareas Administrativas</div>
-                        <div class="chart-container">
-                            <canvas id="efficiencyChart"></canvas>
                         <div class="kpi-card">
                             <div class="kpi-value">80%</div>
                             <div class="kpi-label">Resolución WhatsApp</div>
                         </div>
                     </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Estado de Capacitación del Personal</div>
-                        <div class="chart-container">
-                            <canvas id="trainingChart"></canvas>
                     <div class="metrics-grid">
                         <div class="metric-card">
                             <div class="chart-title">Engagement de Usuarios Activos</div>
@@ -1811,33 +1754,18 @@ def dashboard_page():
                                 <canvas id="userEngagementChart"></canvas>
                             </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Rendimiento del Sistema</div>
-                        <div class="chart-container">
-                            <canvas id="systemPerformanceChart"></canvas>
                         <div class="metric-card">
                             <div class="chart-title">Rendimiento de Automatización</div>
                             <div class="chart-container">
                                 <canvas id="automationChart"></canvas>
                             </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Adopción de Nuevas Funcionalidades</div>
-                        <div class="chart-container">
-                            <canvas id="adoptionChart"></canvas>
                         <div class="metric-card">
                             <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
                             <div class="chart-container">
                                 <canvas id="patientCareChart"></canvas>
                             </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Insights Generales</div>
-                        <div class="chart-container">
-                            <canvas id="insightsChart"></canvas>
                         <div class="metric-card">
                             <div class="chart-title">Reducción de Tareas Administrativas</div>
                             <div class="chart-container">
@@ -1871,17 +1799,13 @@ def dashboard_page():
                     </div>
                 </div>
             </div>
-        </div>
-        <script>
-            {charts_js}
-        </script>
-    </body>
             <script>
                 {charts_js}
             </script>
         </body>
     </html>
     """
+
 
 @rt('/profile')
 def profile_page():
