@@ -1172,15 +1172,15 @@ def dashboard_page():
                     backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
-                    font-size: 2.2rem;
-                    font-weight: 600;
-                    color: white;
-                    font-family: 'Poppins';
-                    text-transform: capitalize;
-                    letter-spacing: 1px;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.8rem;
+                    font-size: 2.2rem !important;
+                    font-weight: 600 !important;
+                    color: white !important;
+                    font-family: 'Poppins' !important;
+                    text-transform: capitalize !important;
+                    letter-spacing: 1px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 0.8rem !important;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
