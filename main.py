@@ -1179,11 +1179,12 @@ def dashboard_page():
                     text-transform: capitalize !important;
                     letter-spacing: 1px !important;
                     display: flex !important;
-                    align-items: center !important;
+                    align-items: flex-start !important;  /* Cambiado de center a flex-start */
                     gap: 0.8rem !important;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
+                    margin-top: 0.5rem !important;  /* Ajuste para alinear con el texto */
                 }}
                 .metrics-grid {{
                     display: grid;
@@ -2841,11 +2842,12 @@ def billing_page():
                     text-transform: capitalize !important;
                     letter-spacing: 1px !important;
                     display: flex !important;
-                    align-items: center !important;
-                    gap: 0.8rem !important; /* Reducido de 1rem */
+                    align-items: flex-start !important;  /* Cambiado de center a flex-start */
+                    gap: 0.8rem !important;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
+                    margin-top: 0.5rem !important;  /* Ajuste para alinear con el texto */
                 }}
                 .billing-grid {{
                     display: grid;
