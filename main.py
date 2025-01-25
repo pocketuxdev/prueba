@@ -2198,51 +2198,69 @@ def profile_page():
             </div>
             <script>
                 window.onload = function() {{
+                    // Verificar autenticación
                     const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
                         window.location.href = '/';
                         return;
                     }}
                     
+                    // Obtener y parsear datos del usuario
                     const userData = JSON.parse(clientData);
                     
                     // Actualizar nombre y rol
-                    document.getElementById('userName').textContent = userData.fullName;
-                    document.getElementById('userRole').textContent = userData.position;
+                    const userNameElement = document.getElementById('userName');
+                    const userRoleElement = document.getElementById('userRole');
+                    
+                    if (userNameElement && userRoleElement) {{
+                        userNameElement.textContent = userData.fullName;
+                        userRoleElement.textContent = userData.position;
+                    }}
                     
                     // Actualizar información personal
-                    document.getElementById('userInfo').innerHTML = `
-                        <div class="info-item">
-                            <div class="info-label">Email</div>
-                            <div class="info-value">${{userData.email}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Nombre Completo</div>
-                            <div class="info-value">${{userData.fullName}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Empresa</div>
-                            <div class="info-value">${{userData.company}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Departamento</div>
-                            <div class="info-value">${{userData.department}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Cargo</div>
-                            <div class="info-value">${{userData.position}}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Roles</div>
-                            <div class="info-value">${{userData.roles}}</div>
-                        </div>
-                    `;
+                    const userInfo = document.getElementById('userInfo');
+                    if (userInfo) {{
+                        userInfo.innerHTML = `
+                            <div class="info-item">
+                                <div class="info-label">Email</div>
+                                <div class="info-value">${{userData.email}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Nombre Completo</div>
+                                <div class="info-value">${{userData.fullName}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Empresa</div>
+                                <div class="info-value">${{userData.company}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Departamento</div>
+                                <div class="info-value">${{userData.department}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Cargo</div>
+                                <div class="info-value">${{userData.position}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Roles</div>
+                                <div class="info-value">${{userData.roles}}</div>
+                            </div>
+                        `;
+                    }}
 
                     // Activar el ícono de profile
-                    document.querySelectorAll('.nav-item').forEach(item => {{
+                    const navItems = document.querySelectorAll('.nav-item');
+                    navItems.forEach(item => {{
                         item.classList.remove('active');
                     }});
-                    document.querySelector('[onclick="handleNavigation(\'profile\')"]').classList.add('active');
+                    
+                    const profileIcon = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
+                    if (profileIcon) {{
+                        profileIcon.classList.add('active');
+                    }}
+
+                    // Restaurar opacidad del body
+                    document.body.style.opacity = '1';
                 }};
             </script>
         </body>
