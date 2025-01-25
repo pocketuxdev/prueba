@@ -135,7 +135,7 @@ def get_common_sidebar():
             
             .header h1 {
                 font-size: 1.5rem;
-                font-family: 'Playfair Display', serif;
+                font-family: 'Poppins', sans-serif;
             }
             
             .kpi-grid {
@@ -189,7 +189,7 @@ def get_common_sidebar():
                 text-align: center;
                 margin-bottom: 1.5rem;
                 font-weight: 500;
-                font-family: 'Playfair Display', serif;
+                font-family: 'Poppins', sans-serif;
             }
             
             .chart-container {
@@ -1133,7 +1133,7 @@ def dashboard_page():
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
-                    font-family: 'Poppins', sans-serif;  /* Solo agregamos esta línea */
+                    font-family: 'Poppins', sans-serif;
                 }}
 
                 body {{
@@ -1159,15 +1159,15 @@ def dashboard_page():
                 }}
                 .header {{
                     display: flex;
-                    align-items: flex-start; /* Alinear al inicio */
+                    align-items: flex-start;
                     align-items: flex-start;
                     padding: 1.5rem;
                     background: rgba(20, 20, 20, 0.8);
                     border-radius: 20px;
                     justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 1rem; /* Reducido de 2rem */
-                    padding: 1rem; /* Reducido de 1.5rem */
+                    margin-bottom: 1rem;
+                    padding: 1rem;
                     background: rgba(40, 40, 40, 0.95);
                     background: rgba(255, 255, 255, 0.05);
                     border-radius: 15px;
@@ -1178,14 +1178,13 @@ def dashboard_page():
                 .header h1 {{
                     font-size: 2.2rem;
                     font-weight: 600;
-                    font-size: 1.5rem; /* Reducido de 2rem */
                     color: white;
-                    font-family: 'Playfair Display', serif; /* Fuente más elegante */
-                    font-family: 'Playfair Display', serif;
-                    line-height: 1.2;
+                    font-family: 'Poppins', sans-serif;
+                    text-transform: lowercase;
+                    letter-spacing: 1px;
                     display: flex;
                     align-items: center;
-                    gap: 0.8rem; /* Reducido de 1rem */
+                    gap: 0.8rem;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -1352,21 +1351,21 @@ def dashboard_page():
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    justify-content: flex-start; /* Cambiado a flex-start para mejor control del espacio */
+                    justify-content: flex-start;
                     overflow: hidden;
                 }}
                 .chart-title {{
                     font-size: 1.2rem;
-                    margin: 0 0 1rem 0; /* Margen uniforme */
+                    margin: 0 0 1rem 0;
                     text-align: center;
                     width: 100%;
                     padding: 0.5rem;
-                    white-space: normal; /* Permitir múltiples líneas */
-                    overflow-wrap: break-word; /* Romper palabras largas si es necesario */
+                    white-space: normal;
+                    overflow-wrap: break-word;
                     word-wrap: break-word;
-                    min-height: 2.5em; /* Altura mínima para dos líneas */
+                    min-height: 2.5em;
                     display: -webkit-box;
-                    -webkit-line-clamp: 2; /* Máximo dos líneas */
+                    -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                     line-height: 1.2;
@@ -1385,11 +1384,11 @@ def dashboard_page():
                 canvas {{
                     width: 100% !important;
                     height: 100% !important;
-                    max-height: calc(100% - 2rem) !important; /* Prevenir desbordamiento */
+                    max-height: calc(100% - 2rem) !important;
                 }}
                 .kpi-grid {{
                     display: grid;
-                    grid-template-columns: repeat(4, 1fr); /* Cambio de 1fr a repeat(4, 1fr) */
+                    grid-template-columns: repeat(4, 1fr);
                     gap: 1rem;
                     margin-bottom: 1.5rem;
                 }}
@@ -1406,15 +1405,15 @@ def dashboard_page():
                 }}
                 .kpi-value {{
                     font-size: 3rem;
-                    font-size: 1.8rem; /* Reducido de 2rem */
+                    font-size: 1.8rem;
                     font-weight: 600;
                     color: #FF0099;
                     margin-bottom: 0.5rem;
-                    margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+                    margin-bottom: 0.3rem;
                 }}
                 .kpi-label {{
                     font-size: 1.2rem;
-                    font-size: 0.9rem; /* Reducido de 1.1rem */
+                    font-size: 0.9rem;
                     color: rgba(255, 255, 255, 0.8);
                     font-weight: 400;
                 }}
@@ -1510,9 +1509,9 @@ def dashboard_page():
                 .chart-container {{
                     height: 300px;
                     margin-top: 2rem;
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
+                    height: 250px;
+                    margin: 1rem 0;
+                    padding: 0.8rem;
                 }}
                 .payment-methods {{
                     display: grid;
@@ -1702,9 +1701,9 @@ def dashboard_page():
                     background: rgba(255, 255, 255, 0.02);
                     border-radius: 15px;
                     border: 1px solid rgba(255, 0, 153, 0.1);
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
+                    height: 250px;
+                    margin: 1rem 0;
+                    padding: 0.8rem;
                 }}
                 @media (max-width: 768px) {{
                     .payment-stats {{
@@ -1722,83 +1721,90 @@ def dashboard_page():
                     scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
                 }}
             </style>
+        
         </head>
         <body>
             {get_common_sidebar()}
-            <div class="dashboard-layout">
-                <div class="main-content">
-                    <div class="header">
-                        <h1>
-                            <i class="fas fa-chart-line header-icon"></i>
-                            Dashboard Tiffany Medical Assistant
-                        </h1>
-                    </div>
-                    
-                    <div class="kpi-grid">
-                        <div class="kpi-card">
-                            <div class="kpi-value">30%</div>
-                            <div class="kpi-label">Incremento en Follow-ups</div>
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">Tiffany Medical Assistant</h1>
+                    <!-- Resto del contenido del dashboard se mantiene igual -->
+                </div>
+                <div class="dashboard-layout">
+                    <div class="main-content">
+                        <div class="header">
+                            <h1>
+                                <i class="fas fa-chart-line header-icon"></i>
+                                Dashboard Tiffany Medical Assistant
+                            </h1>
                         </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value">25%</div>
-                            <div class="kpi-label">Reducción Tareas Admin</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value">5min</div>
-                            <div class="kpi-label">Tiempo Onboarding</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value">80%</div>
-                            <div class="kpi-label">Resolución WhatsApp</div>
-                        </div>
-                    </div>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="chart-title">Engagement de Usuarios Activos</div>
-                            <div class="chart-container">
-                                <canvas id="userEngagementChart"></canvas>
+                        
+                        <div class="kpi-grid">
+                            <div class="kpi-card">
+                                <div class="kpi-value">30%</div>
+                                <div class="kpi-label">Incremento en Follow-ups</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-value">25%</div>
+                                <div class="kpi-label">Reducción Tareas Admin</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-value">5min</div>
+                                <div class="kpi-label">Tiempo Onboarding</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-value">80%</div>
+                                <div class="kpi-label">Resolución WhatsApp</div>
                             </div>
                         </div>
-                        <div class="metric-card">
-                            <div class="chart-title">Rendimiento de Automatización</div>
-                            <div class="chart-container">
-                                <canvas id="automationChart"></canvas>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="chart-title">Engagement de Usuarios Activos</div>
+                                <div class="chart-container">
+                                    <canvas id="userEngagementChart"></canvas>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
-                            <div class="chart-container">
-                                <canvas id="patientCareChart"></canvas>
+                            <div class="metric-card">
+                                <div class="chart-title">Rendimiento de Automatización</div>
+                                <div class="chart-container">
+                                    <canvas id="automationChart"></canvas>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-title">Reducción de Tareas Administrativas</div>
-                            <div class="chart-container">
-                                <canvas id="efficiencyChart"></canvas>
+                            <div class="metric-card">
+                                <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
+                                <div class="chart-container">
+                                    <canvas id="patientCareChart"></canvas>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-title">Estado de Capacitación del Personal</div>
-                            <div class="chart-container">
-                                <canvas id="trainingChart"></canvas>
+                            <div class="metric-card">
+                                <div class="chart-title">Reducción de Tareas Administrativas</div>
+                                <div class="chart-container">
+                                    <canvas id="efficiencyChart"></canvas>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-title">Rendimiento del Sistema</div>
-                            <div class="chart-container">
-                                <canvas id="systemPerformanceChart"></canvas>
+                            <div class="metric-card">
+                                <div class="chart-title">Estado de Capacitación del Personal</div>
+                                <div class="chart-container">
+                                    <canvas id="trainingChart"></canvas>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-title">Adopción de Nuevas Funcionalidades</div>
-                            <div class="chart-container">
-                                <canvas id="adoptionChart"></canvas>
+                            <div class="metric-card">
+                                <div class="chart-title">Rendimiento del Sistema</div>
+                                <div class="chart-container">
+                                    <canvas id="systemPerformanceChart"></canvas>
+                                </div>
                             </div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="chart-title">Insights Generales</div>
-                            <div class="chart-container">
-                                <canvas id="insightsChart"></canvas>
+                            <div class="metric-card">
+                                <div class="chart-title">Adopción de Nuevas Funcionalidades</div>
+                                <div class="chart-container">
+                                    <canvas id="adoptionChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="chart-title">Insights Generales</div>
+                                <div class="chart-container">
+                                    <canvas id="insightsChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2316,36 +2322,36 @@ def reset_password_page():
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             
             <style>
-                :root {
+                :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
                     --background-dark: #000000;
                     --text-light: rgba(255, 255, 255, 0.8);
                     --text-lighter: rgba(255, 255, 255, 0.5);
                     --border-color: rgba(255, 0, 153, 0.2);
-                }
-                * {
+                }}
+                * {{
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
                     font-family: 'Poppins', sans-serif;
-                }
-                body {
+                }}
+                body {{
                     min-height: 100vh;
                     background: var(--background-dark);
-                }
-                .container {
+                }}
+                .container {{
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     min-height: 100vh;
-                }
-                .logo-section {
+                }}
+                .logo-section {{
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     background: rgba(0, 0, 0, 0.5);
-                }
-                .logo {
+                }}
+                .logo {{
                     width: 400px;
                     height: auto;
                     filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
@@ -2354,15 +2360,15 @@ def reset_password_page():
                              logoRotate 12s linear infinite;
                              logoGlow 3s ease-in-out infinite;
                     transform-origin: center center;
-                }
-                .form-section {
+                }}
+                .form-section {{
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     padding: 2rem;
                     background: rgba(255, 255, 255, 0.05);
-                }
-                .form-container {
+                }}
+                .form-container {{
                     background: rgba(40, 40, 40, 0.95);
                     padding: 2.5rem;
                     border-radius: 20px;
@@ -2372,20 +2378,20 @@ def reset_password_page():
                     border: 1px solid rgba(255, 0, 153, 0.1);
                     backdrop-filter: blur(10px);
                     margin: 0 auto; /* Centrar el contenedor */
-                }
-                h1 {
+                }}
+                h1 {{
                     color: white;
                     font-size: 2rem;
                     text-align: center;
                     margin-bottom: 0.5rem;
-                }
-                .subtitle {
+                }}
+                .subtitle {{
                     color: var(--text-lighter);
                     text-align: center;
                     font-size: 0.9rem;
                     margin-bottom: 2rem;
-                }
-                .phone-input {
+                }}
+                .phone-input {{
                     display: flex;
                     align-items: stretch;
                     gap: 8px;
@@ -2395,8 +2401,8 @@ def reset_password_page():
                     border-radius: 12px;
                     border: 1px solid var(--border-color);
                     width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
-                }
-                .country-code {
+                }}
+                .country-code {{
                     display: flex;
                     align-items: center;
                     gap: 6px;
@@ -2407,8 +2413,8 @@ def reset_password_page():
                     height: 42px;
                     min-width: 90px; /* Ancho mínimo para el código de país */
                     flex-shrink: 0; /* Evitar que se encoja */
-                }
-                .country-code input {
+                }}
+                .country-code input {{
                     width: 50px;
                     background: transparent;
                     border: none;
@@ -2416,14 +2422,14 @@ def reset_password_page():
                     font-size: 0.9rem;
                     text-align: center;
                     padding: 0;
-                }
-                .country-flag {
+                }}
+                .country-flag {{
                     width: 24px;
                     height: 16px;
                     border-radius: 4px;
                     transition: all 0.3s ease;
-                }
-                .phone-number {
+                }}
+                .phone-number {{
                     flex: 1;
                     background: rgba(255, 255, 255, 0.1);
                     border: 1px solid var(--border-color);
@@ -2434,8 +2440,8 @@ def reset_password_page():
                     height: 42px;
                     width: 100%; /* Asegurar que ocupe el espacio restante */
                     min-width: 0; /* Permitir que se encoja si es necesario */
-                }
-                .submit-button {
+                }}
+                .submit-button {{
                     width: 100%;
                     padding: 1rem;
                     background: var(--primary-color);
@@ -2448,12 +2454,12 @@ def reset_password_page():
                     transition: all 0.3s ease;
                     text-transform: uppercase;
                     letter-spacing: 1px;
-                }
-                .submit-button:hover {
+                }}
+                .submit-button:hover {{
                     background: var(--primary-hover);
                     transform: translateY(-2px);
-                }
-                .back-link {
+                }}
+                .back-link {{
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -2467,14 +2473,14 @@ def reset_password_page():
                     border-radius: 20px;
                     background: rgba(255, 0, 153, 0.1);
                     border: 1px solid var(--border-color);
-                }
-                .back-link:hover {
+                }}
+                .back-link:hover {{
                     color: var(--primary-color);
                     background: rgba(255, 0, 153, 0.15);
                     border-color: var(--primary-color);
                     transform: translateY(-2px);
-                }
-                #message {
+                }}
+                #message {{
                     margin-top: 1rem;
                     text-align: center;
                     padding: 0.8rem;
@@ -2482,49 +2488,49 @@ def reset_password_page():
                     border-radius: 8px;
                     font-size: 0.9rem;
                     transition: all 0.3s ease;
-                }
-                .success {
+                }}
+                .success {{
                     background: rgba(0, 179, 104, 0.2);
                     border: 1px solid #00b368;
                     color: #00b368;
                     animation: successAnimation 0.3s ease-out forwards;
-                }
-                .error {
+                }}
+                .error {{
                     background: rgba(255, 0, 0, 0.2);
                     border: 1px solid #ff0000;
                     color: #ff0000;
                     animation: errorAnimation 0.3s ease-out forwards;
                     background: rgba(255, 68, 68, 0.2);
                     color: #ff4444;
-                }
-                @keyframes logoRotate {
-                    0% { transform: rotateY(0deg); }
-                    100% { transform: rotateY(360deg); }
-                }
-                @keyframes logoFloat {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-20px); }
-                }
-                @keyframes logoGlow {
-                    0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); }
-                    50% { filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); }
-                }
-                @media (max-width: 768px) {
-                    .container {
+                }}
+                @keyframes logoRotate {{
+                    0% {{ transform: rotateY(0deg); }}
+                    100% {{ transform: rotateY(360deg); }}
+                }}
+                @keyframes logoFloat {{
+                    0%, 100% {{ transform: translateY(0); }}
+                    50% {{ transform: translateY(-20px); }}
+                }}
+                @keyframes logoGlow {{
+                    0%, 100% {{ filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); }}
+                    50% {{ filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); }}
+                }}
+                @media (max-width: 768px) {{
+                    .container {{
                         grid-template-columns: 1fr;
-                    }
-                    .logo-section {
+                    }}
+                    .logo-section {{
                         display: none;
-                    }
-                    .form-section {
+                    }}
+                    .form-section {{
                         padding: 1.5rem;
-                    }
-                    .form-container {
+                    }}
+                    .form-container {{
                         padding: 2rem;
-                    }
-                }
+                    }}
+                }}
                 /* Validación del número */
-                .phone-validation {
+                .phone-validation {{
                     font-size: 0.85rem;
                     margin-top: 0.5rem;
                     padding: 0.5rem;
@@ -2533,78 +2539,78 @@ def reset_password_page():
                     align-items: center;
                     gap: 6px;
                     transition: all 0.3s ease;
-                }
-                .phone-validation.valid {
+                }}
+                .phone-validation.valid {{
                     color: #00b368;
                     background: rgba(0, 179, 104, 0.1);
-                }
-                .phone-validation.invalid {
+                }}
+                .phone-validation.invalid {{
                     color: #ff4444;
                     background: rgba(255, 68, 68, 0.1);
-                }
+                }}
                 /* Ajustes de espaciado */
-                .form-container {
+                .form-container {{
                     padding: 2rem;
                     max-width: 380px;
-                }
-                .phone-input {
+                }}
+                .phone-input {{
                     margin-bottom: 1rem;
-                }
-                .subtitle {
+                }}
+                .subtitle {{
                     margin-bottom: 1.5rem;
                     line-height: 1.4;
-                }
+                }}
                 /* Mejoras visuales */
-                .phone-number:focus, .country-code input:focus {
+                .phone-number:focus, .country-code input:focus {{
                     outline: none;
                     border-color: var(--primary-color);
                     box-shadow: 0 0 0 2px rgba(255, 0, 153, 0.2);
-                }
-                .submit-button:disabled {
+                }}
+                .submit-button:disabled {{
                     opacity: 0.7;
                     cursor: not-allowed;
-                }
+                }}
                 /* Animación para el mensaje de éxito */
-                @keyframes successAnimation {
-                    0% { 
+                @keyframes successAnimation {{
+                    0% {{ 
                         transform: scale(0.9);
                         opacity: 0;
-                    }
-                    50% { 
+                    }}
+                    50% {{ 
                         transform: scale(1.1);
-                    }
-                    100% { 
+                    }}
+                    100% {{ 
                         transform: scale(1);
                         opacity: 1;
-                    }
-                }
-                .success {
+                    }}
+                }}
+                .success {{
                     animation: successAnimation 0.3s ease-out forwards;
-                }
+                }}
                 /* Animaciones */
-                @keyframes errorAnimation {
-                    0% { 
+                @keyframes errorAnimation {{
+                    0% {{ 
                         transform: translateX(-10px);
                         opacity: 0;
-                    }
-                    50% { 
+                    }}
+                    50% {{ 
                         transform: translateX(10px);
-                    }
-                    100% { 
+                    }}
+                    100% {{ 
                         transform: translateX(0);
                         opacity: 1;
-                    }
-                }
+                    }}
+                }}
                 /* Estilos para inputs no válidos */
-                input:invalid {
+                input:invalid {{
                     border-color: #ff0000;
                     animation: shake 0.3s ease-in-out;
-                }
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    25% { transform: translateX(-5px); }
-                    75% { transform: translateX(5px); }
-                }
+                }}
+                @keyframes shake {{
+                    0%, 100% {{ transform: translateX(0); }}
+                    25% {{ transform: translateX(-5px); }}
+                    75% {{ transform: translateX(5px); }}
+                }}
             </style>
         </head>
         <body>
@@ -2658,72 +2664,72 @@ def reset_password_page():
             </div>
             <script>
                 // Country Codes Configuration
-                const countryCodeMap = {
+                const countryCodeMap = {{
                     '+57': 'co', '+52': 'mx', '+34': 'es', '+54': 'ar',
                     '+51': 'pe', '+56': 'cl', '+55': 'br', '+58': 've',
                     '+593': 'ec', '+502': 'gt', '+503': 'sv', '+504': 'hn',
                     '+505': 'ni', '+506': 'cr', '+507': 'pa', '+591': 'bo',
                     '+595': 'py', '+598': 'uy', '+1': 'us'
-                };
+                }};
                 // Initialize elements
                 const dialCodeInput = document.getElementById('dialCode');
                 const countryFlag = document.getElementById('countryFlag');
                 const phoneInput = document.getElementById('phone');
                 // Validación del número de teléfono
-                function validatePhoneNumber(number) {
+                function validatePhoneNumber(number) {{
                     // Eliminar espacios y caracteres especiales
                     number = number.replace(/[^0-9]/g, '');
                     return number.length >= 10 && number.length <= 12;
-                }
-                function updateValidationUI(isValid, message) {
+                }}
+                function updateValidationUI(isValid, message) {{
                     const validation = document.querySelector('.phone-validation');
                     const submitButton = document.getElementById('submitButton');
                     
-                    if (isValid) {
+                    if (isValid) {{
                         validation.className = 'phone-validation valid';
                         validation.innerHTML = '<i class="fas fa-check-circle"></i>' + message;
                         submitButton.disabled = false;
-                    } else {
+                    }} else {{
                         validation.className = 'phone-validation invalid';
                         validation.innerHTML = '<i class="fas fa-exclamation-circle"></i>' + message;
                         submitButton.disabled = true;
-                    }
-                }
+                    }}
+                }}
                 // Event listeners para validación en tiempo real
-                phoneInput.addEventListener('input', function() {
+                phoneInput.addEventListener('input', function() {{
                     const number = this.value;
                     const dialCode = dialCodeInput.value;
                     const isValidCode = countryCodeMap[dialCode];
                     
-                    if (!isValidCode) {
+                    if (!isValidCode) {{
                         updateValidationUI(false, 'Código de país no válido');
                         return;
-                    }
-                    if (validatePhoneNumber(number)) {
+                    }}
+                    if (validatePhoneNumber(number)) {{
                         updateValidationUI(true, 'Número válido');
-                    } else {
+                    }} else {{
                         updateValidationUI(false, 'El número debe tener entre 10 y 12 dígitos');
-                    }
-                });
-                dialCodeInput.addEventListener('input', function(e) {
+                    }}
+                }});
+                dialCodeInput.addEventListener('input', function(e) {{
                     let value = e.target.value;
-                    if (!value.startsWith('+')) {
+                    if (!value.startsWith('+')) {{
                         value = '+' + value;
-                    }
+                    }}
                     e.target.value = value;
                     
                     const countryCode = countryCodeMap[value];
-                    if (countryCode) {
-                        countryFlag.src = `https://flagcdn.com/w160/${countryCode}.png`;
-                        if (phoneInput.value) {
+                    if (countryCode) {{
+                        countryFlag.src = `https://flagcdn.com/w160/${{countryCode}}.png`;
+                        if (phoneInput.value) {{
                             validatePhoneNumber(phoneInput.value);
-                        }
-                    } else {
+                        }}
+                    }} else {{
                         updateValidationUI(false, 'Código de país no válido');
-                    }
-                });
+                    }}
+                }});
                 // Handle form submission
-                document.getElementById('resetForm').addEventListener('submit', async (e) => {
+                document.getElementById('resetForm').addEventListener('submit', async (e) => {{
                     e.preventDefault();
                     const fullNumber = dialCodeInput.value + phoneInput.value;
                     const submitButton = document.getElementById('submitButton');
@@ -2731,665 +2737,40 @@ def reset_password_page():
                     
                     submitButton.disabled = true;
                     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                    try {
-                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/resetPassword', {
+                    try {{
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/resetPassword', {{
                             method: 'POST',
-                            headers: {
+                            headers: {{
                                 'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ phone: fullNumber })
-                        });
-                        if (response.ok) {
+                            }},
+                            body: JSON.stringify({{ phone: fullNumber }})
+                        }});
+                        if (response.ok) {{
                             messageDiv.className = 'success';
                             messageDiv.innerHTML = `
                                 <i class="fas fa-check-circle"></i>
                                 Código enviado correctamente
                             `;
                             localStorage.setItem('resetPhoneNumber', fullNumber);
-                            setTimeout(() => {
+                            setTimeout(() => {{
                                 window.location.href = '/verify-code';
-                            }, 2000);
-                        } else {
+                            }}, 2000);
+                        }} else {{
                             messageDiv.className = 'error';
                             messageDiv.innerHTML = `
                                 <i class="fas fa-exclamation-circle"></i>
                                 Error al enviar el código
                             `;
-                        }
-                    } catch (error) {
+                        }}
+                    }} catch (error) {{
                         messageDiv.className = 'error';
                         messageDiv.innerHTML = `
                             <i class="fas fa-times-circle"></i>
                             Error de conexión
                         `;
-                    } finally {
+                    }} finally {{
                         submitButton.disabled = false;
                         submitButton.innerHTML = 'Enviar código';
-                    }
-                });
-            </script>
-        </body>
-    </html>
-    """
-
-@rt('/billing')
-def billing_page():
-    return f"""
-    <html>
-        <head>
-            <title>Tiffany Medical Assistant - Facturación</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            
-            <style>
-                :root {{
-                    --primary-color: #FF0099;
-                    --primary-hover: #D6006F;
-                    --background-dark: #000000;
-                    --text-light: rgba(255, 255, 255, 0.8);
-                    --text-lighter: rgba(255, 255, 255, 0.5);
-                    --border-color: rgba(255, 0, 153, 0.2);
-                }}
-                * {{
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                    font-family: 'Poppins', sans-serif;
-                }}
-                body {{
-                    background: var(--background-dark);
-                    color: var(--text-light);
-                    min-height: 100vh;
-                }}
-                .dashboard-layout {{
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    padding-left: 100px;
-                    min-height: 100vh;
-                }}
-                .main-content {{
-                    padding: 2rem 2rem 120px 2rem; /* Aumentar padding inferior */
-                }}
-                .header {{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 2rem;
-                    padding: 1.5rem;
-                    margin-bottom: 1rem; /* Reducido de 2rem */
-                    padding: 1rem; /* Reducido de 1.5rem */
-                    background: rgba(40, 40, 40, 0.95);
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
-                    border: 1px solid rgba(255, 0, 153, 0.1);
-                    backdrop-filter: blur(10px);
-                }}
-                .header h1 {{
-                    font-size: 2rem;
-                    font-size: 1.5rem; /* Reducido de 2rem */
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    gap: 0.8rem; /* Reducido de 1rem */
-                }}
-                .header-icon {{
-                    color: var(--primary-color);
-                }}
-                .billing-grid {{
-                    display: grid;
-                    grid-template-columns: 2fr 1fr;
-                    gap: 2rem;
-                    margin-bottom: 2rem;
-                }}
-                .billing-card {{
-                    background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
-                    padding: 1.5rem;
-                    border: 1px solid var(--border-color);
-                    backdrop-filter: blur(10px);
-                }}
-                .billing-summary {{
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 1rem;
-                    margin-bottom: 2rem;
-                }}
-                .summary-item {{
-                    background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 0, 153, 0.1);
-                    padding: 1.5rem;
-                    border-radius: 12px;
-                    text-align: center;
-                    border: 1px solid var(--border-color);
-                    border: 1px solid var(--primary-color);
-                    transition: all 0.3s ease;
-                }}
-                .summary-item:hover {{
-                    background: rgba(255, 0, 153, 0.15);
-                    transform: translateY(-5px);
-                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
-                }}
-                .summary-value {{
-                    font-size: 2rem;
-                    font-weight: 600;
-                    color: var(--primary-color);
-                    margin-bottom: 0.5rem;
-                }}
-                .summary-label {{
-                    font-size: 0.9rem;
-                    color: var(--text-light);
-                }}
-                .calendar-grid {{
-                    display: grid;
-                    grid-template-columns: repeat(4, 1fr);
-                    gap: 1rem;
-                    margin-top: 1rem;
-                }}
-                .month-card {{
-                    background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 255, 255, 0.05);
-                    padding: 1rem;
-                    border-radius: 10px;
-                    text-align: center;
-                    transition: all 0.3s ease;
-                }}
-                .month-card:hover {{
-                    background: rgba(255, 0, 153, 0.15);
-                    background: rgba(255, 0, 153, 0.1);
-                    transform: scale(1.05);
-                }}
-                .month-name {{
-                    font-size: 1.1rem;
-                    margin-bottom: 0.5rem;
-                    color: white;
-                }}
-                .month-amount {{
-                    font-size: 1.2rem;
-                    color: var(--primary-color);
-                    font-weight: 600;
-                }}
-                .month-status {{
-                    font-size: 0.8rem;
-                    margin-top: 0.5rem;
-                    padding: 0.3rem 0.8rem;
-                    border-radius: 12px;
-                    display: inline-block;
-                }}
-                .status-paid {{
-                    background: rgba(0, 179, 104, 0.2);
-                    color: #00b368;
-                }}
-                .status-pending {{
-                    background: rgba(255, 170, 0, 0.2);
-                    color: #ffaa00;
-                }}
-                .chart-container {{
-                    height: 300px;
-                    margin-top: 2rem;
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
-                }}
-                .payment-methods {{
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 1rem;
-                    margin-top: 1rem;
-                }}
-                .payment-method {{
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    padding: 1rem;
-                    background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 10px;
-                    transition: all 0.3s ease;
-                }}
-                .payment-method:hover {{
-                    background: rgba(255, 0, 153, 0.15);
-                    background: rgba(255, 0, 153, 0.1);
-                    transform: translateX(5px);
-                }}
-                .method-icon {{
-                    width: 40px;
-                    height: 40px;
-                    background: var(--primary-color);
-                    border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                }}
-                .section-title {{
-                    font-size: 1.3rem;
-                    color: white;
-                    margin-bottom: 1rem;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }}
-                .section-title i {{
-                    color: var(--primary-color);
-                }}
-                @media (max-width: 1200px) {{
-                    .billing-grid {{
-                        grid-template-columns: 1fr;
-                    }}
-                    .calendar-grid {{
-                        grid-template-columns: repeat(3, 1fr);
-                    }}
-                }}
-                @media (max-width: 768px) {{
-                    .calendar-grid {{
-                        grid-template-columns: repeat(2, 1fr);
-                    }}
-                    .billing-summary {{
-                        grid-template-columns: 1fr;
-                    }}
-                }}
-                .payment-method {{
-                    position: relative;
-                    overflow: hidden;
-                }}
-                .method-details {{
-                    flex: 1;
-                }}
-                .method-status {{
-                    font-size: 0.8rem;
-                    padding: 0.2rem 0.5rem;
-                    background: rgba(255, 0, 153, 0.1);
-                    border-radius: 12px;
-                    color: var(--primary-color);
-                }}
-                .action-btn {{
-                    background: transparent;
-                    border: none;
-                    color: var(--text-light);
-                    cursor: pointer;
-                    padding: 0.5rem;
-                    border-radius: 50%;
-                    transition: all 0.3s ease;
-                }}
-                .action-btn:hover {{
-                    background: rgba(255, 255, 255, 0.1);
-                    color: var(--primary-color);
-                }}
-                .payment-history {{
-                    margin-top: 1rem;
-                    background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 12px;
-                    overflow: hidden;
-                }}
-                .history-header {{
-                    display: grid;
-                    grid-template-columns: 2fr 1fr 1fr 1fr;
-                    padding: 1rem;
-                    background: rgba(255, 0, 153, 0.1);
-                    font-weight: 500;
-                }}
-                .history-item {{
-                    display: grid;
-                    grid-template-columns: 2fr 1fr 1fr 1fr;
-                    padding: 1rem;
-                    align-items: center;
-                    transition: all 0.3s ease;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                }}
-                .history-item:hover {{
-                    background: rgba(255, 0, 153, 0.15);
-                    background: rgba(255, 0, 153, 0.05);
-                }}
-                .history-item.pending {{
-                    background: rgba(255, 170, 0, 0.15);
-                    background: rgba(255, 170, 0, 0.05);
-                }}
-                .status-badge {{
-                    padding: 0.3rem 0.8rem;
-                    border-radius: 12px;
-                    font-size: 0.85rem;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }}
-                .status-badge.paid {{
-                    background: rgba(0, 179, 104, 0.2);
-                    color: #00b368;
-                }}
-                .status-badge.pending {{
-                    background: rgba(255, 170, 0, 0.2);
-                    color: #ffaa00;
-                }}
-                .payment-stats {{
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 1rem;
-                    margin-top: 1rem;
-                }}
-                .stat-card {{
-                    background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 255, 255, 0.05);
-                    padding: 1rem;
-                    border-radius: 12px;
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    transition: all 0.3s ease;
-                }}
-                .stat-card:hover {{
-                    background: rgba(255, 0, 153, 0.15);
-                    background: rgba(255, 0, 153, 0.1);
-                    transform: translateY(-2px);
-                }}
-                .stat-icon {{
-                    width: 40px;
-                    height: 40px;
-                    background: var(--primary-color);
-                    border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                }}
-                .stat-info h4 {{
-                    font-size: 0.9rem;
-                    margin-bottom: 0.2rem;
-                }}
-                .stat-info p {{
-                    font-size: 1.2rem;
-                    font-weight: 600;
-                    color: var(--primary-color);
-                }}
-                .mt-4 {{
-                    margin-top: 2rem;
-                }}
-                .text-success {{
-                    color: #00b368;
-                }}
-                .text-warning {{
-                    color: #ffaa00;
-                }}
-                .chart-container {{
-                    height: 300px;
-                    margin: 2rem 0;
-                    padding: 1rem;
-                    background: rgba(60, 60, 60, 0.95);
-                    background: rgba(255, 255, 255, 0.02);
-                    border-radius: 15px;
-                    border: 1px solid rgba(255, 0, 153, 0.1);
-                    height: 250px; /* Reducido de 300px */
-                    margin: 1rem 0; /* Reducido de 2rem */
-                    padding: 0.8rem; /* Reducido de 1rem */
-                }}
-                @media (max-width: 768px) {{
-                    .payment-stats {{
-                        grid-template-columns: 1fr;
-                    }}
-                    .history-item {{
-                        font-size: 0.9rem;
-                    }}
-                }}
-            </style>
-        </head>
-        <body>
-            {get_common_sidebar()}
-            <div class="dashboard-layout">
-                <div class="main-content">
-                    <div class="header">
-                        <h1>
-                            <i class="fas fa-file-invoice-dollar header-icon"></i>
-                            Centro de Facturación
-                        </h1>
-                    </div>
-                    <div class="billing-grid">
-                        <div class="billing-card">
-                            <div class="billing-summary">
-                                <div class="summary-item">
-                                    <div class="summary-value">$25,500</div>
-                                    <div class="summary-label">Facturación Anual</div>
-                                </div>
-                                <div class="summary-item">
-                                    <div class="summary-value">15</div>
-                                    <div class="summary-label">Facturas Pendientes</div>
-                                </div>
-                                <div class="summary-item">
-                                    <div class="summary-value">85%</div>
-                                    <div class="summary-label">Tasa de Pago</div>
-                                </div>
-                            </div>
-                            <div class="section-title">
-                                <i class="fas fa-calendar-alt"></i>
-                                Facturación Mensual 2024
-                            </div>
-                            <div class="calendar-grid">
-                                <div class="month-card">
-                                    <div class="month-name">Enero</div>
-                                    <div class="month-amount">$2,500</div>
-                                    <div class="month-status status-paid">Pagado</div>
-                                </div>
-                                <div class="month-card">
-                                    <div class="month-name">Febrero</div>
-                                    <div class="month-amount">$2,300</div>
-                                    <div class="month-status status-paid">Pagado</div>
-                                </div>
-                                <div class="month-card">
-                                    <div class="month-name">Marzo</div>
-                                    <div class="month-amount">$2,800</div>
-                                    <div class="month-status status-pending">Pendiente</div>
-                                </div>
-                                <div class="month-card">
-                                    <div class="month-name">Abril</div>
-                                    <div class="month-amount">$2,100</div>
-                                    <div class="month-status status-pending">Próximo</div>
-                                </div>
-                                <!-- Continuar con los demás meses... -->
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="billingChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="billing-card">
-                            <div class="section-title">
-                                <i class="fas fa-credit-card"></i>
-                                Métodos de Pago y Estado de Cuenta
-                            </div>
-                            
-                            <div class="payment-methods">
-                                <div class="payment-method">
-                                    <div class="method-icon">
-                                        <i class="fab fa-cc-visa"></i>
-                                    </div>
-                                    <div class="method-details">
-                                        <h3>Visa Premium</h3>
-                                        <p>**** 4589</p>
-                                        <span class="method-status">Principal</span>
-                                    </div>
-                                    <div class="method-actions">
-                                        <button class="action-btn">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="payment-method">
-                                    <div class="method-icon mastercard">
-                                        <i class="fab fa-cc-mastercard"></i>
-                                    </div>
-                                    <div class="method-details">
-                                        <h3>Mastercard Business</h3>
-                                        <p>**** 7856</p>
-                                        <span class="method-status">Respaldo</span>
-                                    </div>
-                                    <div class="method-actions">
-                                        <button class="action-btn">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section-title mt-4">
-                                <i class="fas fa-history"></i>
-                                Historial de Pagos
-                            </div>
-                            
-                            <div class="payment-history">
-                                <div class="history-header">
-                                    <span>Período</span>
-                                    <span>Estado</span>
-                                    <span>Monto</span>
-                                    <span>Método</span>
-                                </div>
-                                <div class="history-item">
-                                    <div class="period">
-                                        <i class="fas fa-calendar-check text-success"></i>
-                                        Marzo 2024
-                                    </div>
-                                    <div class="status">
-                                        <span class="status-badge paid">
-                                            <i class="fas fa-check"></i> Pagado
-                                        </span>
-                                    </div>
-                                    <div class="amount">$2,800</div>
-                                    <div class="payment-type">
-                                        <i class="fab fa-cc-visa"></i> Visa
-                                    </div>
-                                </div>
-                                <div class="history-item">
-                                    <div class="period">
-                                        <i class="fas fa-calendar-check text-success"></i>
-                                        Febrero 2024
-                                    </div>
-                                    <div class="status">
-                                        <span class="status-badge paid">
-                                            <i class="fas fa-check"></i> Pagado
-                                        </span>
-                                    </div>
-                                    <div class="amount">$2,300</div>
-                                    <div class="payment-type">
-                                        <i class="fab fa-cc-mastercard"></i> Mastercard
-                                    </div>
-                                </div>
-                                <div class="history-item pending">
-                                    <div class="period">
-                                        <i class="fas fa-clock text-warning"></i>
-                                        Abril 2024
-                                    </div>
-                                    <div class="status">
-                                        <span class="status-badge pending">
-                                            Pendiente
-                                        </span>
-                                    </div>
-                                    <div class="amount">$2,100</div>
-                                    <div class="payment-type">
-                                        <i class="fas fa-clock"></i> Por definir
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="section-title mt-4">
-                                <i class="fas fa-chart-pie"></i>
-                                Resumen de Pagos
-                            </div>
-                            <div class="payment-stats">
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-check-circle"></i>
-                                    </div>
-                                    <div class="stat-info">
-                                        <h4>Pagos a Tiempo</h4>
-                                        <p>98%</p>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-bolt"></i>
-                                    </div>
-                                    <div class="stat-info">
-                                        <h4>Tiempo Promedio</h4>
-                                        <p>2 días antes</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-                // Configuración del gráfico
-                const ctx = document.getElementById('billingChart').getContext('2d');
-                new Chart(ctx, {{
-                    type: 'line',
-                    data: {{
-                        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                        datasets: [{{
-                            label: 'Facturación Mensual',
-                            data: [2500, 2300, 2800, 2100, 2600, 2400, 2700, 2900, 2200, 2400, 2600, 2800],
-                            borderColor: '#FF0099',
-                            backgroundColor: 'rgba(255, 0, 153, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#FF0099',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: '#FF0099',
-                            pointRadius: 4,
-                            pointHoverRadius: 6
-                        }}]
-                    }},
-                    options: {{
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {{
-                            legend: {{
-                                display: false
-                            }},
-                            tooltip: {{
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                titleColor: '#FF0099',
-                                bodyColor: '#fff',
-                                padding: 12,
-                                displayColors: false,
-                                callbacks: {{
-                                    label: function(context) {{
-                                        return '$ ' + context.parsed.y;
-                                    }}
-                                }}
-                            }}
-                        }},
-                        scales: {{
-                            y: {{
-                                beginAtZero: true,
-                                grid: {{
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                }},
-                                ticks: {{
-                                    color: 'rgba(255, 255, 255, 0.8)',
-                                    callback: function(value) {{
-                                        return '$ ' + value;
-                                    }}
-                                }}
-                            }},
-                            x: {{
-                                grid: {{
-                                    display: false
-                                }},
-                                ticks: {{
-                                    color: 'rgba(255, 255, 255, 0.8)'
-                                }}
-                            }}
-                        }},
-                        interaction: {{
-                            intersect: false,
-                            mode: 'index'
-                        }},
-                        hover: {{
-                            mode: 'nearest',
-                            intersect: true
-                        }}
                     }}
                 }});
             </script>
