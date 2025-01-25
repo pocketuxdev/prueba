@@ -2370,7 +2370,7 @@ def reset_password_page():
                 }}
                 .form-container {{
                     background: rgba(40, 40, 40, 0.95);
-                    padding: 2.5rem;
+                    padding: 2rem;
                     border-radius: 20px;
                     width: 100%;
                     max-width: 400px;
