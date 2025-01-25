@@ -1176,7 +1176,7 @@ def dashboard_page():
                     font-weight: 600;
                     color: white;
                     font-family: 'Poppins', sans-serif;
-                    text-transform: lowercase;
+                    text-transform: capitalize;
                     letter-spacing: 1px;
                     display: flex;
                     align-items: center;
