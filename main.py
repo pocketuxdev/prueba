@@ -399,16 +399,68 @@ def get_common_sidebar():
                 window.location.href = '/';
                 return;
             }
+
+            // Cargar información del perfil si estamos en la página de perfil
+            if (window.location.pathname === '/profile') {
+                loadProfileInfo(JSON.parse(clientData));
+            }
+
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.substring(1) || 'dashboard';
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
                 currentItem.classList.add('active');
             }
+
             // Restaurar opacidad del body
             document.body.style.opacity = '1';
         };
+
+        function loadProfileInfo(userData) {
+            // Actualizar nombre y rol
+            const userNameElement = document.getElementById('userName');
+            const userRoleElement = document.getElementById('userRole');
+            
+            if (userNameElement && userRoleElement) {
+                userNameElement.textContent = userData.fullName;
+                userRoleElement.textContent = userData.position;
+            }
+            
+            // Actualizar información personal
+            const userInfo = document.getElementById('userInfo');
+            if (userInfo) {
+                userInfo.innerHTML = `
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">${userData.email}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Nombre Completo</div>
+                        <div class="info-value">${userData.fullName}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Empresa</div>
+                        <div class="info-value">${userData.company}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Departamento</div>
+                        <div class="info-value">${userData.department}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Cargo</div>
+                        <div class="info-value">${userData.position}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Roles</div>
+                        <div class="info-value">${userData.roles}</div>
+                    </div>
+                `;
+            }
+        }
     </script>
     """
 
@@ -2188,64 +2240,30 @@ def profile_page():
             </div>
             <script>
                 window.onload = function() {{
+                    // Verificar autenticación
                     const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
                         window.location.href = '/';
                         return;
                     }}
-                    
-                    const userData = JSON.parse(clientData);
-                    
-                    // Actualizar nombre y rol
-                    const userNameElement = document.getElementById('userName');
-                    const userRoleElement = document.getElementById('userRole');
-                    
-                    if (userNameElement && userRoleElement) {{
-                        userNameElement.textContent = userData.fullName || 'Usuario';
-                        userRoleElement.textContent = userData.position || 'Cargo no especificado';
-                    }}
-                    
-                    // Actualizar información personal
-                    const userInfo = document.getElementById('userInfo');
-                    if (userInfo) {{
-                        userInfo.innerHTML = `
-                            <div class="info-item">
-                                <div class="info-label">Email</div>
-                                <div class="info-value">${{userData.email || 'No especificado'}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Nombre Completo</div>
-                                <div class="info-value">${{userData.fullName || 'No especificado'}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Empresa</div>
-                                <div class="info-value">${{userData.company || 'No especificado'}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Departamento</div>
-                                <div class="info-value">${{userData.department || 'No especificado'}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Cargo</div>
-                                <div class="info-value">${{userData.position || 'No especificado'}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Roles</div>
-                                <div class="info-value">${{userData.roles || 'No especificado'}}</div>
-                            </div>
-                        `;
+
+                    // Cargar información del perfil si estamos en la página de perfil
+                    if (window.location.pathname === '/profile') {{
+                        loadProfileInfo(JSON.parse(clientData));
                     }}
 
-                    // Activar el ícono de perfil
-                    const profileIcon = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
-                    if (profileIcon) {{
+                    // Activar item actual según la ruta
+                    const path = window.location.pathname;
+                    const route = path.substring(1) || 'dashboard';
+                    const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+                    if (currentItem) {{
                         document.querySelectorAll('.nav-item').forEach(item => {{
                             item.classList.remove('active');
                         }});
-                        profileIcon.classList.add('active');
+                        currentItem.classList.add('active');
                     }}
 
-                    // Restaurar opacidad
+                    // Restaurar opacidad del body
                     document.body.style.opacity = '1';
                 }};
             </script>
