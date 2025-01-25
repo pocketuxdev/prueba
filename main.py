@@ -2834,13 +2834,15 @@ def billing_page():
                     backdrop-filter: blur(10px);
                 }}
                 .header h1 {{
-                    font-size: 2rem;
-                    font-size: 1.5rem; /* Reducido de 2rem */
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    gap: 0.8rem; /* Reducido de 1rem */
+                    font-size: 2.2rem !important;
+                    font-weight: 600 !important;
+                    color: white !important;
+                    font-family: 'Poppins' !important;
+                    text-transform: capitalize !important;
+                    letter-spacing: 1px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 0.8rem !important; /* Reducido de 1rem */
                 }}
                 .header-icon {{
                     color: var(--primary-color);
