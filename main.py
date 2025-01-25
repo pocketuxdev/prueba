@@ -1108,7 +1108,7 @@ def dashboard_page():
     return f"""
     <html>
         <head>
-            <title>Tiffany Medical Assistant</title>
+            <title>Tiffany Medical Assistant - Dashboard</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1725,7 +1725,7 @@ def dashboard_page():
                     <div class="header">
                         <h1>
                             <i class="fas fa-chart-line header-icon"></i>
-                            Dashboard Tiffany Medical Assistant
+                             Tiffany Medical Assistant
                         </h1>
                     </div>
                     
