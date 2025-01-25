@@ -1112,16 +1112,14 @@ def dashboard_page():
     return f"""
     <html>
         <head>
-            <title>POCKET UX - Dashboard</title>
+            <title>Tiffany Medical Assistant - Dashboard</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- Agregar Poppins junto a los recursos existentes -->
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             
             <style>
-                /* Agregar variables globales manteniendo los estilos existentes */
                 :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
@@ -1131,100 +1129,685 @@ def dashboard_page():
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
 
-                /* Actualizar solo la fuente base */
                 * {{
-                    font-family: 'Poppins', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;  /* Solo agregamos esta línea */
                 }}
 
-                /* Mantener TODOS los demás estilos existentes exactamente como estaban */
-                /* ... resto del código CSS original sin cambios ... */
+                body {{
+                    background: var(--background-dark);
+                    color: var(--text-light);
+                    min-height: 100vh;
+                }}
+                .dashboard-layout {{
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    height: 100vh;
+                    max-width: 100vw;
+                    margin: 0 auto;
+                    padding: 0.5rem 1rem;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                }}
+                .main-content {{
+                    height: calc(100vh - 1rem);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.4rem;
+                }}
+                .header {{
+                    display: flex;
+                    align-items: flex-start; /* Alinear al inicio */
+                    align-items: flex-start;
+                    padding: 1.5rem;
+                    background: rgba(20, 20, 20, 0.8);
+                    border-radius: 20px;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1rem; /* Reducido de 2rem */
+                    padding: 1rem; /* Reducido de 1.5rem */
+                    background: rgba(40, 40, 40, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    margin-bottom: 1.5rem;
+                    backdrop-filter: blur(10px);
+                }}
+                .header h1 {{
+                    font-size: 2.2rem;
+                    font-weight: 600;
+                    font-size: 1.5rem; /* Reducido de 2rem */
+                    color: white;
+                    font-family: 'Playfair Display', serif; /* Fuente más elegante */
+                    font-family: 'Playfair Display', serif;
+                    line-height: 1.2;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem; /* Reducido de 1rem */
+                }}
+                .header-icon {{
+                    color: var(--primary-color);
+                }}
+                .metrics-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                    height: auto;
+                    width: 100%;
+                    padding: 0 1rem;
+                }}
+                /* Resoluciones más comunes y Safari fixes */
+                
+                /* 4K - 3840x2160 */
+                @media screen and (min-width: 2560px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        max-width: 90vw;
+                        margin: 0 auto;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 30vh;
+                    }}
+                }}
+                /* Desktop grande - 1920x1080 */
+                @media screen and (min-width: 1920px) and (max-width: 2559px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 35vh;
+                    }}
+                }}
+                /* Desktop común - 1366x768 */
+                @media screen and (min-width: 1366px) and (max-width: 1919px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 1vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 40vh;
+                    }}
+                }}
+                /* MacBook Pro 13" - 1280x800 */
+                @media screen and (min-width: 1280px) and (max-width: 1365px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                /* Safari específico */
+                @supports (-webkit-hyphens:none) {{
+                    .metrics-grid {{
+                        display: grid;
+                        grid-template-columns: repeat(4, minmax(0, 1fr)); /* Fix para Safari */
+                        gap: 1rem;
+                        width: 100%;
+                        height: auto;
+                        padding: 0 1rem;
+                    }}
+                    .metric-card {{
+                        min-width: 0; /* Fix para Safari */
+                        height: auto;
+                        min-height: 40vh;
+                    }}
+                    .chart-container {{
+                        width: 100%;
+                        min-height: 25vh;
+                        transform: translateZ(0); /* Fix para renderizado en Safari */
+                        -webkit-transform: translateZ(0);
+                    }}
+                }}
+                /* Tablet landscape */
+                @media screen and (min-width: 1024px) and (max-width: 1279px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 42vh;
+                    }}
+                }}
+                /* Tablet portrait */
+                @media screen and (min-width: 768px) and (max-width: 1023px) {{
+                    .metrics-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 2vw;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                /* Mobile landscape */
+                @media screen and (min-width: 480px) and (max-width: 767px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 2vh;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 48vh;
+                    }}
+                }}
+                /* Mobile portrait */
+                @media screen and (max-width: 479px) {{
+                    .metrics-grid {{
+                        grid-template-columns: 1fr;
+                        gap: 2vh;
+                        padding: 0 0.5rem;
+                    }}
+                    
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                /* Fix específico para Safari en diferentes resoluciones */
+                @media not all and (min-resolution:.001dpcm) {{ 
+                    @supports (-webkit-appearance:none) {{
+                        .metrics-grid {{
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                            gap: 1rem;
+                            width: 100%;
+                            height: auto;
+                        }}
+                        
+                        .metric-card {{
+                            break-inside: avoid;
+                            page-break-inside: avoid;
+                            -webkit-column-break-inside: avoid;
+                        }}
+                    }}
+                }}
+                /* Asegurar compatibilidad con diferentes alturas de viewport */
+                @media screen and (max-height: 800px) {{
+                    .metric-card {{
+                        min-height: 45vh;
+                    }}
+                }}
+                @media screen and (max-height: 600px) {{
+                    .metric-card {{
+                        min-height: 50vh;
+                    }}
+                }}
+                .metric-card {{
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem 1rem;
+                    border: 1px solid var(--border-color);
+                    height: auto;
+                    min-height: 35vh;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start; /* Cambiado a flex-start para mejor control del espacio */
+                    overflow: hidden;
+                }}
+                .chart-title {{
+                    font-size: 1.2rem;
+                    margin: 0 0 1rem 0; /* Margen uniforme */
+                    text-align: center;
+                    width: 100%;
+                    padding: 0.5rem;
+                    white-space: normal; /* Permitir múltiples líneas */
+                    overflow-wrap: break-word; /* Romper palabras largas si es necesario */
+                    word-wrap: break-word;
+                    min-height: 2.5em; /* Altura mínima para dos líneas */
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; /* Máximo dos líneas */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    line-height: 1.2;
+                }}
+                .chart-container {{
+                    flex: 1;
+                    position: relative;
+                    width: 95%;
+                    min-height: 28vh;
+                    padding: 0.5rem;
+                    margin: 0 auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }}
+                canvas {{
+                    width: 100% !important;
+                    height: 100% !important;
+                    max-height: calc(100% - 2rem) !important; /* Prevenir desbordamiento */
+                }}
+                .kpi-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr); /* Cambio de 1fr a repeat(4, 1fr) */
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }}
+                .kpi-card {{
+                    background: rgba(20, 20, 20, 0.8);
+                    padding: 1.5rem;
+                    border-radius: 20px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .kpi-value {{
+                    font-size: 3rem;
+                    font-size: 1.8rem; /* Reducido de 2rem */
+                    font-weight: 600;
+                    color: #FF0099;
+                    margin-bottom: 0.5rem;
+                    margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+                }}
+                .kpi-label {{
+                    font-size: 1.2rem;
+                    font-size: 0.9rem; /* Reducido de 1.1rem */
+                    color: rgba(255, 255, 255, 0.8);
+                    font-weight: 400;
+                }}
+                .billing-grid {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr;
+                    gap: 2rem;
+                    margin-bottom: 2rem;
+                }}
+                .billing-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 15px;
+                    padding: 1.5rem;
+                    border: 1px solid var(--border-color);
+                    backdrop-filter: blur(10px);
+                }}
+                .billing-summary {{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                }}
+                .summary-item {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 0, 153, 0.1);
+                    padding: 1.5rem;
+                    border-radius: 12px;
+                    text-align: center;
+                    border: 1px solid var(--border-color);
+                    border: 1px solid var(--primary-color);
+                    transition: all 0.3s ease;
+                }}
+                .summary-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.2);
+                }}
+                .summary-value {{
+                    font-size: 2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    margin-bottom: 0.5rem;
+                }}
+                .summary-label {{
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                }}
+                .calendar-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .month-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 10px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                }}
+                .month-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: scale(1.05);
+                }}
+                .month-name {{
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                    color: white;
+                }}
+                .month-amount {{
+                    font-size: 1.2rem;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                }}
+                .month-status {{
+                    font-size: 0.8rem;
+                    margin-top: 0.5rem;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    display: inline-block;
+                }}
+                .status-paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin-top: 2rem;
+                    height: 250px; /* Reducido de 300px */
+                    margin: 1rem 0; /* Reducido de 2rem */
+                    padding: 0.8rem; /* Reducido de 1rem */
+                }}
+                .payment-methods {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .payment-method {{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 10px;
+                    transition: all 0.3s ease;
+                }}
+                .payment-method:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateX(5px);
+                }}
+                .method-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .section-title {{
+                    font-size: 1.3rem;
+                    color: white;
+                    margin-bottom: 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .section-title i {{
+                    color: var(--primary-color);
+                }}
+                @media (max-width: 1200px) {{
+                    .billing-grid {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .calendar-grid {{
+                        grid-template-columns: repeat(3, 1fr);
+                    }}
+                }}
+                @media (max-width: 768px) {{
+                    .calendar-grid {{
+                        grid-template-columns: repeat(2, 1fr);
+                    }}
+                    .billing-summary {{
+                        grid-template-columns: 1fr;
+                    }}
+                }}
+                .payment-method {{
+                    position: relative;
+                    overflow: hidden;
+                }}
+                .method-details {{
+                    flex: 1;
+                }}
+                .method-status {{
+                    font-size: 0.8rem;
+                    padding: 0.2rem 0.5rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    border-radius: 12px;
+                    color: var(--primary-color);
+                }}
+                .action-btn {{
+                    background: transparent;
+                    border: none;
+                    color: var(--text-light);
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }}
+                .action-btn:hover {{
+                    background: rgba(255, 255, 255, 0.1);
+                    color: var(--primary-color);
+                }}
+                .payment-history {{
+                    margin-top: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    overflow: hidden;
+                }}
+                .history-header {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    background: rgba(255, 0, 153, 0.1);
+                    font-weight: 500;
+                }}
+                .history-item {{
+                    display: grid;
+                    grid-template-columns: 2fr 1fr 1fr 1fr;
+                    padding: 1rem;
+                    align-items: center;
+                    transition: all 0.3s ease;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }}
+                .history-item:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.05);
+                }}
+                .history-item.pending {{
+                    background: rgba(255, 170, 0, 0.15);
+                    background: rgba(255, 170, 0, 0.05);
+                }}
+                .status-badge {{
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.85rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }}
+                .status-badge.paid {{
+                    background: rgba(0, 179, 104, 0.2);
+                    color: #00b368;
+                }}
+                .status-badge.pending {{
+                    background: rgba(255, 170, 0, 0.2);
+                    color: #ffaa00;
+                }}
+                .payment-stats {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }}
+                .stat-card {{
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.05);
+                    padding: 1rem;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    transition: all 0.3s ease;
+                }}
+                .stat-card:hover {{
+                    background: rgba(255, 0, 153, 0.15);
+                    background: rgba(255, 0, 153, 0.1);
+                    transform: translateY(-2px);
+                }}
+                .stat-icon {{
+                    width: 40px;
+                    height: 40px;
+                    background: var(--primary-color);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                }}
+                .stat-info h4 {{
+                    font-size: 0.9rem;
+                    margin-bottom: 0.2rem;
+                }}
+                .stat-info p {{
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                }}
+                .mt-4 {{
+                    margin-top: 2rem;
+                }}
+                .text-success {{
+                    color: #00b368;
+                }}
+                .text-warning {{
+                    color: #ffaa00;
+                }}
+                .chart-container {{
+                    height: 300px;
+                    margin: 2rem 0;
+                    padding: 1rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    height: 250px; /* Reducido de 300px */
+                    margin: 1rem 0; /* Reducido de 2rem */
+                    padding: 0.8rem; /* Reducido de 1rem */
+                }}
+                @media (max-width: 768px) {{
+                    .payment-stats {{
+                        grid-template-columns: 1fr;
+                    }}
+                    .history-item {{
+                        font-size: 0.9rem;
+                    }}
+                }}
+            </style>
+            <!-- Agregar en el <style> de cada página -->
+            <style>
+                html {{
+                    scroll-behavior: smooth;
+                    scroll-padding-bottom: 100px; /* Para que el scroll no oculte contenido detrás del sidebar */
+                }}
             </style>
         </head>
-        <!-- Mantener todo el HTML y estructura existente sin cambios -->
-        {get_common_sidebar()}
-        <div class="dashboard-layout">
-            <div class="main-content">
-                <div class="header">
-                    <h1>
-                        <i class="fas fa-chart-line header-icon"></i>
-                        Dashboard Tiffany Medical Assistant
-                    </h1>
-                </div>
-                
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-value">30%</div>
-                        <div class="kpi-label">Incremento en Follow-ups</div>
+        <body>
+            {get_common_sidebar()}
+            <div class="dashboard-layout">
+                <div class="main-content">
+                    <div class="header">
+                        <h1>
+                            <i class="fas fa-chart-line header-icon"></i>
+                            Dashboard Tiffany Medical Assistant
+                        </h1>
                     </div>
-                    <div class="kpi-card">
-                        <div class="kpi-value">25%</div>
-                        <div class="kpi-label">Reducción Tareas Admin</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-value">5min</div>
-                        <div class="kpi-label">Tiempo Onboarding</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-value">80%</div>
-                        <div class="kpi-label">Resolución WhatsApp</div>
-                    </div>
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="chart-title">Engagement de Usuarios Activos</div>
-                        <div class="chart-container">
-                            <canvas id="userEngagementChart"></canvas>
+                    
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-value">30%</div>
+                            <div class="kpi-label">Incremento en Follow-ups</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">25%</div>
+                            <div class="kpi-label">Reducción Tareas Admin</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">5min</div>
+                            <div class="kpi-label">Tiempo Onboarding</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">80%</div>
+                            <div class="kpi-label">Resolución WhatsApp</div>
                         </div>
                     </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Rendimiento de Automatización</div>
-                        <div class="chart-container">
-                            <canvas id="automationChart"></canvas>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="chart-title">Engagement de Usuarios Activos</div>
+                            <div class="chart-container">
+                                <canvas id="userEngagementChart"></canvas>
+                            </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
-                        <div class="chart-container">
-                            <canvas id="patientCareChart"></canvas>
+                        <div class="metric-card">
+                            <div class="chart-title">Rendimiento de Automatización</div>
+                            <div class="chart-container">
+                                <canvas id="automationChart"></canvas>
+                            </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Reducción de Tareas Administrativas</div>
-                        <div class="chart-container">
-                            <canvas id="efficiencyChart"></canvas>
+                        <div class="metric-card">
+                            <div class="chart-title">Tiempos de Respuesta en Urgencias</div>
+                            <div class="chart-container">
+                                <canvas id="patientCareChart"></canvas>
+                            </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Estado de Capacitación del Personal</div>
-                        <div class="chart-container">
-                            <canvas id="trainingChart"></canvas>
+                        <div class="metric-card">
+                            <div class="chart-title">Reducción de Tareas Administrativas</div>
+                            <div class="chart-container">
+                                <canvas id="efficiencyChart"></canvas>
+                            </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Rendimiento del Sistema</div>
-                        <div class="chart-container">
-                            <canvas id="systemPerformanceChart"></canvas>
+                        <div class="metric-card">
+                            <div class="chart-title">Estado de Capacitación del Personal</div>
+                            <div class="chart-container">
+                                <canvas id="trainingChart"></canvas>
+                            </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Adopción de Nuevas Funcionalidades</div>
-                        <div class="chart-container">
-                            <canvas id="adoptionChart"></canvas>
+                        <div class="metric-card">
+                            <div class="chart-title">Rendimiento del Sistema</div>
+                            <div class="chart-container">
+                                <canvas id="systemPerformanceChart"></canvas>
+                            </div>
                         </div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="chart-title">Insights Generales</div>
-                        <div class="chart-container">
-                            <canvas id="insightsChart"></canvas>
+                        <div class="metric-card">
+                            <div class="chart-title">Adopción de Nuevas Funcionalidades</div>
+                            <div class="chart-container">
+                                <canvas id="adoptionChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="chart-title">Insights Generales</div>
+                            <div class="chart-container">
+                                <canvas id="insightsChart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <script>
-            {charts_js}
-        </script>
-    </body>
+            <script>
+                {charts_js}
+            </script>
+        </body>
     </html>
     """
 
@@ -1505,23 +2088,11 @@ def profile_page():
                         padding: 0.8rem;
                     }}
                 }}
-                @media (min-width: 769px) and (max-width: 1024px) {{
-                    .dashboard-layout {{
-                        padding: 0 1.5rem 100px 1.5rem;
-                    }}
-                    
-                    .profile-grid {{
-                        grid-template-columns: 1fr;
-                        gap: 1.5rem;
-                    }}
-                }}
-                /* Ajustes específicos para tablets */
                 @media (max-width: 1200px) {{
                     .chart-container {{
                         height: 350px;
                     }}
                 }}
-                /* Ajustes para móvil */
                 @media (max-width: 768px) {{
                     .chart-container {{
                         height: 400px;
@@ -1530,14 +2101,12 @@ def profile_page():
                         width: 95%;
                     }}
                 }}
-                /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
                 .main-content {{
                     width: 100%;
                     max-width: 100vw;
                     margin: 0 auto;
                     padding: 2rem 0;
                 }}
-                /* Ajustes para el scroll */
                 html, body {{
                     overflow-x: hidden;
                     scroll-behavior: smooth;
