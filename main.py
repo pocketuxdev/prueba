@@ -2238,16 +2238,11 @@ def profile_page():
                         </div>
                     `;
 
-                    // Activar el ícono de perfil
-                    const navItems = document.querySelectorAll('.nav-item');
-                    navItems.forEach(item => {{
+                    // Activar el ícono de profile
+                    document.querySelectorAll('.nav-item').forEach(item => {{
                         item.classList.remove('active');
                     }});
-                    
-                    const profileNav = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
-                    if (profileNav) {{
-                        profileNav.classList.add('active');
-                    }}
+                    document.querySelector('[onclick="handleNavigation(\'profile\')"]').classList.add('active');
                 }};
             </script>
         </body>
