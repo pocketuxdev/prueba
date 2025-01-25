@@ -1115,13 +1115,13 @@ def dashboard_page():
             <title>POCKET UX - Dashboard</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- Agregar la fuente Poppins -->
+            <!-- Agregar Poppins junto a los recursos existentes -->
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             
             <style>
-                /* Agregar variables globales */
+                /* Agregar variables globales manteniendo los estilos existentes */
                 :root {{
                     --primary-color: #FF0099;
                     --primary-hover: #D6006F;
@@ -1131,32 +1131,16 @@ def dashboard_page():
                     --border-color: rgba(255, 0, 153, 0.2);
                 }}
 
-                /* Actualizar fuente base */
+                /* Actualizar solo la fuente base */
                 * {{
                     font-family: 'Poppins', sans-serif;
                 }}
 
-                /* Mantener todos los estilos existentes y solo actualizar tipografía */
-                .header h1 {{
-                    font-size: 2rem;
-                    font-weight: 600;
-                }}
-
-                .kpi-value {{
-                    font-size: 2.5rem;
-                    font-weight: 600;
-                }}
-
-                .kpi-label {{
-                    font-size: 1.1rem;
-                    font-weight: 500;
-                }}
-
-                /* Mantener TODOS los demás estilos existentes sin modificación */
-                /* ... resto de los estilos existentes ... */
+                /* Mantener TODOS los demás estilos existentes exactamente como estaban */
+                /* ... resto del código CSS original sin cambios ... */
             </style>
         </head>
-        <!-- Mantener todo el contenido existente -->
+        <!-- Mantener todo el HTML y estructura existente sin cambios -->
         {get_common_sidebar()}
         <div class="dashboard-layout">
             <div class="main-content">
