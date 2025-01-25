@@ -1750,7 +1750,7 @@ def dashboard_page():
                     <div class="kpi-card">
                         <div class="kpi-value">80%</div>
                         <div class="kpi-label">Resolución WhatsApp</div>
-        body>
+        <body>
             {get_common_sidebar()}
             <div class="dashboard-layout">
                 <div class="main-content">
