@@ -383,17 +383,7 @@ def get_common_sidebar():
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
-                switch(route) {
-                    case 'dashboard':
-                        window.location.href = '/dashboard';
-                        break;
-                    case 'profile':
-                        window.location.href = '/profile';
-                        break;
-                    case 'billing':
-                        window.location.href = '/billing';
-                        break;
-                }
+                window.location.href = `/${route}`;
             }, 200);
         }
         function handleLogout() {
@@ -2198,14 +2188,12 @@ def profile_page():
             </div>
             <script>
                 window.onload = function() {{
-                    // Verificar autenticación
                     const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
                         window.location.href = '/';
                         return;
                     }}
                     
-                    // Obtener y parsear datos del usuario
                     const userData = JSON.parse(clientData);
                     
                     // Actualizar nombre y rol
@@ -2213,8 +2201,8 @@ def profile_page():
                     const userRoleElement = document.getElementById('userRole');
                     
                     if (userNameElement && userRoleElement) {{
-                        userNameElement.textContent = userData.fullName;
-                        userRoleElement.textContent = userData.position;
+                        userNameElement.textContent = userData.fullName || 'Usuario';
+                        userRoleElement.textContent = userData.position || 'Cargo no especificado';
                     }}
                     
                     // Actualizar información personal
@@ -2223,43 +2211,41 @@ def profile_page():
                         userInfo.innerHTML = `
                             <div class="info-item">
                                 <div class="info-label">Email</div>
-                                <div class="info-value">${{userData.email}}</div>
+                                <div class="info-value">${{userData.email || 'No especificado'}}</div>
                             </div>
                             <div class="info-item">
                                 <div class="info-label">Nombre Completo</div>
-                                <div class="info-value">${{userData.fullName}}</div>
+                                <div class="info-value">${{userData.fullName || 'No especificado'}}</div>
                             </div>
                             <div class="info-item">
                                 <div class="info-label">Empresa</div>
-                                <div class="info-value">${{userData.company}}</div>
+                                <div class="info-value">${{userData.company || 'No especificado'}}</div>
                             </div>
                             <div class="info-item">
                                 <div class="info-label">Departamento</div>
-                                <div class="info-value">${{userData.department}}</div>
+                                <div class="info-value">${{userData.department || 'No especificado'}}</div>
                             </div>
                             <div class="info-item">
                                 <div class="info-label">Cargo</div>
-                                <div class="info-value">${{userData.position}}</div>
+                                <div class="info-value">${{userData.position || 'No especificado'}}</div>
                             </div>
                             <div class="info-item">
                                 <div class="info-label">Roles</div>
-                                <div class="info-value">${{userData.roles}}</div>
+                                <div class="info-value">${{userData.roles || 'No especificado'}}</div>
                             </div>
                         `;
                     }}
 
-                    // Activar el ícono de profile
-                    const navItems = document.querySelectorAll('.nav-item');
-                    navItems.forEach(item => {{
-                        item.classList.remove('active');
-                    }});
-                    
+                    // Activar el ícono de perfil
                     const profileIcon = document.querySelector('[onclick="handleNavigation(\'profile\')"]');
                     if (profileIcon) {{
+                        document.querySelectorAll('.nav-item').forEach(item => {{
+                            item.classList.remove('active');
+                        }});
                         profileIcon.classList.add('active');
                     }}
 
-                    // Restaurar opacidad del body
+                    // Restaurar opacidad
                     document.body.style.opacity = '1';
                 }};
             </script>
