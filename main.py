@@ -1728,7 +1728,10 @@ def dashboard_page():
                             <i class="fas fa-chart-line header-icon"></i>
                             <span class="title-container">
                                 <span class="title-main">Tiffany</span>
-                                <span class="title-sub">Medical Assistant</span>
+                                <div class="subtitle-container">
+                                    <span class="title-sub">Medical</span>
+                                    <span class="title-sub">Assistant</span>
+                                </div>
                             </span>
                         </h1>
                     </div>
