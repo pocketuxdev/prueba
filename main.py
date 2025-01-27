@@ -1198,7 +1198,7 @@ def dashboard_page():
                 }}
                 .title-sub {{
                     font-size: 1.5rem;  // Tamaño actual
-                    font-weight: 200;  // Extra light - más delgado que antes
+                    font-weight: 100;  // El más delgado posible (Thin)
                 }}
                 .header-icon {{
                     color: var(--primary-color);
