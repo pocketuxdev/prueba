@@ -2864,7 +2864,7 @@ def billing_page():
                     font-weight: 600 !important;
                     color: white !important;
                     font-family: 'Poppins' !important;
-                    text-transform: lowercase !important;  // Para que esté en minúsculas
+                    text-transform: capitalize !important;  // Para que esté en minúsculas
                     letter-spacing: 0.1em !important;  // Espaciado entre letras más amplio
                     display: flex !important;
                     align-items: flex-start !important;
