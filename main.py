@@ -1189,14 +1189,14 @@ def dashboard_page():
                 }}
                 .title-main {{
                     font-size: 2.2rem;
-                    margin-bottom: 0.5rem;
+                    margin-bottom: 0.2rem;  /* Reducido de 0.5rem a 0.2rem */
                 }}
                 .title-row {{
                     display: flex;
-                    gap: 0.5rem;
+                    gap: 0.3rem;  /* Reducido de 0.5rem a 0.3rem */
                 }}
                 .title-sub {{
-                    font-size: 2rem;
+                    font-size: 1rem;  /* Reducido de 2rem a 1rem */
                 }}
                 .header-icon {{
                     color: var(--primary-color);
