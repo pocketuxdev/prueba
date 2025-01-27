@@ -1176,11 +1176,15 @@ def dashboard_page():
                     font-weight: 600 !important;
                     color: white !important;
                     font-family: 'Poppins' !important;
-                    text-transform: lowercase !important;  // Para que esté en minúsculas
-                    letter-spacing: 0.1em !important;  // Espaciado entre letras más amplio
+                    text-transform: lowercase !important;
+                    letter-spacing: 0.1em !important;
                     display: flex !important;
-                    align-items: flex-start !important;
+                    align-items: center !important;  // Cambiado a center para alinear con Tiffany
                     gap: 0.8rem !important;
+                }}
+                .header-icon {{
+                    color: var(--primary-color);
+                    margin-top: -0.2rem !important;  // Ajuste fino para alinear perfectamente con Tiffany
                 }}
                 .title-container {{
                     display: flex;
@@ -1200,11 +1204,6 @@ def dashboard_page():
                 .title-sub {{
                     font-size: 1.5rem;  // Tamaño actual
                     font-weight: 100;  // Ahora sí se verá el peso más delgado
-                }}
-                .header-icon {{
-                    color: var(--primary-color);
-                    margin-right: 1.5rem !important;  // Agregamos margen a la derecha del ícono
-                    margin-top: 0.2rem !important;  // Ajuste fino para alinear con el texto
                 }}
                 .metrics-grid {{
                     display: grid;
