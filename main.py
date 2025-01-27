@@ -1202,7 +1202,7 @@ def dashboard_page():
                 }}
                 .header-icon {{
                     color: var(--primary-color);
-                    margin-top: 0.5rem !important;  // Ajuste fino para alinear con la primera línea
+                    margin-right: 1.5rem !important;  // Agregamos margen a la derecha del ícono
                 }}
                 .metrics-grid {{
                     display: grid;
@@ -2871,7 +2871,7 @@ def billing_page():
                 }}
                 .header-icon {{
                     color: var(--primary-color);
-                    margin-top: 0.5rem !important;  /* Ajuste para alinear con el texto */
+                    margin-right: 1.5rem !important;  // Agregamos margen a la derecha del ícono
                 }}
                 .billing-grid {{
                     display: grid;
