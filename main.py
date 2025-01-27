@@ -1176,10 +1176,10 @@ def dashboard_page():
                     font-weight: 600 !important;
                     color: white !important;
                     font-family: 'Poppins' !important;
-                    text-transform: capitalize !important;
-                    letter-spacing: 1px !important;
+                    text-transform: lowercase !important;  // Para que esté en minúsculas
+                    letter-spacing: 0.1em !important;  // Espaciado entre letras más amplio
                     display: flex !important;
-                    align-items: center !important;  // Cambiado a center para alinear verticalmente
+                    align-items: flex-start !important;
                     gap: 0.8rem !important;
                 }}
                 .title-container {{
@@ -1190,7 +1190,7 @@ def dashboard_page():
                 .title-main {{
                     font-size: 2.2rem;
                     font-weight: 600;
-                    margin-bottom: -0.5rem;  // Aumentado de -0.3rem a -0.5rem
+                    margin-bottom: -0.5rem;
                 }}
                 .title-row {{
                     display: flex;
@@ -2865,10 +2865,10 @@ def billing_page():
                     font-weight: 600 !important;
                     color: white !important;
                     font-family: 'Poppins' !important;
-                    text-transform: capitalize !important;
-                    letter-spacing: 1px !important;
+                    text-transform: lowercase !important;  // Para que esté en minúsculas
+                    letter-spacing: 0.1em !important;  // Espaciado entre letras más amplio
                     display: flex !important;
-                    align-items: flex-start !important;  /* Cambiado de center a flex-start */
+                    align-items: flex-start !important;
                     gap: 0.8rem !important;
                 }}
                 .header-icon {{
