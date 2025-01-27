@@ -1188,15 +1188,15 @@ def dashboard_page():
                     align-items: flex-start;
                 }}
                 .title-main {{
-                    font-size: 2.2rem;
-                    margin-bottom: 0.2rem;  /* Reducido de 0.5rem a 0.2rem */
+                    font-size: 2.2rem;  // Tiffany mantiene su tamaño original
+                    margin-bottom: 0.2rem;
                 }}
                 .title-row {{
                     display: flex;
                     gap: 0.3rem;  /* Reducido de 0.5rem a 0.3rem */
                 }}
                 .title-sub {{
-                    font-size: 1rem;  /* Reducido de 2rem a 1rem */
+                    font-size: 1.5rem;  // Aumentado de 1rem a 1.5rem (50% más grande)
                 }}
                 .header-icon {{
                     color: var(--primary-color);
