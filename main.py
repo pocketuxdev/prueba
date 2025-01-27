@@ -1179,7 +1179,7 @@ def dashboard_page():
                     text-transform: capitalize !important;
                     letter-spacing: 1px !important;
                     display: flex !important;
-                    align-items: center !important;
+                    align-items: flex-start !important;  // Cambiado de center a flex-start
                     gap: 0.8rem !important;
                 }}
                 .title-container {{
@@ -1202,7 +1202,7 @@ def dashboard_page():
                 }}
                 .header-icon {{
                     color: var(--primary-color);
-                    margin-top: 0.5rem !important;  /* Ajuste para alinear con el texto */
+                    margin-top: 0.5rem !important;  // Ajuste fino para alinear con la primera línea
                 }}
                 .metrics-grid {{
                     display: grid;
