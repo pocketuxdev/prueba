@@ -2869,11 +2869,11 @@ def billing_page():
                     letter-spacing: 1px !important;
                     display: flex !important;
                     align-items: flex-start !important;  /* Cambiado de center a flex-start */
-                    gap: 2.5rem !important;
+                    gap: 0.8rem !important;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
-                    margin-right: 1.5rem !important;  // Agregamos margen a la derecha del ícono
+                    margin-top: 0.5rem !important;  /* Ajuste para alinear con el texto */
                 }}
                 .billing-grid {{
                     display: grid;
