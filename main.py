@@ -1179,8 +1179,24 @@ def dashboard_page():
                     text-transform: capitalize !important;
                     letter-spacing: 1px !important;
                     display: flex !important;
-                    align-items: flex-start !important;  /* Cambiado de center a flex-start */
+                    align-items: center !important;
                     gap: 0.8rem !important;
+                }}
+                .title-container {{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                }}
+                .title-main {{
+                    font-size: 2.2rem;
+                    margin-bottom: 0.5rem;
+                }}
+                .title-row {{
+                    display: flex;
+                    gap: 0.5rem;
+                }}
+                .title-sub {{
+                    font-size: 2rem;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
@@ -1726,11 +1742,13 @@ def dashboard_page():
                     <div class="header">
                         <h1>
                             <i class="fas fa-chart-line header-icon"></i>
-                            <span class="title-container">
-                                <span class="title-main">Tiffany</span>
-                                <span class="title-sub">Medical</span>
-                                <span class="title-sub">Assistant</span>
-                            </span>
+                            <div class="title-container">
+                                <div class="title-main">Tiffany</div>
+                                <div class="title-row">
+                                    <div class="title-sub">Medical</div>
+                                    <div class="title-sub">Assistant</div>
+                                </div>
+                            </div>
                         </h1>
                     </div>
                     
