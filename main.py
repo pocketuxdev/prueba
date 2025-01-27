@@ -1198,7 +1198,7 @@ def dashboard_page():
                 }}
                 .title-sub {{
                     font-size: 1.5rem;  // Tamaño actual
-                    font-weight: 100;  // El más delgado posible (Thin)
+                    font-weight: 100;  // Ahora sí se verá el peso más delgado
                 }}
                 .header-icon {{
                     color: var(--primary-color);
