@@ -1179,13 +1179,28 @@ def dashboard_page():
                     text-transform: capitalize !important;
                     letter-spacing: 1px !important;
                     display: flex !important;
-                    align-items: flex-start !important;  // Cambiado de center a flex-start
+                    align-items: center !important;
                     gap: 0.8rem !important;
+                }}
+                @media (max-width: 768px) {{
+                    .header h1 {{
+                        align-items: flex-start !important;
+                    }}
+                    
+                    .title-container {{
+                        flex-direction: column;  // Vertical en móvil
+                        align-items: flex-start;
+                    }}
+                    
+                    .header-icon {{
+                        margin-top: 0.5rem !important;
+                    }}
                 }}
                 .title-container {{
                     display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
+                    flex-direction: row;  // Horizontal por defecto (desktop)
+                    align-items: center;
+                    gap: 0.5rem;
                 }}
                 .title-main {{
                     font-size: 2.2rem;  // Tiffany mantiene su tamaño original
