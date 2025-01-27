@@ -1179,12 +1179,12 @@ def dashboard_page():
                     text-transform: lowercase !important;
                     letter-spacing: 0.1em !important;
                     display: flex !important;
-                    align-items: flex-start !important;  // Cambiado a flex-start para alinear al top
-                    gap: 0.8rem !important;
+                    align-items: flex-start !important;
+                    gap: 1.2rem !important;  // Aumentado de 0.8rem a 1.2rem para más separación
                 }}
                 .header-icon {{
                     color: var(--primary-color);
-                    margin-top: 0.5rem !important;  // Ajuste para alinear con la línea base de Tiffany
+                    margin-top: 0.5rem !important;  /* Ajuste para alinear con el texto */
                 }}
                 .title-container {{
                     display: flex;
@@ -2868,7 +2868,7 @@ def billing_page():
                     letter-spacing: 0.1em !important;  // Espaciado entre letras más amplio
                     display: flex !important;
                     align-items: flex-start !important;
-                    gap: 0.8rem !important;
+                    gap: 1.2rem !important;  // Aumentado de 0.8rem a 1.2rem para más separación
                 }}
                 .header-icon {{
                     color: var(--primary-color);
