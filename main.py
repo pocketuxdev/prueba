@@ -3154,7 +3154,7 @@ def billing_page():
                     <div class="header">
                         <h1>
                             <i class="fas fa-file-invoice-dollar header-icon"></i>
-                            Centro de Facturación
+                            Facturación
                         </h1>
                     </div>
                     <div class="billing-grid">
