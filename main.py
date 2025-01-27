@@ -1189,12 +1189,13 @@ def dashboard_page():
                 }}
                 .title-main {{
                     font-size: 2.2rem;  // Tiffany mantiene su tamaño original
-                    margin-bottom: 0.1rem;
+                    margin-bottom: -0.3rem;  // Margen negativo para subir Medical Assistant
                     font-weight: 600;  // Mantiene el peso bold
                 }}
                 .title-row {{
                     display: flex;
                     gap: 0.3rem;  /* Reducido de 0.5rem a 0.3rem */
+                    margin-top: -0.2rem;  // También ayuda a subir el Medical Assistant
                 }}
                 .title-sub {{
                     font-size: 1.5rem;  // Tamaño actual
