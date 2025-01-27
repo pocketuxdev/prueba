@@ -1190,13 +1190,15 @@ def dashboard_page():
                 .title-main {{
                     font-size: 2.2rem;  // Tiffany mantiene su tamaño original
                     margin-bottom: 0.2rem;
+                    font-weight: 600;  // Mantiene el peso bold
                 }}
                 .title-row {{
                     display: flex;
                     gap: 0.3rem;  /* Reducido de 0.5rem a 0.3rem */
                 }}
                 .title-sub {{
-                    font-size: 1.5rem;  // Aumentado de 1rem a 1.5rem (50% más grande)
+                    font-size: 1.5rem;  // Tamaño actual
+                    font-weight: 300;  // Más delgado (light)
                 }}
                 .header-icon {{
                     color: var(--primary-color);
