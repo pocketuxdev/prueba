@@ -1180,7 +1180,7 @@ def dashboard_page():
                     letter-spacing: 1px !important;
                     display: flex !important;
                     align-items: flex-start !important;  // Cambiado de center a flex-start
-                    gap: 1.5rem !important;
+                    gap: 2.5rem !important;
                 }}
                 .title-container {{
                     display: flex;
@@ -2867,7 +2867,7 @@ def billing_page():
                     letter-spacing: 1px !important;
                     display: flex !important;
                     align-items: flex-start !important;  /* Cambiado de center a flex-start */
-                    gap: 1.5rem !important;
+                    gap: 2.5rem !important;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
