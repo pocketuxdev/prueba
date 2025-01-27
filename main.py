@@ -1179,12 +1179,12 @@ def dashboard_page():
                     text-transform: lowercase !important;
                     letter-spacing: 0.1em !important;
                     display: flex !important;
-                    align-items: center !important;  // Cambiado a center para alinear con Tiffany
+                    align-items: flex-start !important;  // Cambiado a flex-start para alinear al top
                     gap: 0.8rem !important;
                 }}
                 .header-icon {{
                     color: var(--primary-color);
-                    margin-top: -0.2rem !important;  // Ajuste fino para alinear perfectamente con Tiffany
+                    margin-top: 0.5rem !important;  // Ajuste para alinear con la línea base de Tiffany
                 }}
                 .title-container {{
                     display: flex;
