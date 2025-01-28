@@ -1372,16 +1372,20 @@ def dashboard_page():
                 }}
                 .chart-title {{
                     font-size: 1.2rem;
-                    margin: 0 0 1rem 0; /* Margen uniforme */
+                    font-family: 'Poppins' !important;
+                    font-weight: 600 !important;
+                    text-transform: capitalize !important;
+                    letter-spacing: 0.1em !important;
+                    margin: 0 0 1rem 0;
                     text-align: center;
                     width: 100%;
                     padding: 0.5rem;
-                    white-space: normal; /* Permitir múltiples líneas */
-                    overflow-wrap: break-word; /* Romper palabras largas si es necesario */
+                    white-space: normal;
+                    overflow-wrap: break-word;
                     word-wrap: break-word;
-                    min-height: 2.5em; /* Altura mínima para dos líneas */
+                    min-height: 2.5em;
                     display: -webkit-box;
-                    -webkit-line-clamp: 2; /* Máximo dos líneas */
+                    -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                     line-height: 1.2;
