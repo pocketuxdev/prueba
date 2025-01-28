@@ -1375,7 +1375,7 @@ def dashboard_page():
                     font-family: 'Poppins' !important;
                     font-weight: 600 !important;
                     text-transform: capitalize !important;
-                    letter-spacing: 0.1em !important;
+                    letter-spacing: 0.05em !important;  // Reducido de 0.1em a 0.05em
                     margin: 0 0 1rem 0;
                     text-align: center;
                     width: 100%;
