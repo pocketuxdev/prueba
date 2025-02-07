@@ -2305,32 +2305,32 @@ def profile_page():
                     // Actualizar información personal
                     const userInfo = document.getElementById('userInfo');
                     if (userInfo) {{
-                        userInfo.innerHTML = `
-                            <div class="info-item">
-                                <div class="info-label">Email</div>
-                                <div class="info-value">${{userData.email}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Nombre Completo</div>
-                                <div class="info-value">${{userData.fullName}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Empresa</div>
-                                <div class="info-value">${{userData.company}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Departamento</div>
-                                <div class="info-value">${{userData.department}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Cargo</div>
-                                <div class="info-value">${{userData.position}}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Roles</div>
-                                <div class="info-value">${{userData.roles}}</div>
-                            </div>
-                        `;
+                    userInfo.innerHTML = `
+                        <div class="info-item">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">${{userData.email}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Nombre Completo</div>
+                            <div class="info-value">${{userData.fullName}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Empresa</div>
+                            <div class="info-value">${{userData.company}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Departamento</div>
+                            <div class="info-value">${{userData.department}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Cargo</div>
+                            <div class="info-value">${{userData.position}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Roles</div>
+                            <div class="info-value">${{userData.roles}}</div>
+                        </div>
+                    `;
                     }}
                 }}
             </script>
@@ -3776,34 +3776,31 @@ def get_common_sidebar_vitafer():
     <!-- HTML común del Sidebar -->
     <div class="sidebar">
         <img src="/static/images/logopocket.png" alt="Logo" class="sidebar-logo">
-        <div class="nav-item" onclick="handleNavigation('dashboard')" data-tooltip="Dashboard">
+        <div class="nav-item" onclick="handleVitaferNavigation('dashboard')" data-tooltip="Dashboard">
             <i class="fas fa-home"></i>
         </div>
-        <div class="nav-item" onclick="handleNavigation('profile')" data-tooltip="Perfil">
+        <div class="nav-item" onclick="handleVitaferNavigation('profile')" data-tooltip="Perfil">
             <i class="fas fa-user"></i>
         </div>
-        <div class="nav-item" onclick="handleNavigation('billing')" data-tooltip="Facturación">
+        <div class="nav-item" onclick="handleVitaferNavigation('billing')" data-tooltip="Facturación">
             <i class="fas fa-file-invoice-dollar"></i>
         </div>
-        <div class="nav-item" onclick="handleLogout()" data-tooltip="Cerrar Sesión">
+        <div class="nav-item" onclick="handleVitaferLogout()" data-tooltip="Cerrar Sesión">
             <i class="fas fa-sign-out-alt"></i>
         </div>
     </div>
     <!-- JavaScript común -->
     <script>
-        function handleNavigation(route) {
-            // Remover clase active de todos los items
+        function handleVitaferNavigation(route) {  // Renombrada
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // Agregar clase active al item actual
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleVitaferNavigation('${route}')"]`);  // Actualizado
             if (currentItem) {
                 currentItem.classList.add('active');
             }
             
-            // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
                 // Asegurar que todas las rutas tengan el prefijo /vitafer/
@@ -3811,31 +3808,28 @@ def get_common_sidebar_vitafer():
             }, 200);
         }
 
-        function handleLogout() {
+        function handleVitaferLogout() {  // Renombrada
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-                localStorage.removeItem('clientData');
-                window.location.href = '/vitafer';  // Redirigir al login de Vitafer
+                localStorage.removeItem('vitaferClientData');  // Cambiado el key
+                window.location.href = '/vitafer';
             }
         }
 
         window.onload = function() {
-            // Verificar autenticación
-            const clientData = localStorage.getItem('clientData');
+            const clientData = localStorage.getItem('vitaferClientData');  // Cambiado el key
             if (!clientData) {
                 window.location.href = '/vitafer';
                 return;
             }
 
-            // Cargar información del perfil si estamos en la página de perfil
             if (window.location.pathname === '/vitafer/profile') {
-                loadProfileInfo(JSON.parse(clientData));
+                loadVitaferProfile(JSON.parse(clientData));  // Renombrada
             }
 
-            // Activar item actual según la ruta
             const path = window.location.pathname;
             // Extraer la ruta después de /vitafer/
             const route = path.replace('/vitafer/', '') || 'dashboard';
-            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            const currentItem = document.querySelector(`[onclick="handleVitaferNavigation('${route}')"]`);  // Actualizado
             if (currentItem) {
                 document.querySelectorAll('.nav-item').forEach(item => {
                     item.classList.remove('active');
@@ -3843,22 +3837,19 @@ def get_common_sidebar_vitafer():
                 currentItem.classList.add('active');
             }
 
-            // Restaurar opacidad del body
             document.body.style.opacity = '1';
         };
 
-        function loadProfileInfo(userData) {
-            // Actualizar nombre y rol
-            const userNameElement = document.getElementById('userName');
-            const userRoleElement = document.getElementById('userRole');
+        function loadVitaferProfile(userData) {  // Renombrada
+            const userNameElement = document.getElementById('vitaferUserName');  // Actualizado
+            const userRoleElement = document.getElementById('vitaferUserRole');  // Actualizado
             
             if (userNameElement && userRoleElement) {
                 userNameElement.textContent = userData.fullName;
                 userRoleElement.textContent = userData.position;
             }
             
-            // Actualizar información personal
-            const userInfo = document.getElementById('userInfo');
+            const userInfo = document.getElementById('vitaferUserInfo');  // Actualizado
             if (userInfo) {
                 userInfo.innerHTML = `
                     <div class="info-item">
@@ -5600,8 +5591,8 @@ def vitafer_profile():
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="profile-info">
-                            <h1 class="profile-name" id="userName">Cargando...</h1>
-                            <div class="profile-role" id="userRole">Cargando...</div>
+                            <h1 class="profile-name" id="vitaferUserName">Cargando...</h1>
+                            <div class="profile-role" id="vitaferUserRole">Cargando...</div>
                             <div class="profile-stats">
                                 <div class="stat-item">
                                     <div class="stat-value">28</div>
@@ -5632,7 +5623,7 @@ def vitafer_profile():
                                 <i class="fas fa-user-circle"></i>
                                 Información Personal
                             </div>
-                            <div class="info-grid" id="userInfo">
+                            <div class="info-grid" id="vitaferUserInfo">
                                 <!-- Se llenará con JavaScript -->
                             </div>
                             <div class="section-title mt-4">
@@ -5707,19 +5698,19 @@ def vitafer_profile():
             <script>
                 window.onload = function() {{
                     // Verificar autenticación
-                    const clientData = localStorage.getItem('clientData');
+                    const clientData = localStorage.getItem('vitaferClientData');
                     if (!clientData) {{
                         window.location.href = '/vitafer';
                         return;
                     }}
                     // Cargar información del perfil si estamos en la página de perfil
                     if (window.location.pathname === '/vitafer/profile') {{
-                        loadProfileInfo(JSON.parse(clientData));
+                        loadVitaferProfile(JSON.parse(clientData));
                     }}
                     // Activar item actual según la ruta
                     const path = window.location.pathname;
                     const route = path.replace('/vitafer/', '') || 'dashboard';
-                    const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
+                    const currentItem = document.querySelector(`[onclick="handleVitaferNavigation('${{route}}')"]`);
                     if (currentItem) {{
                         document.querySelectorAll('.nav-item').forEach(item => {{
                             item.classList.remove('active');
@@ -5729,10 +5720,10 @@ def vitafer_profile():
                     // Restaurar opacidad del body
                     document.body.style.opacity = '1';
                 }};
-                function loadProfileInfo(userData) {{
+                function loadVitaferProfile(userData) {{
                     // Actualizar nombre y rol
-                    const userNameElement = document.getElementById('userName');
-                    const userRoleElement = document.getElementById('userRole');
+                    const userNameElement = document.getElementById('vitaferUserName');
+                    const userRoleElement = document.getElementById('vitaferUserRole');
                     
                     if (userNameElement && userRoleElement) {{
                         userNameElement.textContent = userData.fullName;
@@ -5740,7 +5731,7 @@ def vitafer_profile():
                     }}
                     
                     // Actualizar información personal
-                    const userInfo = document.getElementById('userInfo');
+                    const userInfo = document.getElementById('vitaferUserInfo');
                     if (userInfo) {{
                         userInfo.innerHTML = `
                             <div class="info-item">
