@@ -6867,4 +6867,223 @@ def vitafer_billing():
     </html>
     """
 
+@rt('/home')
+def home():
+    return Html(
+        Head(
+            Meta(charset="utf-8"),
+            Meta(name="viewport", content="width=device-width, initial-scale=1"),
+            Link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"),
+            Link(rel="stylesheet", href="/static/styles.css"),
+            Script(src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"),
+        ),
+        Body(
+            # Contenedor principal que envuelve todo
+            Div(
+                # Fondo de partículas
+                Div(id="particles-js", _class="particles-background"),
+                
+                # Contenido de la página
+                Main(
+                    # Hero Section
+                    Section(
+                        Div(
+                            H1("Tiffany", _class="hero-title"),
+                            H2("Tu Asistente AI Inteligente", _class="hero-subtitle"),
+                            P("Donde la inteligencia artificial se encuentra con tu productividad", _class="hero-description"),
+                            Button("Comenzar Ahora", _class="cta-button"),
+                            _class="hero-content"
+                        ),
+                        _class="hero-section"
+                    ),
+                    # Products Section
+                    Section(
+                        H2("Nuestras Soluciones", _class="section-title"),
+                        Div(
+                            Article(
+                                H3("Tiffany BestSelf"),
+                                P("Asistente AI Personal para Desarrollo Personal"),
+                                Div(
+                                    Button("Llamar Ahora", hx_get="/call/bestself", _class="primary"),
+                                    A("WhatsApp", href="https://wa.me/yourphone", role="button", _class="outline"),
+                                    _class="action-buttons"
+                                )
+                            ),
+                            Article(
+                                H3("Tiffany Hospitality"),
+                                P("Asistente AI para la Industria Hotelera"),
+                                Div(
+                                    Button("Llamar Ahora", hx_get="/call/hospitality", _class="primary"),
+                                    A("WhatsApp", href="https://wa.me/yourphone", role="button", _class="outline"),
+                                    _class="action-buttons"
+                                )
+                            ),
+                            Article(
+                                H3("Tiffany Medical Assistant"),
+                                P("Asistente AI para Profesionales de la Salud"),
+                                Div(
+                                    Button("Llamar Ahora", hx_get="/call/medical", _class="primary"),
+                                    A("WhatsApp", href="https://wa.me/yourphone", role="button", _class="outline"),
+                                    _class="action-buttons"
+                                )
+                            ),
+                            _class="grid"
+                        )
+                    ),
+                    # Statistics Section
+                    Section(
+                        H2("Nuestro Impacto", _class="section-title"),
+                        Div(
+                            Article(
+                                H3("30%", _class="stats"),
+                                P("Incremento en Follow-ups")
+                            ),
+                            Article(
+                                H3("25%", _class="stats"),
+                                P("Reducción Tareas Admin")
+                            ),
+                            Article(
+                                H3("5min", _class="stats"),
+                                P("Tiempo Onboarding")
+                            ),
+                            _class="grid"
+                        )
+                    ),
+                    # About Section
+                    Section(
+                        H2("Lo Que Somos", _class="section-title"),
+                        P("Somos una plataforma innovadora que revoluciona la asistencia personal y profesional a través de la IA.")
+                    ),
+                    # Contact Section
+                    Section(
+                        H2("Contáctanos", _class="section-title"),
+                        Form(
+                            Input(type="text", name="name", placeholder="Tu Nombre"),
+                            Input(type="email", name="email", placeholder="Tu Email"),
+                            Textarea(name="message", placeholder="Tu Mensaje"),
+                            Button("Enviar", type="submit", _class="primary"),
+                            hx_post="/submit-contact",
+                            hx_target="#form-response"
+                        ),
+                        Div(id="form-response"),
+                        _class="container"
+                    )
+                ),
+                _class="main-content"
+            ),
+            _class="page-wrapper"
+        ),
+        # Agregar la configuración de particles.js
+        Script("""
+            particlesJS('particles-js',
+              {
+                "particles": {
+                  "number": {
+                    "value": 100,
+                    "density": {
+                      "enable": true,
+                      "value_area": 800
+                    }
+                  },
+                  "color": {
+                    "value": "#ff1cf7"
+                  },
+                  "shape": {
+                    "type": "circle"
+                  },
+                  "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                      "enable": true,
+                      "speed": 1,
+                      "opacity_min": 0.1,
+                      "sync": false
+                    }
+                  },
+                  "size": {
+                    "value": 3,
+                    "random": true
+                  },
+                  "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ff1cf7",
+                    "opacity": 0.4,
+                    "width": 1
+                  },
+                  "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                      "enable": true,
+                      "rotateX": 600,
+                      "rotateY": 1200
+                    }
+                  }
+                },
+                "interactivity": {
+                  "detect_on": "canvas",
+                  "events": {
+                    "onhover": {
+                      "enable": true,
+                      "mode": "repulse"
+                    },
+                    "onclick": {
+                      "enable": true,
+                      "mode": "push"
+                    },
+                    "resize": true
+                  }
+                },
+                "retina_detect": true
+              }
+            );
+        """)
+    )
+
+@rt('/submit-contact')
+def handle_contact():
+    return P("¡Gracias por tu mensaje! Te contactaremos pronto.")
+
+@rt('/call/{product}')
+def handle_call(product):
+    return P(f"Iniciando llamada para Tiffany {product}...")
+
+@rt('/webhook/start/{tiffany_type}')
+def start_tiffany(tiffany_type):
+    return {"status": "success", "message": f"Iniciando Tiffany {tiffany_type}"}
+
+@rt('/webhook/start/general')
+def start_tiffany_general():
+    return {"status": "success", "message": "Iniciando Tiffany general"}
+
+@rt('/vitafer/home')
+def vitafer_home():
+    return f"""
+    <html>
+        <head>
+            <title>Vitafer - Home</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        </head>
+        <body>
+            {get_common_sidebar_vitafer()}
+            <div class="dashboard-layout">
+                <div class="main-content">
+                    <!-- ... resto del contenido ... -->
+                </div>
+            </div>
+        </body>
+    </html>
+    """
+
 serve()
