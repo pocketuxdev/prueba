@@ -3796,23 +3796,27 @@ def get_common_sidebar_vitafer():
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
+            
             // Agregar clase active al item actual
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
                 currentItem.classList.add('active');
             }
+            
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
                 window.location.href = `/vitafer/${route}`;
             }, 200);
         }
+
         function handleLogout() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
                 localStorage.removeItem('clientData');
                 window.location.href = '/vitafer';
             }
         }
+
         window.onload = function() {
             // Verificar autenticación
             const clientData = localStorage.getItem('clientData');
@@ -3820,10 +3824,12 @@ def get_common_sidebar_vitafer():
                 window.location.href = '/vitafer';
                 return;
             }
+
             // Cargar información del perfil si estamos en la página de perfil
             if (window.location.pathname === '/vitafer/profile') {
                 loadProfileInfo(JSON.parse(clientData));
             }
+
             // Activar item actual según la ruta
             const path = window.location.pathname;
             const route = path.replace('/vitafer/', '') || 'dashboard';
@@ -3834,9 +3840,11 @@ def get_common_sidebar_vitafer():
                 });
                 currentItem.classList.add('active');
             }
+
             // Restaurar opacidad del body
             document.body.style.opacity = '1';
         };
+
         function loadProfileInfo(userData) {
             // Actualizar nombre y rol
             const userNameElement = document.getElementById('userName');
