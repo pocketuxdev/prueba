@@ -3810,13 +3810,13 @@ def get_common_sidebar_vitafer():
 
         function handleVitaferLogout() {  // Renombrada
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-                localStorage.removeItem('vitaferClientData');  // Cambiado el key
+                localStorage.removeItem('clientData');  // Cambiado el key
                 window.location.href = '/vitafer';
             }
         }
 
         window.onload = function() {
-            const clientData = localStorage.getItem('vitaferClientData');  // Cambiado el key
+            const clientData = localStorage.getItem('clientData');  // Cambiado el key
             if (!clientData) {
                 window.location.href = '/vitafer';
                 return;
@@ -4187,7 +4187,7 @@ def vitafer_login():
                         </form>
                         <div id="message"></div>
                         <div class="reset-password-link">
-                            <a href="/reset-password">
+                            <a href="/vitafer/reset-password">  <!-- Corregido el href -->
                                 <i class="fas fa-key"></i>
                                 ¿No recuerdas tu contraseña? ¡Recupérala aquí!
                             </a>
@@ -6116,7 +6116,7 @@ def vitafer_reset_password():
                         
                         <div id="message"></div>
                         
-                        <a href="/" class="back-link">
+                        <a href="/vitafer" class="back-link">  <!-- Corregido el href -->
                             <i class="fas fa-arrow-left"></i>
                             Volver al inicio de sesión
                         </a>
@@ -6214,7 +6214,7 @@ def vitafer_reset_password():
                             `;
                             localStorage.setItem('resetPhoneNumber', fullNumber);
                             setTimeout(() => {
-                                window.location.href = '/verify-code';
+                                window.location.href = '/vitafer/verify-code';  // Mantener el prefijo vitafer
                             }, 2000);
                         } else {
                             messageDiv.className = 'error';
