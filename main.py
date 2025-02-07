@@ -4225,7 +4225,7 @@ def vitafer_login():
                             messageDiv.innerHTML = `<p>${data.message}</p>`;
                             localStorage.setItem('clientData', JSON.stringify(data.clientData));
                             setTimeout(() => {
-                                window.location.href = '/vitafer/dashboard';
+                                window.location.href = '/vitafer/dashboard';  // Asegurar prefijo vitafer
                             }, 1000);
                         } else {
                             messageDiv.className = 'error';
@@ -5173,7 +5173,7 @@ def vitafer_dashboard():
             </style>
         </head>
         <body>
-            {get_common_sidebar()}
+            {get_common_sidebar_vitafer()}  # Usar el sidebar de Vitafer
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
@@ -5267,7 +5267,7 @@ def vitafer_dashboard():
 
 @rt('/vitafer/profile')
 def vitafer_profile():
-   return f"""
+    return f"""
     <html>
         <head>
             <title>Tiffany Medical Assistant - Perfil</title>
@@ -5583,7 +5583,7 @@ def vitafer_profile():
             </style>
         </head>
         <body>
-            {get_common_sidebar()}
+            {get_common_sidebar_vitafer()}  # Usar el sidebar de Vitafer
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="profile-header">
@@ -6605,7 +6605,7 @@ def vitafer_billing():
             </style>
         </head>
         <body>
-            {get_common_sidebar()}
+            {get_common_sidebar_vitafer()}  # Usar el sidebar de Vitafer
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
