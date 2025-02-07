@@ -5176,7 +5176,7 @@ def vitafer_dashboard():
             </style>
         </head>
         <body>
-            {get_common_sidebar_vitafer()}  # Usar el sidebar de Vitafer
+            {get_common_sidebar_vitafer()}  
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
@@ -5586,7 +5586,7 @@ def vitafer_profile():
             </style>
         </head>
         <body>
-            {get_common_sidebar_vitafer()}  # Usar el sidebar de Vitafer
+            {get_common_sidebar_vitafer()}  
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="profile-header">
@@ -6608,7 +6608,7 @@ def vitafer_billing():
             </style>
         </head>
         <body>
-            {get_common_sidebar_vitafer()}  # Usar el sidebar de Vitafer
+            {get_common_sidebar_vitafer()} 
             <div class="dashboard-layout">
                 <div class="main-content">
                     <div class="header">
