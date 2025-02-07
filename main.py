@@ -5701,7 +5701,7 @@ def vitafer_profile():
             <script>
                 window.onload = function() {{
                     // Verificar autenticación
-                    const clientData = localStorage.getItem('vitaferClientData');
+                    const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
                         window.location.href = '/vitafer';
                         return;
