@@ -4224,17 +4224,20 @@ def vitafer_login():
                             messageDiv.className = 'success';
                             messageDiv.innerHTML = `<p>${data.message}</p>`;
                             localStorage.setItem('clientData', JSON.stringify(data.clientData));
+                            
+                            // Redirigir al dashboard después de login exitoso
                             setTimeout(() => {
-                                window.location.href = '/vitafer/dashboard';  // Asegurar prefijo vitafer
+                                window.location.href = '/vitafer/dashboard';
                             }, 1000);
                         } else {
                             messageDiv.className = 'error';
                             messageDiv.innerHTML = `<p>${data.message}</p>`;
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Ingresar';
                         }
                     } catch (error) {
                         messageDiv.className = 'error';
                         messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
-                    } finally {
                         submitButton.disabled = false;
                         submitButton.textContent = 'Ingresar';
                     }
