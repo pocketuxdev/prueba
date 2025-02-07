@@ -766,7 +766,7 @@ def login_page():
                         </form>
                         <div id="message"></div>
                         <div class="reset-password-link">
-                            <a href="/reset-password">
+                            <a href="/vitafer/reset-password">
                                 <i class="fas fa-key"></i>
                                 ¿No recuerdas tu contraseña? ¡Recupérala aquí!
                             </a>
