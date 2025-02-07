@@ -3806,6 +3806,7 @@ def get_common_sidebar_vitafer():
             // Animación suave antes de la navegación
             document.body.style.opacity = '0.5';
             setTimeout(() => {
+                // Asegurar que todas las rutas tengan el prefijo /vitafer/
                 window.location.href = `/vitafer/${route}`;
             }, 200);
         }
@@ -3813,7 +3814,7 @@ def get_common_sidebar_vitafer():
         function handleLogout() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
                 localStorage.removeItem('clientData');
-                window.location.href = '/vitafer';
+                window.location.href = '/vitafer';  // Redirigir al login de Vitafer
             }
         }
 
@@ -3832,6 +3833,7 @@ def get_common_sidebar_vitafer():
 
             // Activar item actual según la ruta
             const path = window.location.pathname;
+            // Extraer la ruta después de /vitafer/
             const route = path.replace('/vitafer/', '') || 'dashboard';
             const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
             if (currentItem) {
