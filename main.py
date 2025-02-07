@@ -5181,8 +5181,7 @@ def vitafer_dashboard():
                             <div class="title-container">
                                 <div class="title-main">Tiffany</div>
                                 <div class="title-row">
-                                    <div class="title-sub">Medical</div>
-                                    <div class="title-sub">Assistant</div>
+                                    <div class="title-sub">Vitafer</div>
                                 </div>
                             </div>
                         </h1>
