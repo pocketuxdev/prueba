@@ -3779,7 +3779,7 @@ def vitafer_login():
                             messageDiv.innerHTML = `<p>${data.message}</p>`;
                             localStorage.setItem('clientData', JSON.stringify(data.clientData));
                             setTimeout(() => {
-                                window.location.href = '/dashboard';
+                                window.location.href = '/vitafer/dashboard';
                             }, 1000);
                         } else {
                             messageDiv.className = 'error';
