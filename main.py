@@ -3435,6 +3435,451 @@ def billing_page():
         </body>
     </html>
     """
+""" ___________________________________________________________________________________________________________________________________________________________________________"""
+
+def get_common_sidebar_vitafer():
+    """Retorna el HTML y estilos comunes para la barra lateral"""
+    return """
+    <!-- Estilos comunes del Sidebar -->
+    <style>
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            bottom: 1rem; /* Cambiado de 2rem a 1rem para bajar más el sidebar */
+            left: 50%;
+            transform: translateX(-50%);
+            height: 60px;
+            background: rgba(40, 40, 40, 0.95);
+            background: rgba(40, 40, 40, 0.75);
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 20px;
+            width: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Ajustar el padding-bottom del contenido principal */
+        .dashboard-layout {
+            padding-bottom: 80px; /* Aumentado para dar más espacio al sidebar */
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                bottom: 0.5rem; /* Ajustado para móviles */
+                padding: 0.5rem 1rem;
+                gap: 1rem;
+            }
+            .dashboard-layout {
+                padding-bottom: 70px; /* Ajustado para móviles */
+            }
+        }
+        /* Resto de los estilos del sidebar se mantienen igual */
+        .sidebar-logo {
+            width: 40px;
+            height: auto;
+            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 0, 153, 0.5));
+            transition: all 0.3s ease;
+        }
+        .sidebar-logo:hover {
+            transform: scale(1.1);
+        }
+        .nav-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08); /* Items más transparentes */
+        }
+        .nav-item:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+        }
+        .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        .nav-item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .nav-item:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: 110%;
+        }
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            height: 100vh;
+            max-width: 100vw; /* Agregar ancho máximo viewport */
+            margin: 0 auto;
+            padding: 0.5rem 1rem; /* Reducido aún más */
+            overflow-y: auto; /* Restaurar scroll vertical */
+            overflow-x: hidden;
+        }
+        @media (max-width: 768px) {
+            .dashboard-layout {
+                padding: 1rem 1rem 100px 1rem;
+                width: 100vw;
+                overflow-x: hidden;
+            }
+            
+            .header {
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 20px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+                font-family: 'Playfair Display', serif;
+            }
+            
+            .kpi-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .kpi-card {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
+                padding: 1.5rem;
+                border: 1px solid var(--border-color);
+                height: auto;
+            }
+            
+            .kpi-value {
+                font-size: 2.5rem;
+                color: var(--primary-color);
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+            
+            .kpi-label {
+                font-size: 1rem;
+                color: var(--text-light);
+                text-align: center;
+            }
+            
+            .metrics-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0.5rem;
+            }
+            
+            .metric-card {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
+                padding: 1.5rem;
+                border: 1px solid var(--border-color);
+                aspect-ratio: 1.2; /* Mantiene una proporción consistente */
+                height: auto;
+                width: 100%;
+            }
+            
+            .chart-title {
+                color: white;
+                font-size: 1.4rem;
+                text-align: center;
+                margin-bottom: 1.5rem;
+                font-weight: 500;
+                font-family: 'Playfair Display', serif;
+            }
+            
+            .chart-container {
+                position: relative;
+                width: 100%;
+                height: 280px;
+                height: 0;
+                padding-bottom: 75%; /* Mantiene una proporción 4:3 */
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain;
+            }
+            
+            /* Ajustes específicos para cada tipo de gráfica */
+            .metric-card[data-chart="line"] .chart-container,
+            .metric-card[data-chart="bar"] .chart-container {
+                height: 200px;
+            }
+            
+            .metric-card[data-chart="bar"] .chart-container,
+            .metric-card[data-chart="doughnut"] .chart-container,
+            .metric-card[data-chart="pie"] .chart-container {
+                height: 220px;
+                padding-bottom: 75%; /* Mantiene la misma proporción para todos los tipos */
+            }
+            
+            .chart-title {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                color: white;
+                text-align: center;
+            }
+            
+            /* Ajustes para las tarjetas KPI */
+            .kpi-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .kpi-card {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
+                padding: 1.5rem;
+                text-align: center;
+            }
+            
+            .kpi-value {
+                font-size: 2.5rem;
+                color: var(--primary-color);
+                margin-bottom: 0.5rem;
+            }
+            
+            .kpi-label {
+                font-size: 1rem;
+                color: var(--text-light);
+            }
+            
+            .sidebar {
+                background: rgba(40, 40, 40, 0.95);
+                padding: 0.5rem 1rem;
+                gap: 1rem;
+            }
+            
+            .nav-item {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .sidebar-logo {
+                width: 35px;
+            }
+        }
+        /* Ajustes para tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .dashboard-layout {
+                padding: 0 1.5rem 100px 1.5rem;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .chart-container {
+                height: 300px;
+            }
+            .calendar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        /* Ajustes específicos para las gráficas */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Aumentado de 180px a 300px */
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 0, 153, 0.1);
+            padding: 1.5rem; /* Aumentado padding */
+            margin: 1rem auto; /* Centrado con auto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chart-title {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            text-align: center; /* Centrar título */
+        }
+        /* Ajustes para tablets */
+        @media (max-width: 1200px) {
+            .chart-container {
+                height: 350px; /* Aún más alto en tablets */
+            }
+        }
+        /* Ajustes para móvil */
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 400px; /* Máxima altura en móvil */
+                padding: 1rem;
+                margin: 1rem auto;
+                width: 95%; /* Dar un pequeño margen en los bordes */
+            }
+            
+            canvas {
+                width: 100% !important;
+                height: 100% !important;
+                max-width: none !important;
+            }
+            
+            .chart-title {
+                font-size: 1.1rem;
+                padding: 0;
+                margin-bottom: 1rem;
+            }
+        }
+        /* Asegurar que el contenido principal tenga espacio para el sidebar inferior */
+        .main-content {
+            width: 100%;
+            max-width: 100vw; /* Cambiar a viewport width */
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        /* Ajustes para el scroll */
+        html, body {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            scroll-padding-bottom: 100px;
+        }
+    </style>
+    <!-- HTML común del Sidebar -->
+    <div class="sidebar">
+        <img src="/static/images/logopocket.png" alt="Logo" class="sidebar-logo">
+        <div class="nav-item" onclick="handleNavigation('dashboard')" data-tooltip="Dashboard">
+            <i class="fas fa-home"></i>
+        </div>
+        <div class="nav-item" onclick="handleNavigation('profile')" data-tooltip="Perfil">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="nav-item" onclick="handleNavigation('billing')" data-tooltip="Facturación">
+            <i class="fas fa-file-invoice-dollar"></i>
+        </div>
+        <div class="nav-item" onclick="handleLogout()" data-tooltip="Cerrar Sesión">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+    </div>
+    <!-- JavaScript común -->
+    <script>
+        function handleNavigation(route) {
+            // Remover clase active de todos los items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Agregar clase active al item actual
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            if (currentItem) {
+                currentItem.classList.add('active');
+            }
+            // Animación suave antes de la navegación
+            document.body.style.opacity = '0.5';
+            setTimeout(() => {
+                window.location.href = `/vitafer/${route}`;
+            }, 200);
+        }
+        function handleLogout() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                localStorage.removeItem('clientData');
+                window.location.href = '/vitafer';
+            }
+        }
+        window.onload = function() {
+            // Verificar autenticación
+            const clientData = localStorage.getItem('clientData');
+            if (!clientData) {
+                window.location.href = '/vitafer';
+                return;
+            }
+            // Cargar información del perfil si estamos en la página de perfil
+            if (window.location.pathname === '/vitafer/profile') {
+                loadProfileInfo(JSON.parse(clientData));
+            }
+            // Activar item actual según la ruta
+            const path = window.location.pathname;
+            const route = path.replace('/vitafer/', '') || 'dashboard';
+            const currentItem = document.querySelector(`[onclick="handleNavigation('${route}')"]`);
+            if (currentItem) {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                currentItem.classList.add('active');
+            }
+            // Restaurar opacidad del body
+            document.body.style.opacity = '1';
+        };
+        function loadProfileInfo(userData) {
+            // Actualizar nombre y rol
+            const userNameElement = document.getElementById('userName');
+            const userRoleElement = document.getElementById('userRole');
+            
+            if (userNameElement && userRoleElement) {
+                userNameElement.textContent = userData.fullName;
+                userRoleElement.textContent = userData.position;
+            }
+            
+            // Actualizar información personal
+            const userInfo = document.getElementById('userInfo');
+            if (userInfo) {
+                userInfo.innerHTML = `
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">${userData.email}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Nombre Completo</div>
+                        <div class="info-value">${userData.fullName}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Empresa</div>
+                        <div class="info-value">${userData.company}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Departamento</div>
+                        <div class="info-value">${userData.department}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Cargo</div>
+                        <div class="info-value">${userData.position}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Roles</div>
+                        <div class="info-value">${userData.roles}</div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+    """
 
 @rt('/vitafer')
 def vitafer_login():
@@ -5255,16 +5700,16 @@ def vitafer_profile():
                     // Verificar autenticación
                     const clientData = localStorage.getItem('clientData');
                     if (!clientData) {{
-                        window.location.href = '/';
+                        window.location.href = '/vitafer';
                         return;
                     }}
                     // Cargar información del perfil si estamos en la página de perfil
-                    if (window.location.pathname === '/profile') {{
+                    if (window.location.pathname === '/vitafer/profile') {{
                         loadProfileInfo(JSON.parse(clientData));
                     }}
                     // Activar item actual según la ruta
                     const path = window.location.pathname;
-                    const route = path.substring(1) || 'dashboard';
+                    const route = path.replace('/vitafer/', '') || 'dashboard';
                     const currentItem = document.querySelector(`[onclick="handleNavigation('${{route}}')"]`);
                     if (currentItem) {{
                         document.querySelectorAll('.nav-item').forEach(item => {{
