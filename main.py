@@ -2685,7 +2685,7 @@ def reset_password_page():
                         
                         <div id="message"></div>
                         
-                        <a href="/" class="back-link">
+                        <a href="/login" class="back-link">
                             <i class="fas fa-arrow-left"></i>
                             Volver al inicio de sesión
                         </a>
