@@ -389,14 +389,14 @@ def get_common_sidebar():
         function handleLogout() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
                 localStorage.removeItem('clientData');
-                window.location.href = '/';
+                window.location.href = '/login';
             }
         }
         window.onload = function() {
             // Verificar autenticación
             const clientData = localStorage.getItem('clientData');
             if (!clientData) {
-                window.location.href = '/';
+                window.location.href = '/login';
                 return;
             }
             // Cargar información del perfil si estamos en la página de perfil
@@ -461,7 +461,7 @@ def get_common_sidebar():
     """
 
 # Route definitions
-@rt('/')
+@rt('/login')
 def login_page():
     return """
     <html>
