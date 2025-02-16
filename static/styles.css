@@ -1,0 +1,626 @@
+/* Variables con nueva paleta de colores */
+:root {
+    --primary: #FF1CF7;
+    --secondary: #7928CA;
+    --accent: #00DFD8;
+    --dark: #0A0A0B;
+    --gradient-1: linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-2: linear-gradient(45deg, var(--secondary), var(--accent));
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+/* Animaciones */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Estilos base */
+body {
+    background: var(--dark);
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 28, 247, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 223, 216, 0.05) 0%, transparent 20%);
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.page-wrapper {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Fondo de partículas */
+.particles-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(135deg, #1a0b1e 0%, #0A0A0B 100%);
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    text-shadow: 0 0 20px rgba(255, 28, 247, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+/* Contenedor del botón */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* Botón principal */
+.cta-button {
+    background: linear-gradient(90deg, #FF1CF7, #7928CA);
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 80%;  /* Ancho del botón */
+    max-width: 400px;  /* Máximo ancho */
+    margin: 0 auto;  /* Centrar horizontalmente */
+    display: block;  /* Asegurar que margin auto funcione */
+    text-transform: uppercase;  /* Texto en mayúsculas */
+    letter-spacing: 1px;  /* Espaciado entre letras */
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 28, 247, 0.4);
+}
+
+/* Estadísticas para escritorio */
+.stats-section {
+    position: relative;
+    padding: 6rem 2rem;
+    margin: 4rem 0;
+}
+
+.stats-section .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Cards de estadísticas */
+.stats-section article {
+    background: rgba(20, 20, 20, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+    transition: all 0.4s ease;
+}
+
+/* Números de estadísticas */
+.stats {
+    font-size: 5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #00DFD8, #FF1CF7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    line-height: 1;
+    display: block;
+}
+
+/* Texto descriptivo */
+.stats-section article p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+/* Efectos hover */
+.stats-section article:hover {
+    transform: translateY(-10px);
+    background: rgba(30, 30, 30, 0.7);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(255, 28, 247, 0.2);
+    border: 1px solid rgba(255, 28, 247, 0.1);
+}
+
+.stats-section article:hover .stats {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Título de la sección */
+.stats-section .section-title {
+    font-size: 3.5rem;
+    margin-bottom: 4rem;
+    background: linear-gradient(135deg, #00DFD8, #FF1CF7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-weight: 900;
+}
+
+/* Estilos para las secciones de contenido */
+section {
+    position: relative;
+    margin: 4rem auto;
+    max-width: 1200px;
+    padding: 2rem;
+    background: transparent;  /* Quitar el fondo */
+    border: none;  /* Quitar el borde */
+    backdrop-filter: none;  /* Quitar el blur */
+}
+
+/* Ajustar el fondo de las cards */
+article {
+    background: rgba(30, 30, 30, 0.4);  /* Hacer más transparente */
+    backdrop-filter: blur(5px);  /* Reducir el blur */
+    border: 1px solid rgba(255, 255, 255, 0.05);  /* Borde más sutil */
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+article:hover {
+    background: rgba(30, 30, 30, 0.6);  /* Un poco más oscuro al hover */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 28, 247, 0.1);
+}
+
+/* Mejorar los títulos de sección */
+.section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 28, 247, 0.2);
+}
+
+/* Grid y Layout */
+.grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 2rem;
+}
+
+/* Efectos adicionales */
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Efectos de scroll */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design mejorado */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 3rem;
+    }
+    
+    .stats {
+        font-size: 3.5rem;
+    }
+    
+    .grid {
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+}
+
+/* Nuevas animaciones */
+@keyframes titleGlow {
+    0%, 100% { text-shadow: 0 0 30px rgba(255, 28, 247, 0.5); }
+    50% { text-shadow: 0 0 50px rgba(255, 28, 247, 0.8); }
+}
+
+/* Ajuste de las partículas */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Asegurar que las secciones estén por encima de las partículas */
+.hero-section,
+section {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+}
+
+/* Ajustar el contenedor principal */
+main {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/* Contenido principal */
+.main-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 2rem;
+}
+
+/* Formulario */
+form {
+    background: rgba(30, 30, 30, 0.4);  /* Hacer más transparente */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2.5rem;
+}
+
+/* Breakpoints
+  Mobile: 320px - 480px
+  Tablet: 481px - 768px
+  Laptop: 769px - 1024px
+  Desktop: 1025px - 1200px
+  Large Desktop: 1201px+
+*/
+
+/* Base styles para móvil primero */
+:root {
+    --container-padding: 1rem;
+    --section-spacing: 3rem;
+}
+
+/* Contenedor principal responsivo */
+.main-content {
+    padding: var(--container-padding);
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Hero Section Responsivo */
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    max-width: 90%;
+    margin: 0 auto 2rem;
+}
+
+/* Botón CTA Responsivo */
+.cta-button {
+    width: min(90%, 400px);
+    padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 3rem);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+/* Grid Responsivo */
+.grid {
+    display: grid;
+    gap: clamp(1rem, 2vw, 2.5rem);
+    padding: var(--container-padding);
+}
+
+/* Secciones Responsivas */
+section {
+    padding: var(--container-padding);
+    margin: var(--section-spacing) auto;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+/* Cards Responsivas */
+article {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Estadísticas Responsivas */
+.stats-section .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.stats {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+}
+
+/* Formulario Responsivo */
+form {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    width: min(90%, 600px);
+    margin: 0 auto;
+}
+
+input, textarea {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    padding: clamp(0.8rem, 2vw, 1.2rem);
+}
+
+/* Media Queries específicos */
+/* Mobile */
+@media (max-width: 480px) {
+    :root {
+        --container-padding: 1rem;
+        --section-spacing: 2rem;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    article {
+        margin-bottom: 1rem;
+    }
+
+    .stats-section article {
+        min-height: auto;
+        padding: 1.5rem;
+    }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+    :root {
+        --container-padding: 1.5rem;
+        --section-spacing: 2.5rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Laptop */
+@media (min-width: 769px) and (max-width: 1024px) {
+    :root {
+        --container-padding: 2rem;
+        --section-spacing: 3rem;
+    }
+
+    .main-content {
+        max-width: 90%;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    :root {
+        --container-padding: 2.5rem;
+        --section-spacing: 4rem;
+    }
+
+    .main-content {
+        max-width: 1200px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+/* Orientación del dispositivo */
+@media (orientation: landscape) and (max-height: 500px) {
+    .hero-section {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+}
+
+/* Soporte para dispositivos de alta densidad */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-title, .section-title {
+        text-shadow: 0 0 40px rgba(255, 28, 247, 0.3);
+    }
+}
+
+/* Preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Mantener los estilos base como estaban y agregar/modificar los media queries */
+
+/* Desktop (Vista por defecto) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 columnas por defecto */
+    gap: 2.5rem;
+    padding: 2rem;
+}
+
+.hero-title {
+    font-size: 6rem;
+}
+
+.hero-subtitle {
+    font-size: 2.5rem;
+}
+
+.stats-section .grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Media Queries para diferentes tamaños */
+/* Laptop */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 5rem;
+    }
+    
+    .main-content {
+        max-width: 90%;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 2rem;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(2, 1fr);  /* 2 columnas en tablet */
+    }
+    
+    .stats-section .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;  /* 1 columna en móvil */
+    }
+    
+    .stats-section .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    article {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Orientación landscape para móviles */
+@media (orientation: landscape) and (max-height: 500px) {
+    .hero-section {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+}
