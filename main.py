@@ -5,6 +5,15 @@ from pathlib import Path
 import httpx
 import urllib.parse
 import json
+from config import (
+    SITE_CONFIG, 
+    SECTIONS, 
+    NAV_ITEMS, 
+    SOCIAL_LINKS, 
+    FOOTER_CONFIG, 
+    API_CONFIG,
+    THEME
+)
 
 BASE_DIR = Path(__file__).resolve().parent
 

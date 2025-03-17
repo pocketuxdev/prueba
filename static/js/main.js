@@ -1529,3 +1529,189 @@ function copyCredential(elementId) {
         console.error('Error al copiar:', err);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar WhatsApp
+    const whatsappButton = document.querySelector('.whatsapp-button');
+    if (whatsappButton) {
+        whatsappButton.addEventListener('click', function() {
+            const phoneNumber = this.dataset.phone;
+            const message = encodeURIComponent('Hola, me gustaría consultar sobre sus servicios legales.');
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        });
+    }
+
+    // Manejar formulario de contacto
+    const contactForm = document.querySelector('#contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            // Mostrar mensaje de éxito
+            const successMessage = document.createElement('div');
+            successMessage.className = 'alert alert-success';
+            successMessage.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                Gracias por contactarnos. Te responderemos a la brevedad.
+            `;
+            
+            this.replaceWith(successMessage);
+        });
+    }
+
+    // Manejar navegación móvil
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('visible');
+        });
+    }
+
+    // Manejar scroll suave para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Cerrar menú móvil si está abierto
+                if (sidebar && menuToggle) {
+                    sidebar.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            }
+        });
+    });
+
+    // Lazy loading para imágenes
+    if ('loading' in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    } else {
+        // Fallback para navegadores que no soportan lazy loading
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+        document.body.appendChild(script);
+    }
+
+    // Manejar modales de servicios
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const serviceId = this.dataset.serviceId;
+            const serviceTitle = this.querySelector('h3').textContent;
+            const serviceDescription = this.dataset.description;
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal">
+                    <button class="modal-close" onclick="closeModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h2>${serviceTitle}</h2>
+                    <p>${serviceDescription}</p>
+                    <button class="primary" onclick="window.location.href='#contact'">
+                        Consultar Ahora
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            setTimeout(() => modal.classList.add('active'), 10);
+        });
+    });
+
+    // Control de visibilidad navbar y sidebar
+    const mainNav = document.querySelector('.main-nav');
+    let lastScrollTop = 0;
+    const navHeight = mainNav?.offsetHeight || 0;
+    
+    function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Control de la navbar
+        if (scrollTop > lastScrollTop && scrollTop > navHeight) {
+            // Scrolling down & past navbar
+            mainNav?.classList.add('hidden');
+            sidebar?.classList.add('visible');
+        } else if (scrollTop < lastScrollTop || scrollTop <= navHeight) {
+            // Scrolling up or at top
+            mainNav?.classList.remove('hidden');
+            sidebar?.classList.remove('visible');
+        }
+        
+        lastScrollTop = scrollTop;
+    }
+    
+    // Throttle scroll event
+    let ticking = false;
+    document.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+});
+
+// Función para cerrar el modal
+function closeModal(event) {
+    // Verificar si el click fue en el selector de país o sus elementos
+    if (event && (
+        event.target.closest('.iti__country-list') || 
+        event.target.closest('.iti__flag-container') ||
+        event.target.closest('.iti__selected-flag')
+    )) {
+        return; // No cerrar el modal si se está interactuando con el selector de país
+    }
+
+    const modal = document.querySelector('.modal-overlay');
+    if (modal) {
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+}
+
+// Cerrar modal al hacer clic fuera
+document.addEventListener('click', function(event) {
+    const modal = document.querySelector('.modal');
+    const overlay = document.querySelector('.modal-overlay');
+    
+    if (overlay && !modal.contains(event.target) && event.target === overlay) {
+        closeModal(event);
+    }
+});
+
+// Cerrar modal con la tecla Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        const navbarHeight = document.querySelector('.main-nav').offsetHeight;
+        const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+} 
