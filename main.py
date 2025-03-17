@@ -6890,7 +6890,7 @@ def vitafer_billing():
     """
 
 @rt('/')
-def index():
+def home():
     return page(
         navbar(),
         hero_section(),
@@ -7827,7 +7827,7 @@ async def registrar_usuario(request):
         )
 
 @rt("/paralegal")
-def index():
+def paralegal():
     enabled_sections = []
     
     # Add enabled sections in correct order
