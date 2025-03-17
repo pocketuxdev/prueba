@@ -1,8 +1,21 @@
 from fasthtml.common import *
 import os
+from starlette.staticfiles import StaticFiles
+from pathlib import Path
+import httpx
+import urllib.parse
+import json
+
+BASE_DIR = Path(__file__).resolve().parent
 
 # Application initialization
 app, rt = fast_app()
+
+# Configurar archivos estáticos
+try:
+    app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+except Exception as e:
+    print(f"Error mounting static files: {e}")
 
 # Static file handling
 @rt('/static/images/<path:filename>')
@@ -6868,200 +6881,940 @@ def vitafer_billing():
     """
 
 @rt('/')
-def home():
-    return Html(
+def index():
+    return page(
+        navbar(),
+        hero_section(),
+        hero_slider_section(),
+        estadisticas_section(),
+        nosotros_section(),
+        contacto_section()
+    )
+
+# Componentes
+def page(*content):
+    return Html(lang="es")(
         Head(
             Meta(charset="utf-8"),
             Meta(name="viewport", content="width=device-width, initial-scale=1"),
+            Title("Tiffany - Tu Asistente Virtual"),
             Link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"),
-            Link(rel="stylesheet", href="/static/styles.css"),
-            Script(src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"),
+            Link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"),
+            Link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css"),
+            Link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css"),
+            Link(rel="stylesheet", href="/static/css/styles.css"),
+            Link(rel="stylesheet", href="/static/css/animations.css"),
+            Script(src="https://unpkg.com/htmx.org@1.9.10"),
+            Script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"),
+            Script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-json.min.js"),
+            Script(src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js")
         ),
         Body(
-            # Contenedor principal que envuelve todo
-            Div(
-                # Fondo de partículas
-                Div(id="particles-js", _class="particles-background"),
-                
-                # Contenido de la página
-                Main(
-                    # Hero Section
-                    Section(
-                        Div(
-                            H1("Tiffany", _class="hero-title"),
-                            H2("Tu Asistente AI Inteligente", _class="hero-subtitle"),
-                            P("Donde la inteligencia artificial se encuentra con tu productividad", _class="hero-description"),
-                            Button("Comenzar Ahora", _class="cta-button"),
-                            _class="hero-content"
-                        ),
-                        _class="hero-section"
-                    ),
-                    # Products Section
-                    Section(
-                        H2("Nuestras Soluciones", _class="section-title"),
-                        Div(
-                            Article(
-                                H3("Tiffany BestSelf"),
-                                P("Asistente AI Personal para Desarrollo Personal"),
-                                Div(
-                                    Button("Llamar Ahora", hx_get="/call/bestself", _class="primary"),
-                                    A("WhatsApp", href="https://wa.me/yourphone", role="button", _class="outline"),
-                                    _class="action-buttons"
-                                )
-                            ),
-                            Article(
-                                H3("Tiffany Hospitality"),
-                                P("Asistente AI para la Industria Hotelera"),
-                                Div(
-                                    Button("Llamar Ahora", hx_get="/call/hospitality", _class="primary"),
-                                    A("WhatsApp", href="https://wa.me/yourphone", role="button", _class="outline"),
-                                    _class="action-buttons"
-                                )
-                            ),
-                            Article(
-                                H3("Tiffany Medical Assistant"),
-                                P("Asistente AI para Profesionales de la Salud"),
-                                Div(
-                                    Button("Llamar Ahora", hx_get="/call/medical", _class="primary"),
-                                    A("WhatsApp", href="https://wa.me/yourphone", role="button", _class="outline"),
-                                    _class="action-buttons"
-                                )
-                            ),
-                            _class="grid"
-                        )
-                    ),
-                    # Statistics Section
-                    Section(
-                        H2("Nuestro Impacto", _class="section-title"),
-                        Div(
-                            Article(
-                                H3("30%", _class="stats"),
-                                P("Incremento en Follow-ups")
-                            ),
-                            Article(
-                                H3("25%", _class="stats"),
-                                P("Reducción Tareas Admin")
-                            ),
-                            Article(
-                                H3("5min", _class="stats"),
-                                P("Tiempo Onboarding")
-                            ),
-                            _class="grid"
-                        )
-                    ),
-                    # About Section
-                    Section(
-                        H2("Lo Que Somos", _class="section-title"),
-                        P("Somos una plataforma innovadora que revoluciona la asistencia personal y profesional a través de la IA.")
-                    ),
-                    # Contact Section
-                    Section(
-                        H2("Contáctanos", _class="section-title"),
-                        Form(
-                            Input(type="text", name="name", placeholder="Tu Nombre"),
-                            Input(type="email", name="email", placeholder="Tu Email"),
-                            Textarea(name="message", placeholder="Tu Mensaje"),
-                            Button("Enviar", type="submit", _class="primary"),
-                            hx_post="/submit-contact",
-                            hx_target="#form-response"
-                        ),
-                        Div(id="form-response"),
-                        _class="container"
-                    )
-                ),
-                _class="main-content"
-            ),
-            _class="page-wrapper"
-        ),
-        # Agregar la configuración de particles.js
-        Script("""
-            particlesJS('particles-js',
-              {
-                "particles": {
-                  "number": {
-                    "value": 100,
-                    "density": {
-                      "enable": true,
-                      "value_area": 800
-                    }
-                  },
-                  "color": {
-                    "value": "#ff1cf7"
-                  },
-                  "shape": {
-                    "type": "circle"
-                  },
-                  "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                      "enable": true,
-                      "speed": 1,
-                      "opacity_min": 0.1,
-                      "sync": false
-                    }
-                  },
-                  "size": {
-                    "value": 3,
-                    "random": true
-                  },
-                  "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ff1cf7",
-                    "opacity": 0.4,
-                    "width": 1
-                  },
-                  "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                      "enable": true,
-                      "rotateX": 600,
-                      "rotateY": 1200
-                    }
-                  }
-                },
-                "interactivity": {
-                  "detect_on": "canvas",
-                  "events": {
-                    "onhover": {
-                      "enable": true,
-                      "mode": "repulse"
-                    },
-                    "onclick": {
-                      "enable": true,
-                      "mode": "push"
-                    },
-                    "resize": true
-                  }
-                },
-                "retina_detect": true
-              }
-            );
-        """)
+            Main(*content),
+            sidebar(),
+            footer(),
+            Script(src="/static/js/main.js")
+        )
     )
 
-@rt('/submit-contact')
-def handle_contact():
-    return P("¡Gracias por tu mensaje! Te contactaremos pronto.")
+def sidebar():
+    return Div(cls="sidebar", id="sidebar")(
+        A(href="#hero")(
+            I(cls="fas fa-home")
+        ),
+        A(href="#hero-slider")(
+            I(cls="fas fa-cube")
+        ),
+        A(href="#estadisticas")(
+            I(cls="fas fa-chart-bar")
+        ),
+        A(href="#nosotros")(
+            I(cls="fas fa-users")
+        ),
+        A(href="#contacto")(
+            I(cls="fas fa-code")
+        ),
+        Img(src="/static/img/logo.png", alt="Tiffany Logo", cls="sidebar-logo")
+    )
 
-@rt('/call/{product}')
-def handle_call(product):
-    return P(f"Iniciando llamada para Tiffany {product}...")
+def navbar():
+    return Nav(cls="container-fluid")(
+        Ul(
+            Li(A(href="#hero", cls="active")(
+                I(cls="fas fa-home"),
+                Span("Inicio")
+            )),
+            Li(A(href="#hero-slider")(
+                I(cls="fas fa-cube"),
+                Span("Tiffany's")
+            )),
+            Li(A(href="#estadisticas")(
+                I(cls="fas fa-chart-bar"),
+                Span("Stats")
+            )),
+            Li(A(href="#nosotros")(
+                I(cls="fas fa-users"),
+                Span("Nosotros")
+            )),
+            Li(A(href="#contacto")(
+                I(cls="fas fa-code"),
+                Span("API")
+            ))
+        ),
+        Div(cls="logo-container")(
+            Img(src="/static/img/logo.png", alt="Tiffany Logo", cls="nav-logo")
+        )
+    )
 
-@rt('/webhook/start/{tiffany_type}')
-def start_tiffany(tiffany_type):
-    return {"status": "success", "message": f"Iniciando Tiffany {tiffany_type}"}
+def hero_section():
+    return Section(cls="container hero", id="hero")(
+        # Botón Dashboard para escritorio
+        Div(cls="dashboard-button-desktop")(
+            Button(
+                cls="dashboard",
+                hx_get="/modal-registro",
+                hx_target="body",
+                hx_swap="beforeend"
+            )("DASHBOARD")
+        ),
+        Div(cls="hero-content")(
+            H1(cls="hero-title")(
+                Span(cls="tiffany-text")("Tiffany"),
+                Span(cls="smart-text")("SMART")
+            ),
+            H2(cls="hero-subtitle")("Automation with... an SMART twist!"),
+            P(cls="hero-description")(
+                "From better workflows to ",
+                Span(cls="highlight")("real-time insights"),
+                ", Tiffany brings elite automation to every industry."
+            ),
+            Div(cls="hero-buttons")(
+                Button(cls="primary", href="#hero-slider", hx_on="click:scrollToSection('hero-slider')")("MEET TIFFANY"),
+                # Botón Dashboard para móvil
+                Div(cls="dashboard-button-mobile")(
+                    Button(
+                        cls="dashboard",
+                        hx_get="/modal-registro",
+                        hx_target="body",
+                        hx_swap="beforeend"
+                    )("DASHBOARD")
+                )
+            )
+        ),
+        Div(cls="scroll-down-arrow", hx_on="click:scrollToSection('hero-slider')")(
+            I(cls="fas fa-chevron-down")
+        )
+    )
 
-@rt('/webhook/start/general')
-def start_tiffany_general():
-    return {"status": "success", "message": "Iniciando Tiffany general"}
+def hero_slider_section():
+    # Crear slides para cada producto
+    hero_slides = []
+    
+    for i, producto in enumerate(PRODUCTOS):
+        detalles = PRODUCTOS_DETALLE.get(producto["nombre"], {})
+        
+        # Crear lista de características con clase adicional para mayor tamaño
+        items_caracteristicas = [Li(cls="hero-feature-item")(caracteristica) for caracteristica in detalles.get("caracteristicas", [])]
+        lista_caracteristicas = Ul(cls="hero-features large-text")(*items_caracteristicas)
+        
+        # Crear slide para el carrusel
+        slide = Div(cls="hero-slide", id=f"hero-slide-{i}", data_index=i)(
+            Div(cls="hero-slide-bg", 
+                style=f"background-image: url('/static/img/{detalles.get('imagen', producto['nombre'].lower().replace(' ', '_') + '.png')}');"
+            ),
+            Div(cls="hero-slide-content")(
+                H1(cls="hero-title large-text")(
+                    Div(cls="tiffany-smart-container")(
+                        Span(cls="tiffany-text")("Tiffany"),
+                        Span(cls="smart-text")("SMART")
+                    ),
+                    Span(cls="producto-tipo")(detalles.get("titulo", producto["nombre"]))
+                ),
+                H2(cls="hero-subtitle large-text")(detalles.get("subtitulo", "")),
+                P(cls="hero-description large-text")(detalles.get("descripcion", producto["descripcion"])),
+                lista_caracteristicas,
+                Div(cls="hero-buttons")(
+                    Button(
+                        cls="outline large-text",
+                        hx_get=f"/modal-llamada/{producto['nombre']}",
+                        hx_target="body",
+                        hx_swap="beforeend"
+                    )("Solicitar Llamada"),
+                    Button(
+                        cls="primary large-text",
+                        hx_get=f"/modal-wp/{producto['nombre']}",
+                        hx_target="body",
+                        hx_swap="beforeend"
+                    )("Contactar por WhatsApp")
+                )
+            )
+        )
+        hero_slides.append(slide)
+    
+    # Crear controles de navegación
+    nav_controls = Div(cls="hero-slider-controls")(
+        Button(cls="slider-prev", hx_on="click:prevHeroSlide()")("❮"),
+        Div(cls="slider-indicators")(
+            *[Span(cls="slider-dot", data_index=i, hx_on=f"click:goToHeroSlide({i})") for i in range(len(PRODUCTOS))]
+        ),
+        Button(cls="slider-next", hx_on="click:nextHeroSlide()")("❯")
+    )
+    
+    # Crear barra de navegación minimalista con cuadrados
+    nav_items = []
+    for i in range(len(PRODUCTOS)):
+        nav_items.append(
+            Span(
+                cls="hero-slider-nav-square", 
+                data_index=i, 
+                hx_on=f"click:goToHeroSlide({i})"
+            )
+        )
+    
+    nav_bar = Div(cls="hero-slider-nav")(*nav_items)
+    
+    return Section(cls="hero-slider-section", id="hero-slider")(
+        Div(cls="hero-slider", id="hero-slider-container")(
+            Div(cls="hero-slider-track")(*hero_slides),
+            nav_controls,
+            nav_bar
+        )
+    )
 
+# Definir la lista de productos como una variable global
+PRODUCTOS = [
+    {
+        "nombre": "Tiffany ParalegaL",
+        "descripcion": "Asistente paralegal para abogados especializados",
+        "whatsapp": "+14153198070",
+        "agent_type": "paralegal"
+    },
+    {
+        "nombre": "Tiffany BetterSelf",
+        "descripcion": "Asistente personal para desarrollo y productividad.",
+        "whatsapp": "+14153198070",
+        "agent_type": "betterself"
+    },
+    {
+        "nombre": "Tiffany Medical Assistant",
+        "descripcion": "Solución especializada para el sector de salud",
+        "whatsapp": "+14153198070",
+        "agent_type": "medical"
+    }
+]
+
+# Información detallada de cada producto
+PRODUCTOS_DETALLE = {
+    "Tiffany Medical Assistant": {
+        "titulo": "MEDICAL ASSISTANT",
+        "subtitulo": "Precision for patient care with ease of automation.",
+        "descripcion": "Stay always connected, keeping track of patient appointments and records securely.",
+        "caracteristicas": [
+            "Automates scheduling, reminders, and patient follow-ups.",
+            "HIPAA-compliant management of medical records.",
+            "Tracks patient progress, aligning with care plans."
+        ],
+        "color": "#123555",
+        "imagen": "tiffany_medical_detail.png"
+    },
+    "Tiffany ParalegaL": {
+        "titulo": "PARALEGAL",
+        "subtitulo": "Your sharp, reliable legal assistant.",
+        "descripcion": "Simplify your daily workload and enhance case management with precision.",
+        "caracteristicas": [
+            "Organizes and manages legal documentation.",
+            "Conducts automated legal research and updates.",
+            "Tracks deadlines and workflows for legal professionals."
+        ],
+        "color": "#04050A",
+        "imagen": "tiffany_paralegal_detail.png"
+    },
+    "Tiffany BetterSelf": {
+        "titulo": "BETTER SELF",
+        "subtitulo": "Improve yourself with the insight of an elite coach.",
+        "descripcion": "Keep track of your wellbeing and daily habits with intelligent automation.",
+        "caracteristicas": [
+            "Guides personal growth and productivity goals.",
+            "Tracks daily habits and recommends actions.",
+            "Integrates with health and fitness apps to ensure progress tracking."
+        ],
+        "color": "#FFFFFF",
+        "imagen": "tiffany_betterself_detail.png"
+    }
+}
+
+# Definir la lista de productos para la sección Try our API
+PRODUCTOS_API = [
+    {
+        "nombre": "Tiffany ParalegaL",
+        "descripcion": "Asistente paralegal para abogados especializados",
+        "agent_type": "tryapiparalegal"  # Endpoint completo
+    },
+    {
+        "nombre": "Tiffany BetterSelf",
+        "descripcion": "Asistente personal para desarrollo y productividad.",
+        "agent_type": "tryapibetterself"  # Endpoint completo
+    },
+    {
+        "nombre": "Tiffany Medical",
+        "descripcion": "Solución especializada para el sector de salud",
+        "agent_type": "tryapimedical"  # Endpoint completo
+    }
+]
+
+def estadisticas_section():
+    return Section(cls="container stats", id="estadisticas")(
+        H2("Nuestro Impacto"),
+        Div(cls="grid")(
+            Div(H3("1.000+"), P("Clientes Satisfechos")),
+            Div(H3("24/7"), P("Disponibilidad")),
+            Div(H3("99%"), P("Precisión"))
+        )
+    )
+
+def nosotros_section():
+    return Section(cls="container about", id="nosotros")(
+        H2("Lo Que Somos"),
+        P("Somos pioneros en asistentes virtuales inteligentes, comprometidos con la innovación y la excelencia.")
+    )
+
+def contacto_section():
+    # Crear selectores para cada tipo de Tiffany usando PRODUCTOS_API
+    tiffany_selectors = []
+    
+    for producto in PRODUCTOS_API:
+        # Usar el endpoint directamente con el agent_type que ya incluye "tryapi"
+        data_endpoint = f"https://tifanny-back.vercel.app/v1/tifanny/{producto['agent_type']}"
+        
+        selector = Div(
+            cls="tiffany-selector",
+            data_agent=producto["agent_type"],
+            data_endpoint=data_endpoint,
+            hx_on="click:selectTiffanyAgent(event)"
+        )(
+            H4(producto["nombre"].split(" ")[-1]),
+            P(producto["descripcion"])
+        )
+        tiffany_selectors.append(selector)
+    
+    return Section(cls="container", id="contacto")(
+        H2("Prueba nuestra API"),
+        P(cls="section-description")(
+            "Integra el poder de Tiffany SMART en tus aplicaciones con nuestra API fácil de usar."
+        ),
+        
+        # Selector de Tiffany
+        Div(cls="tiffany-selectors")(
+            H3("Selecciona un agente Tiffany para probar"),
+            Div(cls="tiffany-selector-grid")(*tiffany_selectors)
+        ),
+        
+        # Formulario de API
+        Div(cls="api-demo")(
+            Div(cls="api-form")(
+                H3("Connect to Tiffany"),
+                Form(cls="api-test-form")(
+                    # POST URL con label flotante
+                    Div(cls="form-group floating-label")(
+                        Input(type="text", name="post_url", placeholder="POST", 
+                              readonly=True,
+                              cls="post-url-input"),
+                        Label(fr="post_url")("POST URL")
+                    ),
+                    
+                    # API KEY con label flotante
+                    Div(cls="form-group floating-label")(
+                        Input(type="text", name="api_key", placeholder="API KEY", 
+                              readonly=True,
+                              cls="api-key-input",
+                              oninput="updateJsonPreview(event)"),
+                        Label(fr="api_key")("API KEY")
+                    ),
+                    
+                    # Client ID con label flotante
+                    Div(cls="form-group floating-label")(
+                        Input(type="text", name="client_id", 
+                              placeholder="Client ID/your company name", 
+                              required=True,
+                              oninput="updateJsonPreview(event)"),
+                        Label(fr="client_id")("Client ID")
+                    ),
+                    
+                    Input(type="hidden", name="agent_type", id="agent_type_input", value=""),
+                    
+                    # Platform con label flotante
+                    Div(cls="form-group floating-label")(
+                        Select(name="platform", 
+                               required=True,
+                               onchange="updateJsonPreview(event)")(
+                            Option(value="", disabled=True, selected=True)(""),
+                            Option(value="wp")("WhatsApp"),
+                            Option(value="voice")("Call")
+                        ),
+                        Label(fr="platform")("Platform")
+                    ),
+                    
+                    H4("Client Info"),
+                    
+                    # Email con label flotante
+                    Div(cls="form-group floating-label")(
+                        Input(type="email", name="email", 
+                              placeholder="Email", 
+                              required=True,
+                              oninput="updateJsonPreview(event)"),
+                        Label(fr="email")("Email")
+                    ),
+                    
+                    # Phone con label estático
+                    Div(cls="form-group")(
+                        Label(fr="phone")("Phone"),
+                        Input(type="tel", name="phone", 
+                              placeholder="Phone", 
+                              required=True,
+                              pattern="[0-9+\s-]*",
+                              title="Please enter only numbers, +, spaces or hyphens",
+                              oninput="updateJsonPreview(event)")
+                    ),
+                    
+                    # Age con label flotante
+                    Div(cls="form-group floating-label")(
+                        Input(type="number", name="age", 
+                              placeholder="Age",
+                              min="1",
+                              max="150",
+                              oninput="updateJsonPreview(event)"),
+                        Label(fr="age")("Age")
+                    ),
+                    
+                    # Last interaction con label flotante
+                    Div(cls="form-group floating-label")(
+                        Textarea(name="last_interaction", 
+                                placeholder="Last interaction", 
+                                rows="3",
+                                oninput="updateJsonPreview(event)"),
+                        Label(fr="last_interaction")("Last interaction")
+                    ),
+                    
+                    Button(
+                        type="submit",
+                        cls="primary", 
+                        disabled=True, 
+                        id="try-button", 
+                        onclick="return handleFormSubmit(event)"
+                    )("ACTIVATE TIFFANY")
+                )
+            ),
+            Div(cls="api-code")(
+                H3("Request Preview"),
+                Div(cls="code-container")(
+                    Button(cls="copy-button", onclick="copyCode()")(),
+                    Pre(cls="code-block language-json", id="json-preview")(
+                        Code("""
+{
+    "api_key": "",
+    "client_id": "",
+    "agent_type": "",
+    "platform": "",
+    "email": "",
+    "phone": "",
+    "age": "",
+    "last_interaction": ""
+}
+                        """)
+                    )
+                )
+            )
+        ),
+        
+        # Agregar la sección DOCS al final
+        Div(cls="docs-section")(
+            H2(cls="docs-title")("Conoce a Tiffany a fondo"),
+            A(
+                href="https://docs.tiffanysmart.com",  # Ajusta esta URL según necesites
+                target="_blank",
+                cls="docs-button"
+            )("DOCUMENTACIÓN")
+        )
+    )
+
+# Rutas HTMX
+@rt("/llamar/{producto}", methods=["POST"])
+def llamar(producto: str):
+    return Div(cls="alert alert-success")(
+        P(f"¡Gracias! Te llamaremos pronto sobre {producto}")
+    )
+
+@rt("/contacto", methods=["POST"])
+async def contacto(request):
+    form = await request.form()
+    return Div(cls="alert alert-success")(
+        P("¡Gracias por contactarnos! Te responderemos pronto.")
+    )
+
+# Rutas HTMX para modales genéricos
+@rt("/modal-llamada/{producto}")
+def modal_llamada(producto: str):
+    # Decodificar el nombre del producto
+    producto_decodificado = producto.replace("%20", " ")
+    
+    return Div(cls="modal-overlay", id="modal-producto")(
+        Div(cls="modal modal-compact")(
+            H3(f"Solicitar llamada - {producto_decodificado}"),
+            Form(hx_post=f"/enviar-llamada/{producto}", hx_swap="outerHTML")(
+                Input(type="hidden", name="platform", value="voice"),
+                
+                # Nombre con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="text", name="nombre", id="nombre", placeholder="Ingresa tu nombre completo", required=True),
+                    Label(fr="nombre")("Nombre")
+                ),
+                
+                # Cargo con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="text", name="cargo", id="cargo", placeholder="Ej: Gerente, Director, etc.", required=True),
+                    Label(fr="cargo")("Cargo")
+                ),
+                
+                # Empresa con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="text", name="empresa", id="empresa", placeholder="Nombre de tu empresa (opcional)"),
+                    Label(fr="empresa")("Empresa")
+                ),
+                
+                # Prompt con label flotante
+                Div(cls="form-group floating-label")(
+                    Textarea(name="prompt", id="prompt", placeholder="Describe brevemente tu consulta", required=True, rows="3"),
+                    Label(fr="prompt")("¿En qué podemos ayudarte?")
+                ),
+                
+                # Teléfono con label normal (no flotante)
+                Div(cls="form-group phone-group")(
+                    Label(fr="telefono")("Teléfono"),
+                    Input(type="tel", name="telefono", id="telefono", placeholder="Número de teléfono", required=True)
+                ),
+                
+                Div(cls="modal-buttons")(
+                    Button(type="button", hx_on="click:closeModal()")("Cancelar"),
+                    Button(type="submit")("Enviar")
+                )
+            )
+        )
+    )
+
+@rt("/modal-wp/{producto}")
+def modal_wp(producto: str):
+    # Decodificar el nombre del producto
+    producto_decodificado = producto.replace("%20", " ")
+    
+    return Div(cls="modal-overlay", id="modal-producto")(
+        Div(cls="modal modal-compact")(
+            H3(f"Contacto por WhatsApp - {producto_decodificado}"),
+            Form(hx_post=f"/enviar-wp/{producto}", hx_swap="outerHTML")(
+                Input(type="hidden", name="platform", value="wp"),
+                
+                # Nombre con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="text", name="nombre", id="nombre", placeholder="Ingresa tu nombre completo", required=True),
+                    Label(fr="nombre")("Nombre")
+                ),
+                
+                # Cargo con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="text", name="cargo", id="cargo", placeholder="Ej: Gerente, Director, etc.", required=True),
+                    Label(fr="cargo")("Cargo")
+                ),
+                
+                # Empresa con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="text", name="empresa", id="empresa", placeholder="Nombre de tu empresa (opcional)"),
+                    Label(fr="empresa")("Empresa")
+                ),
+                
+                # Prompt con label flotante
+                Div(cls="form-group floating-label")(
+                    Textarea(name="prompt", id="prompt", placeholder="Describe brevemente tu consulta", required=True, rows="3"),
+                    Label(fr="prompt")("¿En qué podemos ayudarte?")
+                ),
+                
+                # Teléfono con label normal (no flotante)
+                Div(cls="form-group phone-group")(
+                    Label(fr="telefono")("Teléfono"),
+                    Input(type="tel", name="telefono", id="telefono", placeholder="Número de teléfono", required=True)
+                ),
+                
+                Div(cls="modal-buttons")(
+                    Button(type="button", hx_on="click:closeModal()")("Cancelar"),
+                    Button(type="submit")("Enviar")
+                )
+            )
+        )
+    )
+
+@rt("/enviar-llamada/{producto}", methods=["POST"])
+async def enviar_llamada(producto: str, request):
+    form = await request.form()
+    producto_nombre = producto.replace("%20", " ")
+    
+    # Obtener el agent_type del producto seleccionado
+    producto_info = next((p for p in PRODUCTOS if p["nombre"] == producto_nombre), None)
+    
+    if not producto_info:
+        return Div(cls="alert alert-error")(
+            P("Producto no encontrado")
+        )
+    
+    datos = {
+        "phone": form.get("telefono"),
+        "platform": "voice",
+        "name": form.get("nombre"),
+        "jobTitle": form.get("cargo"),
+        "company": form.get("empresa") or None,  # Asegurar que sea null si está vacío
+        "inquiry": form.get("prompt") or None,   # Asegurar que sea null si está vacío
+        "agent_type": producto_info["agent_type"]
+    }
+    
+    print("Datos a enviar:", datos)  # Para debugging
+    
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            headers = {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+            response = await client.post(
+                "https://tifanny-back.vercel.app/v1/tifanny/newUserHome",
+                json=datos,
+                headers=headers
+            )
+            
+            print("Respuesta del servidor:", response.status_code)  # Para debugging
+            print("Contenido de la respuesta:", await response.aread())  # Para debugging
+            
+            try:
+                response_data = response.json()
+            except Exception as e:
+                print("Error al parsear JSON:", str(e))
+                response_data = {}
+
+            if response.status_code == 200:
+                return Div(cls="alert alert-success")(
+                    P("Tiffany se contactará contigo muy pronto!")
+                )
+            elif response.status_code == 400:
+                return Div(cls="alert alert-warning")(
+                    P(response_data.get('message', "Número de teléfono inválido"))
+                )
+            else:
+                print(f"Error del servidor: {response.status_code} - {response_data}")
+                return Div(cls="alert alert-error")(
+                    P("Error al procesar la solicitud. Por favor, intenta más tarde.")
+                )
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}")
+        return Div(cls="alert alert-error")(
+            P("Error de conexión. Por favor, intenta más tarde.")
+        )
+
+@rt("/enviar-wp/{producto}", methods=["POST"])
+async def enviar_wp(producto: str, request):
+    form = await request.form()
+    producto_nombre = producto.replace("%20", " ")
+    
+    # Obtener el agent_type y whatsapp del producto seleccionado
+    producto_info = next((p for p in PRODUCTOS if p["nombre"] == producto_nombre), None)
+    
+    if not producto_info:
+        return Div(cls="alert alert-error")(
+            P("Producto no encontrado")
+        )
+        
+    datos = {
+        "phone": form.get("telefono"),
+        "platform": "wp",
+        "name": form.get("nombre"),
+        "jobTitle": form.get("cargo"),
+        "company": form.get("empresa") or None,  # Asegurar que sea null si está vacío
+        "inquiry": form.get("prompt") or None,   # Asegurar que sea null si está vacío
+        "agent_type": producto_info["agent_type"]
+    }
+    
+    print("Datos a enviar:", datos)  # Para debugging
+    
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            headers = {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+            response = await client.post(
+                "https://tifanny-back.vercel.app/v1/tifanny/newUserHome",
+                json=datos,
+                headers=headers
+            )
+            
+            print("Respuesta del servidor:", response.status_code)  # Para debugging
+            print("Contenido de la respuesta:", await response.aread())  # Para debugging
+            
+            try:
+                response_data = response.json()
+            except Exception as e:
+                print("Error al parsear JSON:", str(e))
+                response_data = {}
+
+            if response.status_code == 200:
+                if producto_info["whatsapp"]:
+                    return Script("""
+                        window.open('https://wa.me/""" + producto_info["whatsapp"] + """', '_blank');
+                        document.querySelector('.modal-overlay').remove();
+                    """)
+                else:
+                    return Div(cls="alert alert-warning")(
+                        P("No se pudo encontrar el número de WhatsApp para este producto.")
+                    )
+            elif response.status_code == 400:
+                return Div(cls="alert alert-warning")(
+                    P(response_data.get('message', "Número de teléfono inválido"))
+                )
+            else:
+                print(f"Error del servidor: {response.status_code} - {response_data}")
+                return Div(cls="alert alert-error")(
+                    P("Error al procesar la solicitud. Por favor, intenta más tarde.")
+                )
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}")
+        return Div(cls="alert alert-error")(
+            P("Error de conexión. Por favor, intenta más tarde.")
+        )
+
+@rt("/modal-detalle/{producto}")
+def modal_detalle(producto: str):
+    # Decodificar el nombre del producto
+    producto_decodificado = producto.replace("%20", " ")
+    
+    # Obtener detalles del producto
+    detalles = PRODUCTOS_DETALLE.get(producto_decodificado, {
+        "titulo": f"{producto_decodificado}",
+        "subtitulo": "Asistente virtual inteligente",
+        "descripcion": "Información detallada no disponible.",
+        "caracteristicas": ["Característica 1", "Característica 2", "Característica 3"],
+        "color": "#FF006D",
+        "imagen": f"{producto_decodificado.lower().replace(' ', '_')}.png"
+    })
+    
+    # Crear lista de características - SOLUCIÓN ALTERNATIVA
+    # En lugar de usar .add(), pasamos los elementos directamente al constructor
+    items_caracteristicas = [Li(caracteristica) for caracteristica in detalles["caracteristicas"]]
+    lista_caracteristicas = Ul(cls="producto-caracteristicas")(*items_caracteristicas)
+    
+    return Div(cls="modal-overlay producto-modal-overlay", id="modal-producto-detalle", hx_on="click:closeProductModal(event)")(
+        Div(cls="producto-modal", style=f"--producto-color: {detalles['color']}")(
+            Div(cls="producto-modal-close", hx_on="click:closeProductModal(event)")(
+                I(cls="fas fa-times")
+            ),
+            Div(cls="producto-modal-content")(
+                Div(cls="producto-modal-info")(
+                    H2(cls="producto-modal-titulo")(
+                        Span(cls="producto-nombre")("Tiffany"),
+                        Span(cls="producto-tipo")("SMART"),
+                        Br(),
+                        Span(cls="producto-subtipo")(detalles["titulo"].split(" ")[-1])
+                    ),
+                    P(cls="producto-modal-subtitulo")(detalles["subtitulo"]),
+                    P(cls="producto-modal-descripcion")(detalles["descripcion"]),
+                    lista_caracteristicas,
+                    Div(cls="producto-modal-buttons")(
+                        Button(
+                            cls="outline",
+                            hx_get=f"/modal-llamada/{producto}",
+                            hx_target="body",
+                            hx_swap="beforeend",
+                            hx_on="click:closeProductModal(event)"
+                        )("Solicitar Llamada"),
+                        Button(
+                            cls="primary",
+                            hx_get=f"/modal-wp/{producto}",
+                            hx_target="body",
+                            hx_swap="beforeend",
+                            hx_on="click:closeProductModal(event)"
+                        )("Contactar por WhatsApp")
+                    )
+                ),
+                Div(cls="producto-modal-imagen")(
+                    Img(src=f"/static/img/{detalles['imagen']}", alt=detalles["titulo"])
+                )
+            )
+        )
+    )
+
+def footer():
+    return Footer(cls="site-footer")(
+        Div(cls="container footer-content")(
+            Div(cls="footer-section logo-section")(
+                Img(src="/static/img/logo.png", alt="Tiffany Logo", cls="footer-logo"),
+                P("Transformando la automatización con inteligencia artificial avanzada para empresas y profesionales.")
+            ),
+            Div(cls="footer-section links-section")(
+                H4("Enlaces Rápidos"),
+                Ul(
+                    Li(A(href="#hero")("Inicio")),
+                    Li(A(href="#hero-slider")("Productos")),
+                    Li(A(href="#estadisticas")("Estadísticas")),
+                    Li(A(href="#nosotros")("Nosotros")),
+                    Li(A(href="#contacto")("API"))
+                )
+            ),
+            Div(cls="footer-section contact-section")(
+                H4("Contacto"),
+                Ul(
+                    Li(I(cls="fas fa-map-marker-alt"), " Av. Insurgentes Sur 1602, CDMX"),
+                    Li(I(cls="fas fa-phone"), " +52 55 1234 5678"),
+                    Li(I(cls="fas fa-envelope"), " info@tiffanysmart.com")
+                )
+            ),
+            Div(cls="footer-section social-section")(
+                H4("Síguenos"),
+                Div(cls="social-icons")(
+                    A(href="https://twitter.com/tiffanysmart", target="_blank")(
+                        I(cls="fab fa-twitter")
+                    ),
+                    A(href="https://www.linkedin.com/company/tiffanysmart", target="_blank")(
+                        I(cls="fab fa-linkedin")
+                    ),
+                    A(href="https://www.instagram.com/tiffany_pocketux?igsh=ZXJoaWh5c3o0bTA=", target="_blank")(
+                        I(cls="fab fa-instagram")
+                    ),
+                    A(href="https://www.youtube.com/tiffanysmart", target="_blank")(
+                        I(cls="fab fa-youtube")
+                    )
+                )
+            )
+        ),
+        Div(cls="footer-bottom")(
+            P("© 2025 Tiffany SMART. Todos los derechos reservados."),
+            P("Desarrollado con ", I(cls="fas fa-heart"), " por Tiffany Labs")
+        )
+    )
+
+@rt("/modal-registro")
+def modal_registro():
+    return Div(cls="modal-overlay", id="modal-registro")(
+        Div(cls="modal modal-compact")(
+            H3("Crear cuenta"),
+            Form(
+                hx_post="/registrar-usuario",
+                hx_swap="outerHTML"
+            )(
+                # Nombre completo con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="text", name="fullName", id="nombre", 
+                         placeholder="Ingresa tu nombre completo", required=True),
+                    Label(fr="nombre")("Nombre completo")
+                ),
+                
+                # Email con label flotante
+                Div(cls="form-group floating-label")(
+                    Input(type="email", name="email", id="email", 
+                         placeholder="Correo electrónico", required=True),
+                    Label(fr="email")("Email")
+                ),
+                
+                # Teléfono con label normal (no flotante)
+                Div(cls="form-group phone-group")(
+                    Label(fr="telefono")("Teléfono"),
+                    Input(type="tel", name="phone", id="telefono", 
+                         placeholder="Número de teléfono", required=True)
+                ),
+                
+                Div(cls="modal-buttons")(
+                    Button(type="button", hx_on="click:closeModal()")("Cancelar"),
+                    Button(type="submit", cls="primary")("Registrarse")
+                )
+            )
+        )
+    )
+
+@rt("/registrar-usuario", methods=["POST"])
+async def registrar_usuario(request):
+    form = await request.form()
+    
+    # Preparar los datos para el endpoint con el formato correcto
+    datos = {
+        "fullName": form.get("fullName") or None,
+        "email": form.get("email"),
+        "phone": form.get("phone") or None
+    }
+    
+    print("Datos a enviar:", datos)  # Para debugging
+    
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            headers = {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Origin": "https://homejs.vercel.app"
+            }
+            
+            response = await client.post(
+                "https://tifanny-back.vercel.app/v1/tifanny/registerbyweb",
+                json=datos,
+                headers=headers
+            )
+            
+            print("Respuesta del servidor:", response.status_code)  # Para debugging
+            print("Contenido de la respuesta:", await response.aread())  # Para debugging
+            
+            try:
+                response_data = response.json()
+            except Exception as e:
+                print("Error al parsear JSON:", str(e))
+                response_data = {}
+
+            if response.status_code == 201:
+                # Registro exitoso - Mostrar credenciales
+                return Div(cls="modal-overlay", id="modal-credenciales")(
+                    Div(cls="modal modal-compact")(
+                        H3("¡Bienvenido a Tiffany!"),
+                        P(response_data.get("message", "Tu registro ha sido exitoso.")),
+                        Div(cls="credentials-container text-center")(
+                            H4("Tus credenciales de acceso"),
+                            Div(cls="credential-group")(
+                                P(cls="credential-label")("Correo electrónico:"),
+                                P(cls="credential-value")(form.get("email"))
+                            ),
+                            Div(cls="credential-group")(
+                                P(cls="credential-label")("Contraseña:"),
+                                P(cls="credential-value")(
+                                    response_data.get("credentials", {}).get("password", "")
+                                )
+                            )
+                        ),
+                        P(cls="credentials-warning")(
+                            I(cls="fas fa-exclamation-triangle"), 
+                            " Por tu seguridad, guarda estas credenciales en un lugar seguro."
+                        ),
+                        Div(cls="modal-buttons")(
+                            Button(
+                                cls="primary",
+                                onclick="window.location.href='https://www.tiffany.cool/login'"
+                            )("Iniciar Sesión")
+                        )
+                    )
+                )
+            elif response.status_code == 409:
+                return Div(cls="alert alert-warning")(
+                    P("Este correo electrónico ya está registrado."),
+                    P("Por favor inicia sesión o utiliza otro correo.")
+                )
+            else:
+                print(f"Error del servidor: {response.status_code} - {response_data}")
+                return Div(cls="alert alert-error")(
+                    P("Error al procesar el registro. Por favor intenta nuevamente.")
+                )
+                
+    except Exception as e:
+        print(f"Error en registro: {str(e)}")
+        return Div(cls="alert alert-error")(
+            P("Error de conexión. Por favor intenta más tarde.")
+        )
 
 serve()
