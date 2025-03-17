@@ -1,0 +1,6593 @@
+/* Importar fuentes SF Pro Display */
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+/* Importar fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Variables con nueva paleta de colores */
+:root {
+  /* Colores principales */
+  --background-color: #0A0A0B !important;
+  --primary: #FF006D;
+  --primary-rgb: 255, 0, 109;
+  --primary-dark: #CC0057;
+  --primary-light: #FF4D94;
+  --secondary: #7928CA;
+  --accent: #d1279e;
+  --dark: #0A0A0B;
+  --card-bg: rgba(20, 20, 30, 0.8);
+  --card-bg-hover: rgba(30, 30, 40, 0.9);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --gradient-1: linear-gradient(135deg, #cc0057, #ad2196);
+  --gradient-2: linear-gradient(45deg, var(--secondary), var(--accent));
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --primary-hover: #e600e0;
+  --background: #0A0A0B;
+  --text-main: rgba(255, 255, 255, 0.9);
+  --text-light: rgba(255, 255, 255, 0.8);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  
+  /* Breakpoints */
+  --mobile: 320px;       /* Dispositivos móviles pequeños */
+  --mobile-large: 425px; /* Dispositivos móviles grandes */
+  --tablet: 768px;       /* Tablets y dispositivos medianos */
+  --laptop: 1024px;      /* Laptops y pantallas pequeñas */
+  --desktop: 1440px;     /* Monitores de escritorio */
+  --4k: 2560px;          /* Pantallas de alta resolución */
+}
+
+/* Estilos base para prevenir scroll horizontal */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Ajustes para contenedores principales */
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Layout base */
+body {
+  background-color: var(--background);
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    180deg,
+    #0A0A0B 0%,
+    #13111A 25%,
+    #0A0A0B 50%,
+    #13111A 75%,
+    #0A0A0B 100%
+  );
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding-bottom: 100px; /* Espacio para la navegación */
+  padding-top: 100px;
+}
+
+/* Navegación */
+nav {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+nav.scrolled {
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+nav li {
+  position: relative;
+}
+
+nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+nav a i {
+  font-size: 1.2rem;
+}
+
+nav a span {
+  font-size: 0.9rem;
+}
+
+nav a:hover, nav a.active {
+  color: #FF006D !important;
+  background: rgba(255, 0, 109, 0.1) !important;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #FF006D !important;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after, nav a.active::after {
+  width: 100%;
+}
+
+/* Logo en la navegación */
+.logo-container {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nav-logo {
+    height: 80px;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+nav.scrolled .nav-logo {
+    height: 60px;
+}
+
+/* Efecto de brillo */
+@keyframes logo-glow {
+    0% {
+        filter: drop-shadow(0 0 2px rgba(121, 40, 202, 0));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(121, 40, 202, 0.8));
+        transform: scale(1.05);
+    }
+    100% {
+        filter: drop-shadow(0 0 2px rgba(121, 40, 202, 0));
+        transform: scale(1);
+    }
+}
+
+.nav-logo {
+    animation: logo-glow 3s ease-in-out infinite;
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+    .logo-container {
+        right: 1rem;
+    }
+    
+    .nav-logo {
+        height: 50px;
+    }
+    
+    nav.scrolled .nav-logo {
+        height: 40px;
+    }
+
+    nav {
+        padding: 0.5rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    section {
+        padding: 2rem 1rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hero Section actualizado */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 2rem;
+  background-image: url('/static/img/tiffany_smart_bg.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin-left: 5%;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.tiffany-text {
+  font-size: 5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #FF006D, #FF4D94);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: -0.5rem;
+}
+
+.smart-text {
+  font-size: 6rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  background: linear-gradient(45deg, #FF006D, #FF4D94);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+.hero-subtitle {
+  font-size: 1.8rem;
+  font-weight: 500;
+  background: linear-gradient(45deg, #2E1210, #943934);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.highlight {
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Estilo específico para el botón CONOCE MÁS */
+.hero button.primary {
+  background: rgba(255, 0, 109, 0.2);
+  color: white;
+  border: 2px solid #FF006D;
+  padding: 0.8rem 1.8rem; /* Reducir el padding horizontal */
+  border-radius: 6px !important;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(255, 0, 109, 0.2);
+  display: inline-block; /* Asegurar que el botón solo ocupe el espacio necesario */
+  width: auto; /* Ancho automático basado en el contenido */
+  min-width: 0; /* Eliminar cualquier ancho mínimo */
+  margin-right: auto; /* Alinear a la izquierda */
+  animation: button-glow 2s infinite ease-in-out; /* Aplicar la animación */
+}
+
+.hero-buttons button.primary:hover {
+  background: rgba(255, 0, 109, 0.3);
+  transform: translateY(-3px);
+  animation: button-glow 1s infinite ease-in-out; /* Animación más rápida en hover */
+  border-color: #FF4D94;
+}
+
+/* Asegurar que el botón mantenga su forma en dispositivos móviles */
+@media (max-width: 768px) {
+  .hero-buttons {
+    justify-content: center; /* Centrar en dispositivos móviles */
+  }
+  
+  .hero button.primary {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero button.primary {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons button.primary {
+    padding: 0.6rem 1.8rem;
+    font-size: 0.85rem;
+    border-radius: 8px !important;
+  }
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+  .hero {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hero-content {
+    margin-left: 0;
+  }
+  
+  .hero-title {
+    align-items: center;
+  }
+  
+  .tiffany-text {
+    font-size: 3.5rem;
+  }
+  
+  .smart-text {
+    font-size: 4.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .hero button.primary {
+    padding: 0.7rem 2rem;
+    font-size: 0.9rem;
+    min-width: 180px;
+  }
+}
+
+/* Secciones */
+section {
+  padding: 4rem 2rem;
+}
+
+/* Ajustes para la sección de productos */
+#productos {
+  padding: 5rem 2rem;
+}
+
+#productos .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Ajustes para las tarjetas */
+.card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 320px;
+  text-align: center;
+  border: 1px solid rgba(255, 28, 247, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--card-bg-image);
+  background-size: cover;
+  background-position: center;
+  opacity: 0; /* Inicialmente invisible */
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover::before {
+  opacity: 0.3 !important; /* Forzar visibilidad al hacer hover */
+}
+
+/* Degradado para mejorar legibilidad */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.card:hover::after {
+  opacity: 0.7;
+}
+
+/* Asegurar que el contenido esté por encima del fondo */
+.card h3, .card p, .card .grid {
+  position: relative;
+  z-index: 2;
+}
+
+/* Animación inicial para las tarjetas */
+.card.animate-in::before {
+  animation: cardInitialReveal 2s ease forwards;
+}
+
+@keyframes cardInitialReveal {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0; /* Vuelve a ser invisible al final */
+  }
+}
+
+/* Estado inicial para la animación */
+.card:not(.animate-in)::before {
+  opacity: 0;
+}
+
+.card:not(.animate-in) h3,
+.card:not(.animate-in) p,
+.card:not(.animate-in) .grid {
+  opacity: 0;
+}
+
+/* Efecto al pasar el cursor */
+.card:hover {
+  transform: translateY(-5px);
+  background: var(--card-bg-hover);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Botones */
+button.primary:not(.hero-content .primary) {
+  background: var(--primary) !important;
+  border: none !important;
+  color: white !important;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 12px;
+  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+  box-shadow: 0 5px 15px rgba(255, 28, 247, 0.3);
+}
+
+button.primary:not(.hero-content .primary):hover {
+  background: var(--gradient-1) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 28, 247, 0.4);
+}
+
+button.outline {
+  border: 2px solid var(--primary) !important;
+  color: var(--primary) !important;
+  background: transparent !important;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+}
+
+button.outline:hover {
+  background: rgba(255, 0, 109, 0.1) !important;
+  color: white !important;
+  transform: translateY(-2px);
+}
+
+/* Formulario */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+input, textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* Alertas */
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  animation: fadeIn 0.3s ease;
+}
+
+.alert-success {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  color: #00ff00;
+}
+
+/* Estadísticas */
+#estadisticas {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+#estadisticas h2 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+#estadisticas .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#estadisticas .grid div {
+  background: rgba(20, 20, 30, 0.5);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Eliminar opacity: 0 para que los elementos sean visibles */
+}
+
+#estadisticas .grid div:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  background: rgba(30, 30, 40, 0.6);
+  border-color: rgba(255, 0, 109, 0.2);
+}
+
+#estadisticas h3 {
+  color: #FF006D;
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+#estadisticas p {
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* Animación para los números de estadísticas */
+@keyframes countUp {
+  from {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#estadisticas .grid div {
+  opacity: 1;
+}
+
+#estadisticas .grid div.animate-in {
+  animation: countUp 0.8s forwards;
+}
+
+/* Aplicar retrasos diferentes para cada elemento */
+#estadisticas .grid div:nth-child(1).animate-in {
+  animation-delay: 0.1s;
+}
+
+#estadisticas .grid div:nth-child(2).animate-in {
+  animation-delay: 0.3s;
+}
+
+#estadisticas .grid div:nth-child(3).animate-in {
+  animation-delay: 0.5s;
+}
+
+/* Estilos para títulos y subtítulos */
+h1, h2, h3, h4, p {
+    font-family: var(--font-primary);
+    text-align: center;
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin-bottom: 2rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 1rem auto;
+}
+
+/* Ajuste específico para secciones */
+section {
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.products h2, .stats h2, .about h2, .contact h2 {
+    background: linear-gradient(45deg, #cc0057, #d9d9d9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h4 {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+    }
+}
+
+/* Estilos para el modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal {
+  background: var(--card-bg);
+  border-radius: 15px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Título del modal con el color solicitado */
+.modal h3 {
+  color: #FF006D;
+    margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Estilos para los inputs cuando están enfocados */
+.modal .form-group input:focus,
+.modal .form-group textarea:focus {
+  border-color: #FF006D;
+  box-shadow: 0 0 0 2px rgba(255, 0, 109, 0.2);
+  outline: none;
+}
+
+/* Estilos para los labels flotantes cuando el input está enfocado */
+.modal .form-group.floating-label input:focus ~ label,
+.modal .form-group.floating-label textarea:focus ~ label,
+.modal .form-group.floating-label input:not(:placeholder-shown) ~ label,
+.modal .form-group.floating-label textarea:not(:placeholder-shown) ~ label {
+  color: #FF006D;
+}
+
+/* Estilos para los botones del modal */
+.modal-buttons {
+    display: flex;
+  justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-buttons button {
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: #CC0057;
+  color: white;
+  border: none;
+}
+
+.modal-buttons button[type="submit"]:hover {
+  background-color: #FF006D;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 109, 0.3);
+}
+
+.modal-buttons button[type="button"] {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-buttons button[type="button"]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para el mensaje de éxito */
+.alert-success {
+  background-color: rgba(0, 200, 83, 0.2);
+  border: 1px solid rgba(0, 200, 83, 0.3);
+  color: #00C853;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* Estilos para el mensaje de error */
+.alert-error {
+  background-color: rgba(255, 0, 109, 0.2);
+  border: 1px solid rgba(255, 0, 109, 0.3);
+  color: #FF006D;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* Estilos para el mensaje de advertencia */
+.alert-warning {
+  background-color: rgba(255, 193, 7, 0.2);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  color: #FFC107;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* Estilos para el modal más compacto */
+.modal-compact {
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.modal-compact textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.modal-compact h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-compact .modal-buttons {
+    margin-top: 1rem;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .modal-compact {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .modal-compact h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Media queries para diferentes dispositivos */
+
+/* Mobile (320px) - Dispositivos móviles pequeños */
+@media (max-width: 320px) {
+  .tiffany-text {
+    font-size: 2.5rem;
+  }
+  
+  .smart-text {
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+  }
+  
+  .hero button.primary {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.8rem;
+    min-width: 160px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  nav ul {
+    gap: 0.5rem;
+  }
+  
+  nav a span {
+    display: none; /* Ocultar texto en navegación */
+  }
+}
+
+/* Mobile Large (425px) - Dispositivos móviles grandes */
+@media (min-width: 321px) and (max-width: 425px) {
+  .tiffany-text {
+    font-size: 3rem;
+  }
+  
+  .smart-text {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  nav a span {
+    display: none; /* Ocultar texto en navegación */
+  }
+}
+
+/* Tablet (768px) - Tablets y dispositivos medianos */
+@media (min-width: 426px) and (max-width: 768px) {
+  .hero {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hero-content {
+    margin-left: 0;
+  }
+  
+  .hero-title {
+    align-items: center;
+  }
+  
+  .tiffany-text {
+    font-size: 3.5rem;
+  }
+  
+  .smart-text {
+    font-size: 4.5rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Laptop (1024px) - Laptops y pantallas pequeñas */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-content {
+    margin-left: 3%;
+  }
+  
+  .tiffany-text {
+    font-size: 4rem;
+  }
+  
+  .smart-text {
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop (1440px) - Monitores de escritorio */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .hero-content {
+    margin-left: 5%;
+    max-width: 650px;
+  }
+  
+  .tiffany-text {
+    font-size: 5rem;
+  }
+  
+  .smart-text {
+    font-size: 6rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* 4K (2560px) - Pantallas de alta resolución */
+@media (min-width: 1441px) {
+  .hero-content {
+    margin-left: 10%;
+    max-width: 800px;
+  }
+  
+  .tiffany-text {
+    font-size: 6rem;
+  }
+  
+  .smart-text {
+    font-size: 7rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  
+  .hero-subtitle {
+    font-size: 2.2rem;
+  }
+  
+  .hero-description {
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Ajustes para los botones en las tarjetas */
+.card .grid {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  margin-top: auto;
+  justify-content: center;
+}
+
+.card button {
+  flex: 1;
+  min-width: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Responsive para diferentes tamaños de pantalla */
+@media (max-width: 768px) {
+  #productos .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+    min-height: 280px;
+  }
+  
+  .card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .card p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card .grid {
+    flex-direction: row;
+  }
+  
+  .card button {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 425px) {
+  #productos .grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    min-height: 250px;
+  }
+}
+
+/* Breakpoints refinados */
+
+/* Base styles (aplicados a todos los tamaños) */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+section {
+  padding: 4rem 1rem;
+}
+
+/* Extra small devices - Móviles pequeños (hasta 320px) */
+@media (max-width: 320px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  section {
+    padding: 3rem 0.5rem;
+  }
+  
+  .tiffany-text {
+    font-size: 2.5rem;
+  }
+  
+  .smart-text {
+    font-size: 3.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+  }
+  
+  .hero button.primary {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.8rem;
+    min-width: 160px;
+  }
+  
+  nav ul {
+    gap: 0.5rem;
+  }
+  
+  nav a span {
+    display: none;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  #productos .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Small devices - Móviles (321px - 576px) */
+@media (min-width: 321px) and (max-width: 576px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  section {
+    padding: 3.5rem 1rem;
+  }
+  
+  .tiffany-text {
+    font-size: 3rem;
+  }
+  
+  .smart-text {
+    font-size: 4rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .hero-description {
+    font-size: 0.95rem;
+  }
+  
+  nav a span {
+    display: none;
+  }
+  
+  #productos .grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* Medium devices - Tablets (577px - 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+  
+  .hero {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hero-content {
+    margin-left: 0;
+  }
+  
+  .hero-title {
+    align-items: center;
+  }
+  
+  .tiffany-text {
+    font-size: 3.5rem;
+  }
+  
+  .smart-text {
+    font-size: 4.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  #productos .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Large devices - Laptops (769px - 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+  
+  .hero-content {
+    margin-left: 3%;
+  }
+  
+  .tiffany-text {
+    font-size: 4rem;
+  }
+  
+  .smart-text {
+    font-size: 5rem;
+  }
+  
+  #productos .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Extra large devices - Desktops (993px - 1200px) */
+@media (min-width: 993px) and (max-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  
+  .hero-content {
+    margin-left: 5%;
+    max-width: 600px;
+  }
+}
+
+/* XX-Large devices - Large desktops (1201px - 1440px) */
+@media (min-width: 1201px) and (max-width: 1440px) {
+  .container {
+    max-width: 1320px;
+  }
+  
+  .hero-content {
+    margin-left: 5%;
+    max-width: 650px;
+  }
+}
+
+/* Ultra large devices - 4K+ (1441px and up) */
+@media (min-width: 1441px) {
+  .container {
+    max-width: 1800px;
+  }
+  
+  .hero-content {
+    margin-left: 10%;
+    max-width: 800px;
+  }
+  
+  .tiffany-text {
+    font-size: 6rem;
+  }
+  
+  .smart-text {
+    font-size: 7rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+  
+  .hero-subtitle {
+    font-size: 2.2rem;
+  }
+  
+  .hero-description {
+    font-size: 1.5rem;
+  }
+  
+  section {
+    padding: 6rem 2rem;
+  }
+  
+  #productos .grid {
+    max-width: 1600px;
+    gap: 2.5rem;
+  }
+}
+
+/* Estilos para el modal de detalle de producto */
+.producto-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.4s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.producto-modal {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+  animation: slideUpFade 0.5s ease;
+  border-top: 4px solid var(--gradient-1);
+  display: flex;
+  flex-direction: column;
+}
+
+.producto-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.producto-modal-close:hover {
+  background: rgba(255, 0, 109, 0.3);
+  transform: rotate(90deg);
+}
+
+.producto-modal-close i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.producto-modal-content {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  max-height: calc(90vh - 40px);
+}
+
+.producto-modal-info {
+  padding: 2.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.producto-modal-imagen {
+  flex: 1;
+  min-height: 350px;
+  max-height: 90vh;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.producto-modal-imagen img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+.producto-modal-titulo {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.producto-nombre {
+  color: white;
+  font-weight: 600;
+  font-size: 1.8rem;
+  display: inline-block;
+}
+
+.producto-tipo {
+  color: var(--primary);
+  font-weight: 300;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  margin-left: 0.5rem;
+}
+
+.producto-subtipo {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.producto-modal-subtitulo {
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.producto-modal-descripcion {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.producto-caracteristicas {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 2rem;
+}
+
+.producto-caracteristicas li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.producto-caracteristicas li::before {
+  content: '•';
+  color: var(--primary);
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.producto-modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.producto-modal-buttons button {
+  flex: 1;
+  padding: 0.8rem 1.5rem;
+}
+
+.producto-modal-buttons button.outline {
+  border-color: var(--primary);
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.producto-modal-buttons button.outline:hover {
+  background-color: var(--gradient-1);
+  border-color: var(--gradient-1);
+  color: white;
+}
+
+.producto-modal-buttons button.primary {
+  background-color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.producto-modal-buttons button.primary:hover {
+  background-color: var(--primary);
+}
+
+/* Estilos para la sección de API */
+#contacto {
+  background: linear-gradient(135deg, #0a0a0a, #1a0012);
+  border-radius: 20px;
+  padding: 3rem;
+  margin-top: 2rem;
+}
+
+.api-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.api-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.api-code {
+  flex: 1.5;
+  min-width: 350px;
+}
+
+.code-block {
+  background: #1A1525;
+  border-radius: 12px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-left: 4px solid var(--primary);
+}
+
+.code-block code {
+  color: #f8f8f2;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.api-plans {
+  margin-top: 4rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.api-plans h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.api-plans .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.api-plan {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 28, 247, 0.1);
+  max-width: 350px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.api-plan.featured {
+  background: #1E1A29;
+  border: 2px solid var(--primary);
+  position: relative;
+  z-index: 2;
+}
+
+.api-plan.featured::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  height: 6px;
+  background: var(--primary);
+  border-radius: 16px 16px 0 0;
+}
+
+.api-plan:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.api-plan.featured:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+.api-plan h4 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.api-plan p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.api-plan ul {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  flex-grow: 1;
+}
+
+.api-plan li {
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+.api-plan li::before {
+  content: '✓';
+  color: var(--primary);
+  position: absolute;
+  left: -1.5rem;
+  font-weight: bold;
+}
+
+.api-plan button {
+  align-self: center;
+  min-width: 180px;
+  margin-top: 1.5rem;
+}
+
+/* Responsive para los planes de API */
+@media (max-width: 1200px) {
+  .api-plans .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 0 1rem;
+  }
+  
+  .api-plan {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .api-demo {
+    flex-direction: column;
+  }
+  
+  .api-plan.featured {
+    transform: scale(1);
+  }
+  
+  .api-plan.featured:hover {
+    transform: translateY(-10px);
+  }
+  
+  .api-plans .grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .api-demo {
+    grid-template-columns: 1fr;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .api-form, .api-code {
+    padding: 1rem;
+    margin: 0 1rem;
+    width: auto;
+  }
+
+  .code-container {
+    overflow-x: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  .code-block {
+    font-size: 0.8rem;
+    padding: 1rem;
+    min-width: 280px;
+  }
+
+  .tiffany-selector-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .tiffany-selector {
+    margin: 0;
+  }
+
+  /* Ajustar el padding de la sección contenedora */
+  #contacto {
+    padding: 2rem 0;
+  }
+
+  /* Ajustar los títulos y descripciones */
+  #contacto h2,
+  #contacto .section-description,
+  #contacto h3 {
+    padding: 0 1rem;
+  }
+
+  /* Ajustar los inputs y campos del formulario */
+  .api-form input,
+  .api-form select,
+  .api-form textarea {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* Ajustar el botón de copiar */
+  .copy-button {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .api-demo {
+    grid-template-columns: 1fr;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .api-form, .api-code {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+
+  .code-block {
+    font-size: 0.7rem;
+  }
+
+  #contacto h2 {
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .section-description {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+
+  .api-form input,
+  .api-form select,
+  .api-form textarea {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .copy-button {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Estilos para el footer */
+.site-footer {
+  background: linear-gradient(180deg, #0a0a0a, #1a0012);
+  padding: 4rem 0 0 0;
+  position: relative;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(255, 0, 109, 0.2);
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  opacity: 0.7;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  padding: 0 2rem;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-section {
+  align-items: flex-start;
+}
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-section h4 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-section h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: var(--primary);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--primary);
+}
+
+.contact-section li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-section i {
+  color: var(--primary);
+  width: 20px;
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: var(--primary);
+  transform: translateY(-5px);
+}
+
+.social-icons i {
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.footer-bottom {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.footer-bottom p {
+  margin: 0.5rem 0;
+}
+
+.footer-bottom i {
+  color: var(--primary);
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive para el footer */
+@media (max-width: 992px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 3rem 0 0 0;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .logo-section {
+    align-items: center;
+  }
+  
+  .footer-section h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .contact-section li {
+    justify-content: center;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    padding: 2rem 0 0 0;
+  }
+  
+  .footer-content {
+    padding: 0 1rem;
+  }
+  
+  .footer-logo {
+    width: 120px;
+  }
+  
+  .footer-section h4 {
+    font-size: 1.1rem;
+  }
+  
+  .footer-bottom {
+    margin-top: 2rem;
+    padding: 1rem 0;
+    font-size: 0.8rem;
+  }
+}
+
+/* Estilos para el carrusel de productos basados en el hero */
+.producto-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 3rem 0;
+}
+
+.producto-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.producto-slide {
+  min-width: 100%;
+  flex: 0 0 100%;
+}
+
+/* Usar los mismos estilos del hero para los productos */
+.producto-hero-content {
+  background-size: cover;
+  background-position: right center;
+  position: relative;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 4rem;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.producto-hero-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+.producto-hero-content > * {
+  position: relative;
+  z-index: 1;
+  max-width: 60%;
+}
+
+.producto-hero-content .hero-title .producto-tipo {
+  color: var(--primary);
+  font-size: 4rem;
+  display: block;
+  margin-top: 0.5rem;
+  text-shadow: 0 0 15px rgba(255, 28, 247, 0.5);
+}
+
+.producto-hero-content .hero-features {
+  list-style: none;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.producto-hero-content .hero-features li {
+  position: relative;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.producto-hero-content .hero-features li::before {
+  content: '•';
+  color: var(--primary);
+  position: absolute;
+  left: -1.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(255, 28, 247, 0.5);
+}
+
+/* Controles del carrusel */
+.producto-carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.carousel-prev, .carousel-next {
+  background: rgba(255, 28, 247, 0.1);
+  border: none;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-prev:hover, .carousel-next:hover {
+  background: var(--primary);
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 1rem;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+/* Responsive para el carrusel de productos */
+@media (max-width: 1200px) {
+  .producto-hero-content > * {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 992px) {
+  .producto-hero-slide {
+    min-height: 500px;
+  }
+  
+  .producto-hero-content {
+    padding: 3rem;
+  }
+  
+  .producto-hero-text {
+    max-width: 80%;
+  }
+  
+  .producto-hero-image::after {
+    background: linear-gradient(to bottom, rgba(19, 17, 26, 0.6) 0%, rgba(19, 17, 26, 0.9) 100%);
+  }
+  
+  .producto-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .producto-hero-title .producto-tipo {
+    font-size: 3rem;
+  }
+  
+  .producto-hero-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .producto-hero-slide {
+    min-height: 450px;
+    margin: 0 0.5rem;
+  }
+  
+  .producto-hero-content {
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .producto-hero-text {
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .producto-hero-description {
+    max-width: 100%;
+  }
+  
+  .producto-caracteristicas {
+    display: inline-block;
+    text-align: left;
+  }
+  
+  .producto-hero-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .producto-hero-slide {
+    min-height: 400px;
+  }
+  
+  .producto-hero-content {
+    padding: 1.5rem;
+  }
+  
+  .producto-hero-title {
+    font-size: 2rem;
+  }
+  
+  .producto-hero-title .producto-tipo {
+    font-size: 2.5rem;
+  }
+  
+  .producto-hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .producto-hero-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .producto-caracteristicas li {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .producto-hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Estilos para los selectores de Tiffany en la API */
+.tiffany-selectors {
+  margin: 3rem 0;
+}
+
+.tiffany-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Efecto glassmorphic para las tarjetas de la API */
+.tiffany-selector {
+  background: rgba(30, 30, 40, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+    transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+  overflow: hidden;
+}
+
+.tiffany-selector::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.15) 0%, 
+    rgba(103, 0, 180, 0.2) 100%);
+  z-index: -1;
+  border-radius: 15px;
+}
+
+.tiffany-selector::after {
+    content: '';
+    position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: radial-gradient(
+    circle at top right,
+    rgba(255, 0, 128, 0.1) 0%,
+    rgba(103, 0, 180, 0.1) 50%,
+    transparent 70%
+  );
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.tiffany-selector:hover::after {
+  opacity: 1;
+}
+
+.tiffany-selector:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(255, 0, 128, 0.2);
+  border-color: rgba(255, 0, 128, 0.3);
+}
+
+.tiffany-selector.selected {
+  border: 1px solid rgba(255, 0, 128, 0.5);
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.2) 0%, 
+    rgba(103, 0, 180, 0.25) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(255, 0, 128, 0.3);
+  animation: cardGlow 2s infinite;
+}
+
+.tiffany-selector.selected::before {
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.25) 0%, 
+    rgba(103, 0, 180, 0.3) 100%);
+}
+
+.tiffany-selector img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 5px 15px rgba(255, 0, 128, 0.3));
+    transition: all 0.3s ease;
+}
+
+.tiffany-selector:hover img {
+  transform: scale(1.05);
+}
+
+.tiffany-selector h4 {
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tiffany-selector p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Responsive para los selectores de Tiffany */
+@media (max-width: 768px) {
+  .tiffany-selector-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+  .tiffany-selector-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Estilos para el Hero Slider */
+.hero-slider-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-slider {
+  position: relative;
+  min-height: 100vh; /* Asegurar que ocupe toda la altura de la pantalla */
+  overflow: hidden; /* Evitar desbordamientos */
+}
+
+.hero-slider-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.hero-slide {
+  position: relative;
+  min-width: 100%;
+  height: 100vh;
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+}
+
+/* Ajustar las imágenes de fondo del hero slider */
+.hero-slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/static/img/tiffany_smart_bg.png') !important;
+  background-size: cover;
+  background-position: 60% center; /* Mover la imagen más a la derecha */
+  z-index: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Ajustar el overlay para que sea similar al del hero principal */
+.hero-slide-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+.hero-slide-content {
+  position: relative;
+  z-index: 2;
+  width: auto;
+  padding: 1rem 1.5rem;
+  background: rgba(10, 10, 11, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 28, 247, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.8s ease-out forwards;
+  text-align: left;
+  margin-left: 5%;
+  display: inline-block;
+  padding-left: 5%; /* Añadir padding consistente con el hero principal */
+  max-width: 600px; /* Limitar el ancho del contenido */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-slide .hero-title {
+  margin-bottom: 0.8rem;
+}
+
+.hero-slide .tiffany-text {
+  font-size: 2.2rem;
+}
+
+.hero-slide .smart-text {
+  font-size: 2.8rem;
+}
+
+.hero-slide .producto-tipo {
+  white-space: nowrap;
+  font-size: 2rem;
+  margin-top: 0.3rem;
+}
+
+.hero-slide .hero-subtitle {
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.hero-slide .hero-description {
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+  max-width: 500px;
+}
+
+.hero-slide .hero-features {
+  margin-bottom: 1rem;
+  max-width: 500px;
+}
+
+.hero-slide .hero-features li {
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.hero-slide .hero-buttons {
+  justify-content: flex-start;
+  margin-top: 0.8rem;
+}
+
+.hero-slide .hero-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 992px) {
+  .hero-slide-content {
+    padding: 0.9rem 1.3rem;
+    margin-left: 4%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 2rem;
+  }
+  
+  .hero-slide .smart-text {
+  font-size: 2.5rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.8rem;
+  }
+  
+  .hero-slide .hero-description,
+  .hero-slide .hero-features {
+    max-width: 450px;
+  }
+  
+  .hero-slide-bg {
+    background-position: 65% center; /* Ajustar posición para pantallas medianas */
+  }
+  
+  .hero-slide-bg::before {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.8) 40%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slide-content {
+    padding: 0.8rem 1.2rem;
+    margin-left: 3%;
+    max-width: 90%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 1.8rem;
+  }
+  
+  .hero-slide .smart-text {
+    font-size: 2.2rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.6rem;
+  }
+  
+  .hero-slide .hero-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .hero-slide .hero-description {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .hero-slide .hero-features li {
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+  }
+  
+  .hero-slide .hero-buttons button {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+  }
+  
+  .hero-slide-bg {
+    background-position: 70% center; /* Ajustar posición para móviles */
+  }
+  
+  .hero-slide-bg::before {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.85) 50%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-slide-content {
+    padding: 0.7rem 1rem;
+    margin-left: 2%;
+    max-width: 95%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 1.6rem;
+  }
+  
+  .hero-slide .smart-text {
+    font-size: 2rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.4rem;
+  }
+  
+  .hero-slide .hero-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-slide .hero-description {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-slide .hero-features {
+    margin-bottom: 0.7rem;
+  }
+  
+  .hero-slide .hero-features li {
+    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .hero-slide .hero-buttons button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .hero-slide-bg {
+    background-position: 75% center; /* Ajustar posición para móviles pequeños */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slide-content {
+    padding: 0.6rem 0.9rem;
+    margin-left: 1%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 1.4rem;
+  }
+  
+  .hero-slide .smart-text {
+    font-size: 1.8rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.2rem;
+  }
+  
+  .hero-slide .hero-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .hero-slide .hero-description {
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .hero-slide .hero-features li {
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .hero-slide-bg {
+    background-position: 75% center; /* Ajustar posición para móviles pequeños */
+  }
+}
+
+/* Estilos específicos para Tiffany Medical Assistant */
+.hero-slide[data-index="1"] .tiffany-text,
+.hero-slide[data-index="1"] .smart-text {
+  background: linear-gradient(45deg, #123555, #038290);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-slide[data-index="1"] .producto-tipo {
+  color: #123555;
+  -webkit-text-fill-color: #123555;
+}
+
+.hero-slide[data-index="1"] .hero-subtitle {
+  color: #CC0057;
+}
+
+/* Estilos específicos para Tiffany BetterSelf */
+.hero-slide[data-index="0"] .tiffany-text,
+.hero-slide[data-index="0"] .smart-text {
+  color: #FFFFFF;
+  -webkit-text-fill-color: #FFFFFF;
+}
+
+.hero-slide[data-index="0"] .producto-tipo {
+  color: #FFFFFF;
+  -webkit-text-fill-color: #FFFFFF;
+}
+
+.hero-slide[data-index="0"] .hero-subtitle {
+  color: #FFCCE2;
+}
+
+/* Estilos específicos para Tiffany Paralegal */
+.hero-slide[data-index="2"] .tiffany-text,
+.hero-slide[data-index="2"] .smart-text {
+  background: linear-gradient(45deg, #000000, #D9D9D9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-slide[data-index="2"] .producto-tipo {
+  background: linear-gradient(45deg, #000000, #D9D9D9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-slide[data-index="2"] .hero-subtitle {
+  color: #CC0057;
+}
+
+.hero-slide[data-index="2"] .hero-description {
+  color: #FFFFFF;
+}
+
+.hero-slide[data-index="2"] .hero-features li {
+  color: #D9D9D9;
+  -webkit-text-fill-color: #D9D9D9;
+}
+
+/* Barra de navegación minimalista para el hero slider */
+.hero-slider-nav {
+  position: absolute;
+  bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  z-index: 10;
+  background: rgba(19, 17, 26, 0.6);
+    backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 8px 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 28, 247, 0.2);
+}
+
+.hero-slider-nav-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  margin: 0 5px;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-slider-nav-square:hover {
+  background: rgba(255, 28, 247, 0.5);
+}
+
+.hero-slider-nav-square.active {
+  width: 24px;
+  background: var(--primary);
+  box-shadow: 0 0 10px rgba(255, 28, 247, 0.5);
+}
+
+/* Responsive para la barra de navegación */
+@media (max-width: 768px) {
+  .hero-slider-nav {
+    bottom: 20px;
+    padding: 6px 12px;
+  }
+  
+  .hero-slider-nav-square {
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+  }
+  
+  .hero-slider-nav-square.active {
+    width: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-slider-nav {
+    bottom: 15px;
+    padding: 5px 10px;
+  }
+  
+  .hero-slider-nav-square {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+  }
+  
+  .hero-slider-nav-square.active {
+    width: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider-nav {
+    bottom: 10px;
+    padding: 4px 8px;
+  }
+  
+  .hero-slider-nav-square {
+    width: 6px;
+    height: 6px;
+    margin: 0 3px;
+  }
+  
+  .hero-slider-nav-square.active {
+    width: 12px;
+  }
+}
+
+/* Si hay estilos específicos para #productos que son necesarios,
+   podemos mantenerlos o adaptarlos para #hero-slider */
+
+/* Por ejemplo, si hay estilos como: */
+/* #productos {
+    estilos...
+} */
+
+/* Podríamos necesitar moverlos o adaptarlos a: */
+/* #hero-slider {
+    estilos adaptados...
+} */
+
+/* Corregir el glitch de la sidebar */
+.sidebar {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0.8rem;
+  background: rgba(40, 40, 40, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0; /* Inicialmente invisible */
+  transform: translateY(-50%) translateX(50px); /* Inicialmente fuera de la pantalla */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  transition: all 0.3s ease;
+  pointer-events: none; /* Inicialmente no interactuable */
+}
+
+/* Clase para mostrar la sidebar cuando se hace scroll */
+.sidebar.visible {
+    opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: all; /* Permitir interacción cuando es visible */
+}
+
+/* Estilo para los enlaces de la sidebar */
+.sidebar a {
+    width: 40px;
+    height: 40px;
+  border-radius: 30%;
+  color: var(--text-light);
+  background: rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+  text-decoration: none;
+    position: relative;
+}
+
+/* Cambiar el color de hover y activo de la sidebar a #FF006D */
+.sidebar a:hover,
+.sidebar a.active {
+  color: #FF0099 !important;
+  background: rgba(255, 0, 109, 0.1) !important;
+  transform: scale(1.1);
+}
+
+/* Asegurarse de que no haya otros estilos que interfieran */
+.sidebar a:hover i,
+.sidebar a.active i {
+  color: #FF0099 !important;
+}
+
+/* Estilo para el logo de la sidebar */
+.sidebar-logo {
+  width: 40px;
+  margin-top: 1rem;
+}
+
+/* Estilos para la flecha de scroll down */
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+    width: 40px;
+  height: 40px;
+  background: rgba(255, 28, 247, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 10;
+  animation: bounce 2s infinite, glow 2s infinite alternate;
+  box-shadow: 0 0 15px rgba(255, 28, 247, 0.3);
+    transition: all 0.3s ease;
+}
+
+.sidebar-logo:hover {
+  opacity: 1;
+    transform: scale(1.1);
+}
+
+/* También actualizar los estilos de la navegación principal para mantener consistencia */
+nav a:hover, 
+nav a.active {
+  color: #FF006D !important;
+  background: rgba(255, 0, 109, 0.1) !important;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 28, 247, 0.3);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 28, 247, 0.7);
+  }
+}
+
+/* Ajustes responsivos para la flecha */
+@media (max-width: 768px) {
+  .scroll-down-arrow {
+    bottom: 20px;
+        width: 35px;
+        height: 35px;
+    }
+    
+  .scroll-down-arrow i {
+    font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+  .scroll-down-arrow {
+    bottom: 15px;
+        width: 30px;
+        height: 30px;
+    }
+    
+  .scroll-down-arrow i {
+    font-size: 0.9rem;
+    }
+}
+/* ... existing code ... */
+
+.code-container {
+  position: relative;
+    margin-top: 1rem;
+    min-height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.copy-button {
+  position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: rgba(45, 45, 45, 0.7);
+    border: 1px solid rgba(63, 63, 63, 0.5);
+    border-radius: 4px;
+    color: #d4d4d4;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    display: flex;
+  align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+.copy-button:hover {
+    background: rgba(61, 61, 61, 0.9);
+    border-color: rgba(82, 82, 82, 0.8);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.copy-button:active {
+    transform: scale(0.95);
+}
+
+.copy-button::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4d4d4' viewBox='0 0 16 16'%3E%3Cpath d='M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1H2z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Estilo para cuando el botón ha copiado exitosamente */
+.copy-button.copied {
+    background: rgba(var(--primary-rgb), 0.7);
+    border-color: rgba(var(--primary-rgb), 0.9);
+}
+
+.copy-button.copied::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+}
+
+.code-block {
+    background: #1e1e1e;
+    padding: 2.5rem 1.5rem 1.5rem;
+    margin: 0;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    height: 100%;
+    min-height: 400px;
+    color: #d4d4d4;
+    counter-reset: line;
+}
+
+/* Añadir líneas numeradas como en la imagen */
+.code-block .line {
+    display: block;
+    position: relative;
+    padding-left: 3.5em;
+}
+
+.code-block .line:before {
+    content: counter(line);
+    counter-increment: line;
+    position: absolute;
+    left: 0;
+    color: #888;
+    text-align: right;
+    width: 3em;
+    padding-right: 0.5em;
+}
+
+/* Personalización adicional de Prism para que se vea como en la imagen */
+.token.property {
+    color: #9cdcfe;
+}
+
+.token.string {
+    color: #ce9178;
+}
+
+.token.number {
+    color: #b5cea8;
+}
+
+.token.boolean {
+    color: #569cd6;
+}
+
+.token.null {
+    color: #569cd6;
+}
+
+/* Añadir un fondo con líneas como en la imagen */
+.code-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.03) 50%);
+    background-size: 100% 3rem;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.response-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    max-width: 400px;
+}
+
+.response-message.success {
+    background-color: #4CAF50;
+    border-left: 4px solid #45a049;
+}
+
+.response-message.error {
+    background-color: #f44336;
+    border-left: 4px solid #da3c31;
+}
+
+.response-message.info {
+    background-color: #2196F3;
+    border-left: 4px solid #1e88e5;
+}
+
+/* Animación de resplandor para las tarjetas seleccionadas */
+@keyframes cardGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(255, 0, 128, 0.2), 0 0 15px rgba(103, 0, 180, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(255, 0, 128, 0.5), 0 0 20px rgba(255, 0, 128, 0.3), 0 0 30px rgba(103, 0, 180, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(255, 0, 128, 0.2), 0 0 15px rgba(103, 0, 180, 0.1);
+  }
+}
+
+.tiffany-selector.selected {
+  border: 1px solid rgba(255, 0, 128, 0.5);
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.2) 0%, 
+    rgba(103, 0, 180, 0.25) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(255, 0, 128, 0.3);
+  animation: cardGlow 2s infinite;
+}
+
+/* Estilos para el selector de teléfono internacional */
+.iti {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.iti__flag-container {
+  display: flex;
+  align-items: center;
+}
+
+.iti__selected-flag {
+  background-color: rgba(30, 30, 40, 0.3) !important;
+  border-radius: 8px 0 0 8px;
+  transition: all 0.3s ease;
+}
+
+.iti__selected-flag:hover {
+  background-color: rgba(50, 50, 60, 0.5) !important;
+}
+
+.iti__country-list {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  width: 300px;
+}
+
+.iti__country {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.iti__country:hover {
+  background-color: rgba(255, 0, 128, 0.1);
+}
+
+.iti__country.iti__active {
+  background-color: rgba(255, 0, 128, 0.2);
+}
+
+.iti__country-name {
+  color: var(--text-main);
+  margin-left: 8px;
+}
+
+.iti__dial-code {
+  color: var(--text-secondary);
+}
+
+/* Ajustar el input de teléfono */
+input[type="tel"] {
+  padding-left: 90px !important;
+}
+
+/* Estilos para los grupos de formulario con labels */
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: rgba(30, 30, 40, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Ajustar el input de teléfono con el selector de país */
+.form-group .iti {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.form-group input[type="tel"] {
+  padding-left: 90px !important;
+}
+
+/* Estilos para labels flotantes en los formularios */
+.form-group {
+  margin-bottom: 1.5rem;
+    position: relative;
+}
+
+/* Estilo base para los labels flotantes */
+.form-group.floating-label {
+  position: relative;
+}
+
+.form-group.floating-label label {
+  position: absolute;
+  top: 0.8rem;
+  left: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+  pointer-events: none;
+  margin-bottom: 0;
+  background: transparent;
+  padding: 0 0.3rem;
+  z-index: 1;
+}
+
+/* Cuando el input está enfocado o tiene contenido, el label flota arriba */
+.form-group.floating-label input:focus ~ label,
+.form-group.floating-label input:not(:placeholder-shown) ~ label,
+.form-group.floating-label textarea:focus ~ label,
+.form-group.floating-label textarea:not(:placeholder-shown) ~ label {
+  top: -0.7rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+  color: #FF006D;
+  /* Eliminar el fondo y añadir un efecto de difuminado para mejorar la legibilidad */
+  background: transparent;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.8);
+  padding: 0;
+}
+
+/* Ajustar el placeholder para que no se superponga con el label */
+.form-group.floating-label input::placeholder,
+.form-group.floating-label textarea::placeholder {
+  color: transparent;
+  transition: color 0.2s ease;
+}
+
+/* Cuando el input está enfocado, mostrar el placeholder */
+.form-group.floating-label input:focus::placeholder,
+.form-group.floating-label textarea:focus::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mantener los estilos normales para el grupo de teléfono */
+.form-group.phone-group label {
+  position: static;
+    display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+/* Estilos para los inputs y textareas dentro de los grupos de formulario */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: rgba(30, 30, 40, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+  outline: none;
+}
+
+/* Estilos para los botones del hero slider */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-buttons button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+    transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+}
+
+/* Botón primario (Contactar por WhatsApp) */
+.hero-buttons button.primary {
+  background-color: #CC0057;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(204, 0, 87, 0.3);
+}
+
+.hero-buttons button.primary:hover {
+  background-color: #FF006D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 0, 109, 0.4);
+}
+
+/* Botón outline (Solicitar Llamada) */
+.hero-buttons button.outline {
+  background-color: transparent;
+  color: #FF006D;
+  border: 1px solid #FF006D;
+}
+
+.hero-buttons button.outline:hover {
+  background-color: rgba(255, 0, 109, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 109, 0.2);
+}
+
+/* Mantener la responsividad */
+@media (max-width: 768px) {
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .hero-buttons button {
+    min-width: 160px;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons button {
+  width: 100%;
+  }
+}
+
+/* Asegurar que los estilos de los botones del hero slider tengan mayor especificidad */
+.hero-slide .hero-buttons button.primary,
+.hero-slide-content .hero-buttons button.primary,
+button.primary[hx_get*="/modal-wp/"] {
+  background-color: #CC0057 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(204, 0, 87, 0.3) !important;
+}
+
+button.primary[hx_get*="/modal-wp/"]:hover,
+.hero-slide .hero-buttons button.primary:hover,
+.hero-slide-content .hero-buttons button.primary:hover,
+button.primary[onclick*="closeProductModal"]:hover,
+button.primary:hover {
+  background-color: #FF006D !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(255, 0, 109, 0.4) !important;
+}
+
+.hero-slide .hero-buttons button.outline,
+.hero-slide-content .hero-buttons button.outline,
+button.outline[hx_get*="/modal-llamada/"] {
+  background-color: transparent !important;
+  color: #FF006D !important;
+  border: 1px solid #FF006D !important;
+}
+
+.hero-slide .hero-buttons button.outline:hover,
+.hero-slide-content .hero-buttons button.outline:hover,
+button.outline[hx_get*="/modal-llamada/"]:hover {
+  background-color: rgba(255, 0, 109, 0.1) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(255, 0, 109, 0.2) !important;
+}
+
+/* Sobrescribir cualquier otro estilo de hover para estos botones */
+.hero-buttons button:hover,
+button[hx_get*="/modal-wp/"]:hover,
+button[hx_get*="/modal-llamada/"]:hover {
+  background-color: #FF006D !important;
+  border-color: #FF006D !important;
+}
+
+/* Asegurarse de que no haya otros estilos de hover que interfieran */
+button.primary:hover {
+  background-color: #FF006D !important;
+}
+
+button.outline:hover {
+  background-color: rgba(255, 0, 109, 0.1) !important;
+  color: #FF006D !important;
+  border-color: #FF006D !important;
+}
+
+/* Estilos específicos para el botón Try it de la API */
+button#try-button,
+button[id="try-button"] {
+  background-color: #CC0057 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(204, 0, 87, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+button#try-button:hover,
+button[id="try-button"]:hover {
+  background-color: #FF006D !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(255, 0, 109, 0.4) !important;
+}
+
+button#try-button:disabled,
+button[id="try-button"]:disabled {
+  background-color: rgba(204, 0, 87, 0.5) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Asegurarse de que el botón Try it tenga el color correcto cuando está habilitado */
+button#try-button:not(:disabled),
+button[id="try-button"]:not(:disabled) {
+  background-color: #CC0057 !important;
+}
+
+/* Asegurarse de que el botón Try it tenga el color correcto en hover cuando está habilitado */
+button#try-button:not(:disabled):hover,
+button[id="try-button"]:not(:disabled):hover {
+  background-color: #FF006D !important;
+}
+
+/* Estilos para los modales en dispositivos móviles */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 0;
+  }
+  
+  .modal {
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+    padding: 2rem;
+    margin: 0;
+    overflow-y: auto;
+  }
+  
+  .modal h3 {
+    margin-top: 0;
+    padding-top: 1rem;
+  }
+  
+  .modal-buttons {
+    margin-top: auto;
+    padding-bottom: 2rem;
+  }
+  
+  /* Ajustar el espaciado de los grupos de formulario */
+  .modal .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  /* Asegurar que el contenido del modal no se desborde */
+  .modal form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* Estilos específicos para dispositivos muy pequeños */
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.5rem;
+  }
+  
+  .modal h3 {
+    font-size: 1.3rem;
+  }
+  
+  .modal-buttons button {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Estilos para los títulos del carrusel */
+.hero-slide-content .hero-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.hero-slide-content .tiffany-smart-container {
+    display: inline-flex;  /* Cambiar a inline-flex */
+    align-items: center;
+    gap: 0;  /* Eliminar el gap entre Tiffany y SMART */
+    white-space: nowrap;
+}
+
+.hero-slide-content .tiffany-text,
+.hero-slide-content .smart-text {
+  color: var(--primary);
+    font-weight: 700;
+    font-size: 2.5rem;
+    font-family: var(--font-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;  /* Asegurar que la línea base sea la misma */
+    display: inline-block;  /* Cambiar a inline-block */
+    vertical-align: baseline;  /* Alinear por la línea base */
+}
+
+.hero-slide-content .producto-tipo {
+    color: #FF006D;
+    margin-left: 1rem;
+    font-size: 1.8rem;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .hero-slide-content .hero-title {
+        gap: 0.5rem;
+    }
+    
+    .hero-slide-content .tiffany-text,
+    .hero-slide-content .smart-text {
+        font-size: 2rem;
+    }
+    
+    .hero-slide-content .producto-tipo {
+        margin-left: 0;
+        width: 100%;
+  font-size: 1.5rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Mejorar los controles de navegación del hero slider */
+.hero-slider-controls {
+  position: absolute;
+  bottom: 2rem;
+  left: auto; /* Quitar el centrado */
+  right: 5rem; /* Mover más a la izquierda (desde 2rem a 5rem) */
+  transform: none; /* Eliminar la transformación que centraba */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+}
+
+/* Ajustes responsivos para los controles */
+@media (max-width: 992px) {
+  .hero-slider-controls {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 2.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+  }
+
+  .slider-prev,
+  .slider-next {
+    width: 35px;
+    height: 35px;
+  }
+
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .slider-dot.active {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slider-controls {
+    bottom: 2rem;
+    gap: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .slider-prev,
+  .slider-next {
+    width: 30px;
+    height: 30px;
+  font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider-controls {
+    bottom: 1.5rem;
+    gap: 0.6rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .slider-prev,
+  .slider-next {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+
+  .slider-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .slider-dot.active {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Estilo para los botones de navegación (flechas) */
+.slider-prev,
+.slider-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+  background: rgba(255, 0, 109, 0.3);
+  border-color: #FF006D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 0, 109, 0.3);
+}
+
+/* Reducir el tamaño de los indicadores de slides (puntos) */
+.slider-indicators {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center; /* Centrar verticalmente los indicadores */
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%; /* Mantener forma circular para los inactivos */
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease, border-radius 0.3s ease;
+}
+
+.slider-dot.active {
+  width: 12px; /* Aumentar el tamaño del indicador activo */
+  height: 12px; /* Aumentar el tamaño del indicador activo */
+  background: #FF006D;
+  transform: scale(1.1); /* Ligero efecto de escala adicional */
+  border-radius: 4px; /* Forma cuadrada con bordes redondeados cuando está activo */
+  box-shadow: 0 0 12px rgba(255, 0, 109, 0.6);
+}
+
+/* Añadir transición suave entre formas */
+.slider-dot {
+  transition: all 0.3s ease, border-radius 0.3s ease;
+}
+
+/* Mantener el hover como está */
+.slider-dot:hover {
+  background: rgba(255, 0, 109, 0.7);
+}
+
+/* Responsive para el carrusel de productos */
+@media (max-width: 1200px) {
+  .producto-hero-content > * {
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 992px) {
+  .producto-hero-slide {
+    min-height: 500px;
+  }
+  
+  .producto-hero-content {
+    padding: 3rem;
+  }
+  
+  .producto-hero-text {
+    max-width: 80%;
+  }
+  
+  .producto-hero-image::after {
+    background: linear-gradient(to bottom, rgba(19, 17, 26, 0.6) 0%, rgba(19, 17, 26, 0.9) 100%);
+  }
+  
+  .producto-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .producto-hero-title .producto-tipo {
+    font-size: 3rem;
+  }
+  
+  .producto-hero-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .producto-hero-slide {
+    min-height: 450px;
+    margin: 0 0.5rem;
+  }
+  
+  .producto-hero-content {
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .producto-hero-text {
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .producto-hero-description {
+    max-width: 100%;
+  }
+  
+  .producto-caracteristicas {
+    display: inline-block;
+    text-align: left;
+  }
+  
+  .producto-hero-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .producto-hero-slide {
+    min-height: 400px;
+  }
+  
+  .producto-hero-content {
+    padding: 1.5rem;
+  }
+  
+  .producto-hero-title {
+    font-size: 2rem;
+  }
+  
+  .producto-hero-title .producto-tipo {
+    font-size: 2.5rem;
+  }
+  
+  .producto-hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .producto-hero-description {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .producto-caracteristicas li {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .producto-hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Estilos para los selectores de Tiffany en la API */
+.tiffany-selectors {
+  margin: 3rem 0;
+}
+
+.tiffany-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Efecto glassmorphic para las tarjetas de la API */
+.tiffany-selector {
+  background: rgba(30, 30, 40, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+  overflow: hidden;
+}
+
+.tiffany-selector::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.15) 0%, 
+    rgba(103, 0, 180, 0.2) 100%);
+  z-index: -1;
+  border-radius: 15px;
+}
+
+.tiffany-selector::after {
+    content: '';
+    position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: radial-gradient(
+    circle at top right,
+    rgba(255, 0, 128, 0.1) 0%,
+    rgba(103, 0, 180, 0.1) 50%,
+    transparent 70%
+  );
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.tiffany-selector:hover::after {
+  opacity: 1;
+}
+
+.tiffany-selector:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(255, 0, 128, 0.2);
+  border-color: rgba(255, 0, 128, 0.3);
+}
+
+.tiffany-selector.selected {
+  border: 1px solid rgba(255, 0, 128, 0.5);
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.2) 0%, 
+    rgba(103, 0, 180, 0.25) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(255, 0, 128, 0.3);
+  animation: cardGlow 2s infinite;
+}
+
+.tiffany-selector.selected::before {
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.25) 0%, 
+    rgba(103, 0, 180, 0.3) 100%);
+}
+
+.tiffany-selector img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 5px 15px rgba(255, 0, 128, 0.3));
+    transition: all 0.3s ease;
+}
+
+.tiffany-selector:hover img {
+  transform: scale(1.05);
+}
+
+.tiffany-selector h4 {
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tiffany-selector p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Responsive para los selectores de Tiffany */
+@media (max-width: 768px) {
+  .tiffany-selector-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .tiffany-selector-grid {
+    grid-template-columns: 1fr;
+  }
+} 
+
+/* Estilos para el Hero Slider */
+.hero-slider-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-slider {
+  position: relative;
+  min-height: 100vh; /* Asegurar que ocupe toda la altura de la pantalla */
+  overflow: hidden; /* Evitar desbordamientos */
+}
+
+.hero-slider-track {
+    display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.hero-slide {
+  position: relative;
+  min-width: 100%;
+  height: 100vh;
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+}
+
+/* Ajustar las imágenes de fondo del hero slider */
+.hero-slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/static/img/tiffany_smart_bg.png') !important;
+  background-size: cover;
+  background-position: 60% center; /* Mover la imagen más a la derecha */
+  z-index: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Ajustar el overlay para que sea similar al del hero principal */
+.hero-slide-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+.hero-slide-content {
+    position: relative;
+  z-index: 2;
+  width: auto;
+  padding: 1rem 1.5rem;
+  background: rgba(10, 10, 11, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 28, 247, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.8s ease-out forwards;
+  text-align: left;
+  margin-left: 5%;
+  display: inline-block;
+  padding-left: 5%; /* Añadir padding consistente con el hero principal */
+  max-width: 600px; /* Limitar el ancho del contenido */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-slide .hero-title {
+  margin-bottom: 0.8rem;
+}
+
+.hero-slide .tiffany-text {
+  font-size: 2.2rem;
+}
+
+.hero-slide .smart-text {
+  font-size: 2.8rem;
+}
+
+.hero-slide .producto-tipo {
+  white-space: nowrap;
+  font-size: 2rem;
+  margin-top: 0.3rem;
+}
+
+.hero-slide .hero-subtitle {
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.hero-slide .hero-description {
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+  max-width: 500px;
+}
+
+.hero-slide .hero-features {
+    margin-bottom: 1rem;
+  max-width: 500px;
+}
+
+.hero-slide .hero-features li {
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.hero-slide .hero-buttons {
+  justify-content: flex-start;
+  margin-top: 0.8rem;
+}
+
+.hero-slide .hero-buttons button {
+    padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 992px) {
+  .hero-slide-content {
+    padding: 0.9rem 1.3rem;
+    margin-left: 4%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 2rem;
+  }
+  
+  .hero-slide .smart-text {
+  font-size: 2.5rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.8rem;
+  }
+  
+  .hero-slide .hero-description,
+  .hero-slide .hero-features {
+    max-width: 450px;
+  }
+  
+  .hero-slide-bg {
+    background-position: 65% center; /* Ajustar posición para pantallas medianas */
+  }
+  
+  .hero-slide-bg::before {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.8) 40%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slide-content {
+    padding: 0.8rem 1.2rem;
+    margin-left: 3%;
+    max-width: 90%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 1.8rem;
+  }
+  
+  .hero-slide .smart-text {
+    font-size: 2.2rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.6rem;
+  }
+  
+  .hero-slide .hero-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .hero-slide .hero-description {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .hero-slide .hero-features li {
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+  }
+  
+  .hero-slide .hero-buttons button {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+  }
+  
+  .hero-slide-bg {
+    background-position: 70% center; /* Ajustar posición para móviles */
+  }
+  
+  .hero-slide-bg::before {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.85) 50%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-slide-content {
+    padding: 0.7rem 1rem;
+    margin-left: 2%;
+    max-width: 95%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 1.6rem;
+  }
+  
+  .hero-slide .smart-text {
+    font-size: 2rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.4rem;
+  }
+  
+  .hero-slide .hero-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-slide .hero-description {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-slide .hero-features {
+    margin-bottom: 0.7rem;
+  }
+  
+  .hero-slide .hero-features li {
+    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .hero-slide .hero-buttons button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .hero-slide-bg {
+    background-position: 75% center; /* Ajustar posición para móviles pequeños */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slide-content {
+    padding: 0.6rem 0.9rem;
+    margin-left: 1%;
+  }
+  
+  .hero-slide .tiffany-text {
+    font-size: 1.4rem;
+  }
+  
+  .hero-slide .smart-text {
+    font-size: 1.8rem;
+  }
+  
+  .hero-slide .producto-tipo {
+    font-size: 1.2rem;
+  }
+  
+  .hero-slide .hero-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .hero-slide .hero-description {
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .hero-slide .hero-features li {
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .hero-slide-bg {
+    background-position: 75% center; /* Ajustar posición para móviles pequeños */
+  }
+}
+
+/* Estilos específicos para Tiffany Medical Assistant */
+.hero-slide[data-index="1"] .tiffany-text,
+.hero-slide[data-index="1"] .smart-text {
+  background: linear-gradient(45deg, #123555, #038290);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-slide[data-index="1"] .producto-tipo {
+  color: #123555;
+  -webkit-text-fill-color: #123555;
+}
+
+.hero-slide[data-index="1"] .hero-subtitle {
+  color: #CC0057;
+}
+
+/* Estilos específicos para Tiffany BetterSelf */
+.hero-slide[data-index="0"] .tiffany-text,
+.hero-slide[data-index="0"] .smart-text {
+  color: #FFFFFF;
+  -webkit-text-fill-color: #FFFFFF;
+}
+
+.hero-slide[data-index="0"] .producto-tipo {
+  color: #FFFFFF;
+  -webkit-text-fill-color: #FFFFFF;
+}
+
+.hero-slide[data-index="0"] .hero-subtitle {
+  color: #FFCCE2;
+}
+
+/* Estilos específicos para Tiffany Paralegal */
+.hero-slide[data-index="2"] .tiffany-text,
+.hero-slide[data-index="2"] .smart-text {
+  background: linear-gradient(45deg, #000000, #D9D9D9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-slide[data-index="2"] .producto-tipo {
+  background: linear-gradient(45deg, #000000, #D9D9D9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-slide[data-index="2"] .hero-subtitle {
+  color: #CC0057;
+}
+
+.hero-slide[data-index="2"] .hero-description {
+  color: #FFFFFF;
+}
+
+.hero-slide[data-index="2"] .hero-features li {
+  color: #D9D9D9;
+  -webkit-text-fill-color: #D9D9D9;
+}
+
+/* Barra de navegación minimalista para el hero slider */
+.hero-slider-nav {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: rgba(19, 17, 26, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 8px 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 28, 247, 0.2);
+}
+
+.hero-slider-nav-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  margin: 0 5px;
+  background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-slider-nav-square:hover {
+  background: rgba(255, 28, 247, 0.5);
+}
+
+.hero-slider-nav-square.active {
+  width: 24px;
+  background: var(--primary);
+  box-shadow: 0 0 10px rgba(255, 28, 247, 0.5);
+}
+
+/* Responsive para la barra de navegación */
+@media (max-width: 768px) {
+  .hero-slider-nav {
+    bottom: 20px;
+    padding: 6px 12px;
+  }
+  
+  .hero-slider-nav-square {
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+  }
+  
+  .hero-slider-nav-square.active {
+    width: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-slider-nav {
+    bottom: 15px;
+    padding: 5px 10px;
+  }
+  
+  .hero-slider-nav-square {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+  }
+  
+  .hero-slider-nav-square.active {
+    width: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider-nav {
+    bottom: 10px;
+    padding: 4px 8px;
+  }
+  
+  .hero-slider-nav-square {
+    width: 6px;
+    height: 6px;
+    margin: 0 3px;
+  }
+  
+  .hero-slider-nav-square.active {
+    width: 12px;
+  }
+}
+
+/* Si hay estilos específicos para #productos que son necesarios,
+   podemos mantenerlos o adaptarlos para #hero-slider */
+
+/* Por ejemplo, si hay estilos como: */
+/* #productos {
+    estilos...
+} */
+
+/* Podríamos necesitar moverlos o adaptarlos a: */
+/* #hero-slider {
+    estilos adaptados...
+} */
+
+/* Corregir el glitch de la sidebar */
+.sidebar {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+    display: flex;
+  flex-direction: column;
+    align-items: center;
+  gap: 1.5rem;
+  z-index: 100;
+  background: rgba(40, 40, 40, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0; /* Inicialmente invisible */
+  transform: translateY(-50%) translateX(50px); /* Inicialmente fuera de la pantalla */
+  transition: all 0.3s ease;
+  pointer-events: none; /* Inicialmente no interactuable */
+}
+
+/* Clase para mostrar la sidebar cuando se hace scroll */
+.sidebar.visible {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: all; /* Permitir interacción cuando es visible */
+}
+
+/* Estilo para los enlaces de la sidebar */
+.sidebar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 30%;
+  color: var(--text-light);
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* Cambiar el color de hover y activo de la sidebar a #FF006D */
+.sidebar a:hover,
+.sidebar a.active {
+  color: #FF0099 !important;
+  background: rgba(255, 0, 109, 0.1) !important;
+  transform: scale(1.1);
+}
+
+/* Asegurarse de que no haya otros estilos que interfieran */
+.sidebar a:hover i,
+.sidebar a.active i {
+  color: #FF006D !important;
+}
+
+/* Estilo para el logo de la sidebar */
+.sidebar-logo {
+  width: 40px;
+  margin-top: 1rem;
+}
+
+/* Estilos para la flecha de scroll down */
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 28, 247, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  animation: bounce 2s infinite, glow 2s infinite alternate;
+  box-shadow: 0 0 15px rgba(255, 28, 247, 0.3);
+    transition: all 0.3s ease;
+}
+
+.sidebar-logo:hover {
+  opacity: 1;
+    transform: scale(1.1);
+}
+
+/* También actualizar los estilos de la navegación principal para mantener consistencia */
+nav a:hover, 
+nav a.active {
+  color: #FF006D !important;
+  background: rgba(255, 0, 109, 0.1) !important;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 28, 247, 0.3);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 28, 247, 0.7);
+  }
+}
+
+/* Ajustes responsivos para la flecha */
+@media (max-width: 768px) {
+  .scroll-down-arrow {
+    bottom: 20px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .scroll-down-arrow i {
+    font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+  .scroll-down-arrow {
+    bottom: 15px;
+        width: 30px;
+        height: 30px;
+    }
+    
+  .scroll-down-arrow i {
+    font-size: 0.9rem;
+    }
+} 
+/* ... existing code ... */
+
+.code-container {
+    position: relative;
+    margin-top: 1rem;
+    min-height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: rgba(45, 45, 45, 0.7);
+    border: 1px solid rgba(63, 63, 63, 0.5);
+    border-radius: 4px;
+    color: #d4d4d4;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+.copy-button:hover {
+    background: rgba(61, 61, 61, 0.9);
+    border-color: rgba(82, 82, 82, 0.8);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.copy-button:active {
+    transform: scale(0.95);
+}
+
+.copy-button::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4d4d4' viewBox='0 0 16 16'%3E%3Cpath d='M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1H2z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Estilo para cuando el botón ha copiado exitosamente */
+.copy-button.copied {
+    background: rgba(var(--primary-rgb), 0.7);
+    border-color: rgba(var(--primary-rgb), 0.9);
+}
+
+.copy-button.copied::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+}
+
+.code-block {
+    background: #1e1e1e;
+    padding: 2.5rem 1.5rem 1.5rem;
+    margin: 0;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    height: 100%;
+    min-height: 400px;
+    color: #d4d4d4;
+    counter-reset: line;
+}
+
+/* Añadir líneas numeradas como en la imagen */
+.code-block .line {
+    display: block;
+    position: relative;
+    padding-left: 3.5em;
+}
+
+.code-block .line:before {
+    content: counter(line);
+    counter-increment: line;
+    position: absolute;
+    left: 0;
+    color: #888;
+    text-align: right;
+    width: 3em;
+    padding-right: 0.5em;
+}
+
+/* Personalización adicional de Prism para que se vea como en la imagen */
+.token.property {
+    color: #9cdcfe;
+}
+
+.token.string {
+    color: #ce9178;
+}
+
+.token.number {
+    color: #b5cea8;
+}
+
+.token.boolean {
+    color: #569cd6;
+}
+
+.token.null {
+    color: #569cd6;
+}
+
+/* Añadir un fondo con líneas como en la imagen */
+.code-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.03) 50%);
+    background-size: 100% 3rem;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.response-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    max-width: 400px;
+}
+
+.response-message.success {
+    background-color: #4CAF50;
+    border-left: 4px solid #45a049;
+}
+
+.response-message.error {
+    background-color: #f44336;
+    border-left: 4px solid #da3c31;
+}
+
+.response-message.info {
+    background-color: #2196F3;
+    border-left: 4px solid #1e88e5;
+}
+
+/* Animación de resplandor para las tarjetas seleccionadas */
+@keyframes cardGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(255, 0, 128, 0.2), 0 0 15px rgba(103, 0, 180, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(255, 0, 128, 0.5), 0 0 20px rgba(255, 0, 128, 0.3), 0 0 30px rgba(103, 0, 180, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 0, 128, 0.3), 0 0 10px rgba(255, 0, 128, 0.2), 0 0 15px rgba(103, 0, 180, 0.1);
+  }
+}
+
+.tiffany-selector.selected {
+  border: 1px solid rgba(255, 0, 128, 0.5);
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 128, 0.2) 0%, 
+    rgba(103, 0, 180, 0.25) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(255, 0, 128, 0.3);
+  animation: cardGlow 2s infinite;
+}
+
+/* Estilos para el selector de teléfono internacional */
+.iti {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.iti__flag-container {
+  display: flex;
+  align-items: center;
+}
+
+.iti__selected-flag {
+  background-color: rgba(30, 30, 40, 0.3) !important;
+  border-radius: 8px 0 0 8px;
+  transition: all 0.3s ease;
+}
+
+.iti__selected-flag:hover {
+  background-color: rgba(50, 50, 60, 0.5) !important;
+}
+
+.iti__country-list {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  width: 300px;
+}
+
+.iti__country {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.iti__country:hover {
+  background-color: rgba(255, 0, 128, 0.1);
+}
+
+.iti__country.iti__active {
+  background-color: rgba(255, 0, 128, 0.2);
+}
+
+.iti__country-name {
+  color: var(--text-main);
+  margin-left: 8px;
+}
+
+.iti__dial-code {
+  color: var(--text-secondary);
+}
+
+/* Ajustar el input de teléfono */
+input[type="tel"] {
+  padding-left: 90px !important;
+}
+
+/* Estilos para los grupos de formulario con labels */
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+    display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: rgba(30, 30, 40, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Ajustar el input de teléfono con el selector de país */
+.form-group .iti {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.form-group input[type="tel"] {
+  padding-left: 90px !important;
+}
+
+/* Estilos para labels flotantes en los formularios */
+.form-group {
+  margin-bottom: 1.5rem;
+    position: relative;
+}
+
+/* Estilo base para los labels flotantes */
+.form-group.floating-label {
+  position: relative;
+}
+
+.form-group.floating-label label {
+    position: absolute;
+  top: 0.8rem;
+  left: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+  pointer-events: none;
+  margin-bottom: 0;
+  background: transparent;
+  padding: 0 0.3rem;
+  z-index: 1;
+}
+
+/* Cuando el input está enfocado o tiene contenido, el label flota arriba */
+.form-group.floating-label input:focus ~ label,
+.form-group.floating-label input:not(:placeholder-shown) ~ label,
+.form-group.floating-label textarea:focus ~ label,
+.form-group.floating-label textarea:not(:placeholder-shown) ~ label {
+  top: -0.7rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+  color: #FF006D;
+  /* Eliminar el fondo y añadir un efecto de difuminado para mejorar la legibilidad */
+  background: transparent;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.8);
+  padding: 0;
+}
+
+/* Ajustar el placeholder para que no se superponga con el label */
+.form-group.floating-label input::placeholder,
+.form-group.floating-label textarea::placeholder {
+  color: transparent;
+  transition: color 0.2s ease;
+}
+
+/* Cuando el input está enfocado, mostrar el placeholder */
+.form-group.floating-label input:focus::placeholder,
+.form-group.floating-label textarea:focus::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mantener los estilos normales para el grupo de teléfono */
+.form-group.phone-group label {
+  position: static;
+    display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+/* Estilos para los inputs y textareas dentro de los grupos de formulario */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: rgba(30, 30, 40, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+  outline: none;
+}
+
+/* Estilos para los botones del hero slider */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-buttons button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+    transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+}
+
+/* Botón primario (Contactar por WhatsApp) */
+.hero-buttons button.primary {
+  background-color: #CC0057;
+    color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(204, 0, 87, 0.3);
+}
+
+.hero-buttons button.primary:hover {
+  background-color: #FF006D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 0, 109, 0.4);
+}
+
+/* Botón outline (Solicitar Llamada) */
+.hero-buttons button.outline {
+  background-color: transparent;
+  color: #FF006D;
+  border: 1px solid #FF006D;
+}
+
+.hero-buttons button.outline:hover {
+  background-color: rgba(255, 0, 109, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 109, 0.2);
+}
+
+/* Mantener la responsividad */
+@media (max-width: 768px) {
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .hero-buttons button {
+    min-width: 160px;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons button {
+    width: 100%;
+  }
+}
+
+/* Asegurar que los estilos de los botones del hero slider tengan mayor especificidad */
+.hero-slide .hero-buttons button.primary,
+.hero-slide-content .hero-buttons button.primary,
+button.primary[hx_get*="/modal-wp/"] {
+  background-color: #CC0057 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(204, 0, 87, 0.3) !important;
+}
+
+button.primary[hx_get*="/modal-wp/"]:hover,
+.hero-slide .hero-buttons button.primary:hover,
+.hero-slide-content .hero-buttons button.primary:hover,
+button.primary[onclick*="closeProductModal"]:hover,
+button.primary:hover {
+  background-color: #FF006D !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(255, 0, 109, 0.4) !important;
+}
+
+.hero-slide .hero-buttons button.outline,
+.hero-slide-content .hero-buttons button.outline,
+button.outline[hx_get*="/modal-llamada/"] {
+  background-color: transparent !important;
+  color: #FF006D !important;
+  border: 1px solid #FF006D !important;
+}
+
+.hero-slide .hero-buttons button.outline:hover,
+.hero-slide-content .hero-buttons button.outline:hover,
+button.outline[hx_get*="/modal-llamada/"]:hover {
+  background-color: rgba(255, 0, 109, 0.1) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(255, 0, 109, 0.2) !important;
+}
+
+/* Sobrescribir cualquier otro estilo de hover para estos botones */
+.hero-buttons button:hover,
+button[hx_get*="/modal-wp/"]:hover,
+button[hx_get*="/modal-llamada/"]:hover {
+  background-color: #FF006D !important;
+  border-color: #FF006D !important;
+}
+
+/* Asegurarse de que no haya otros estilos de hover que interfieran */
+button.primary:hover {
+  background-color: #FF006D !important;
+}
+
+button.outline:hover {
+  background-color: rgba(255, 0, 109, 0.1) !important;
+  color: #FF006D !important;
+  border-color: #FF006D !important;
+}
+
+/* Estilos específicos para el botón Try it de la API */
+button#try-button,
+button[id="try-button"] {
+  background-color: #CC0057 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(204, 0, 87, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+button#try-button:hover,
+button[id="try-button"]:hover {
+  background-color: #FF006D !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(255, 0, 109, 0.4) !important;
+}
+
+button#try-button:disabled,
+button[id="try-button"]:disabled {
+  background-color: rgba(204, 0, 87, 0.5) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Asegurarse de que el botón Try it tenga el color correcto cuando está habilitado */
+button#try-button:not(:disabled),
+button[id="try-button"]:not(:disabled) {
+  background-color: #CC0057 !important;
+}
+
+/* Asegurarse de que el botón Try it tenga el color correcto en hover cuando está habilitado */
+button#try-button:not(:disabled):hover,
+button[id="try-button"]:not(:disabled):hover {
+  background-color: #FF006D !important;
+}
+
+/* Estilos para los modales en dispositivos móviles */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 0;
+  }
+  
+  .modal {
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    margin: 0;
+    overflow-y: auto;
+  }
+  
+  .modal h3 {
+    margin-top: 0;
+    padding-top: 1rem;
+  }
+  
+  .modal-buttons {
+    margin-top: auto;
+    padding-bottom: 2rem;
+  }
+  
+  /* Ajustar el espaciado de los grupos de formulario */
+  .modal .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  /* Asegurar que el contenido del modal no se desborde */
+  .modal form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* Estilos específicos para dispositivos muy pequeños */
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.5rem;
+  }
+  
+  .modal h3 {
+    font-size: 1.3rem;
+  }
+  
+  .modal-buttons button {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Estilos para los títulos del carrusel */
+.hero-slide-content .hero-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.hero-slide-content .tiffany-smart-container {
+    display: inline-flex;  /* Cambiar a inline-flex */
+    align-items: center;
+    gap: 0;  /* Eliminar el gap entre Tiffany y SMART */
+    white-space: nowrap;
+}
+
+.hero-slide-content .tiffany-text,
+.hero-slide-content .smart-text {
+  color: var(--primary);
+    font-weight: 700;
+    font-size: 2.5rem;
+    font-family: var(--font-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;  /* Asegurar que la línea base sea la misma */
+    display: inline-block;  /* Cambiar a inline-block */
+    vertical-align: baseline;  /* Alinear por la línea base */
+}
+
+.hero-slide-content .producto-tipo {
+    color: #FF006D;
+    margin-left: 1rem;
+    font-size: 1.8rem;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .hero-slide-content .hero-title {
+        gap: 0.5rem;
+    }
+    
+    .hero-slide-content .tiffany-text,
+    .hero-slide-content .smart-text {
+        font-size: 2rem;
+    }
+    
+    .hero-slide-content .producto-tipo {
+        margin-left: 0;
+        width: 100%;
+  font-size: 1.5rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Mejorar los controles de navegación del hero slider */
+.hero-slider-controls {
+  position: absolute;
+  bottom: 2rem;
+  left: auto; /* Quitar el centrado */
+  right: 5rem; /* Mover más a la izquierda (desde 2rem a 5rem) */
+  transform: none; /* Eliminar la transformación que centraba */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+}
+
+/* Estilo para los botones de navegación (flechas) */
+.slider-prev,
+.slider-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+    transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+  background: rgba(255, 0, 109, 0.3);
+  border-color: #FF006D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 0, 109, 0.3);
+}
+
+/* Reducir el tamaño de los indicadores de slides (puntos) */
+.slider-indicators {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; /* Mantener forma circular para los inactivos */
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+  background: #FF006D;
+  transform: scale(1.2);
+  border-radius: 4px; /* Cambiar a forma cuadrada con bordes redondeados cuando está activo */
+  box-shadow: 0 0 10px rgba(255, 0, 109, 0.5);
+}
+
+/* Añadir transición suave entre formas */
+.slider-dot {
+  transition: all 0.3s ease, border-radius 0.3s ease;
+}
+
+/* Mantener el hover como está */
+.slider-dot:hover {
+  background: rgba(255, 0, 109, 0.7);
+}
+
+/* Ocultar la navegación duplicada */
+.hero-slider-nav {
+  display: none; /* Ocultar la barra de navegación duplicada */
+}
+
+/* Ajustes responsivos para los controles */
+@media (max-width: 992px) {
+  .hero-slider-controls {
+    right: 4rem; /* Mantener a la derecha en tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slider-controls {
+    bottom: 1.2rem;
+    left: 50%; /* Centrar horizontalmente en móviles */
+    right: auto; /* Quitar posicionamiento derecho */
+    transform: translateX(-50%); /* Centrar completamente */
+    gap: 0.8rem;
+    padding: 0.5rem 1rem; /* Añadir padding para mejor toque */
+    background: rgba(0, 0, 0, 0.2); /* Fondo sutil para mejor visibilidad */
+    border-radius: 20px; /* Bordes redondeados */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider-controls {
+    bottom: 1rem;
+    padding: 0.4rem 0.8rem; /* Reducir padding en móviles muy pequeños */
+    gap: 0.6rem;
+  }
+}
+
+/* Ajustes responsivos específicos */
+@media (max-width: 992px) {
+  .hero-slide-bg {
+    background-position: 65% center; /* Mover más a la derecha en tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slide-bg {
+    background-position: 75% center; /* Mover aún más a la derecha en móviles */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slide-bg {
+    background-position: 80% center; /* Mover mucho más a la derecha en móviles pequeños */
+  }
+}
+
+/* Solución para el botón de WhatsApp que cambia a azul */
+button.primary[hx_get*="/modal-wp/"],
+button.primary[hx-get*="/modal-wp/"],
+.hero-buttons button.primary,
+button.primary[onclick*="closeProductModal"],
+button.primary {
+  background-color: #CC0057 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(204, 0, 87, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+button.primary[hx_get*="/modal-wp/"]:hover,
+button.primary[hx-get*="/modal-wp/"]:hover,
+.hero-buttons button.primary:hover,
+button.primary[onclick*="closeProductModal"]:hover,
+button.primary:hover {
+  background-color: #FF006D !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(255, 0, 109, 0.4) !important;
+}
+
+/* Asegurarse de que no haya otros estilos que interfieran */
+a:hover,
+button:hover {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+/* Específicamente para los botones dentro del modal de producto */
+.producto-modal button.primary {
+  background-color: #CC0057 !important;
+  color: white !important;
+}
+
+.producto-modal button.primary:hover {
+  background-color: #FF006D !important;
+  color: white !important;
+}
+
+/* Estilos para los floating labels en la sección API */
+.api-form .form-group {
+    position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.api-form input,
+.api-form textarea,
+.api-form select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: rgba(30, 30, 40, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.api-form input:focus,
+.api-form textarea:focus,
+.api-form select:focus {
+  border-color: #FF006D;
+  box-shadow: 0 0 0 2px rgba(255, 0, 109, 0.2);
+  outline: none;
+}
+
+/* Convertir los inputs actuales a floating labels */
+.api-form .form-group.floating-label {
+    position: relative;
+}
+
+.api-form .form-group.floating-label label {
+  position: absolute;
+  top: 0.8rem;
+  left: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+    pointer-events: none;
+  margin-bottom: 0;
+  z-index: 2;
+}
+
+.api-form .form-group.floating-label input:focus ~ label,
+.api-form .form-group.floating-label input:not(:placeholder-shown) ~ label,
+.api-form .form-group.floating-label textarea:focus ~ label,
+.api-form .form-group.floating-label textarea:not(:placeholder-shown) ~ label,
+.api-form .form-group.floating-label select:focus ~ label,
+.api-form .form-group.floating-label select:not([value=""]) ~ label {
+  top: -0.7rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+  color: #FF006D;
+  padding: 0 0.3rem;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    transparent 40%, 
+    var(--card-bg) 40%, 
+    var(--card-bg) 60%, 
+    transparent 60%, 
+    transparent 100%);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Ajustar el placeholder para que no se superponga con el label */
+.api-form .form-group.floating-label input::placeholder,
+.api-form .form-group.floating-label textarea::placeholder {
+  color: transparent;
+  transition: color 0.2s ease;
+}
+
+/* Cuando el input está enfocado, mostrar el placeholder */
+.api-form .form-group.floating-label input:focus::placeholder,
+.api-form .form-group.floating-label textarea:focus::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos para el grupo de teléfono con label estático */
+.api-form .form-group.phone-group label {
+    display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+/* Añadir efecto de brillo constante al botón */
+@keyframes button-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 0, 109, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 109, 0.7), 0 0 30px rgba(255, 0, 109, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 0, 109, 0.3);
+  }
+}
+
+/* Aplicar la animación al botón */
+.hero button.primary {
+  background: rgba(255, 0, 109, 0.2);
+  color: white;
+  border: 2px solid #FF006D;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px !important;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+    transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: inline-block;
+  width: auto;
+  min-width: 0;
+  margin-right: auto;
+  animation: button-glow 2s infinite ease-in-out; /* Aplicar la animación */
+}
+
+/* Efecto adicional en hover */
+.hero button.primary:hover {
+  background: rgba(255, 0, 109, 0.3);
+  transform: translateY(-3px);
+  animation: button-glow 1s infinite ease-in-out; /* Animación más rápida en hover */
+  border-color: #FF4D94;
+}
+
+/* Añadir un efecto de brillo interno */
+.hero button.primary::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 0, 109, 0.1) 0%, transparent 70%);
+  transform: rotate(30deg);
+  z-index: -1;
+  animation: rotate-glow 8s linear infinite;
+}
+
+@keyframes rotate-glow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Contenedor de botones del hero */
+.hero-buttons {
+  display: flex;
+  justify-content: flex-start; /* Alineación a la izquierda por defecto */
+    margin-top: 1rem;
+}
+
+/* Estilo base del botón MEET TIFFANY */
+.hero button.primary {
+  background: rgba(255, 0, 109, 0.2);
+  color: white;
+  border: 2px solid #FF006D;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px !important;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: inline-block;
+  width: auto;
+  min-width: 0;
+  margin-right: auto;
+  animation: button-glow 2s infinite ease-in-out;
+}
+
+/* Ajustes responsivos para el botón */
+@media (max-width: 768px) {
+  .hero-buttons {
+    justify-content: center; /* Centrar en móviles */
+  }
+
+  .hero button.primary {
+    margin-right: 0; /* Quitar margen automático en móviles */
+  }
+}
+
+/* Mantener los estilos existentes del botón */
+.hero button.primary:hover {
+  background: rgba(255, 0, 109, 0.3);
+  transform: translateY(-3px);
+  animation: button-glow 1s infinite ease-in-out;
+  border-color: #FF4D94;
+}
+
+/* Estilos específicos para el botón de WhatsApp */
+.hero-buttons button.primary[hx_get*="/modal-wp/"],
+.producto-modal-buttons button.primary[hx_get*="/modal-wp/"] {
+  background: transparent !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+}
+
+/* Hover para el botón de WhatsApp */
+.hero-buttons button.primary[hx_get*="/modal-wp/"]:hover,
+.producto-modal-buttons button.primary[hx_get*="/modal-wp/"]:hover {
+  background: rgba(255, 0, 109, 0.1) !important;
+  color: white !important;
+  transform: translateY(-2px);
+  border-color: var(--primary-light) !important;
+}
+
+/* Asegurar que no haya sombras azules en el focus */
+.hero-buttons button.primary[hx_get*="/modal-wp/"]:focus,
+.producto-modal-buttons button.primary[hx_get*="/modal-wp/"]:focus {
+  box-shadow: 0 0 0 3px rgba(255, 0, 109, 0.2) !important;
+  outline: none !important;
+}
+
+/* Sobrescribir los estilos por defecto de PicoCSS para los botones */
+[role="button"],
+button,
+button[type="button"],
+button[type="reset"],
+button[type="submit"] {
+  --primary: #FF006D !important;
+  --primary-hover: #FF4D94 !important;
+  --background-color: transparent !important;
+}
+
+/* Estilos específicos para el botón DEPLOY YOUR TIFFANY */
+button[onclick="return handleFormSubmit(event)"] {
+  background-color: var(--primary) !important;
+  color: white !important;
+  border: 2px solid var(--primary) !important;
+  transition: all 0.3s ease;
+}
+
+button[onclick="return handleFormSubmit(event)"]:hover,
+button[onclick="return handleFormSubmit(event)"]:focus {
+  background-color: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  color: white !important;
+  box-shadow: 0 0 0 3px rgba(255, 0, 109, 0.2) !important;
+}
+
+/* Estilos específicos para el botón de WhatsApp */
+button[hx_get*="/modal-wp/"],
+button[hx-get*="/modal-wp/"] {
+  background-color: transparent !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+  transition: all 0.3s ease;
+}
+
+button[hx_get*="/modal-wp/"]:hover,
+button[hx_get*="/modal-wp/"]:focus,
+button[hx-get*="/modal-wp/"]:hover,
+button[hx-get*="/modal-wp/"]:focus {
+  background-color: rgba(255, 0, 109, 0.1) !important;
+  border-color: var(--primary-hover) !important;
+  color: white !important;
+  box-shadow: 0 0 0 3px rgba(255, 0, 109, 0.2) !important;
+}
+
+/* Deshabilitar cualquier otro estilo de hover que pueda interferir */
+button:is(:hover, :active, :focus):not([disabled]) {
+  --background-color: var(--primary-hover) !important;
+  --border-color: var(--primary-hover) !important;
+  --color: white !important;
+}
+
+/* Estilos para la sección de documentación */
+.docs-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem; /* Aumentar el margen superior */
+  padding: 3rem 0;
+    text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.docs-title {
+  font-size: 2rem;
+  font-weight: 600;
+    margin-bottom: 2rem;
+  background: linear-gradient(45deg, #cc0057, #ad2196);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--font-primary);
+}
+
+/* Estilo del botón DOCS similar a DEPLOY YOUR TIFFANY */
+.docs-button {
+  background: rgba(255, 0, 109, 0.2) !important;
+  color: white !important;
+  border: 2px #CC0057 !important;
+  padding: 0.8rem 3rem;
+  border-radius: 6px !important;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+    transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  animation: button-glow 2s infinite ease-in-out;
+}
+
+.docs-button:hover {
+  background: rgba(255, 0, 109, 0.3) !important;
+  transform: translateY(-3px);
+  animation: button-glow 1s infinite ease-in-out;
+  border-color: var(--primary-light) !important;
+}
+
+/* Efecto de brillo interno */
+.docs-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 0, 109, 0.1) 0%, transparent 70%);
+  transform: rotate(30deg);
+  z-index: -1;
+  animation: rotate-glow 8s linear infinite;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .docs-section {
+    margin-top: 5rem;
+    padding: 2rem 0;
+  }
+
+  .docs-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .docs-button {
+    padding: 0.7rem 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .docs-section {
+    margin-top: 4rem;
+  }
+
+  .docs-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .docs-button {
+    padding: 0.6rem 2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajustes específicos para la sección de API en móviles */
+@media (max-width: 768px) {
+    .api-demo {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+        width: 100%;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+
+    .api-form, 
+    .api-code {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    .code-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .code-block {
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    /* Ajustes para los selectores de Tiffany */
+    .tiffany-selector-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0;
+        width: 100%;
+    }
+
+    .tiffany-selector {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* Ajustes específicos para dispositivos muy pequeños */
+@media (max-width: 480px) {
+    .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .api-form, 
+    .api-code {
+        padding: 0.75rem;
+    }
+
+    /* Ajustar inputs y campos de formulario */
+    .form-group {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px; /* Prevenir zoom en iOS */
+    }
+
+    /* Ajustar botones */
+    button {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}
+
+/* Ajustes específicos para iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+    .container {
+        width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .api-demo,
+    .api-form,
+    .api-code,
+    .tiffany-selector-grid {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px; /* Prevenir zoom en iOS */
+    }
+}
+
+/* Estilos para la sección de selección de API */
+.tiffany-selectors {
+    width: 100%;
+    padding: 2rem 0;
+}
+
+.tiffany-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem; /* Alinear con el padding del formulario */
+}
+
+.tiffany-selector {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .tiffany-selector-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem; /* Mismo padding que el formulario en móvil */
+    }
+
+    .tiffany-selector {
+        width: 100%; /* Ancho completo */
+        margin: 0; /* Quitar márgenes laterales */
+        padding: 1.25rem;
+    }
+
+    .tiffany-selectors {
+        padding: 1rem 0;
+    }
+
+    .tiffany-selectors h3 {
+        padding: 0 1rem; /* Alinear con el grid */
+    margin-bottom: 1rem;
+    }
+}
+
+/* Ajustes para dispositivos muy pequeños */
+@media (max-width: 480px) {
+    .tiffany-selector-grid {
+        padding: 0 0.5rem; /* Mismo padding que el formulario en pantallas pequeñas */
+    }
+
+    .tiffany-selector {
+        padding: 1rem;
+    }
+
+    .tiffany-selectors h3 {
+        padding: 0 0.5rem;
+    }
+}
+
+/* Estilos específicos para el botón de la API */
+.api-form button[type="submit"] {
+    position: relative;
+    transition: all 0.3s ease;
+    min-width: 220px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estado de carga del botón */
+.api-form button[type="submit"].loading {
+    color: transparent !important;
+    background: rgba(255, 0, 109, 0.3) !important;
+    pointer-events: none;
+}
+
+.api-form button[type="submit"].loading::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    margin: -12px 0 0 -12px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: button-spinner 0.8s linear infinite;
+}
+
+/* Mensajes de respuesta del formulario */
+.api-message {
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.api-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.api-message.success {
+    background: rgba(255, 0, 109, 0.15);
+    border: 1px solid rgba(255, 0, 109, 0.2);
+    color: white;
+}
+
+.api-message.error {
+    background: rgba(255, 77, 77, 0.1);
+    border: 1px solid rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
+}
+
+@keyframes button-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilos para los botones Dashboard (escritorio y móvil) */
+.dashboard-button-desktop,
+.dashboard-button-mobile {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 10;
+}
+
+.dashboard-button-mobile {
+    display: none;
+    position: static;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+/* Estilo común para ambos botones Dashboard */
+.dashboard-button-desktop button,
+.dashboard-button-mobile button {
+    background: rgba(5, 4, 6, 0.7) !important;
+    color: white;
+    border: 2px solid #050406 !important;
+    padding: 0.8rem 1.8rem;
+    border-radius: 6px !important;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: inline-block;
+}
+
+.dashboard-button-desktop button:hover,
+.dashboard-button-mobile button:hover {
+    background: rgba(5, 4, 6, 0.9) !important;
+    transform: translateY(-3px);
+    border-color: #333 !important;
+}
+
+/* Media queries para mostrar/ocultar según el dispositivo */
+@media (max-width: 992px) {
+    .dashboard-button-desktop {
+        display: none;
+    }
+    
+    .dashboard-button-mobile {
+        display: block;
+    }
+    
+    /* Ajustar el contenedor de botones para incluir el botón móvil */
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    /* Asegurar que el botón MEET TIFFANY tenga el mismo ancho */
+    .hero-buttons button.primary {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    /* Ajustar el botón Dashboard móvil */
+    .dashboard-button-mobile button {
+        width: 100%;
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-button-mobile button {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-button-mobile {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .dashboard-button-mobile button {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+/* Ajustes específicos para los botones del hero section */
+.hero-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 992px) {
+  .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  /* Ajustes específicos para los botones en el hero section */
+  .hero-buttons button.primary,
+  .hero-buttons .dashboard-button-mobile button {
+      width: 100%;
+      min-height: 48px;
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+  }
+  
+  /* Contenedor específico para el botón dashboard móvil en el hero */
+  .hero-buttons .dashboard-button-mobile {
+      width: 100%;
+      margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-buttons button.primary,
+  .hero-buttons .dashboard-button-mobile button {
+      padding: 0.7rem 1.5rem;
+      font-size: 0.95rem;
+      min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons {
+      max-width: 240px;
+  }
+  
+  .hero-buttons button.primary,
+  .hero-buttons .dashboard-button-mobile button {
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+  }
+}
+
+/* Ajustes para sección "Lo que somos" */
+#nosotros {
+    min-height: 60vh; /* Reducido de 80vh */
+    padding: 4rem 0;  /* Reducido de 6rem */
+}
+
+#nosotros .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#nosotros p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Ajustes para sección API */
+#contacto {
+    min-height: 60vh; /* Igualado con la sección nosotros */
+    padding: 4rem 0;  /* Igualado con la sección nosotros */
+}
+
+#contacto .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#contacto p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+}
+
+/* Media queries para mantener consistencia en móviles */
+@media (max-width: 768px) {
+    #nosotros,
+    #contacto {
+        min-height: 50vh;
+        padding: 3rem 0;
+    }
+    
+    #nosotros p,
+    #contacto p {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #nosotros,
+    #contacto {
+        min-height: 40vh;
+        padding: 2.5rem 0;
+    }
+}
+
+/* Ajustes de tamaño de fuente para hero slider */
+.hero-slide-description {
+    font-size: clamp(1.2rem, 2.2vw, 1.35rem);
+    line-height: 1.7;
+    margin: 1.8rem auto;
+    max-width: 90%;
+}
+
+.hero-features {
+    margin: 2rem 0;
+}
+
+.hero-features li {
+    font-size: clamp(1.15rem, 2vw, 1.25rem);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+}
+
+/* Ajustes responsive para hero slider */
+@media (max-width: 992px) {
+    .hero-slide-description {
+        font-size: 1.25rem;
+        line-height: 1.8;
+    }
+    
+    .hero-features li {
+        font-size: 1.2rem;
+        line-height: 1.7;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-slide-description {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin: 2rem auto;
+    }
+    
+    .hero-features li {
+        font-size: 1.15rem;
+        line-height: 1.7;
+        margin-bottom: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-slide-description {
+        font-size: 1.15rem;
+        line-height: 1.8;
+    }
+    
+    .hero-features li {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+}
+
+/* Ajustes para las tarjetas de productos en el hero slider */
+.producto-modal {
+    max-width: 95%;
+    width: 1100px;
+    padding: 2.5rem;
+    margin: 1rem auto;
+}
+
+.producto-modal-content {
+    display: flex;
+    gap: 3rem;
+}
+
+/* Media queries para ajustar tamaño en dispositivos móviles */
+@media (max-width: 992px) {
+    .producto-modal {
+        width: 95%;
+        padding: 2rem;
+        min-height: 85vh;
+    }
+    
+    .producto-modal-content {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+    
+    .producto-modal-info {
+        flex: 1;
+        padding: 1.5rem;
+    }
+    
+    .producto-modal-titulo {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .producto-modal-subtitulo {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .producto-modal-descripcion {
+        font-size: 1.35rem;
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+    }
+    
+    .producto-caracteristicas li {
+        font-size: 1.3rem;
+        line-height: 1.7;
+        margin-bottom: 1.2rem;
+        padding: 0.5rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .producto-modal {
+        width: 100%;
+        min-height: 90vh;
+        padding: 2.5rem 2rem;
+        margin: 0;
+    }
+    
+    .producto-modal-titulo {
+        font-size: 2.3rem;
+    }
+    
+    .producto-modal-subtitulo {
+        font-size: 1.4rem;
+    }
+    
+    .producto-modal-descripcion {
+        font-size: 1.3rem;
+        line-height: 1.8;
+    }
+    
+    .producto-caracteristicas li {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        padding: 0.6rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .producto-modal {
+        width: 100%;
+        min-height: 95vh;
+        padding: 2rem 1.5rem;
+    }
+    
+    .producto-modal-info {
+        padding: 1rem;
+    }
+    
+    .producto-modal-content {
+        gap: 2rem;
+    }
+    
+    .producto-modal-titulo {
+        font-size: 2.2rem;
+    }
+    
+    .producto-modal-subtitulo {
+        font-size: 1.35rem;
+    }
+    
+    .producto-modal-descripcion {
+        font-size: 1.25rem;
+        line-height: 1.7;
+    }
+    
+    .producto-caracteristicas li {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        padding: 0.5rem 0;
+    }
+} 
+
+/* Estilos para texto grande en el carrusel */
+.hero-slide-content .large-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.hero-slide-content .hero-title.large-text {
+    font-size: 2.5rem;
+}
+
+.hero-slide-content .hero-subtitle.large-text {
+    font-size: 1.8rem;
+}
+
+.hero-slide-content .hero-description.large-text {
+    font-size: 1.4rem;
+    margin: 1.5rem 0;
+}
+
+.hero-features.large-text {
+    font-size: 1.3rem;
+    margin: 1.5rem 0;
+}
+
+.hero-feature-item {
+    margin: 0.8rem 0;
+    line-height: 1.5;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .hero-slide-content .hero-title.large-text {
+        font-size: 2rem;
+    }
+
+    .hero-slide-content .hero-subtitle.large-text {
+        font-size: 1.5rem;
+    }
+
+    .hero-slide-content .hero-description.large-text {
+        font-size: 1.2rem;
+    }
+
+    .hero-features.large-text {
+        font-size: 1.1rem;
+    }
+
+    .hero-feature-item {
+        margin: 0.6rem 0;
+    }
+
+    .hero-buttons .large-text {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+/* ... existing code ... */
