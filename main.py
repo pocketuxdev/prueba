@@ -7826,4 +7826,345 @@ async def registrar_usuario(request):
             P("Error de conexión. Por favor intenta más tarde.")
         )
 
+@rt("/paralegal")
+def index():
+    enabled_sections = []
+    
+    # Add enabled sections in correct order
+    if SECTIONS["hero"]["enabled"]:
+        enabled_sections.append(hero_section())
+    
+    if SECTIONS["about"]["enabled"]:
+        enabled_sections.append(about_section())
+    
+    if SECTIONS["services"]["enabled"]:
+        enabled_sections.append(services_section())
+    
+    if SECTIONS["process"]["enabled"]:
+        enabled_sections.append(process_section())
+    
+    if SECTIONS["contact"]["enabled"]:
+        enabled_sections.append(contact_section())
+    
+    return page(*enabled_sections)
+
+def page(*content):
+    return Html(lang="es")(
+        Head(
+            Meta(charset="utf-8"),
+            Meta(name="viewport", content="width=device-width, initial-scale=1"),
+            Meta(name="description", content=SITE_CONFIG["description"]),
+            Title(SITE_CONFIG["title"]),
+            Link(rel="icon", href=SITE_CONFIG["favicon"]),
+            # Load Fonts and Base Styles
+            Link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"),
+            Link(rel="stylesheet", href="https://fonts.cdnfonts.com/css/sf-pro-display"),
+            Link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"),
+            Link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"),
+            # Initialize Theme Variables
+            Style("""
+                :root {
+                    --primary: """ + THEME['colors']['primary'] + """;
+                    --primary-light: """ + THEME['colors']['primary_light'] + """;
+                    --primary-dark: """ + THEME['colors']['primary_dark'] + """;
+                    --secondary: """ + THEME['colors']['secondary'] + """;
+                    --accent: """ + THEME['colors']['accent'] + """;
+                    --text: """ + THEME['colors']['text'] + """;
+                    --background: """ + THEME['colors']['background'] + """;
+                    --success: """ + THEME['colors']['success'] + """;
+                    --error: """ + THEME['colors']['error'] + """;
+                    --warning: """ + THEME['colors']['warning'] + """;
+                    --glass-bg: """ + THEME['glass']['background'] + """;
+                    --glass-border: """ + THEME['glass']['border'] + """;
+                    --heading-font: """ + THEME['fonts']['heading']['family'] + """;
+                    --body-font: """ + THEME['fonts']['body']['family'] + """;
+                }
+            """),
+            # Load our custom styles
+            Link(rel="stylesheet", href="/static/css/theme.css"),
+            Link(rel="stylesheet", href="/static/css/animations.css"),
+            # Load Scripts
+            Script(src="https://unpkg.com/htmx.org@1.9.10"),
+            Script(src="/static/js/theme.js")
+        ),
+        Body(
+            main_nav(),
+            Main(*content),
+            sidebar(),
+            whatsapp_button(),
+            footer(),
+            Script(src="/static/js/main.js")
+        )
+    )
+
+def main_nav():
+    return Nav(cls="main-nav")(
+        Div(cls="main-nav-container")(
+            Ul()(
+                *[
+                    Li()(
+                        A(
+                            href=f"#{item['id']}", 
+                            hx_on=f"click:scrollToSection('{item['id']}')"
+                        )(
+                            I(cls=f"fas {item['icon']}"),
+                            Span()(item['text'])
+                        )
+                    )
+                    for item in NAV_ITEMS
+                ]
+            )
+        )
+    )
+
+def sidebar():
+    nav_items = []
+    for item in NAV_ITEMS:
+        nav_items.append(
+            A(
+                href=f"#{item['id']}", 
+                title=item['text'],
+                hx_on=f"click:scrollToSection('{item['id']}')"
+            )(
+                I(cls=f"fas {item['icon']}")
+            )
+        )
+    
+    return Div(cls="sidebar", id="sidebar")(*nav_items)
+
+def hero_section():
+    hero_config = SECTIONS["hero"]
+    return Section(cls="container hero", id="hero", style=f"background-image: url('{hero_config['background_image']}')")(
+        Div(cls="hero-content")(
+            H1(cls="hero-title")(hero_config["title"]),
+            H2(cls="hero-subtitle")(hero_config["subtitle"]),
+            P(cls="hero-description")(hero_config["description"]),
+            Div(cls="hero-buttons")(
+                Button(
+                    cls="primary",
+                    href=hero_config["cta_primary"]["url"],
+                    hx_on=f"click:scrollToSection('{hero_config['cta_primary']['url'].replace('#', '')}')"
+                )(hero_config["cta_primary"]["text"]),
+                Button(
+                    cls="outline",
+                    href=hero_config["cta_secondary"]["url"],
+                    hx_on=f"click:scrollToSection('{hero_config['cta_secondary']['url'].replace('#', '')}')"
+                )(hero_config["cta_secondary"]["text"])
+            )
+        )
+    )
+
+def about_section():
+    about_config = SECTIONS["about"]
+    about_items = []
+    
+    for item in about_config["items"]:
+        about_items.append(
+            Div(cls="about-item")(
+                I(cls=item["icon"]),
+                H3(item["title"]),
+                P(item["description"])
+            )
+        )
+    
+    return Section(cls="container about", id="about")(
+        H2(about_config["title"]),
+        P(about_config["description"]),
+        Div(cls="about-grid")(*about_items)
+    )
+
+def services_section():
+    services_config = SECTIONS["services"]
+    service_items = []
+    
+    for service in services_config["items"]:
+        features_list = [Li(feature) for feature in service["features"]]
+        
+        service_items.append(
+            Div(cls="service-card")(
+                I(cls=service["icon"]),
+                H3(service["title"]),
+                H4(service["subtitle"]),
+                P(service["description"]),
+                Ul(cls="service-features")(*features_list),
+                Button(
+                    cls="primary service-cta",
+                    hx_get=f"/modal-whatsapp/{service['title']}",
+                    hx_target="body",
+                    hx_swap="beforeend"
+                )("Consultar por WhatsApp")
+            )
+        )
+    
+    return Section(cls="container services", id="services")(
+        H2(services_config["title"]),
+        H3(services_config["subtitle"]),
+        P(services_config["description"]),
+        Div(cls="services-grid")(*service_items)
+    )
+
+def process_section():
+    process_config = SECTIONS["process"]
+    process_items = []
+    
+    for i, step in enumerate(process_config["items"]):
+        process_items.append(
+            Div(cls=f"process-step{' active' if i == 0 else ''}", data_index=i)(
+                Span(cls="step-number")(step["number"]),
+                Div(cls="step-content")(
+                    H3(step["title"]),
+                    P(step["description"])
+                )
+            )
+        )
+    
+    # Crear los dots para navegación
+    dots = []
+    for i in range(len(process_config["items"])):
+        dots.append(
+            Button(
+                cls=f"process-dot{' active' if i == 0 else ''}", 
+                data_index=i,
+                hx_on=f"click:goToProcessStep({i})"
+            )
+        )
+    
+    # Controles del carrusel
+    controls = Div(cls="process-controls")(
+        Button(cls="process-arrow prev", hx_on="click:prevProcessStep()")("❮"),
+        Div(cls="process-dots")(*dots),
+        Button(cls="process-arrow next", hx_on="click:nextProcessStep()")("❯")
+    )
+    
+    return Section(cls="container process", id="process")(
+        H2(process_config["title"]),
+        P(process_config["description"]),
+        Div(cls="process-grid")(
+            Div(cls="process-slider")(
+                Div(cls="process-slider-track", id="process-track")(*process_items)
+            ),
+            controls
+        )
+    )
+
+def contact_section():
+    contact_config = SECTIONS["contact"]
+    return Section(cls="container contact", id="contact")(
+        H2(contact_config["title"]),
+        P(contact_config["description"]),
+        Div(cls="contact-wrapper")(
+            contact_form(),
+            contact_info(contact_config["info"])
+        )
+    )
+
+def contact_form():
+    return Form(cls="contact-form", hx_post="/contact", hx_swap="outerHTML")(
+        Div(cls="form-group")(
+            Label("Nombre"),
+            Input(type="text", name="name", required=True, placeholder="Tu nombre completo")
+        ),
+        Div(cls="form-group")(
+            Label("Email"),
+            Input(type="email", name="email", required=True, placeholder="tu@email.com")
+        ),
+        Div(cls="form-group")(
+            Label("Mensaje"),
+            Textarea(name="message", required=True, placeholder="¿En qué podemos ayudarte?")
+        ),
+        Button(type="submit", cls="primary")("Enviar Mensaje")
+    )
+
+def contact_info(info):
+    return Div(cls="contact-info")(
+        H3("Información de Contacto"),
+        Ul(cls="contact-list")(
+            Li(I(cls="fas fa-map-marker-alt"), " ", info["address"]),
+            Li(I(cls="fas fa-phone"), " ", info["phone"]),
+            Li(I(cls="fas fa-envelope"), " ", info["email"])
+        )
+    )
+
+def whatsapp_button():
+    whatsapp_number = SOCIAL_LINKS[0]["url"].replace("https://wa.me/", "")
+    return A(
+        href=f"https://wa.me/{whatsapp_number}",
+        cls="whatsapp-button",
+        target="_blank",
+        title="Contactar por WhatsApp"
+    )(
+        I(cls="fab fa-whatsapp")
+    )
+
+def footer():
+    social_items = []
+    for social in SOCIAL_LINKS:
+        social_items.append(
+            A(href=social["url"], target="_blank", title=social["platform"])(
+                I(cls=social["icon"])
+            )
+        )
+    
+    footer_links = []
+    for link in FOOTER_CONFIG["links"]:
+        footer_links.append(
+            Li(A(href=link["url"])(link["text"]))
+        )
+    
+    return Footer(cls="site-footer")(
+        Div(cls="container footer-content")(
+            Div(cls="footer-section logo-section")(
+                Img(src=SITE_CONFIG["logo"]["light"], alt=f"{SITE_CONFIG['name']} Logo", cls="footer-logo"),
+                P(SITE_CONFIG["description"])
+            ),
+            Div(cls="footer-section links-section")(
+                H4("Enlaces Rápidos"),
+                Ul(*footer_links)
+            ),
+            Div(cls="footer-section contact-section")(
+                H4("Contacto"),
+                contact_info(SECTIONS["contact"]["info"])
+            ),
+            Div(cls="footer-section social-section")(
+                H4("Síguenos"),
+                Div(cls="social-icons")(*social_items)
+            )
+        ),
+        Div(cls="footer-bottom")(
+            P(FOOTER_CONFIG["copyright"]),
+            P(cls="credits", _unsafe=True)(FOOTER_CONFIG["credits"])
+        )
+    )
+
+# HTMX Routes for modals and forms
+@rt("/contact", methods=["POST"])
+async def handle_contact(request):
+    form = await request.form()
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(
+                f"{API_CONFIG['base_url']}/{API_CONFIG['version']}{API_CONFIG['endpoints']['contact']}",
+                json=dict(form)
+            )
+            if response.status_code == 200:
+                return Div(cls="alert alert-success")(
+                    P("¡Gracias por tu mensaje! Te contactaremos pronto.")
+                )
+            else:
+                return Div(cls="alert alert-error")(
+                    P("Lo sentimos, hubo un error al procesar tu solicitud. Por favor, intenta nuevamente más tarde.")
+                )
+    except Exception as e:
+        return Div(cls="alert alert-error")(
+            P("Lo sentimos, hubo un error al procesar tu solicitud. Por favor, intenta nuevamente más tarde.")
+        )
+
+@rt("/modal-whatsapp/{service}")
+def modal_whatsapp(service: str):
+    whatsapp_number = SOCIAL_LINKS[0]["url"].replace("https://wa.me/", "")
+    service_name = service.replace("%20", " ")
+    message = f"Hola, me interesa consultar sobre el servicio de {service_name}"
+    whatsapp_url = f"https://wa.me/{whatsapp_number}?text={urllib.parse.quote(message)}"
+    return Script(f"window.open('{whatsapp_url}', '_blank');")
+
 serve()
