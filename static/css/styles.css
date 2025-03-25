@@ -1,4 +1,5 @@
 /* Importar fuentes SF Pro Display */
+/* Importar fuentes SF Pro Display */
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
 /* Importar fuente Poppins */
@@ -6532,62 +6533,3 @@ button:is(:hover, :active, :focus):not([disabled]) {
         padding: 0.5rem 0;
     }
 } 
-
-/* Estilos para texto grande en el carrusel */
-.hero-slide-content .large-text {
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-.hero-slide-content .hero-title.large-text {
-    font-size: 2.5rem;
-}
-
-.hero-slide-content .hero-subtitle.large-text {
-    font-size: 1.8rem;
-}
-
-.hero-slide-content .hero-description.large-text {
-    font-size: 1.4rem;
-    margin: 1.5rem 0;
-}
-
-.hero-features.large-text {
-    font-size: 1.3rem;
-    margin: 1.5rem 0;
-}
-
-.hero-feature-item {
-    margin: 0.8rem 0;
-    line-height: 1.5;
-}
-
-/* Ajustes para dispositivos móviles */
-@media (max-width: 768px) {
-    .hero-slide-content .hero-title.large-text {
-        font-size: 2rem;
-    }
-
-    .hero-slide-content .hero-subtitle.large-text {
-        font-size: 1.5rem;
-    }
-
-    .hero-slide-content .hero-description.large-text {
-        font-size: 1.2rem;
-    }
-
-    .hero-features.large-text {
-        font-size: 1.1rem;
-    }
-
-    .hero-feature-item {
-        margin: 0.6rem 0;
-    }
-
-    .hero-buttons .large-text {
-        font-size: 1.1rem;
-        padding: 0.8rem 1.5rem;
-    }
-}
-
-/* ... existing code ... */

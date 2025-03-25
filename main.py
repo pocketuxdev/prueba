@@ -6890,7 +6890,27 @@ def vitafer_billing():
     """
 
 @rt('/')
-def home():
+from fasthtml.common import *
+from starlette.staticfiles import StaticFiles
+from pathlib import Path
+import httpx
+import urllib.parse
+
+# Obtener la ruta absoluta del directorio del script
+BASE_DIR = Path(__file__).resolve().parent
+
+# Configuración de la aplicación
+app, rt = fast_app()
+
+# Configurar archivos estáticos
+try:
+    app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+except Exception as e:
+    print(f"Error mounting static files: {e}")
+
+# Ruta principal
+@rt("/")
+def index():
     return page(
         navbar(),
         hero_section(),
@@ -6979,12 +6999,12 @@ def hero_section():
     return Section(cls="container hero", id="hero")(
         # Botón Dashboard para escritorio
         Div(cls="dashboard-button-desktop")(
-            Button(
-                cls="dashboard",
-                hx_get="/modal-registro",
-                hx_target="body",
-                hx_swap="beforeend"
-            )("DASHBOARD")
+            A(
+                href="https://www.tiffany.cool/login",
+                target="_blank"
+            )(
+                Button(cls="dashboard")("DASHBOARD")
+            )
         ),
         Div(cls="hero-content")(
             H1(cls="hero-title")(
@@ -7001,12 +7021,12 @@ def hero_section():
                 Button(cls="primary", href="#hero-slider", hx_on="click:scrollToSection('hero-slider')")("MEET TIFFANY"),
                 # Botón Dashboard para móvil
                 Div(cls="dashboard-button-mobile")(
-                    Button(
-                        cls="dashboard",
-                        hx_get="/modal-registro",
-                        hx_target="body",
-                        hx_swap="beforeend"
-                    )("DASHBOARD")
+                    A(
+                        href="https://www.tiffany.cool/dashboard",
+                        target="_blank"
+                    )(
+                        Button(cls="dashboard")("DASHBOARD")
+                    )
                 )
             )
         ),
@@ -7022,9 +7042,9 @@ def hero_slider_section():
     for i, producto in enumerate(PRODUCTOS):
         detalles = PRODUCTOS_DETALLE.get(producto["nombre"], {})
         
-        # Crear lista de características con clase adicional para mayor tamaño
-        items_caracteristicas = [Li(cls="hero-feature-item")(caracteristica) for caracteristica in detalles.get("caracteristicas", [])]
-        lista_caracteristicas = Ul(cls="hero-features large-text")(*items_caracteristicas)
+        # Crear lista de características
+        items_caracteristicas = [Li(caracteristica) for caracteristica in detalles.get("caracteristicas", [])]
+        lista_caracteristicas = Ul(cls="hero-features")(*items_caracteristicas)
         
         # Crear slide para el carrusel
         slide = Div(cls="hero-slide", id=f"hero-slide-{i}", data_index=i)(
@@ -7032,25 +7052,25 @@ def hero_slider_section():
                 style=f"background-image: url('/static/img/{detalles.get('imagen', producto['nombre'].lower().replace(' ', '_') + '.png')}');"
             ),
             Div(cls="hero-slide-content")(
-                H1(cls="hero-title large-text")(
+                H1(cls="hero-title")(
                     Div(cls="tiffany-smart-container")(
                         Span(cls="tiffany-text")("Tiffany"),
                         Span(cls="smart-text")("SMART")
                     ),
                     Span(cls="producto-tipo")(detalles.get("titulo", producto["nombre"]))
                 ),
-                H2(cls="hero-subtitle large-text")(detalles.get("subtitulo", "")),
-                P(cls="hero-description large-text")(detalles.get("descripcion", producto["descripcion"])),
+                H2(cls="hero-subtitle")(detalles.get("subtitulo", "")),
+                P(cls="hero-description")(detalles.get("descripcion", producto["descripcion"])),
                 lista_caracteristicas,
                 Div(cls="hero-buttons")(
                     Button(
-                        cls="outline large-text",
+                        cls="outline",
                         hx_get=f"/modal-llamada/{producto['nombre']}",
                         hx_target="body",
                         hx_swap="beforeend"
                     )("Solicitar Llamada"),
                     Button(
-                        cls="primary large-text",
+                        cls="primary",
                         hx_get=f"/modal-wp/{producto['nombre']}",
                         hx_target="body",
                         hx_swap="beforeend"
@@ -7093,12 +7113,6 @@ def hero_slider_section():
 # Definir la lista de productos como una variable global
 PRODUCTOS = [
     {
-        "nombre": "Tiffany ParalegaL",
-        "descripcion": "Asistente paralegal para abogados especializados",
-        "whatsapp": "+14153198070",
-        "agent_type": "paralegal"
-    },
-    {
         "nombre": "Tiffany BetterSelf",
         "descripcion": "Asistente personal para desarrollo y productividad.",
         "whatsapp": "+14153198070",
@@ -7109,6 +7123,12 @@ PRODUCTOS = [
         "descripcion": "Solución especializada para el sector de salud",
         "whatsapp": "+14153198070",
         "agent_type": "medical"
+    },
+    {
+        "nombre": "Tiffany ParalegaL",
+        "descripcion": "Asistente paralegal para abogados especializados",
+        "whatsapp": "+14153198070",
+        "agent_type": "paralegal"
     }
 ]
 
@@ -7155,11 +7175,6 @@ PRODUCTOS_DETALLE = {
 # Definir la lista de productos para la sección Try our API
 PRODUCTOS_API = [
     {
-        "nombre": "Tiffany ParalegaL",
-        "descripcion": "Asistente paralegal para abogados especializados",
-        "agent_type": "tryapiparalegal"  # Endpoint completo
-    },
-    {
         "nombre": "Tiffany BetterSelf",
         "descripcion": "Asistente personal para desarrollo y productividad.",
         "agent_type": "tryapibetterself"  # Endpoint completo
@@ -7168,6 +7183,11 @@ PRODUCTOS_API = [
         "nombre": "Tiffany Medical",
         "descripcion": "Solución especializada para el sector de salud",
         "agent_type": "tryapimedical"  # Endpoint completo
+    },
+    {
+        "nombre": "Tiffany ParalegaL",
+        "descripcion": "Asistente paralegal para abogados especializados",
+        "agent_type": "tryapiparalegal"  # Endpoint completo
     }
 ]
 
@@ -7703,129 +7723,6 @@ def footer():
             P("Desarrollado con ", I(cls="fas fa-heart"), " por Tiffany Labs")
         )
     )
-
-@rt("/modal-registro")
-def modal_registro():
-    return Div(cls="modal-overlay", id="modal-registro")(
-        Div(cls="modal modal-compact")(
-            H3("Crear cuenta"),
-            Form(
-                hx_post="/registrar-usuario",
-                hx_swap="outerHTML"
-            )(
-                # Nombre completo con label flotante
-                Div(cls="form-group floating-label")(
-                    Input(type="text", name="fullName", id="nombre", 
-                         placeholder="Ingresa tu nombre completo", required=True),
-                    Label(fr="nombre")("Nombre completo")
-                ),
-                
-                # Email con label flotante
-                Div(cls="form-group floating-label")(
-                    Input(type="email", name="email", id="email", 
-                         placeholder="Correo electrónico", required=True),
-                    Label(fr="email")("Email")
-                ),
-                
-                # Teléfono con label normal (no flotante)
-                Div(cls="form-group phone-group")(
-                    Label(fr="telefono")("Teléfono"),
-                    Input(type="tel", name="phone", id="telefono", 
-                         placeholder="Número de teléfono", required=True)
-                ),
-                
-                Div(cls="modal-buttons")(
-                    Button(type="button", hx_on="click:closeModal()")("Cancelar"),
-                    Button(type="submit", cls="primary")("Registrarse")
-                )
-            )
-        )
-    )
-
-@rt("/registrar-usuario", methods=["POST"])
-async def registrar_usuario(request):
-    form = await request.form()
-    
-    # Preparar los datos para el endpoint con el formato correcto
-    datos = {
-        "fullName": form.get("fullName") or None,
-        "email": form.get("email"),
-        "phone": form.get("phone") or None
-    }
-    
-    print("Datos a enviar:", datos)  # Para debugging
-    
-    try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            headers = {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Origin": "https://homejs.vercel.app"
-            }
-            
-            response = await client.post(
-                "https://tifanny-back.vercel.app/v1/tifanny/registerbyweb",
-                json=datos,
-                headers=headers
-            )
-            
-            print("Respuesta del servidor:", response.status_code)  # Para debugging
-            print("Contenido de la respuesta:", await response.aread())  # Para debugging
-            
-            try:
-                response_data = response.json()
-            except Exception as e:
-                print("Error al parsear JSON:", str(e))
-                response_data = {}
-
-            if response.status_code == 201:
-                # Registro exitoso - Mostrar credenciales
-                return Div(cls="modal-overlay", id="modal-credenciales")(
-                    Div(cls="modal modal-compact")(
-                        H3("¡Bienvenido a Tiffany!"),
-                        P(response_data.get("message", "Tu registro ha sido exitoso.")),
-                        Div(cls="credentials-container text-center")(
-                            H4("Tus credenciales de acceso"),
-                            Div(cls="credential-group")(
-                                P(cls="credential-label")("Correo electrónico:"),
-                                P(cls="credential-value")(form.get("email"))
-                            ),
-                            Div(cls="credential-group")(
-                                P(cls="credential-label")("Contraseña:"),
-                                P(cls="credential-value")(
-                                    response_data.get("credentials", {}).get("password", "")
-                                )
-                            )
-                        ),
-                        P(cls="credentials-warning")(
-                            I(cls="fas fa-exclamation-triangle"), 
-                            " Por tu seguridad, guarda estas credenciales en un lugar seguro."
-                        ),
-                        Div(cls="modal-buttons")(
-                            Button(
-                                cls="primary",
-                                onclick="window.location.href='https://www.tiffany.cool/login'"
-                            )("Iniciar Sesión")
-                        )
-                    )
-                )
-            elif response.status_code == 409:
-                return Div(cls="alert alert-warning")(
-                    P("Este correo electrónico ya está registrado."),
-                    P("Por favor inicia sesión o utiliza otro correo.")
-                )
-            else:
-                print(f"Error del servidor: {response.status_code} - {response_data}")
-                return Div(cls="alert alert-error")(
-                    P("Error al procesar el registro. Por favor intenta nuevamente.")
-                )
-                
-    except Exception as e:
-        print(f"Error en registro: {str(e)}")
-        return Div(cls="alert alert-error")(
-            P("Error de conexión. Por favor intenta más tarde.")
-        )
-
 
 
 serve()
