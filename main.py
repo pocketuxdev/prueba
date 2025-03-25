@@ -768,7 +768,7 @@ def login_page():
             <div class="container">
                 <!-- Logo Section -->
                 <div class="image-section">
-                    <img src="/static/images/logo.png" alt="POCKET UX Logo" class="logo">
+                    <img src="/static/img/logo.png" alt="POCKET UX Logo" class="logo">
                 </div>
                 
                 <!-- Login Form Section -->
@@ -7990,7 +7990,7 @@ def trial_login():
             <div class="container">
                 <!-- Logo Section -->
                 <div class="image-section">
-                    <img src="/static/images/logopocket.png" alt="POCKET UX Logo" class="logo">
+                    <img src="/static/img/logo.png" alt="POCKET UX Logo" class="logo">
                 </div>
                 
                 <!-- Login Form Section -->
