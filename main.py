@@ -376,7 +376,7 @@ def get_common_sidebar():
     </style>
     <!-- HTML común del Sidebar -->
     <div class="sidebar">
-        <img src="/static/images/logopocket.png" alt="Logo" class="sidebar-logo">
+        <img src="/static/images/logo.png" alt="Logo" class="sidebar-logo">
         <div class="nav-item" onclick="handleNavigation('dashboard')" data-tooltip="Dashboard">
             <i class="fas fa-home"></i>
         </div>
@@ -768,7 +768,7 @@ def login_page():
             <div class="container">
                 <!-- Logo Section -->
                 <div class="image-section">
-                    <img src="/static/images/logopocket.png" alt="POCKET UX Logo" class="logo">
+                    <img src="/static/images/logo.png" alt="POCKET UX Logo" class="logo">
                 </div>
                 
                 <!-- Login Form Section -->
@@ -6889,240 +6889,6 @@ def vitafer_billing():
         </body>
     </html>
     """
-@rt('/test/user')
-def trial_login():
-    return f"""
-    <!DOCTYPE html>
-    <html lang="es">
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Login Trial - Tiffany</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-            <link rel="stylesheet" href="/static/css/styles.css">
-            <style>
-                .trial-login {
-                    background: linear-gradient(135deg, #1a1c23 0%, #242731 100%);
-                    min-height: 100vh;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                
-                .login-container {
-                    width: 100%;
-                    max-width: 400px;
-                    margin: 0 auto;
-                    padding: 20px;
-                }
-                
-                .login-box {
-                    background: rgba(255, 255, 255, 0.1);
-                    backdrop-filter: blur(10px);
-                    border-radius: 15px;
-                    padding: 30px;
-                    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-                }
-                
-                .trial-header {
-                    text-align: center;
-                    margin-bottom: 30px;
-                }
-                
-                .login-logo {
-                    width: 120px;
-                    height: auto;
-                    margin-bottom: 15px;
-                }
-                
-                .trial-badge {
-                    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
-                    color: white;
-                    padding: 8px 15px;
-                    border-radius: 20px;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    font-size: 0.9rem;
-                    margin-top: 15px;
-                }
-                
-                .trial-badge i {
-                    font-size: 1rem;
-                }
-                
-                .login-form {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-                }
-                
-                .form-group {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 8px;
-                }
-                
-                .form-group label {
-                    color: #e1e1e6;
-                    font-size: 0.9rem;
-                }
-                
-                .form-group input {
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 8px;
-                    padding: 12px;
-                    color: white;
-                    font-size: 1rem;
-                    transition: all 0.3s ease;
-                }
-                
-                .form-group input:focus {
-                    outline: none;
-                    border-color: #ff6b6b;
-                    background: rgba(255, 255, 255, 0.1);
-                }
-                
-                .btn-primary {
-                    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
-                    color: white;
-                    border: none;
-                    padding: 12px;
-                    border-radius: 8px;
-                    font-size: 1rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                }
-                
-                .btn-primary:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-                }
-                
-                .btn-primary:disabled {
-                    opacity: 0.7;
-                    cursor: not-allowed;
-                    transform: none;
-                }
-                
-                #message {
-                    text-align: center;
-                    padding: 10px;
-                    border-radius: 8px;
-                    font-size: 0.9rem;
-                }
-                
-                .alert {
-                    padding: 12px;
-                    border-radius: 8px;
-                    margin-top: 15px;
-                }
-                
-                .alert-success {
-                    background: rgba(46, 213, 115, 0.2);
-                    color: #2ed573;
-                    border: 1px solid rgba(46, 213, 115, 0.3);
-                }
-                
-                .alert-danger {
-                    background: rgba(255, 71, 87, 0.2);
-                    color: #ff4757;
-                    border: 1px solid rgba(255, 71, 87, 0.3);
-                }
-                
-                @media (max-width: 480px) {
-                    .login-container {
-                        padding: 15px;
-                    }
-                    
-                    .login-box {
-                        padding: 20px;
-                    }
-                    
-                    .login-logo {
-                        width: 100px;
-                    }
-                    
-                    .trial-badge {
-                        font-size: 0.8rem;
-                    }
-                }
-            </style>
-        </head>
-        <body class="trial-login">
-            <div class="login-container">
-                <div class="login-box">
-                    <div class="trial-header">
-                        <img src="/static/images/logo.png" alt="Logo" class="login-logo">
-                        <div class="trial-badge">
-                            <i class="fas fa-star"></i>
-                            <span>VERSIÓN DE PRUEBA - 3 DÍAS</span>
-                        </div>
-                    </div>
-                    <form id="loginForm" class="login-form">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" id="password" name="password" required>
-                        </div>
-                        <button type="submit" class="btn-primary">
-                            Ingresar
-                        </button>
-                        <div id="message"></div>
-                    </form>
-                </div>
-            </div>
-            <script>
-                document.getElementById('loginForm').addEventListener('submit', async (e) => {{
-                    e.preventDefault();
-                    const form = e.target;
-                    const button = form.querySelector('button');
-                    const messageDiv = document.getElementById('message');
-                    
-                    button.disabled = true;
-                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-                    
-                    try {{
-                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/loginTrialUser', {{
-                            method: 'POST',
-                            headers: {{
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json'
-                            }},
-                            credentials: 'include',
-                            body: JSON.stringify({{
-                                email: form.email.value,
-                                password: form.password.value
-                            }})
-                        }});
-                        
-                        const data = await response.json();
-                        
-                        if (response.ok) {{
-                            messageDiv.className = 'alert alert-success';
-                            messageDiv.textContent = data.message;
-                            localStorage.setItem('trialStart', new Date().toISOString());
-                            window.location.href = '/trial/dashboard';
-                        }} else {{
-                            messageDiv.className = 'alert alert-danger';
-                            messageDiv.textContent = data.message;
-                        }}
-                    }} catch (error) {{
-                        messageDiv.className = 'alert alert-danger';
-                        messageDiv.textContent = 'Error de conexión';
-                    }} finally {{
-                        button.disabled = false;
-                        button.textContent = 'Ingresar';
-                    }}
-                }});
-            </script>
-        </body>
-    </html>
-    """
 
 @rt('/')
 def home():
@@ -7939,6 +7705,367 @@ def footer():
         )
     )
 
+@rt('/test/user')
+def trial_login():
+    return """
+    <html>
+        <head>
+            <title>POCKET UX - Login test</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="POCKET UX ">
+            
+            <!-- External Resources -->
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            
+            <!-- Styles -->
+            <style>
+                /* Root Variables */
+                :root {
+                    --primary-color: #FF0099;
+                    --primary-hover: #D6006F;
+                    --background-dark: #000000;
+                    --text-light: rgba(255, 255, 255, 0.8);
+                    --text-lighter: rgba(255, 255, 255, 0.5);
+                    --border-color: rgba(255, 0, 153, 0.2);
+                }
+                
+                /* Reset and Base Styles */
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
+                }
+                
+                body {
+                    min-height: 100vh;
+                    height: 100vh;
+                    width: 100vw;
+                    background: var(--background-dark);
+                    color: var(--text-light);
++                   overflow: hidden; /* Prevenir scroll */
+                    overflow: hidden;
+                }
+                
+                /* Layout Components */
+                .container {
+                    position: relative;
+                    z-index: 2;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    min-height: 100vh;
+                    height: 100vh;
+                    width: 100vw;
+                    backdrop-filter: blur(10px);
++                   overflow: hidden; /* Prevenir scroll en el contenedor */
+                    overflow: hidden;
+                }
+                
+                /* Image Section */
+                .image-section {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    overflow: hidden;
+                    background: rgba(0, 0, 0, 0.5);
+                }
+                
+                .logo {
+                    width: 400px;
+                    height: auto;
+                    filter: brightness(1.2) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7));
+                    animation: logoFloat 6s ease-in-out infinite,
+                              logoGlow 3s ease-in-out infinite,
+                              logoRotate 12s linear infinite;
+                    transform-origin: center center;
+                    perspective: 1000px;
+                }
+                
+                @keyframes logoFloat {
+                    0%, 100% { transform: translateY(0) rotateY(0deg); }
+                    50% { transform: translateY(-20px) rotateY(180deg); }
+                }
+                
+                @keyframes logoGlow {
+                    0%, 100% { 
+                        filter: brightness(1) drop-shadow(0 0 20px rgba(255, 0, 153, 0.5)); 
+                    }
+                    50% { 
+                        filter: brightness(1.4) drop-shadow(0 0 30px rgba(255, 0, 153, 0.7)); 
+                    }
+                }
+                
+                @keyframes logoRotate {
+                    0% { transform: rotateY(0deg); }
+                    100% { transform: rotateY(360deg); }
+                }
+                
+                /* Form Section */
+                .form-section {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 2rem;
+                    background: rgba(255, 255, 255, 0.05); /* Agregado el fondo semi-transparente */
+                }
+                
+                .login-container {
+                    background: rgba(40, 40, 40, 0.95);
+                    padding: 2.5rem;
+                    border-radius: 20px;
+                    width: 100%;
+                    max-width: 400px;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                    border: 1px solid rgba(255, 0, 153, 0.1);
+                    backdrop-filter: blur(10px); /* Agregado el efecto de blur */
+                }
+                
+                h1 {
+                    color: white;
+                    font-size: 2rem;
+                    text-align: center;
+                    margin-bottom: 2rem;
+                }
+                
+                .form-group {
+                    position: relative;
+                    margin-bottom: 1.5rem;
+                    background: rgba(60, 60, 60, 0.95);
+                    padding: 0.8rem;
+                    border-radius: 12px;
+                    border: 1px solid var(--border-color);
+                }
+                
+                .form-group i {
+                    position: absolute;
+                    left: 1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: var(--primary-color);
+                    font-size: 1.2rem;
+                }
+                
+                input {
+                    width: 100%;
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    font-size: 0.95rem;
+                    padding-left: 2.5rem;
+                }
+                
+                input::placeholder {
+                    color: var(--text-lighter);
+                }
+                
+                input:focus {
+                    outline: none;
+                }
+                
+                button {
+                    width: 100%;
+                    padding: 1rem;
+                    background: var(--primary-color);
+                    border: none;
+                    border-radius: 12px;
+                    color: white;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+                
+                button:hover {
+                    background: var(--primary-hover);
+                }
+                
+                /* Reset Password Link */
+                .reset-password-link {
+                    margin-top: 1.5rem;
+                    text-align: center;
+                }
+                
+                .reset-password-link a {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    gap: 8px;
+                    color: var(--text-lighter);
+                    text-decoration: none;
+                    font-size: 0.9rem;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    background: rgba(60, 60, 60, 0.95);
+                    border: 1px solid var(--border-color);
+                    transition: all 0.3s ease;
+                }
+                
+                .reset-password-link a:hover {
+                    background: rgba(255, 0, 153, 0.15);
+                }
+                
+                /* Media Queries */
+                @media (max-width: 768px) {
+                    .container {
+                        grid-template-columns: 1fr;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
+                    }
+                    
+                    .image-section {
+                        display: none;
+                    }
+                    
+                    .form-section {
+                        padding: 1.5rem;
++                       height: 100vh; /* Altura fija en móvil */
++                       overflow: hidden; /* Prevenir scroll */
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
+                    }
+                    
+                    .login-container {
+                        padding: 2rem;
++                       max-height: 100%; /* Asegurar que no exceda la altura de la pantalla */
+                        max-height: 100vh;
+                        width: 100%;
+                    }
+                    
+                    h1 {
+                        font-size: 1.8rem;
+                        margin-bottom: 1.5rem;
+                    }
+                }
+                /* Message Styles */
+                #message {
+                    margin-top: 1rem;
+                    text-align: center;
+                    padding: 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.9rem;
+                    transition: all 0.3s ease;
+                }
+                .success {
+                    background: rgba(0, 179, 104, 0.2);
+                    border: 1px solid #00b368;
+                    color: #00b368;
+                    animation: successAnimation 0.3s ease-out forwards;
+                }
+                .error {
+                    background: rgba(255, 0, 0, 0.2);
+                    border: 1px solid #ff0000;
+                    color: #ff0000;
+                    animation: errorAnimation 0.3s ease-out forwards;
+                }
+                /* Animaciones */
+                @keyframes errorAnimation {
+                    0% { transform: translateX(-10px); opacity: 0; }
+                    50% { transform: translateX(10px); }
+                    100% { transform: translateX(0); opacity: 1; }
+                }
+                /* Estilos para inputs no válidos */
+                input:invalid {
+                    border-color: #ff0000;
+                    animation: shake 0.3s ease-in-out;
+                }
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-5px); }
+                    75% { transform: translateX(5px); }
+                }
+            </style>
+        </head>
+        <body>
+            <!-- Main Container -->
+            <div class="container">
+                <!-- Logo Section -->
+                <div class="image-section">
+                    <img src="/static/images/logopocket.png" alt="POCKET UX Logo" class="logo">
+                </div>
+                
+                <!-- Login Form Section -->
+                <div class="form-section">
+                    <div class="login-container">
+                        <h1>Bienvenido</h1>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" required placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="password" required placeholder="Contraseña">
+                            </div>
+                            <button type="submit" id="submitButton">Ingresar</button>
+                        </form>
+                        <div id="message"></div>
+                        <div class="reset-password-link">
+                            <a href="/reset-password">
+                                <i class="fas fa-key"></i>
+                                ¿No recuerdas tu contraseña? ¡Recupérala aquí!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Scripts -->
+            <script>
+                document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const submitButton = document.getElementById('submitButton');
+                    const messageDiv = document.getElementById('message');
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Iniciando sesión...';
+                    try {
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/loginTrialUser', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify({
+                                email,
+                                password
+                            })
+                        });
+                        const data = await response.json();
+                        if (response.ok) {
+                            messageDiv.className = 'success';
+                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                            localStorage.setItem('clientData', JSON.stringify(data.clientData));
+                            setTimeout(() => {
+                                window.location.href = '/dashboard';
+                            }, 1000);
+                        } else {
+                            messageDiv.className = 'error';
+                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                        }
+                    } catch (error) {
+                        messageDiv.className = 'error';
+                        messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Ingresar';
+                    }
+                });
+            </script>
+        </body>
+    </html>
+    """
 
 
 serve()
