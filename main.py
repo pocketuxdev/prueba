@@ -761,6 +761,98 @@ def login_page():
                     25% { transform: translateX(-5px); }
                     75% { transform: translateX(5px); }
                 }
+
+                /* Modal Styles */
+                .modal-overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    backdrop-filter: blur(5px);
+                    z-index: 1000;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .modal {
+                    background: rgba(40, 40, 40, 0.95);
+                    padding: 2rem;
+                    border-radius: 20px;
+                    width: 90%;
+                    max-width: 400px;
+                    position: relative;
+                    border: 1px solid var(--border-color);
+                    animation: modalAppear 0.3s ease-out;
+                }
+
+                @keyframes modalAppear {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .modal h2 {
+                    color: white;
+                    text-align: center;
+                    margin-bottom: 1.5rem;
+                }
+
+                .modal .close-button {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    background: none;
+                    border: none;
+                    color: var(--text-lighter);
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    width: auto;
+                }
+
+                .modal .close-button:hover {
+                    color: white;
+                }
+
+                /* Botón de registro */
+                .register-button {
+                    margin-top: 1rem;
+                    background: transparent;
+                    border: 1px solid var(--primary-color);
+                    color: var(--primary-color);
+                }
+
+                .register-button:hover {
+                    background: var(--primary-color);
+                    color: white;
+                }
+
+                /* Separador */
+                .separator {
+                    margin: 1rem 0;
+                    text-align: center;
+                    color: var(--text-lighter);
+                    display: flex;
+                    align-items: center;
+                }
+
+                .separator::before,
+                .separator::after {
+                    content: '';
+                    flex: 1;
+                    border-bottom: 1px solid var(--border-color);
+                }
+
+                .separator span {
+                    padding: 0 1rem;
+                }
             </style>
         </head>
         <body>
@@ -787,6 +879,17 @@ def login_page():
                             <button type="submit" id="submitButton">Ingresar</button>
                         </form>
                         <div id="message"></div>
+                        
+                        <!-- Separador -->
+                        <div class="separator">
+                            <span>o</span>
+                        </div>
+                        
+                        <!-- Botón de registro -->
+                        <button class="register-button" onclick="openRegisterModal()">
+                            <i class="fas fa-user-plus"></i> Crear cuenta
+                        </button>
+                        
                         <div class="reset-password-link">
                             <a href="/reset-password">
                                 <i class="fas fa-key"></i>
@@ -796,8 +899,109 @@ def login_page():
                     </div>
                 </div>
             </div>
+
+            <!-- Modal de Registro -->
+            <div class="modal-overlay" id="registerModal">
+                <div class="modal">
+                    <button class="close-button" onclick="closeRegisterModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h2>Crear cuenta</h2>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullName" required placeholder="Nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="registerEmail" required placeholder="Correo electrónico">
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="phone" required placeholder="Teléfono">
+                        </div>
+                        <button type="submit" id="registerButton">Registrarse</button>
+                    </form>
+                    <div id="registerMessage"></div>
+                </div>
+            </div>
+
             <!-- Scripts -->
             <script>
+                // Funciones del modal
+                function openRegisterModal() {
+                    document.getElementById('registerModal').style.display = 'flex';
+                }
+
+                function closeRegisterModal() {
+                    document.getElementById('registerModal').style.display = 'none';
+                }
+
+                // Cerrar modal al hacer clic fuera
+                document.getElementById('registerModal').addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeRegisterModal();
+                    }
+                });
+
+                // Manejo del formulario de registro
+                document.getElementById('registerForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const fullName = document.getElementById('fullName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const phone = document.getElementById('phone').value;
+                    const registerButton = document.getElementById('registerButton');
+                    const messageDiv = document.getElementById('registerMessage');
+                    
+                    registerButton.disabled = true;
+                    registerButton.textContent = 'Procesando...';
+                    
+                    try {
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/registerbyweb', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                fullName,
+                                email,
+                                phone
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            messageDiv.className = 'success';
+                            messageDiv.innerHTML = `
+                                <p>${data.message}</p>
+                                <p>Tus credenciales:</p>
+                                <p>Email: ${email}</p>
+                                <p>Contraseña: ${data.credentials.password}</p>
+                            `;
+                            // Limpiar el formulario
+                            document.getElementById('registerForm').reset();
+                            
+                            // Cerrar el modal después de 5 segundos
+                            setTimeout(() => {
+                                closeRegisterModal();
+                            }, 5000);
+                        } else {
+                            messageDiv.className = 'error';
+                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                        }
+                    } catch (error) {
+                        messageDiv.className = 'error';
+                        messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
+                    } finally {
+                        registerButton.disabled = false;
+                        registerButton.textContent = 'Registrarse';
+                    }
+                });
+
+                // Código existente del login
                 document.getElementById('loginForm').addEventListener('submit', async (e) => {
                     e.preventDefault();
                     
@@ -805,8 +1009,10 @@ def login_page():
                     const password = document.getElementById('password').value;
                     const submitButton = document.getElementById('submitButton');
                     const messageDiv = document.getElementById('message');
+                    
                     submitButton.disabled = true;
                     submitButton.textContent = 'Iniciando sesión...';
+                    
                     try {
                         const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/loginClient', {
                             method: 'POST',
@@ -820,7 +1026,9 @@ def login_page():
                                 password
                             })
                         });
+                        
                         const data = await response.json();
+                        
                         if (response.ok) {
                             messageDiv.className = 'success';
                             messageDiv.innerHTML = `<p>${data.message}</p>`;
