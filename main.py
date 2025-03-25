@@ -6890,27 +6890,7 @@ def vitafer_billing():
     """
 
 @rt('/')
-from fasthtml.common import *
-from starlette.staticfiles import StaticFiles
-from pathlib import Path
-import httpx
-import urllib.parse
-
-# Obtener la ruta absoluta del directorio del script
-BASE_DIR = Path(__file__).resolve().parent
-
-# Configuración de la aplicación
-app, rt = fast_app()
-
-# Configurar archivos estáticos
-try:
-    app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
-except Exception as e:
-    print(f"Error mounting static files: {e}")
-
-# Ruta principal
-@rt("/")
-def index():
+def home():
     return page(
         navbar(),
         hero_section(),
@@ -7723,6 +7703,7 @@ def footer():
             P("Desarrollado con ", I(cls="fas fa-heart"), " por Tiffany Labs")
         )
     )
+
 
 
 serve()
