@@ -6889,6 +6889,240 @@ def vitafer_billing():
         </body>
     </html>
     """
+@rt('/test/user')
+def trial_login():
+    return f"""
+    <!DOCTYPE html>
+    <html lang="es">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Login Trial - Tiffany</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <link rel="stylesheet" href="/static/css/styles.css">
+            <style>
+                .trial-login {
+                    background: linear-gradient(135deg, #1a1c23 0%, #242731 100%);
+                    min-height: 100vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .login-container {
+                    width: 100%;
+                    max-width: 400px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
+                
+                .login-box {
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    border-radius: 15px;
+                    padding: 30px;
+                    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                }
+                
+                .trial-header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                }
+                
+                .login-logo {
+                    width: 120px;
+                    height: auto;
+                    margin-bottom: 15px;
+                }
+                
+                .trial-badge {
+                    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+                    color: white;
+                    padding: 8px 15px;
+                    border-radius: 20px;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 0.9rem;
+                    margin-top: 15px;
+                }
+                
+                .trial-badge i {
+                    font-size: 1rem;
+                }
+                
+                .login-form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                
+                .form-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                }
+                
+                .form-group label {
+                    color: #e1e1e6;
+                    font-size: 0.9rem;
+                }
+                
+                .form-group input {
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 8px;
+                    padding: 12px;
+                    color: white;
+                    font-size: 1rem;
+                    transition: all 0.3s ease;
+                }
+                
+                .form-group input:focus {
+                    outline: none;
+                    border-color: #ff6b6b;
+                    background: rgba(255, 255, 255, 0.1);
+                }
+                
+                .btn-primary {
+                    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+                    color: white;
+                    border: none;
+                    padding: 12px;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+                
+                .btn-primary:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+                }
+                
+                .btn-primary:disabled {
+                    opacity: 0.7;
+                    cursor: not-allowed;
+                    transform: none;
+                }
+                
+                #message {
+                    text-align: center;
+                    padding: 10px;
+                    border-radius: 8px;
+                    font-size: 0.9rem;
+                }
+                
+                .alert {
+                    padding: 12px;
+                    border-radius: 8px;
+                    margin-top: 15px;
+                }
+                
+                .alert-success {
+                    background: rgba(46, 213, 115, 0.2);
+                    color: #2ed573;
+                    border: 1px solid rgba(46, 213, 115, 0.3);
+                }
+                
+                .alert-danger {
+                    background: rgba(255, 71, 87, 0.2);
+                    color: #ff4757;
+                    border: 1px solid rgba(255, 71, 87, 0.3);
+                }
+                
+                @media (max-width: 480px) {
+                    .login-container {
+                        padding: 15px;
+                    }
+                    
+                    .login-box {
+                        padding: 20px;
+                    }
+                    
+                    .login-logo {
+                        width: 100px;
+                    }
+                    
+                    .trial-badge {
+                        font-size: 0.8rem;
+                    }
+                }
+            </style>
+        </head>
+        <body class="trial-login">
+            <div class="login-container">
+                <div class="login-box">
+                    <div class="trial-header">
+                        <img src="/static/images/logo.png" alt="Logo" class="login-logo">
+                        <div class="trial-badge">
+                            <i class="fas fa-star"></i>
+                            <span>VERSIÓN DE PRUEBA - 3 DÍAS</span>
+                        </div>
+                    </div>
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            Ingresar
+                        </button>
+                        <div id="message"></div>
+                    </form>
+                </div>
+            </div>
+            <script>
+                document.getElementById('loginForm').addEventListener('submit', async (e) => {{
+                    e.preventDefault();
+                    const form = e.target;
+                    const button = form.querySelector('button');
+                    const messageDiv = document.getElementById('message');
+                    
+                    button.disabled = true;
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+                    
+                    try {{
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/loginTrialUser', {{
+                            method: 'POST',
+                            headers: {{
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            }},
+                            credentials: 'include',
+                            body: JSON.stringify({{
+                                email: form.email.value,
+                                password: form.password.value
+                            }})
+                        }});
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {{
+                            messageDiv.className = 'alert alert-success';
+                            messageDiv.textContent = data.message;
+                            localStorage.setItem('trialStart', new Date().toISOString());
+                            window.location.href = '/trial/dashboard';
+                        }} else {{
+                            messageDiv.className = 'alert alert-danger';
+                            messageDiv.textContent = data.message;
+                        }}
+                    }} catch (error) {{
+                        messageDiv.className = 'alert alert-danger';
+                        messageDiv.textContent = 'Error de conexión';
+                    }} finally {{
+                        button.disabled = false;
+                        button.textContent = 'Ingresar';
+                    }}
+                }});
+            </script>
+        </body>
+    </html>
+    """
 
 @rt('/')
 def home():
