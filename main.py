@@ -8319,58 +8319,58 @@ def trial_login():
 
                 // Existing login form handler
                  document.getElementById('registerForm').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const fullName = document.getElementById('fullName').value;
-                    const email = document.getElementById('registerEmail').value;
-                    const phone = document.getElementById('phone').value;
-                    const registerButton = document.getElementById('registerButton');
-                    const messageDiv = document.getElementById('registerMessage');
+    e.preventDefault();
+    
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('registerEmail').value;
+    const phone = document.getElementById('phone').value;
+    const registerButton = document.getElementById('registerButton');
+    const messageDiv = document.getElementById('registerMessage');
 
-                    registerButton.disabled = true;
-                    registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+    registerButton.disabled = true;
+    registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
 
-                    try {
-                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/registerbyweb', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json'
-                            },
-                            credentials: 'include',
-                            body: JSON.stringify({
-                                fullName,
-                                email,
-                                phone
-                            })
-                        });
+    try {
+        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/registerbyweb', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                fullName,
+                email,
+                phone
+            })
+        });
 
-                        const data = await response.json();
+        const data = await response.json();
 
-                        if (response.ok) {
-                            // Cerrar el modal de registro
-                            document.getElementById('registerModal').style.display = 'none';
-                            
-                            // Mostrar las credenciales en el modal de bienvenida
-                            const welcomeModal = document.getElementById('welcomeModal');
-                            document.getElementById('credentialEmail').textContent = email;
-                            document.getElementById('credentialPassword').textContent = data.password;
-                            welcomeModal.style.display = 'block';
+        if (response.ok) {
+            // Cerrar el modal de registro
+            document.getElementById('registerModal').style.display = 'none';
+            
+            // Mostrar las credenciales en el modal de bienvenida
+            const welcomeModal = document.getElementById('welcomeModal');
+            document.getElementById('credentialEmail').textContent = email;
+            document.getElementById('credentialPassword').textContent = data.password; // Mostrar contraseña sin cifrar
+            welcomeModal.style.display = 'block';
 
-                            // Guardar datos del cliente
-                            localStorage.setItem('clientData', JSON.stringify(data.clientData));
-                        } else {
-                            messageDiv.className = 'error';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
-                        }
-                    } catch (error) {
-                        messageDiv.className = 'error';
-                        messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
-                    } finally {
-                        registerButton.disabled = false;
-                        registerButton.innerHTML = 'Registrarse';
-                    }
-                });
+            // Guardar datos del cliente
+            localStorage.setItem('clientData', JSON.stringify(data.clientData));
+        } else {
+            messageDiv.className = 'error';
+            messageDiv.innerHTML = `<p>${data.message}</p>`;
+        }
+    } catch (error) {
+        messageDiv.className = 'error';
+        messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
+    } finally {
+        registerButton.disabled = false;
+        registerButton.innerHTML = 'Registrarse';
+    }
+});
 
                 // Funcionalidad de copiar credenciales
                 document.querySelectorAll('.copy-button').forEach(button => {
