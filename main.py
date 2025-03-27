@@ -8365,6 +8365,15 @@ def trial_login():
         }, 2000);
     });
 });
+// Manejar el botón de comenzar prueba
+                document.getElementById('startTrialButton').addEventListener('click', () => {
+                    window.location.href = '/dashboard';
+                });
+
+                // Cerrar modal de bienvenida
+                document.getElementById('closeWelcomeModal').addEventListener('click', () => {
+                    document.getElementById('welcomeModal').style.display = 'none';
+                });
             </script>
         </body>
     </html>
