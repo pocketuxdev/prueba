@@ -376,7 +376,7 @@ def get_common_sidebar():
     </style>
     <!-- HTML común del Sidebar -->
     <div class="sidebar">
-        <img src="/static/images/logo.png" alt="Logo" class="sidebar-logo">
+        <img src="/static/img/logo.png" alt="Logo" class="sidebar-logo">
         <div class="nav-item" onclick="handleNavigation('dashboard')" data-tooltip="Dashboard">
             <i class="fas fa-home"></i>
         </div>
@@ -8071,8 +8071,119 @@ def trial_login():
                     .modal-content {
                         width: 95%;
                         padding: 1.5rem;
-                    }
-                }
+                    }  
+
+                    .welcome-modal {
+    text-align: center;
+    max-width: 500px;
+}
+
+.welcome-content {
+    padding: 1rem;
+}
+
+.welcome-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    animation: starPulse 2s infinite;
+}
+
+@keyframes starPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.welcome-message {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin: 1rem 0 2rem;
+}
+
+.credentials-box {
+    background: rgba(60, 60, 60, 0.95);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+}
+
+.credentials-box h3 {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.credential-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.credential-label {
+    color: var(--text-lighter);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.credential-value {
+    color: var(--primary-color);
+    font-weight: 500;
+    flex: 1;
+    margin: 0 1rem;
+    text-align: left;
+}
+
+.copy-button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-lighter);
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-button:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.copy-button.copied {
+    background: #00b368;
+    border-color: #00b368;
+    color: white;
+}
+
+.start-trial-button {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    border: none;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-trial-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.4);
+}
+                }    
+
+                
             </style>
         </head>
         <body>
@@ -8144,6 +8255,44 @@ def trial_login():
                 </div>
             </div>
 
+              <!-- Welcome Modal with Credentials -->
+            <div id="welcomeModal" class="modal">
+                <div class="modal-content welcome-modal">
+                    <span class="close-modal" id="closeWelcomeModal">&times;</span>
+                    <div class="welcome-content">
+                        <i class="fas fa-star welcome-icon"></i>
+                        <h2>¡Bienvenido a POCKET UX!</h2>
+                        <p class="welcome-message">Disfruta tu período de prueba de 3 días</p>
+                        
+                        <div class="credentials-box">
+                            <h3>Tus Credenciales de Acceso</h3>
+                            <div class="credential-item">
+                                <span class="credential-label">
+                                    <i class="fas fa-envelope"></i> Email:
+                                </span>
+                                <span id="credentialEmail" class="credential-value"></span>
+                                <button class="copy-button" data-copy="email">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="credential-item">
+                                <span class="credential-label">
+                                    <i class="fas fa-key"></i> Contraseña:
+                                </span>
+                                <span id="credentialPassword" class="credential-value"></span>
+                                <button class="copy-button" data-copy="password">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button id="startTrialButton" class="start-trial-button">
+                            Comenzar Prueba
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Scripts -->
             <script>
                 // Modal functionality
@@ -8169,55 +8318,7 @@ def trial_login():
                 };
 
                 // Existing login form handler
-                document.getElementById('loginForm').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-                    const submitButton = document.getElementById('submitButton');
-                    const messageDiv = document.getElementById('message');
-
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-                    
-                    try {
-                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/loginTrialUser', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json'
-                            },
-                            credentials: 'include',
-                            body: JSON.stringify({
-                                email,
-                                password
-                            })
-                        });
-                        
-                        const data = await response.json();
-                        
-                        if (response.ok) {
-                            messageDiv.className = 'success';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
-                            localStorage.setItem('clientData', JSON.stringify(data.clientData));
-                            setTimeout(() => {
-                                window.location.href = '/dashboard';
-                            }, 1000);
-                        } else {
-                            messageDiv.className = 'error';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
-                        }
-                    } catch (error) {
-                        messageDiv.className = 'error';
-                        messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
-                    } finally {
-                        submitButton.disabled = false;
-                        submitButton.innerHTML = 'Ingresar';
-                    }
-                });
-
-                // Registration form handler
-                document.getElementById('registerForm').addEventListener('submit', async (e) => {
+                 document.getElementById('registerForm').addEventListener('submit', async (e) => {
                     e.preventDefault();
                     
                     const fullName = document.getElementById('fullName').value;
@@ -8247,14 +8348,17 @@ def trial_login():
                         const data = await response.json();
 
                         if (response.ok) {
-                            messageDiv.className = 'success';
-                            messageDiv.innerHTML = `<p>${data.message}</p>`;
-                            localStorage.setItem('clientData', JSON.stringify(data.clientData));
+                            // Cerrar el modal de registro
+                            document.getElementById('registerModal').style.display = 'none';
                             
-                            // Auto login after successful registration
-                            setTimeout(() => {
-                                window.location.href = '/dashboard';
-                            }, 1000);
+                            // Mostrar las credenciales en el modal de bienvenida
+                            const welcomeModal = document.getElementById('welcomeModal');
+                            document.getElementById('credentialEmail').textContent = email;
+                            document.getElementById('credentialPassword').textContent = data.password || '********';
+                            welcomeModal.style.display = 'block';
+
+                            // Guardar datos del cliente
+                            localStorage.setItem('clientData', JSON.stringify(data.clientData));
                         } else {
                             messageDiv.className = 'error';
                             messageDiv.innerHTML = `<p>${data.message}</p>`;
@@ -8266,6 +8370,34 @@ def trial_login():
                         registerButton.disabled = false;
                         registerButton.innerHTML = 'Registrarse';
                     }
+                });
+
+                // Funcionalidad de copiar credenciales
+                document.querySelectorAll('.copy-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const type = this.dataset.copy;
+                        const text = document.getElementById(`credential${type.charAt(0).toUpperCase() + type.slice(1)}`).textContent;
+                        
+                        navigator.clipboard.writeText(text).then(() => {
+                            this.classList.add('copied');
+                            this.innerHTML = '<i class="fas fa-check"></i>';
+                            
+                            setTimeout(() => {
+                                this.classList.remove('copied');
+                                this.innerHTML = '<i class="fas fa-copy"></i>';
+                            }, 2000);
+                        });
+                    });
+                });
+
+                // Manejar el botón de comenzar prueba
+                document.getElementById('startTrialButton').addEventListener('click', () => {
+                    window.location.href = '/dashboard';
+                });
+
+                // Cerrar modal de bienvenida
+                document.getElementById('closeWelcomeModal').addEventListener('click', () => {
+                    document.getElementById('welcomeModal').style.display = 'none';
                 });
             </script>
         </body>
