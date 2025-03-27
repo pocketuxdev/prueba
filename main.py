@@ -6981,7 +6981,7 @@ def hero_section():
         # Botón Dashboard para escritorio
         Div(cls="dashboard-button-desktop")(
             A(
-                href="https://www.tiffany.cool/login",
+                href="https://www.tiffany.cool/test/user",
                 target="_blank"
             )(
                 Button(cls="dashboard")("DASHBOARD")
@@ -7003,7 +7003,7 @@ def hero_section():
                 # Botón Dashboard para móvil
                 Div(cls="dashboard-button-mobile")(
                     A(
-                        href="https://www.tiffany.cool/dashboard",
+                        href="https://www.tiffany.cool/test/user",
                         target="_blank"
                     )(
                         Button(cls="dashboard")("DASHBOARD")
