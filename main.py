@@ -8109,16 +8109,9 @@ def trial_login():
     border: 1px solid var(--border-color);
 }
 
-.credentials-box h3 {
-    color: var(--text-light);
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
 .credential-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin: 1rem 0;
     padding: 0.8rem;
     background: rgba(0, 0, 0, 0.2);
@@ -8131,6 +8124,7 @@ def trial_login():
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    width: 100px;
 }
 
 .credential-value {
@@ -8141,45 +8135,32 @@ def trial_login():
     text-align: left;
 }
 
-.copy-button {
+.copy-all-button {
+    width: 100%;
+    margin-top: 1rem;
     background: transparent;
     border: 1px solid var(--border-color);
     color: var(--text-lighter);
-    width: 35px;
-    height: 35px;
+    padding: 0.8rem;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.copy-button:hover {
+.copy-all-button:hover {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
 }
 
-.copy-button.copied {
+.copy-all-button.copied {
     background: #00b368;
     border-color: #00b368;
     color: white;
-}
-
-.start-trial-button {
-    background: var(--primary-color);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    border: none;
-    font-size: 1.1rem;
-    margin-top: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.start-trial-button:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 0, 153, 0.4);
 }
                 }    
 
@@ -8255,43 +8236,39 @@ def trial_login():
                 </div>
             </div>
 
-              <!-- Welcome Modal with Credentials -->
-            <div id="welcomeModal" class="modal">
-                <div class="modal-content welcome-modal">
-                    <span class="close-modal" id="closeWelcomeModal">&times;</span>
-                    <div class="welcome-content">
-                        <i class="fas fa-star welcome-icon"></i>
-                        <h2>¡Bienvenido a POCKET UX!</h2>
-                        <p class="welcome-message">Disfruta tu período de prueba de 3 días</p>
-                        
-                        <div class="credentials-box">
-                            <h3>Tus Credenciales de Acceso</h3>
-                            <div class="credential-item">
-                                <span class="credential-label">
-                                    <i class="fas fa-envelope"></i> Email:
-                                </span>
-                                <span id="credentialEmail" class="credential-value"></span>
-                                <button class="copy-button" data-copy="email">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            <div class="credential-item">
-                                <span class="credential-label">
-                                    <i class="fas fa-key"></i> Contraseña:
-                                </span>
-                                <span id="credentialPassword" class="credential-value"></span>
-                                <button class="copy-button" data-copy="password">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <button id="startTrialButton" class="start-trial-button">
-                            Comenzar Prueba
-                        </button>
-                    </div>
+              <div id="welcomeModal" class="modal">
+    <div class="modal-content welcome-modal">
+        <span class="close-modal" id="closeWelcomeModal">&times;</span>
+        <div class="welcome-content">
+            <i class="fas fa-star welcome-icon"></i>
+            <h2>¡Bienvenido a POCKET UX!</h2>
+            <p class="welcome-message">Disfruta tu período de prueba de 3 días</p>
+            
+            <div class="credentials-box">
+                <h3>Tus Credenciales de Acceso</h3>
+                <div class="credential-item">
+                    <span class="credential-label">
+                        <i class="fas fa-envelope"></i> Email:
+                    </span>
+                    <span id="credentialEmail" class="credential-value"></span>
                 </div>
+                <div class="credential-item">
+                    <span class="credential-label">
+                        <i class="fas fa-key"></i> Contraseña:
+                    </span>
+                    <span id="credentialPassword" class="credential-value"></span>
+                </div>
+                <button class="copy-all-button">
+                    <i class="fas fa-copy"></i> Copiar Credenciales
+                </button>
             </div>
+            
+            <button id="startTrialButton" class="start-trial-button">
+                Comenzar Prueba
+            </button>
+        </div>
+    </div>
+</div>
 
             <!-- Scripts -->
             <script>
@@ -8373,32 +8350,21 @@ def trial_login():
 });
 
                 // Funcionalidad de copiar credenciales
-                document.querySelectorAll('.copy-button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const type = this.dataset.copy;
-                        const text = document.getElementById(`credential${type.charAt(0).toUpperCase() + type.slice(1)}`).textContent;
-                        
-                        navigator.clipboard.writeText(text).then(() => {
-                            this.classList.add('copied');
-                            this.innerHTML = '<i class="fas fa-check"></i>';
-                            
-                            setTimeout(() => {
-                                this.classList.remove('copied');
-                                this.innerHTML = '<i class="fas fa-copy"></i>';
-                            }, 2000);
-                        });
-                    });
-                });
-
-                // Manejar el botón de comenzar prueba
-                document.getElementById('startTrialButton').addEventListener('click', () => {
-                    window.location.href = '/dashboard';
-                });
-
-                // Cerrar modal de bienvenida
-                document.getElementById('closeWelcomeModal').addEventListener('click', () => {
-                    document.getElementById('welcomeModal').style.display = 'none';
-                });
+                document.querySelector('.copy-all-button').addEventListener('click', function() {
+    const email = document.getElementById('credentialEmail').textContent;
+    const password = document.getElementById('credentialPassword').textContent;
+    const credentials = `Email: ${email}\nContraseña: ${password}`;
+    
+    navigator.clipboard.writeText(credentials).then(() => {
+        this.classList.add('copied');
+        this.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+        
+        setTimeout(() => {
+            this.classList.remove('copied');
+            this.innerHTML = '<i class="fas fa-copy"></i> Copiar Credenciales';
+        }, 2000);
+    });
+});
             </script>
         </body>
     </html>
