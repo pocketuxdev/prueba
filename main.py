@@ -8180,70 +8180,7 @@ def trial_login():
     background: var(--primary-hover);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(255, 0, 153, 0.4);
-.credentials-box {
-    background: rgba(60, 60, 60, 0.95);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    border: 1px solid var(--border-color);
 }
-
-.credential-item {
-    display: flex;
-    align-items: center;
-    margin: 1rem 0;
-    padding: 0.8rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-}
-
-.credential-label {
-    color: var(--text-lighter);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100px;
-}
-
-.credential-value {
-    color: var(--primary-color);
-    font-weight: 500;
-    flex: 1;
-    margin: 0 1rem;
-    text-align: left;
-}
-
-.copy-all-button {
-    width: 100%;
-    margin-top: 1rem;
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-lighter);
-    padding: 0.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.copy-all-button:hover {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-.copy-all-button.copied {
-    background: #00b368;
-    border-color: #00b368;
-    color: white;
-
-}
-
-
                 }    
 
                 
@@ -8320,38 +8257,41 @@ def trial_login():
 
               <!-- Welcome Modal with Credentials -->
             <div id="welcomeModal" class="modal">
-    <div class="modal-content welcome-modal">
-        <span class="close-modal" id="closeWelcomeModal">&times;</span>
-        <div class="welcome-content">
-            <i class="fas fa-star welcome-icon"></i>
-            <h2>¡Bienvenido a POCKET UX!</h2>
-            <p class="welcome-message">Disfruta tu período de prueba de 3 días</p>
-            
-            <div class="credentials-box">
-                <h3>Tus Credenciales de Acceso</h3>
-                <div class="credential-item">
-                    <span class="credential-label">
-                        <i class="fas fa-envelope"></i> Email:
-                    </span>
-                    <span id="credentialEmail" class="credential-value"></span>
+                <div class="modal-content welcome-modal">
+                    <span class="close-modal" id="closeWelcomeModal">&times;</span>
+                    <div class="welcome-content">
+                        <i class="fas fa-star welcome-icon"></i>
+                        <h2>¡Bienvenido a POCKET UX!</h2>
+                        <p class="welcome-message">Disfruta tu período de prueba de 3 días</p>
+                        
+                        <div class="credentials-box">
+                            <h3>Tus Credenciales de Acceso</h3>
+                            <div class="credential-item">
+                                <span class="credential-label">
+                                    <i class="fas fa-envelope"></i> Email:
+                                </span>
+                                <span id="credentialEmail" class="credential-value"></span>
+                                <button class="copy-button" data-copy="email">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="credential-item">
+                                <span class="credential-label">
+                                    <i class="fas fa-key"></i> Contraseña:
+                                </span>
+                                <span id="credentialPassword" class="credential-value"></span>
+                                <button class="copy-button" data-copy="password">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button id="startTrialButton" class="start-trial-button">
+                            Comenzar Prueba
+                        </button>
+                    </div>
                 </div>
-                <div class="credential-item">
-                    <span class="credential-label">
-                        <i class="fas fa-key"></i> Contraseña:
-                    </span>
-                    <span id="credentialPassword" class="credential-value"></span>
-                </div>
-                <button class="copy-all-button">
-                    <i class="fas fa-copy"></i> Copiar Credenciales
-                </button>
             </div>
-            
-            <button id="startTrialButton" class="start-trial-button">
-                Comenzar Prueba
-            </button>
-        </div>
-    </div>
-</div>
 
             <!-- Scripts -->
             <script>
@@ -8379,74 +8319,76 @@ def trial_login():
 
                 // Existing login form handler
                  document.getElementById('registerForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const fullName = document.getElementById('fullName').value;
-    const email = document.getElementById('registerEmail').value;
-    const phone = document.getElementById('phone').value;
-    const registerButton = document.getElementById('registerButton');
-    const messageDiv = document.getElementById('registerMessage');
+                    e.preventDefault();
+                    
+                    const fullName = document.getElementById('fullName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const phone = document.getElementById('phone').value;
+                    const registerButton = document.getElementById('registerButton');
+                    const messageDiv = document.getElementById('registerMessage');
 
-    registerButton.disabled = true;
-    registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+                    registerButton.disabled = true;
+                    registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
 
-    try {
-        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/registerbyweb', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                fullName,
-                email,
-                phone
-            })
-        });
+                    try {
+                        const response = await fetch('https://tifanny-back.vercel.app/v1/tifanny/registerbyweb', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify({
+                                fullName,
+                                email,
+                                phone
+                            })
+                        });
 
-        const data = await response.json();
+                        const data = await response.json();
 
-        if (response.ok) {
-            // Cerrar el modal de registro
-            document.getElementById('registerModal').style.display = 'none';
-            
-            // Mostrar las credenciales en el modal de bienvenida
-            const welcomeModal = document.getElementById('welcomeModal');
-            document.getElementById('credentialEmail').textContent = email;
-            document.getElementById('credentialPassword').textContent = data.password; // Mostrar contraseña sin cifrar
-            welcomeModal.style.display = 'block';
+                        if (response.ok) {
+                            // Cerrar el modal de registro
+                            document.getElementById('registerModal').style.display = 'none';
+                            
+                            // Mostrar las credenciales en el modal de bienvenida
+                            const welcomeModal = document.getElementById('welcomeModal');
+                            document.getElementById('credentialEmail').textContent = email;
+                            document.getElementById('credentialPassword').textContent = data.password;
+                            welcomeModal.style.display = 'block';
 
-            // Guardar datos del cliente
-            localStorage.setItem('clientData', JSON.stringify(data.clientData));
-        } else {
-            messageDiv.className = 'error';
-            messageDiv.innerHTML = `<p>${data.message}</p>`;
-        }
-    } catch (error) {
-        messageDiv.className = 'error';
-        messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
-    } finally {
-        registerButton.disabled = false;
-        registerButton.innerHTML = 'Registrarse';
-    }
-});
+                            // Guardar datos del cliente
+                            localStorage.setItem('clientData', JSON.stringify(data.clientData));
+                        } else {
+                            messageDiv.className = 'error';
+                            messageDiv.innerHTML = `<p>${data.message}</p>`;
+                        }
+                    } catch (error) {
+                        messageDiv.className = 'error';
+                        messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
+                    } finally {
+                        registerButton.disabled = false;
+                        registerButton.innerHTML = 'Registrarse';
+                    }
+                });
 
-// Nuevo manejador para copiar todas las credenciales
-document.querySelector('.copy-all-button').addEventListener('click', function() {
-    const email = document.getElementById('credentialEmail').textContent;
-    const password = document.getElementById('credentialPassword').textContent;
-    const credentials = `Email: ${email}\nContraseña: ${password}`;
-    
-    navigator.clipboard.writeText(credentials).then(() => {
-        this.classList.add('copied');
-        this.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
-        
-        setTimeout(() => {
-            this.classList.remove('copied');
-            this.innerHTML = '<i class="fas fa-copy"></i> Copiar Credenciales';
-        }, 2000);
-    });
+                // Funcionalidad de copiar credenciales
+                document.querySelectorAll('.copy-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const type = this.dataset.copy;
+                        const text = document.getElementById(`credential${type.charAt(0).toUpperCase() + type.slice(1)}`).textContent;
+                        
+                        navigator.clipboard.writeText(text).then(() => {
+                            this.classList.add('copied');
+                            this.innerHTML = '<i class="fas fa-check"></i>';
+                            
+                            setTimeout(() => {
+                                this.classList.remove('copied');
+                                this.innerHTML = '<i class="fas fa-copy"></i>';
+                            }, 2000);
+                        });
+                    });
+                });
 
                 // Manejar el botón de comenzar prueba
                 document.getElementById('startTrialButton').addEventListener('click', () => {
@@ -8461,6 +8403,7 @@ document.querySelector('.copy-all-button').addEventListener('click', function() 
         </body>
     </html>
     """
+
 
 
 serve()
