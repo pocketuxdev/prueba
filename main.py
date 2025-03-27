@@ -8325,7 +8325,7 @@ def trial_login():
         });
 
         const data = await response.json();
-        console.log('Respuesta del servidor:', data); // Agregar este log para debug
+        console.log('Respuesta completa:', data); // Para debug
 
         if (response.ok) {
             // Cerrar el modal de registro
@@ -8335,12 +8335,11 @@ def trial_login():
             const welcomeModal = document.getElementById('welcomeModal');
             document.getElementById('credentialEmail').textContent = email;
             
-            // Asegurarnos de que la contraseña se muestre correctamente
-            const password = data.password || data.plainPassword || data.user?.password || 'No disponible';
+            // Obtener la contraseña de la estructura correcta de la respuesta
+            const password = data.credentials?.password || data.password || 'No disponible';
             document.getElementById('credentialPassword').textContent = password;
             
-            // Agregar un log para verificar la contraseña
-            console.log('Contraseña recibida:', password);
+            console.log('Contraseña extraída:', password); // Para debug
             
             welcomeModal.style.display = 'block';
 
@@ -8351,7 +8350,7 @@ def trial_login():
             messageDiv.innerHTML = `<p>${data.message}</p>`;
         }
     } catch (error) {
-        console.error('Error completo:', error); // Agregar este log para debug
+        console.error('Error completo:', error);
         messageDiv.className = 'error';
         messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
     } finally {
@@ -8359,6 +8358,7 @@ def trial_login():
         registerButton.innerHTML = 'Registrarse';
     }
 });
+
 
                 // Funcionalidad de copiar credenciales
                 document.querySelector('.copy-all-button').addEventListener('click', function() {
