@@ -8133,6 +8133,8 @@ def trial_login():
     flex: 1;
     margin: 0 1rem;
     text-align: left;
+    user-select: all; /* Permite seleccionar fácilmente el texto */
+    word-break: break-all; /* Asegura que las contraseñas largas se muestren correctamente */
 }
 
 .copy-all-button {
@@ -8295,7 +8297,7 @@ def trial_login():
                 };
 
                 // Existing login form handler
-                 document.getElementById('registerForm').addEventListener('submit', async (e) => {
+                document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const fullName = document.getElementById('fullName').value;
@@ -8323,6 +8325,7 @@ def trial_login():
         });
 
         const data = await response.json();
+        console.log('Respuesta del servidor:', data); // Agregar este log para debug
 
         if (response.ok) {
             // Cerrar el modal de registro
@@ -8331,7 +8334,14 @@ def trial_login():
             // Mostrar las credenciales en el modal de bienvenida
             const welcomeModal = document.getElementById('welcomeModal');
             document.getElementById('credentialEmail').textContent = email;
-            document.getElementById('credentialPassword').textContent = data.password; // Mostrar contraseña sin cifrar
+            
+            // Asegurarnos de que la contraseña se muestre correctamente
+            const password = data.password || data.plainPassword || data.user?.password || 'No disponible';
+            document.getElementById('credentialPassword').textContent = password;
+            
+            // Agregar un log para verificar la contraseña
+            console.log('Contraseña recibida:', password);
+            
             welcomeModal.style.display = 'block';
 
             // Guardar datos del cliente
@@ -8341,6 +8351,7 @@ def trial_login():
             messageDiv.innerHTML = `<p>${data.message}</p>`;
         }
     } catch (error) {
+        console.error('Error completo:', error); // Agregar este log para debug
         messageDiv.className = 'error';
         messageDiv.innerHTML = '<p>Error de conexión: ' + error.message + '</p>';
     } finally {
